@@ -2,24 +2,24 @@
   "test_id": "d2080ac4-a851-49cc-8150-1c80d4d7b601",
   "version": "v4",
   "auto_heal_version": "AH2",
-  "session_id": "6b8081f2-9c4e-4361-b054-5dcd9532d3d5",
+  "session_id": "a2d3bf7e-33a5-4757-b3ed-d224ca61217a",
   "org_id": "3436657",
   "user_id": "3615379",
   "url": "",
-  "start_timestamp": "2026-11-18T05:42:00.241Z",
-  "end_timestamp": "2026-11-18T05:43:32.738Z",
+  "start_timestamp": "2026-11-18T08:00:14.691Z",
+  "end_timestamp": "2026-11-18T08:01:53.726Z",
   "status": "success",
-  "commit_id": "6b8081f2-9c4e-4361-b054-5dcd9532d3d5",
+  "commit_id": "a2d3bf7e-33a5-4757-b3ed-d224ca61217a",
   "instructions": [
     {
       "content_type": "generative_block",
-      "instruction_id": "generative_block_22b05a50b3e14af6aca3f46cb4115075",
-      "generative_id": "22b05a50b3e14af6aca3f46cb4115075",
+      "instruction_id": "generative_block_427297ff595d4b2bbf05086aca468a52",
+      "generative_id": "427297ff595d4b2bbf05086aca468a52",
       "objective": "Go to {{global.base_url}}/login?mode=signup . Create an account with name 'Org Tester', email '{{smart.random_email}}' and password 'correct-horse-9'. On 'Name your board', enter board name 'Team {{smart.random_string_8}}' and verify the Address field fills in with a lowercase version. Click 'Create board' and verify the settings page shows a message ending in 'is live.'",
       "status": "success",
       "children": [
         {
-          "instruction_id": "f1a31c03-003d-4e31-a9c2-4421810317c1",
+          "instruction_id": "c30d16dc-8b43-4d2b-8a06-181b7411027e",
           "instruction_class": "driver_action",
           "module_id": "",
           "instruction": "Navigate to {{global.base_url}}/login?mode=signup",
@@ -30,12 +30,12 @@
           "classification_error": {},
           "operations": [
             {
-              "operation_id": "0eaed882-1dac-451a-b1ed-38859178c9a6",
-              "instruction_id": "f1a31c03-003d-4e31-a9c2-4421810317c1",
+              "operation_id": "cbeb9a30-283f-4695-85d4-600fc4fe86ac",
+              "instruction_id": "c30d16dc-8b43-4d2b-8a06-181b7411027e",
               "instruction": "Navigate to {{global.base_url}}/login?mode=signup",
               "intent": "Navigate to {{global.base_url}}/login?mode=signup",
-              "operation_start": "2026-11-18T05:42:43.139551+00:00",
-              "operation_end": "2026-11-18T05:42:43.326Z",
+              "operation_start": "2026-11-18T08:01:01.923361+00:00",
+              "operation_end": "2026-11-18T08:01:02.157Z",
               "status": "success",
               "command": "OPEN",
               "name": "",
@@ -60,7 +60,7 @@
               "update_time_stamp": "",
               "locator_variable": "",
               "locator_variable_name": "",
-              "image_url": "https://prodauteurartefacts.blob.core.windows.net/test-screenshots/test_screenshots/untagged_screenshot/0eaed882-1dac-451a-b1ed-38859178c9a6.webp",
+              "image_url": "https://prodauteurartefacts.blob.core.windows.net/test-screenshots/test_screenshots/untagged_screenshot/cbeb9a30-283f-4695-85d4-600fc4fe86ac.webp",
               "alternative_xpaths": [],
               "attribute": "",
               "value_description": "",
@@ -158,8 +158,8 @@
             }
           ],
           "status": "success",
-          "start_timestamp": "2026-11-18T05:42:43.139551+00:00",
-          "end_timestamp": "2026-11-18T05:42:43.326Z",
+          "start_timestamp": "2026-11-18T08:01:01.923361+00:00",
+          "end_timestamp": "2026-11-18T08:01:02.157Z",
           "type": "agent_generated",
           "tags": [],
           "html_paths": [],
@@ -185,7 +185,7 @@
           "network_assertion_content": {},
           "screenshot_command": "",
           "smartui_contents": {},
-          "generative_id": "22b05a50b3e14af6aca3f46cb4115075",
+          "generative_id": "427297ff595d4b2bbf05086aca468a52",
           "plan_id": "",
           "generative_objective": "Go to {{global.base_url}}/login?mode=signup . Create an account with name 'Org Tester', email '{{smart.random_email}}' and password 'correct-horse-9'. On 'Name your board', enter board name 'Team {{smart.random_string_8}}' and verify the Address field fills in with a lowercase version. Click 'Create board' and verify the settings page shows a message ending in 'is live.'",
           "error_message": "",
@@ -196,10 +196,10 @@
           "reasoning": "Navigate to {{global.base_url}}/login?mode=signup"
         },
         {
-          "instruction_id": "7db36923-c44f-4e5a-8c17-367be1696e0f",
+          "instruction_id": "da76db5f-b494-4ba1-b0c0-cafb3c0de670",
           "instruction_class": "driver_action",
           "module_id": "",
-          "instruction": "Typing board name \"Team Xq7PpL2a\"",
+          "instruction": "Typing board name Team {{smart.random_string_8}}",
           "command": "TYPE",
           "error": null,
           "parent_instruction_id": "",
@@ -207,12 +207,12 @@
           "classification_error": {},
           "operations": [
             {
-              "operation_id": "b003e0cc-bcfe-4d39-a7b9-24eeca403d3e",
-              "instruction_id": "7db36923-c44f-4e5a-8c17-367be1696e0f",
-              "instruction": "Typing board name \"Team Xq7PpL2a\"",
-              "intent": "Typing board name \"Team Xq7PpL2a\"",
-              "operation_start": "2026-11-18T05:42:52.207246+00:00",
-              "operation_end": "2026-11-18T05:42:52.231Z",
+              "operation_id": "a699baeb-14de-417a-af50-ff1aa252213a",
+              "instruction_id": "da76db5f-b494-4ba1-b0c0-cafb3c0de670",
+              "instruction": "Typing board name Team {{smart.random_string_8}}",
+              "intent": "Typing board name Team {{smart.random_string_8}}",
+              "operation_start": "2026-11-18T08:01:09.338583+00:00",
+              "operation_end": "2026-11-18T08:01:09.378Z",
               "status": "success",
               "command": "TYPE",
               "name": "",
@@ -226,7 +226,7 @@
               "grounded_by": "",
               "error_message": "",
               "code_snippet": "",
-              "sub_instruction_obj": "{\"operation\":\"Typing board name \\\"Team Xq7PpL2a\\\"\",\"agent\":\"Vision Agent\",\"operation_dict\":{\"operation_type\":\"TYPE\"},\"reasoning\":\"PRIMARY: On 'Name your board', enter board name 'Team {{smart.random_string_8}}'; role=textbox; text=\\\"Board name\\\" | HINTS: container=Create board form\",\"variable\":{\"value\":\"Team {{smart.random_string_8}}\"},\"secrets\":{},\"params\":{}}",
+              "sub_instruction_obj": "{\"operation\":\"Typing board name Team {{smart.random_string_8}}\",\"agent\":\"Vision Agent\",\"operation_dict\":{\"operation_type\":\"TYPE\"},\"reasoning\":\"PRIMARY: On 'Name your board', enter board name 'Team {{smart.random_string_8}}'; role=textbox; text=\\\"Board name\\\" | HINTS: container=Name your board form\",\"variable\":{\"intent\":\"Typing board name Team {{smart.random_string_8}}\",\"value\":\"Team {{smart.random_string_8}}\"},\"secrets\":{},\"params\":{}}",
               "test_id": "",
               "test_version": "",
               "action": "",
@@ -237,7 +237,7 @@
               "update_time_stamp": "",
               "locator_variable": "",
               "locator_variable_name": "",
-              "image_url": "https://prodauteurartefacts.blob.core.windows.net/test-screenshots/test_screenshots/untagged_screenshot/b003e0cc-bcfe-4d39-a7b9-24eeca403d3e.webp",
+              "image_url": "https://prodauteurartefacts.blob.core.windows.net/test-screenshots/test_screenshots/untagged_screenshot/a699baeb-14de-417a-af50-ff1aa252213a.webp",
               "alternative_xpaths": [],
               "attribute": "",
               "value_description": "",
@@ -339,11 +339,11 @@
               "output_variables": {},
               "visual_context": {
                 "x": 960,
-                "y": 278,
+                "y": 285,
                 "confidence": 0,
                 "bbox": {
                   "x": 765,
-                  "y": 265,
+                  "y": 272,
                   "width": 390,
                   "height": 26
                 },
@@ -351,17 +351,17 @@
                 "viewport_width": 1920,
                 "viewport_height": 1080,
                 "scale_factor": null,
-                "raw_image_url": "https://prodauteurartefacts.blob.core.windows.net/test-screenshots/test_screenshots/untagged_screenshot/b003e0cc-bcfe-4d39-a7b9-24eeca403d3e.webp",
+                "raw_image_url": "https://prodauteurartefacts.blob.core.windows.net/test-screenshots/test_screenshots/untagged_screenshot/a699baeb-14de-417a-af50-ff1aa252213a.webp",
                 "raw_image_sas_url": "",
                 "annotated_image_url": "",
                 "annotated_image_sas_url": ""
               },
-              "reasoning": "PRIMARY: On 'Name your board', enter board name 'Team {{smart.random_string_8}}'; role=textbox; text=\"Board name\" | HINTS: container=Create board form"
+              "reasoning": "PRIMARY: On 'Name your board', enter board name 'Team {{smart.random_string_8}}'; role=textbox; text=\"Board name\" | HINTS: container=Name your board form"
             }
           ],
           "status": "success",
-          "start_timestamp": "2026-11-18T05:42:52.207246+00:00",
-          "end_timestamp": "2026-11-18T05:42:52.231Z",
+          "start_timestamp": "2026-11-18T08:01:09.338583+00:00",
+          "end_timestamp": "2026-11-18T08:01:09.378Z",
           "type": "agent_generated",
           "tags": [],
           "html_paths": [],
@@ -387,7 +387,7 @@
           "network_assertion_content": {},
           "screenshot_command": "",
           "smartui_contents": {},
-          "generative_id": "22b05a50b3e14af6aca3f46cb4115075",
+          "generative_id": "427297ff595d4b2bbf05086aca468a52",
           "plan_id": "",
           "generative_objective": "Go to {{global.base_url}}/login?mode=signup . Create an account with name 'Org Tester', email '{{smart.random_email}}' and password 'correct-horse-9'. On 'Name your board', enter board name 'Team {{smart.random_string_8}}' and verify the Address field fills in with a lowercase version. Click 'Create board' and verify the settings page shows a message ending in 'is live.'",
           "error_message": "",
@@ -395,13 +395,13 @@
           "reason": "",
           "title": "",
           "used_variables": [],
-          "reasoning": "PRIMARY: On 'Name your board', enter board name 'Team {{smart.random_string_8}}'; role=textbox; text=\"Board name\" | HINTS: container=Create board form"
+          "reasoning": "PRIMARY: On 'Name your board', enter board name 'Team {{smart.random_string_8}}'; role=textbox; text=\"Board name\" | HINTS: container=Name your board form"
         },
         {
-          "instruction_id": "7f8b32fa-775d-484f-8833-fc291375a3b8",
+          "instruction_id": "65db3fc8-f30f-43a7-b60c-f8b86d859db7",
           "instruction_class": "driver_action",
           "module_id": "",
-          "instruction": "Reading the Address field value",
+          "instruction": "Reading the lowercase address from the Create board form",
           "command": "TEXTUAL_ANALYZER",
           "error": null,
           "parent_instruction_id": "",
@@ -409,11 +409,11 @@
           "classification_error": {},
           "operations": [
             {
-              "operation_id": "4086fd55-c27a-4ae7-a75a-2ef581e2699b",
-              "instruction_id": "7f8b32fa-775d-484f-8833-fc291375a3b8",
-              "instruction": "Reading the Address field value",
-              "intent": "Reading the Address field value",
-              "operation_start": "2026-11-18T05:43:01.383366+00:00",
+              "operation_id": "77548bfb-b9ec-4a1f-9ff1-e7a505759263",
+              "instruction_id": "65db3fc8-f30f-43a7-b60c-f8b86d859db7",
+              "instruction": "Reading the lowercase address from the Create board form",
+              "intent": "Reading the lowercase address from the Create board form",
+              "operation_start": "2026-11-18T08:01:18.772513+00:00",
               "operation_end": "",
               "status": "success",
               "command": "TEXTUAL_ANALYZER",
@@ -428,7 +428,7 @@
               "grounded_by": "",
               "error_message": "",
               "code_snippet": "",
-              "sub_instruction_obj": "{\"operation\":\"Reading the Address field value\",\"agent\":\"Operation Agent\",\"operation_dict\":{\"operation_type\":\"TEXTUAL_ANALYZER\"},\"reasoning\":\"the value in the Address textbox of the Create board form\",\"variable\":{},\"secrets\":{},\"params\":{},\"code_js\":\"el(18).value\",\"wrapped_js\":\"(els) => {\\n  const __m = {18: 0};\\n  const el = (i) => els[__m[i]];\\n  const __v = (el(18).value);\\n  return (typeof __v === 'boolean' ? String(__v) : __v);\\n}\",\"locators\":[\"internal:role=textbox[name=\\\"Address\\\"i]\"],\"operator\":\"equals\",\"transforms\":[\"strip\",\"lowercase\"],\"query\":\"the value in the Address textbox of the Create board form\",\"expected_value\":\"team-fticejp3\",\"needs_unit_conversion\":false,\"condition\":\"the Address field fills in with a lowercase version of 'Team {{smart.random_string_8}}'\"}",
+              "sub_instruction_obj": "{\"operation\":\"Reading the lowercase address from the Create board form\",\"agent\":\"Operation Agent\",\"operation_dict\":{\"operation_type\":\"TEXTUAL_ANALYZER\"},\"reasoning\":\"the lowercase value filled into the Address textbox in the Create board form\",\"variable\":{},\"secrets\":{},\"params\":{},\"code_js\":\"el(13).value.toLowerCase()\",\"wrapped_js\":\"(els) => {\\n  const __m = {13: 0};\\n  const el = (i) => els[__m[i]];\\n  const __v = (el(13).value.toLowerCase());\\n  return (typeof __v === 'boolean' ? String(__v) : __v);\\n}\",\"locators\":[\"internal:role=textbox[name=\\\"Address\\\"i]\"],\"operator\":\"equals\",\"transforms\":[],\"query\":\"the lowercase value filled into the Address textbox in the Create board form\",\"expected_value\":\"team-iy6glzut\",\"needs_unit_conversion\":false,\"condition\":\"the Address field fills in with a lowercase version\"}",
               "test_id": "",
               "test_version": "",
               "action": "",
@@ -439,15 +439,15 @@
               "update_time_stamp": "",
               "locator_variable": "",
               "locator_variable_name": "",
-              "image_url": "https://prodauteurartefacts.blob.core.windows.net/test-screenshots/test_screenshots/untagged_screenshot/4086fd55-c27a-4ae7-a75a-2ef581e2699b.webp",
+              "image_url": "https://prodauteurartefacts.blob.core.windows.net/test-screenshots/test_screenshots/untagged_screenshot/77548bfb-b9ec-4a1f-9ff1-e7a505759263.webp",
               "alternative_xpaths": [],
               "attribute": "",
               "value_description": "",
               "url": "",
               "navigation_direction": "",
               "tagified_image_url": "",
-              "query_variable_name": "address_field_lowercase_board_name",
-              "query_variable_value": "team-fticejp3",
+              "query_variable_name": "address_field_lowercase_version",
+              "query_variable_value": "team-iy6glzut",
               "query_variable_type": "",
               "expected_value": "",
               "queried_value": "",
@@ -503,7 +503,7 @@
               "network_throttle": {},
               "is_mobile_offline": false,
               "autoheal": false,
-              "reprobe": true,
+              "reprobe": false,
               "click_modifier": null,
               "db_query": "",
               "db_details": {},
@@ -532,14 +532,14 @@
               "until_settle_ms": 0,
               "api_data": {},
               "output_variables": {
-                "address_field_lowercase_board_name": "team-fticejp3"
+                "address_field_lowercase_version": "team-iy6glzut"
               },
               "visual_context": null,
-              "reasoning": "the value in the Address textbox of the Create board form"
+              "reasoning": "the lowercase value filled into the Address textbox in the Create board form"
             }
           ],
           "status": "success",
-          "start_timestamp": "2026-11-18T05:43:01.383366+00:00",
+          "start_timestamp": "2026-11-18T08:01:18.772513+00:00",
           "end_timestamp": "",
           "type": "agent_generated",
           "tags": [],
@@ -566,7 +566,7 @@
           "network_assertion_content": {},
           "screenshot_command": "",
           "smartui_contents": {},
-          "generative_id": "22b05a50b3e14af6aca3f46cb4115075",
+          "generative_id": "427297ff595d4b2bbf05086aca468a52",
           "plan_id": "",
           "generative_objective": "Go to {{global.base_url}}/login?mode=signup . Create an account with name 'Org Tester', email '{{smart.random_email}}' and password 'correct-horse-9'. On 'Name your board', enter board name 'Team {{smart.random_string_8}}' and verify the Address field fills in with a lowercase version. Click 'Create board' and verify the settings page shows a message ending in 'is live.'",
           "error_message": "",
@@ -574,10 +574,10 @@
           "reason": "",
           "title": "",
           "used_variables": [],
-          "reasoning": "the value in the Address textbox of the Create board form"
+          "reasoning": "the lowercase value filled into the Address textbox in the Create board form"
         },
         {
-          "instruction_id": "1ba5757e-90d3-4465-97de-86b20fd82d65",
+          "instruction_id": "5820b104-d624-4f58-8e4b-f6763046b6a4",
           "instruction_class": "non_driver_action",
           "module_id": "",
           "instruction": "Assertion check",
@@ -593,39 +593,32 @@
                 "assertion_tree": {
                   "sub_results": [
                     {
-                      "description": "the Address field fills in with a lowercase version of 'Team {{smart.random_string_8}}'",
+                      "description": "the Address field fills in with a lowercase version",
                       "passed": true,
                       "operator": "equals",
-                      "transforms": [
-                        "strip",
-                        "lowercase"
-                      ],
+                      "transforms": [],
                       "json_path": null,
-                      "expected": "team-fticejp3",
-                      "extracted_value": "{{address_field_lowercase_board_name}}",
-                      "store_key": "address_field_lowercase_board_name",
+                      "expected": "team-iy6glzut",
+                      "extracted_value": "{{address_field_lowercase_version}}",
+                      "store_key": "address_field_lowercase_version",
                       "variable_refs": {
-                        "{{address_field_lowercase_board_name}}": "team-fticejp3",
-                        "{{smart.random_string_8}}": "FTicEJp3"
+                        "{{address_field_lowercase_version}}": "team-iy6glzut"
                       }
                     }
                   ],
                   "sub_checks": [
                     {
-                      "description": "the Address field fills in with a lowercase version of 'Team {{smart.random_string_8}}'",
-                      "store_key": "address_field_lowercase_board_name",
-                      "expected_value": "team-fticejp3",
-                      "extracted_value": "{{address_field_lowercase_board_name}}",
+                      "description": "the Address field fills in with a lowercase version",
+                      "store_key": "address_field_lowercase_version",
+                      "expected_value": "team-iy6glzut",
+                      "extracted_value": "{{address_field_lowercase_version}}",
                       "operator": "equals",
-                      "transforms": [
-                        "strip",
-                        "lowercase"
-                      ]
+                      "transforms": []
                     }
                   ],
                   "composite_operator": "and",
                   "verification": "",
-                  "claim": "the Address field fills in with a lowercase version of 'Team {{smart.random_string_8}}'",
+                  "claim": "the Address field fills in with a lowercase version",
                   "operator": [],
                   "assertion_operands": [],
                   "left_operand": null,
@@ -641,11 +634,11 @@
           "classification_error": {},
           "operations": [
             {
-              "operation_id": "ec7428ed-4493-44e6-adb7-27fc7a8e85df",
-              "instruction_id": "1ba5757e-90d3-4465-97de-86b20fd82d65",
+              "operation_id": "93e779e5-9663-4da0-914f-b8c3092e211b",
+              "instruction_id": "5820b104-d624-4f58-8e4b-f6763046b6a4",
               "instruction": "Assertion check",
               "intent": "Assertion check",
-              "operation_start": "2026-11-18T05:43:01.941498+00:00",
+              "operation_start": "2026-11-18T08:01:19.332492+00:00",
               "operation_end": "",
               "status": "success",
               "command": "ASSERTION",
@@ -671,7 +664,7 @@
               "update_time_stamp": "",
               "locator_variable": "",
               "locator_variable_name": "",
-              "image_url": "https://prodauteurartefacts.blob.core.windows.net/test-screenshots/test_screenshots/untagged_screenshot/ec7428ed-4493-44e6-adb7-27fc7a8e85df.webp",
+              "image_url": "https://prodauteurartefacts.blob.core.windows.net/test-screenshots/test_screenshots/untagged_screenshot/93e779e5-9663-4da0-914f-b8c3092e211b.webp",
               "alternative_xpaths": [],
               "attribute": "",
               "value_description": "",
@@ -737,60 +730,49 @@
                 "operands": [],
                 "sub_results": [
                   {
-                    "description": "the Address field fills in with a lowercase version of 'Team {{smart.random_string_8}}'",
+                    "description": "the Address field fills in with a lowercase version",
                     "passed": true,
                     "operator": "equals",
-                    "transforms": [
-                      "strip",
-                      "lowercase"
-                    ],
+                    "transforms": [],
                     "json_path": null,
-                    "expected": "team-fticejp3",
-                    "extracted_value": "{{address_field_lowercase_board_name}}",
-                    "store_key": "address_field_lowercase_board_name",
+                    "expected": "team-iy6glzut",
+                    "extracted_value": "{{address_field_lowercase_version}}",
+                    "store_key": "address_field_lowercase_version",
                     "variable_refs": {
-                      "{{address_field_lowercase_board_name}}": "team-fticejp3",
-                      "{{smart.random_string_8}}": "FTicEJp3"
+                      "{{address_field_lowercase_version}}": "team-iy6glzut"
                     }
                   }
                 ],
                 "sub_checks": [
                   {
-                    "description": "the Address field fills in with a lowercase version of 'Team {{smart.random_string_8}}'",
-                    "store_key": "address_field_lowercase_board_name",
-                    "expected_value": "team-fticejp3",
-                    "extracted_value": "{{address_field_lowercase_board_name}}",
+                    "description": "the Address field fills in with a lowercase version",
+                    "store_key": "address_field_lowercase_version",
+                    "expected_value": "team-iy6glzut",
+                    "extracted_value": "{{address_field_lowercase_version}}",
                     "operator": "equals",
-                    "transforms": [
-                      "strip",
-                      "lowercase"
-                    ]
+                    "transforms": []
                   }
                 ],
                 "composite_operator": "and",
-                "verification": "The Address field contains a lowercase version of the entered board name.",
-                "claim": "the Address field fills in with a lowercase version of 'Team {{smart.random_string_8}}'"
+                "verification": "the Address field contains a lowercase version of the entered board name",
+                "claim": "the Address field fills in with a lowercase version"
               },
               "assertion_tree": {
                 "assertion_id": "assert_cp_1",
                 "status": "passed",
-                "description": "the Address field fills in with a lowercase version of 'Team {{smart.random_string_8}}'",
+                "description": "the Address field fills in with a lowercase version",
                 "sub_results": [
                   {
-                    "description": "the Address field fills in with a lowercase version of 'Team {{smart.random_string_8}}'",
+                    "description": "the Address field fills in with a lowercase version",
                     "passed": true,
                     "operator": "equals",
-                    "transforms": [
-                      "strip",
-                      "lowercase"
-                    ],
+                    "transforms": [],
                     "json_path": null,
-                    "expected": "team-fticejp3",
-                    "extracted_value": "{{address_field_lowercase_board_name}}",
-                    "store_key": "address_field_lowercase_board_name",
+                    "expected": "team-iy6glzut",
+                    "extracted_value": "{{address_field_lowercase_version}}",
+                    "store_key": "address_field_lowercase_version",
                     "variable_refs": {
-                      "{{address_field_lowercase_board_name}}": "team-fticejp3",
-                      "{{smart.random_string_8}}": "FTicEJp3"
+                      "{{address_field_lowercase_version}}": "team-iy6glzut"
                     }
                   }
                 ],
@@ -798,7 +780,7 @@
                 "passed": true,
                 "step": 4,
                 "is_final": false,
-                "verification": "The Address field contains a lowercase version of the entered board name.",
+                "verification": "the Address field contains a lowercase version of the entered board name",
                 "error_message": null,
                 "duration_ms": 0
               },
@@ -840,7 +822,7 @@
             }
           ],
           "status": "success",
-          "start_timestamp": "2026-11-18T05:43:01.941498+00:00",
+          "start_timestamp": "2026-11-18T08:01:19.332492+00:00",
           "end_timestamp": "",
           "type": "agent_generated",
           "tags": [],
@@ -867,7 +849,7 @@
           "network_assertion_content": {},
           "screenshot_command": "",
           "smartui_contents": {},
-          "generative_id": "22b05a50b3e14af6aca3f46cb4115075",
+          "generative_id": "427297ff595d4b2bbf05086aca468a52",
           "plan_id": "",
           "generative_objective": "Go to {{global.base_url}}/login?mode=signup . Create an account with name 'Org Tester', email '{{smart.random_email}}' and password 'correct-horse-9'. On 'Name your board', enter board name 'Team {{smart.random_string_8}}' and verify the Address field fills in with a lowercase version. Click 'Create board' and verify the settings page shows a message ending in 'is live.'",
           "error_message": "",
@@ -878,7 +860,7 @@
           "reasoning": ""
         },
         {
-          "instruction_id": "e2dd747e-7c57-43db-87e5-adf3e0e91b52",
+          "instruction_id": "2d96c092-055d-4596-bb08-8fc82effaa4f",
           "instruction_class": "driver_action",
           "module_id": "",
           "instruction": "Clicking Create board",
@@ -889,12 +871,12 @@
           "classification_error": {},
           "operations": [
             {
-              "operation_id": "59d50f8b-3bd1-4be2-b58a-fdb81ec7e025",
-              "instruction_id": "e2dd747e-7c57-43db-87e5-adf3e0e91b52",
+              "operation_id": "d6673710-03c4-4bd3-8009-4ccb3485349a",
+              "instruction_id": "2d96c092-055d-4596-bb08-8fc82effaa4f",
               "instruction": "Clicking Create board",
               "intent": "Clicking Create board",
-              "operation_start": "2026-11-18T05:43:06.869723+00:00",
-              "operation_end": "2026-11-18T05:43:06.900Z",
+              "operation_start": "2026-11-18T08:01:24.530696+00:00",
+              "operation_end": "2026-11-18T08:01:24.566Z",
               "status": "success",
               "command": "CLICK",
               "name": "",
@@ -908,7 +890,7 @@
               "grounded_by": "",
               "error_message": "",
               "code_snippet": "",
-              "sub_instruction_obj": "{\"operation\":\"Clicking Create board\",\"agent\":\"Vision Agent\",\"operation_dict\":{\"operation_type\":\"CLICK\"},\"reasoning\":\"PRIMARY: Click 'Create board'; role=button; text=\\\"Create board\\\" | HINTS: container=Create board form\",\"variable\":{},\"secrets\":{},\"params\":{}}",
+              "sub_instruction_obj": "{\"operation\":\"Clicking Create board\",\"agent\":\"Vision Agent\",\"operation_dict\":{\"operation_type\":\"CLICK\"},\"reasoning\":\"PRIMARY: Click 'Create board'; role=button; text=\\\"Create board\\\" | HINTS: container=Name your board form\",\"variable\":{},\"secrets\":{},\"params\":{}}",
               "test_id": "",
               "test_version": "",
               "action": "",
@@ -919,7 +901,7 @@
               "update_time_stamp": "",
               "locator_variable": "",
               "locator_variable_name": "",
-              "image_url": "https://prodauteurartefacts.blob.core.windows.net/test-screenshots/test_screenshots/untagged_screenshot/59d50f8b-3bd1-4be2-b58a-fdb81ec7e025.webp",
+              "image_url": "https://prodauteurartefacts.blob.core.windows.net/test-screenshots/test_screenshots/untagged_screenshot/d6673710-03c4-4bd3-8009-4ccb3485349a.webp",
               "alternative_xpaths": [],
               "attribute": "",
               "value_description": "",
@@ -1021,11 +1003,11 @@
               "output_variables": {},
               "visual_context": {
                 "x": 960,
-                "y": 472,
+                "y": 479,
                 "confidence": 0,
                 "bbox": {
                   "x": 776,
-                  "y": 452,
+                  "y": 459,
                   "width": 368,
                   "height": 40
                 },
@@ -1033,17 +1015,17 @@
                 "viewport_width": 1920,
                 "viewport_height": 1080,
                 "scale_factor": null,
-                "raw_image_url": "https://prodauteurartefacts.blob.core.windows.net/test-screenshots/test_screenshots/untagged_screenshot/59d50f8b-3bd1-4be2-b58a-fdb81ec7e025.webp",
+                "raw_image_url": "https://prodauteurartefacts.blob.core.windows.net/test-screenshots/test_screenshots/untagged_screenshot/d6673710-03c4-4bd3-8009-4ccb3485349a.webp",
                 "raw_image_sas_url": "",
                 "annotated_image_url": "",
                 "annotated_image_sas_url": ""
               },
-              "reasoning": "PRIMARY: Click 'Create board'; role=button; text=\"Create board\" | HINTS: container=Create board form"
+              "reasoning": "PRIMARY: Click 'Create board'; role=button; text=\"Create board\" | HINTS: container=Name your board form"
             }
           ],
           "status": "success",
-          "start_timestamp": "2026-11-18T05:43:06.869723+00:00",
-          "end_timestamp": "2026-11-18T05:43:06.900Z",
+          "start_timestamp": "2026-11-18T08:01:24.530696+00:00",
+          "end_timestamp": "2026-11-18T08:01:24.566Z",
           "type": "agent_generated",
           "tags": [],
           "html_paths": [],
@@ -1069,7 +1051,7 @@
           "network_assertion_content": {},
           "screenshot_command": "",
           "smartui_contents": {},
-          "generative_id": "22b05a50b3e14af6aca3f46cb4115075",
+          "generative_id": "427297ff595d4b2bbf05086aca468a52",
           "plan_id": "",
           "generative_objective": "Go to {{global.base_url}}/login?mode=signup . Create an account with name 'Org Tester', email '{{smart.random_email}}' and password 'correct-horse-9'. On 'Name your board', enter board name 'Team {{smart.random_string_8}}' and verify the Address field fills in with a lowercase version. Click 'Create board' and verify the settings page shows a message ending in 'is live.'",
           "error_message": "",
@@ -1077,11 +1059,11 @@
           "reason": "",
           "title": "",
           "used_variables": [],
-          "reasoning": "PRIMARY: Click 'Create board'; role=button; text=\"Create board\" | HINTS: container=Create board form"
+          "reasoning": "PRIMARY: Click 'Create board'; role=button; text=\"Create board\" | HINTS: container=Name your board form"
         },
         {
           "content_type": "until_block",
-          "instruction_id": "until_3c293d1c",
+          "instruction_id": "until_11460d0f",
           "condition": "the heading 'Settings' is visible",
           "max_retries": 10,
           "settle_ms": 500,
@@ -1089,10 +1071,10 @@
           "condition_met": true,
           "children": [
             {
-              "instruction_id": "59a29c54-aa1c-4d6c-bc34-803bd1c52d3a",
+              "instruction_id": "65059a35-d8c1-4da5-95aa-f6a8365f564c",
               "instruction_class": "driver_action",
               "module_id": "",
-              "instruction": "Waiting for the Settings heading to be visible",
+              "instruction": "Waiting for the Settings page to load",
               "command": "WAIT",
               "error": null,
               "parent_instruction_id": "",
@@ -1100,17 +1082,17 @@
               "classification_error": {},
               "operations": [
                 {
-                  "operation_id": "7e35f5e3-ef21-46ce-9982-74cd86807bb8",
-                  "instruction_id": "59a29c54-aa1c-4d6c-bc34-803bd1c52d3a",
-                  "instruction": "Waiting for the Settings heading to be visible",
-                  "intent": "Waiting for the Settings heading to be visible",
-                  "operation_start": "2026-11-18T05:43:14.670314+00:00",
-                  "operation_end": "2026-11-18T05:43:18.243Z",
+                  "operation_id": "fdd2843a-cabe-40fb-8ffb-426d116358d9",
+                  "instruction_id": "65059a35-d8c1-4da5-95aa-f6a8365f564c",
+                  "instruction": "Waiting for the Settings page to load",
+                  "intent": "Waiting for the Settings page to load",
+                  "operation_start": "2026-11-18T08:01:33.759450+00:00",
+                  "operation_end": "2026-11-18T08:01:38.171Z",
                   "status": "success",
                   "command": "WAIT",
                   "name": "",
                   "target": "",
-                  "value": "500",
+                  "value": "1000",
                   "message": "",
                   "operation_dict": "",
                   "frame": "",
@@ -1119,7 +1101,7 @@
                   "grounded_by": "",
                   "error_message": "",
                   "code_snippet": "",
-                  "sub_instruction_obj": "{\"operation\":\"Waiting for the Settings heading to be visible\",\"agent\":\"Operation Agent\",\"operation_dict\":{\"operation_type\":\"WAIT\"},\"reasoning\":\"PRIMARY: wait for the Settings heading to be visible\",\"variable\":{},\"secrets\":{},\"params\":{}}",
+                  "sub_instruction_obj": "{\"operation\":\"Waiting for the Settings page to load\",\"agent\":\"Operation Agent\",\"operation_dict\":{\"operation_type\":\"WAIT\"},\"reasoning\":\"PRIMARY: wait for the Settings page to load\",\"variable\":{},\"secrets\":{},\"params\":{}}",
                   "test_id": "",
                   "test_version": "",
                   "action": "",
@@ -1130,7 +1112,7 @@
                   "update_time_stamp": "",
                   "locator_variable": "",
                   "locator_variable_name": "",
-                  "image_url": "https://prodauteurartefacts.blob.core.windows.net/test-screenshots/test_screenshots/untagged_screenshot/7e35f5e3-ef21-46ce-9982-74cd86807bb8.webp",
+                  "image_url": "https://prodauteurartefacts.blob.core.windows.net/test-screenshots/test_screenshots/untagged_screenshot/fdd2843a-cabe-40fb-8ffb-426d116358d9.webp",
                   "alternative_xpaths": [],
                   "attribute": "",
                   "value_description": "",
@@ -1224,12 +1206,12 @@
                   "api_data": {},
                   "output_variables": {},
                   "visual_context": null,
-                  "reasoning": "PRIMARY: wait for the Settings heading to be visible"
+                  "reasoning": "PRIMARY: wait for the Settings page to load"
                 }
               ],
               "status": "success",
-              "start_timestamp": "2026-11-18T05:43:14.670314+00:00",
-              "end_timestamp": "2026-11-18T05:43:18.243Z",
+              "start_timestamp": "2026-11-18T08:01:33.759450+00:00",
+              "end_timestamp": "2026-11-18T08:01:38.171Z",
               "type": "agent_generated",
               "tags": [],
               "html_paths": [],
@@ -1263,7 +1245,7 @@
               "reason": "",
               "title": "",
               "used_variables": [],
-              "reasoning": "PRIMARY: wait for the Settings heading to be visible"
+              "reasoning": "PRIMARY: wait for the Settings page to load"
             }
           ],
           "generative_id": "",
@@ -1272,10 +1254,10 @@
           "status": "success"
         },
         {
-          "instruction_id": "154a0cb5-1227-4d59-926c-2610ab7cc3bd",
+          "instruction_id": "2c662eed-965c-4b76-b9c6-1940fbd21b17",
           "instruction_class": "driver_action",
           "module_id": "",
-          "instruction": "Checking whether the settings page live message is present",
+          "instruction": "Checking whether the settings live message is present",
           "command": "TEXTUAL_ANALYZER",
           "error": null,
           "parent_instruction_id": "",
@@ -1283,11 +1265,11 @@
           "classification_error": {},
           "operations": [
             {
-              "operation_id": "082010d2-0b6f-4840-a5a4-4b328d2c0eea",
-              "instruction_id": "154a0cb5-1227-4d59-926c-2610ab7cc3bd",
-              "instruction": "Checking whether the settings page live message is present",
-              "intent": "Checking whether the settings page live message is present",
-              "operation_start": "2026-11-18T05:43:28.532064+00:00",
+              "operation_id": "c8919b1b-93d3-4400-8569-b00840af168d",
+              "instruction_id": "2c662eed-965c-4b76-b9c6-1940fbd21b17",
+              "instruction": "Checking whether the settings live message is present",
+              "intent": "Checking whether the settings live message is present",
+              "operation_start": "2026-11-18T08:01:49.887356+00:00",
               "operation_end": "",
               "status": "success",
               "command": "TEXTUAL_ANALYZER",
@@ -1302,7 +1284,7 @@
               "grounded_by": "",
               "error_message": "",
               "code_snippet": "",
-              "sub_instruction_obj": "{\"operation\":\"Checking whether the settings page live message is present\",\"agent\":\"Operation Agent\",\"operation_dict\":{\"operation_type\":\"TEXTUAL_ANALYZER\"},\"reasoning\":\"whether a message ending in 'is live.' is present in the settings page alert\",\"variable\":{},\"secrets\":{},\"params\":{},\"code_js\":\"/is live\\\\.\\\\s*$/.test(el(24).innerText)\",\"wrapped_js\":\"(els) => {\\n  const __m = {24: 0};\\n  const el = (i) => els[__m[i]];\\n  const __v = (/is live\\\\.\\\\s*$/.test(el(24).innerText));\\n  return (typeof __v === 'boolean' ? String(__v) : __v);\\n}\",\"locators\":[\"internal:text=\\\"Team FTicEJp3 is live.\\\"i\"],\"operator\":\"equals\",\"transforms\":[],\"query\":\"whether a message ending in 'is live.' is present in the settings page alert\",\"expected_value\":\"true\",\"needs_unit_conversion\":false,\"condition\":\"the settings page shows a message ending in 'is live.'\"}",
+              "sub_instruction_obj": "{\"operation\":\"Checking whether the settings live message is present\",\"agent\":\"Operation Agent\",\"operation_dict\":{\"operation_type\":\"TEXTUAL_ANALYZER\"},\"reasoning\":\"whether a message ending in 'is live.' is present in the settings page alert\",\"variable\":{},\"secrets\":{},\"params\":{},\"code_js\":\"/is live\\\\.\\\\s*$/.test(el(23).innerText)\",\"wrapped_js\":\"(els) => {\\n  const __m = {23: 0};\\n  const el = (i) => els[__m[i]];\\n  const __v = (/is live\\\\.\\\\s*$/.test(el(23).innerText));\\n  return (typeof __v === 'boolean' ? String(__v) : __v);\\n}\",\"locators\":[\"internal:text=\\\"Team Iy6glzUT is live.\\\"i\"],\"operator\":\"equals\",\"transforms\":[],\"query\":\"whether a message ending in 'is live.' is present in the settings page alert\",\"expected_value\":\"true\",\"needs_unit_conversion\":false,\"condition\":\"the settings page shows a message ending in 'is live.'\"}",
               "test_id": "",
               "test_version": "",
               "action": "",
@@ -1313,14 +1295,14 @@
               "update_time_stamp": "",
               "locator_variable": "",
               "locator_variable_name": "",
-              "image_url": "https://prodauteurartefacts.blob.core.windows.net/test-screenshots/test_screenshots/untagged_screenshot/082010d2-0b6f-4840-a5a4-4b328d2c0eea.webp",
+              "image_url": "https://prodauteurartefacts.blob.core.windows.net/test-screenshots/test_screenshots/untagged_screenshot/c8919b1b-93d3-4400-8569-b00840af168d.webp",
               "alternative_xpaths": [],
               "attribute": "",
               "value_description": "",
               "url": "",
               "navigation_direction": "",
               "tagified_image_url": "",
-              "query_variable_name": "settings_page_live_message",
+              "query_variable_name": "settings_live_message",
               "query_variable_value": "true",
               "query_variable_type": "",
               "expected_value": "",
@@ -1406,14 +1388,14 @@
               "until_settle_ms": 0,
               "api_data": {},
               "output_variables": {
-                "settings_page_live_message": "true"
+                "settings_live_message": "true"
               },
               "visual_context": null,
               "reasoning": "whether a message ending in 'is live.' is present in the settings page alert"
             }
           ],
           "status": "success",
-          "start_timestamp": "2026-11-18T05:43:28.532064+00:00",
+          "start_timestamp": "2026-11-18T08:01:49.887356+00:00",
           "end_timestamp": "",
           "type": "agent_generated",
           "tags": [],
@@ -1440,7 +1422,7 @@
           "network_assertion_content": {},
           "screenshot_command": "",
           "smartui_contents": {},
-          "generative_id": "22b05a50b3e14af6aca3f46cb4115075",
+          "generative_id": "427297ff595d4b2bbf05086aca468a52",
           "plan_id": "",
           "generative_objective": "Go to {{global.base_url}}/login?mode=signup . Create an account with name 'Org Tester', email '{{smart.random_email}}' and password 'correct-horse-9'. On 'Name your board', enter board name 'Team {{smart.random_string_8}}' and verify the Address field fills in with a lowercase version. Click 'Create board' and verify the settings page shows a message ending in 'is live.'",
           "error_message": "",
@@ -1451,7 +1433,7 @@
           "reasoning": "whether a message ending in 'is live.' is present in the settings page alert"
         },
         {
-          "instruction_id": "7a154a87-ba92-4ad6-8eee-a5c41ad7e648",
+          "instruction_id": "0fac69a4-b968-4af0-adde-6e2818d9e9c1",
           "instruction_class": "non_driver_action",
           "module_id": "",
           "instruction": "Assertion check",
@@ -1473,19 +1455,19 @@
                       "transforms": [],
                       "json_path": null,
                       "expected": "true",
-                      "extracted_value": "{{settings_page_live_message}}",
-                      "store_key": "settings_page_live_message",
+                      "extracted_value": "{{settings_live_message}}",
+                      "store_key": "settings_live_message",
                       "variable_refs": {
-                        "{{settings_page_live_message}}": "true"
+                        "{{settings_live_message}}": "true"
                       }
                     }
                   ],
                   "sub_checks": [
                     {
                       "description": "the settings page shows a message ending in 'is live.'",
-                      "store_key": "settings_page_live_message",
+                      "store_key": "settings_live_message",
                       "expected_value": "true",
-                      "extracted_value": "{{settings_page_live_message}}",
+                      "extracted_value": "{{settings_live_message}}",
                       "operator": "equals",
                       "transforms": []
                     }
@@ -1508,11 +1490,11 @@
           "classification_error": {},
           "operations": [
             {
-              "operation_id": "2c219bba-bee4-4c60-97f5-2fcf0e5675a4",
-              "instruction_id": "7a154a87-ba92-4ad6-8eee-a5c41ad7e648",
+              "operation_id": "624d7e0c-e78a-48d6-8e9a-4a5568e6bfaa",
+              "instruction_id": "0fac69a4-b968-4af0-adde-6e2818d9e9c1",
               "instruction": "Assertion check",
               "intent": "Assertion check",
-              "operation_start": "2026-11-18T05:43:29.106659+00:00",
+              "operation_start": "2026-11-18T08:01:50.477209+00:00",
               "operation_end": "",
               "status": "success",
               "command": "ASSERTION",
@@ -1538,7 +1520,7 @@
               "update_time_stamp": "",
               "locator_variable": "",
               "locator_variable_name": "",
-              "image_url": "https://prodauteurartefacts.blob.core.windows.net/test-screenshots/test_screenshots/untagged_screenshot/2c219bba-bee4-4c60-97f5-2fcf0e5675a4.webp",
+              "image_url": "https://prodauteurartefacts.blob.core.windows.net/test-screenshots/test_screenshots/untagged_screenshot/624d7e0c-e78a-48d6-8e9a-4a5568e6bfaa.webp",
               "alternative_xpaths": [],
               "attribute": "",
               "value_description": "",
@@ -1610,25 +1592,25 @@
                     "transforms": [],
                     "json_path": null,
                     "expected": "true",
-                    "extracted_value": "{{settings_page_live_message}}",
-                    "store_key": "settings_page_live_message",
+                    "extracted_value": "{{settings_live_message}}",
+                    "store_key": "settings_live_message",
                     "variable_refs": {
-                      "{{settings_page_live_message}}": "true"
+                      "{{settings_live_message}}": "true"
                     }
                   }
                 ],
                 "sub_checks": [
                   {
                     "description": "the settings page shows a message ending in 'is live.'",
-                    "store_key": "settings_page_live_message",
+                    "store_key": "settings_live_message",
                     "expected_value": "true",
-                    "extracted_value": "{{settings_page_live_message}}",
+                    "extracted_value": "{{settings_live_message}}",
                     "operator": "equals",
                     "transforms": []
                   }
                 ],
                 "composite_operator": "and",
-                "verification": "A message on the settings page ends in 'is live.'.",
+                "verification": "a message on the settings page ends in 'is live.'",
                 "claim": "the settings page shows a message ending in 'is live.'"
               },
               "assertion_tree": {
@@ -1643,10 +1625,10 @@
                     "transforms": [],
                     "json_path": null,
                     "expected": "true",
-                    "extracted_value": "{{settings_page_live_message}}",
-                    "store_key": "settings_page_live_message",
+                    "extracted_value": "{{settings_live_message}}",
+                    "store_key": "settings_live_message",
                     "variable_refs": {
-                      "{{settings_page_live_message}}": "true"
+                      "{{settings_live_message}}": "true"
                     }
                   }
                 ],
@@ -1654,7 +1636,7 @@
                 "passed": true,
                 "step": 8,
                 "is_final": true,
-                "verification": "A message on the settings page ends in 'is live.'.",
+                "verification": "a message on the settings page ends in 'is live.'",
                 "error_message": null,
                 "duration_ms": 0
               },
@@ -1696,7 +1678,7 @@
             }
           ],
           "status": "success",
-          "start_timestamp": "2026-11-18T05:43:29.106659+00:00",
+          "start_timestamp": "2026-11-18T08:01:50.477209+00:00",
           "end_timestamp": "",
           "type": "agent_generated",
           "tags": [],
@@ -1723,7 +1705,7 @@
           "network_assertion_content": {},
           "screenshot_command": "",
           "smartui_contents": {},
-          "generative_id": "22b05a50b3e14af6aca3f46cb4115075",
+          "generative_id": "427297ff595d4b2bbf05086aca468a52",
           "plan_id": "",
           "generative_objective": "Go to {{global.base_url}}/login?mode=signup . Create an account with name 'Org Tester', email '{{smart.random_email}}' and password 'correct-horse-9'. On 'Name your board', enter board name 'Team {{smart.random_string_8}}' and verify the Address field fills in with a lowercase version. Click 'Create board' and verify the settings page shows a message ending in 'is live.'",
           "error_message": "",
@@ -1739,9 +1721,9 @@
       "result_code": null,
       "bifurcation_context": [],
       "approach_reason": [
-        "Created an account for Org Tester using the requested password and a generated email address.",
-        "Entered the board name “Team FTicEJp3”; its address was automatically set to the lowercase value “team-fticejp3”.",
-        "Created the board and reached its settings page, which confirmed that “Team FTicEJp3 is live.”"
+        "Created an account for Org Tester using the requested password.",
+        "Entered the board name “Team Iy6glzUT”; its address was automatically set to the lowercase value “team-iy6glzut.”",
+        "Created the board successfully and reached its settings page, which confirmed that “Team Iy6glzUT is live.”"
       ],
       "one_liner": null
     }
@@ -1749,7 +1731,7 @@
   "modules": [],
   "uploaded_files": [],
   "test_params": [],
-  "test_level_variables": "[{\"name\":\"address_field_lowercase_board_name\",\"value\":\"team-fticejp3\",\"value_type\":\"test_level\",\"variable_description\":\"ANALYZE result\"},{\"name\":\"settings_page_live_message\",\"value\":\"true\",\"value_type\":\"test_level\",\"variable_description\":\"ANALYZE result\"}]",
+  "test_level_variables": "[{\"name\":\"address_field_lowercase_version\",\"value\":\"team-iy6glzut\",\"value_type\":\"test_level\",\"variable_description\":\"ANALYZE result\"},{\"name\":\"settings_live_message\",\"value\":\"true\",\"value_type\":\"test_level\",\"variable_description\":\"ANALYZE result\"}]",
   "test_global_variables": [
     {
       "id": 623263,

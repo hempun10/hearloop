@@ -7,7 +7,7 @@ TanStack Start (React 19) on Cloudflare Workers, D1 via Drizzle, Better Auth, sh
 ```
 src/
   routes/                 thin: loader primes the query cache, guards in beforeLoad, page = feature components
-  features/<domain>/      orgs, posts, changelog, runs, landing, auth, api
+  features/<domain>/      orgs, posts, changelog, runs, landing, dashboard, auth, api
     <x>.schema.ts         zod schemas, shared by forms and server-function validators (client-safe)
     <x>.server.ts         Drizzle queries; server-only, never import from components
     <x>.functions.ts      createServerFn wrappers (validator + middleware); import .server lazily inside handlers
@@ -15,7 +15,7 @@ src/
     use-*.ts              hooks: mutations with optimistic updates, shortcuts
     components/           feature UI
   components/ui/          shadcn primitives (add with `bunx shadcn@latest add <name>`; don't hand-roll inputs/dialogs)
-  components/             app-wide pieces (headers, nav-link, page-header, user-menu)
+  components/             app-wide pieces (site header/footer, back-button, user-menu); magic/ = Magic UI motion components
   middleware/auth.ts      sessionMiddleware (user | null), authMiddleware (requires user)
   db/schema.ts            Drizzle schema (single source of types: Post, Org, Run…)
 ```

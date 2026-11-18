@@ -27,6 +27,10 @@ import { Route as OrgDashboardSettingsRouteImport } from './routes/$org/dashboar
 import { Route as ApiOrgChangelogRouteImport } from './routes/api/$org/changelog'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 import { Route as OrgPublicPostsIdRouteImport } from './routes/$org/_public/posts.$id'
+import { Route as OrgDashboardSettingsIndexRouteImport } from './routes/$org/dashboard/settings/index'
+import { Route as OrgDashboardSettingsAccessRouteImport } from './routes/$org/dashboard/settings/access'
+import { Route as OrgDashboardSettingsBrandingRouteImport } from './routes/$org/dashboard/settings/branding'
+import { Route as OrgDashboardSettingsTokenRouteImport } from './routes/$org/dashboard/settings/token'
 import { Route as ApiOrgPostsIndexRouteImport } from './routes/api/$org/posts.index'
 import { Route as ApiOrgPostsIdIndexRouteImport } from './routes/api/$org/posts.$id.index'
 import { Route as ApiOrgPostsIdRunsRouteImport } from './routes/api/$org/posts.$id.runs'
@@ -120,6 +124,30 @@ const OrgPublicPostsIdRoute = OrgPublicPostsIdRouteImport.update({
   path: '/posts/$id',
   getParentRoute: () => OrgPublicRoute,
 } as any)
+const OrgDashboardSettingsIndexRoute =
+  OrgDashboardSettingsIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => OrgDashboardSettingsRoute,
+  } as any)
+const OrgDashboardSettingsAccessRoute =
+  OrgDashboardSettingsAccessRouteImport.update({
+    id: '/access',
+    path: '/access',
+    getParentRoute: () => OrgDashboardSettingsRoute,
+  } as any)
+const OrgDashboardSettingsBrandingRoute =
+  OrgDashboardSettingsBrandingRouteImport.update({
+    id: '/branding',
+    path: '/branding',
+    getParentRoute: () => OrgDashboardSettingsRoute,
+  } as any)
+const OrgDashboardSettingsTokenRoute =
+  OrgDashboardSettingsTokenRouteImport.update({
+    id: '/token',
+    path: '/token',
+    getParentRoute: () => OrgDashboardSettingsRoute,
+  } as any)
 const ApiOrgPostsIndexRoute = ApiOrgPostsIndexRouteImport.update({
   id: '/api/$org/posts/',
   path: '/api/$org/posts/',
@@ -152,12 +180,16 @@ export interface FileRoutesByFullPath {
   '/$org/dashboard/changelog': typeof OrgDashboardChangelogRoute
   '/$org/dashboard/roadmap': typeof OrgDashboardRoadmapRoute
   '/$org/dashboard/runs': typeof OrgDashboardRunsRoute
-  '/$org/dashboard/settings': typeof OrgDashboardSettingsRoute
+  '/$org/dashboard/settings': typeof OrgDashboardSettingsRouteWithChildren
   '/api/$org/changelog': typeof ApiOrgChangelogRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/$org/': typeof OrgPublicIndexRoute
   '/$org/dashboard/': typeof OrgDashboardIndexRoute
   '/$org/posts/$id': typeof OrgPublicPostsIdRoute
+  '/$org/dashboard/settings/access': typeof OrgDashboardSettingsAccessRoute
+  '/$org/dashboard/settings/branding': typeof OrgDashboardSettingsBrandingRoute
+  '/$org/dashboard/settings/token': typeof OrgDashboardSettingsTokenRoute
+  '/$org/dashboard/settings/': typeof OrgDashboardSettingsIndexRoute
   '/api/$org/posts/': typeof ApiOrgPostsIndexRoute
   '/api/$org/posts/$id/runs': typeof ApiOrgPostsIdRunsRoute
   '/api/$org/posts/$id/status': typeof ApiOrgPostsIdStatusRoute
@@ -173,11 +205,14 @@ export interface FileRoutesByTo {
   '/$org/dashboard/changelog': typeof OrgDashboardChangelogRoute
   '/$org/dashboard/roadmap': typeof OrgDashboardRoadmapRoute
   '/$org/dashboard/runs': typeof OrgDashboardRunsRoute
-  '/$org/dashboard/settings': typeof OrgDashboardSettingsRoute
   '/api/$org/changelog': typeof ApiOrgChangelogRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/$org/dashboard': typeof OrgDashboardIndexRoute
   '/$org/posts/$id': typeof OrgPublicPostsIdRoute
+  '/$org/dashboard/settings/access': typeof OrgDashboardSettingsAccessRoute
+  '/$org/dashboard/settings/branding': typeof OrgDashboardSettingsBrandingRoute
+  '/$org/dashboard/settings/token': typeof OrgDashboardSettingsTokenRoute
+  '/$org/dashboard/settings': typeof OrgDashboardSettingsIndexRoute
   '/api/$org/posts': typeof ApiOrgPostsIndexRoute
   '/api/$org/posts/$id/runs': typeof ApiOrgPostsIdRunsRoute
   '/api/$org/posts/$id/status': typeof ApiOrgPostsIdStatusRoute
@@ -197,12 +232,16 @@ export interface FileRoutesById {
   '/$org/dashboard/changelog': typeof OrgDashboardChangelogRoute
   '/$org/dashboard/roadmap': typeof OrgDashboardRoadmapRoute
   '/$org/dashboard/runs': typeof OrgDashboardRunsRoute
-  '/$org/dashboard/settings': typeof OrgDashboardSettingsRoute
+  '/$org/dashboard/settings': typeof OrgDashboardSettingsRouteWithChildren
   '/api/$org/changelog': typeof ApiOrgChangelogRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/$org/_public/': typeof OrgPublicIndexRoute
   '/$org/dashboard/': typeof OrgDashboardIndexRoute
   '/$org/_public/posts/$id': typeof OrgPublicPostsIdRoute
+  '/$org/dashboard/settings/access': typeof OrgDashboardSettingsAccessRoute
+  '/$org/dashboard/settings/branding': typeof OrgDashboardSettingsBrandingRoute
+  '/$org/dashboard/settings/token': typeof OrgDashboardSettingsTokenRoute
+  '/$org/dashboard/settings/': typeof OrgDashboardSettingsIndexRoute
   '/api/$org/posts/': typeof ApiOrgPostsIndexRoute
   '/api/$org/posts/$id/runs': typeof ApiOrgPostsIdRunsRoute
   '/api/$org/posts/$id/status': typeof ApiOrgPostsIdStatusRoute
@@ -227,6 +266,10 @@ export interface FileRouteTypes {
     | '/$org/'
     | '/$org/dashboard/'
     | '/$org/posts/$id'
+    | '/$org/dashboard/settings/access'
+    | '/$org/dashboard/settings/branding'
+    | '/$org/dashboard/settings/token'
+    | '/$org/dashboard/settings/'
     | '/api/$org/posts/'
     | '/api/$org/posts/$id/runs'
     | '/api/$org/posts/$id/status'
@@ -242,11 +285,14 @@ export interface FileRouteTypes {
     | '/$org/dashboard/changelog'
     | '/$org/dashboard/roadmap'
     | '/$org/dashboard/runs'
-    | '/$org/dashboard/settings'
     | '/api/$org/changelog'
     | '/api/auth/$'
     | '/$org/dashboard'
     | '/$org/posts/$id'
+    | '/$org/dashboard/settings/access'
+    | '/$org/dashboard/settings/branding'
+    | '/$org/dashboard/settings/token'
+    | '/$org/dashboard/settings'
     | '/api/$org/posts'
     | '/api/$org/posts/$id/runs'
     | '/api/$org/posts/$id/status'
@@ -271,6 +317,10 @@ export interface FileRouteTypes {
     | '/$org/_public/'
     | '/$org/dashboard/'
     | '/$org/_public/posts/$id'
+    | '/$org/dashboard/settings/access'
+    | '/$org/dashboard/settings/branding'
+    | '/$org/dashboard/settings/token'
+    | '/$org/dashboard/settings/'
     | '/api/$org/posts/'
     | '/api/$org/posts/$id/runs'
     | '/api/$org/posts/$id/status'
@@ -416,6 +466,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OrgPublicPostsIdRouteImport
       parentRoute: typeof OrgPublicRoute
     }
+    '/$org/dashboard/settings/': {
+      id: '/$org/dashboard/settings/'
+      path: '/'
+      fullPath: '/$org/dashboard/settings/'
+      preLoaderRoute: typeof OrgDashboardSettingsIndexRouteImport
+      parentRoute: typeof OrgDashboardSettingsRoute
+    }
+    '/$org/dashboard/settings/access': {
+      id: '/$org/dashboard/settings/access'
+      path: '/access'
+      fullPath: '/$org/dashboard/settings/access'
+      preLoaderRoute: typeof OrgDashboardSettingsAccessRouteImport
+      parentRoute: typeof OrgDashboardSettingsRoute
+    }
+    '/$org/dashboard/settings/branding': {
+      id: '/$org/dashboard/settings/branding'
+      path: '/branding'
+      fullPath: '/$org/dashboard/settings/branding'
+      preLoaderRoute: typeof OrgDashboardSettingsBrandingRouteImport
+      parentRoute: typeof OrgDashboardSettingsRoute
+    }
+    '/$org/dashboard/settings/token': {
+      id: '/$org/dashboard/settings/token'
+      path: '/token'
+      fullPath: '/$org/dashboard/settings/token'
+      preLoaderRoute: typeof OrgDashboardSettingsTokenRouteImport
+      parentRoute: typeof OrgDashboardSettingsRoute
+    }
     '/api/$org/posts/': {
       id: '/api/$org/posts/'
       path: '/api/$org/posts'
@@ -465,11 +543,28 @@ const OrgPublicRouteWithChildren = OrgPublicRoute._addFileChildren(
   OrgPublicRouteChildren,
 )
 
+interface OrgDashboardSettingsRouteChildren {
+  OrgDashboardSettingsAccessRoute: typeof OrgDashboardSettingsAccessRoute
+  OrgDashboardSettingsBrandingRoute: typeof OrgDashboardSettingsBrandingRoute
+  OrgDashboardSettingsTokenRoute: typeof OrgDashboardSettingsTokenRoute
+  OrgDashboardSettingsIndexRoute: typeof OrgDashboardSettingsIndexRoute
+}
+
+const OrgDashboardSettingsRouteChildren: OrgDashboardSettingsRouteChildren = {
+  OrgDashboardSettingsAccessRoute: OrgDashboardSettingsAccessRoute,
+  OrgDashboardSettingsBrandingRoute: OrgDashboardSettingsBrandingRoute,
+  OrgDashboardSettingsTokenRoute: OrgDashboardSettingsTokenRoute,
+  OrgDashboardSettingsIndexRoute: OrgDashboardSettingsIndexRoute,
+}
+
+const OrgDashboardSettingsRouteWithChildren =
+  OrgDashboardSettingsRoute._addFileChildren(OrgDashboardSettingsRouteChildren)
+
 interface OrgDashboardRouteChildren {
   OrgDashboardChangelogRoute: typeof OrgDashboardChangelogRoute
   OrgDashboardRoadmapRoute: typeof OrgDashboardRoadmapRoute
   OrgDashboardRunsRoute: typeof OrgDashboardRunsRoute
-  OrgDashboardSettingsRoute: typeof OrgDashboardSettingsRoute
+  OrgDashboardSettingsRoute: typeof OrgDashboardSettingsRouteWithChildren
   OrgDashboardIndexRoute: typeof OrgDashboardIndexRoute
 }
 
@@ -477,7 +572,7 @@ const OrgDashboardRouteChildren: OrgDashboardRouteChildren = {
   OrgDashboardChangelogRoute: OrgDashboardChangelogRoute,
   OrgDashboardRoadmapRoute: OrgDashboardRoadmapRoute,
   OrgDashboardRunsRoute: OrgDashboardRunsRoute,
-  OrgDashboardSettingsRoute: OrgDashboardSettingsRoute,
+  OrgDashboardSettingsRoute: OrgDashboardSettingsRouteWithChildren,
   OrgDashboardIndexRoute: OrgDashboardIndexRoute,
 }
 

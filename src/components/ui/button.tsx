@@ -18,6 +18,8 @@ const buttonVariants = cva(
         ghost:
           "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
         link: "text-primary underline-offset-4 hover:underline",
+        cta: "relative bg-foreground font-semibold text-background shadow-[inset_0_-1px_0_rgba(0,0,0,.14),0_1px_2px_rgba(0,0,0,.4)] hover:bg-foreground/90 active:scale-[0.97]",
+        soft: "border border-input bg-accent font-semibold text-muted-foreground shadow-[inset_0_1px_0_rgba(255,255,255,.08)] hover:bg-[color-mix(in_oklch,var(--accent),white_4%)] hover:text-foreground active:scale-[0.97]",
       },
       size: {
         default: "h-9 px-4 py-2 has-[>svg]:px-3",

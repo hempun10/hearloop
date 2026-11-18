@@ -12,6 +12,8 @@ export function getRouter() {
     defaultPreload: 'intent',
     // let Query decide freshness; the router always runs loaders, which read the cache
     defaultPreloadStaleTime: 0,
+    // the old app's smoothness: cross-fade between pages, persistent chrome excluded in styles.css
+    defaultViewTransition: true,
   })
   setupRouterSsrQueryIntegration({ router, queryClient })
   return router

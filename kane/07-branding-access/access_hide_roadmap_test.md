@@ -20,4 +20,4 @@ variables:
 # Session: access_hide_roadmap
 
 ## Step 1
-Go to {{base_url}}/login?next=/acme/dashboard/settings . Sign in with email '{{e2e_email}}' and password '{{e2e_password}}'. Turn off 'Public roadmap' and click 'Save changes'. Open the address /acme and verify the header has no 'Roadmap' link. Go back to /acme/dashboard/settings, turn 'Public roadmap' on again, save, open /acme and verify the 'Roadmap' link is back.
+Go to {{base_url}}/login?next=/acme/dashboard/settings/access . Sign in with email '{{e2e_email}}' and password '{{e2e_password}}'. Turn off 'Public roadmap' and click 'Save changes'. Open the address /acme and verify the header has no 'Roadmap' link. Go back to /acme/dashboard/settings/access, turn 'Public roadmap' on again, save, open /acme and verify the 'Roadmap' link is back.

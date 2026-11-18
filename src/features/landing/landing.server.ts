@@ -8,7 +8,7 @@ export async function landingData(orgId: number) {
     db.select({ posts: count(), votes: sum(posts.votes) }).from(posts).where(eq(posts.orgId, orgId)),
     db.select({ n: count() }).from(posts).where(and(eq(posts.orgId, orgId), eq(posts.status, 'shipped'))),
     db.select({ n: count() }).from(runs).innerJoin(posts, eq(posts.id, runs.postId)).where(eq(posts.orgId, orgId)),
-    db.query.posts.findMany({ where: and(eq(posts.orgId, orgId), ne(posts.status, 'shipped')), orderBy: desc(posts.votes), limit: 3 }),
+    db.query.posts.findMany({ where: and(eq(posts.orgId, orgId), ne(posts.status, 'shipped')), orderBy: desc(posts.votes), limit: 5 }),
     db
       .select({ title: posts.title, summary: runs.summary })
       .from(runs)
@@ -21,7 +21,8 @@ export async function landingData(orgId: number) {
   return {
     stats: { posts: stats.posts, votes: Number(stats.votes ?? 0), runs: runCount.n, shipped: shipped.n },
     top,
-    lastPass: lastPass ?? null,
+    // Kane's summary: "Objective…\nKane: passed…\nstep\nstep…"
+    lastPass: lastPass ? { title: lastPass.title, steps: lastPass.summary.split('\n').slice(2).filter(Boolean).slice(0, 4) } : null,
     shipped: entries,
   }
 }

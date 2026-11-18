@@ -1,88 +1,40 @@
-import { ChevronUp, CircleCheck } from 'lucide-react'
-import type { ReactNode } from 'react'
-import { Card } from '#/components/ui/card'
-import type { ChangelogEntry, Post } from '#/db/schema'
-import { StatusBadge } from '#/features/posts/components/status-badge'
-import { shortDate } from '#/lib/format'
-import { cn } from '#/lib/utils'
-import { kaneSteps } from './loop-terminal'
-import { SectionHeading } from './section-heading'
+import { AnimatedSpan, Terminal, TypingAnimation } from '#/components/magic/terminal'
+import { Framed, SectionHeader } from './frame'
 
-const FALLBACK_KANE = ['Opened the board', 'Typed in the search box', 'Checked only matching requests stay', 'Cleared the box, all requests came back']
+const BULLETS = [
+  ['Picks the top request', 'The loop reads the board through the API and takes the most voted open post.'],
+  ['Builds it with Claude Code', 'The agent edits the repo, runs the build and writes the Kane objective that should prove the change.'],
+  ['Proves it with Kane CLI', 'Kane drives a real browser through that objective and returns pass or fail with every step.'],
+  ['Ships, or tries again', "Pass: shipped and announced. Fail: Kane's report goes back to the agent, up to three tries."],
+] as const
 
-export function HowItWorks({ top, lastPass, latest }: {
-  top: Post[]
-  lastPass: { summary: string } | null
-  latest: Pick<ChangelogEntry, 'title' | 'body' | 'createdAt'> | undefined
-}) {
-  const steps = lastPass ? kaneSteps(lastPass.summary, 4) : []
+const FALLBACK = ['Opened the board and found the new control', 'Exercised it the way the request described', 'Checked the result on the page']
+
+export function HowItWorks({ lastPass }: { lastPass: { title: string; steps: string[] } | null }) {
+  const steps = lastPass?.steps.length ? lastPass.steps : FALLBACK
   return (
-    <section id="how" className="mx-auto max-w-6xl scroll-mt-20 px-4 pt-28 md:px-8">
-      <SectionHeading kicker="How it works" title="One loop, no hand-offs." description="From a vote to a verified release without anyone copying a ticket into a sprint." />
-      <div className="mt-12 grid gap-4 md:grid-cols-3">
-        <Tile className="md:col-span-2" n="01" title="Users ask" text="A public board with votes. The most wanted request rises to the top on its own.">
-          <ol className="grid gap-2">
-            {top.length === 0 && <MiniRow rank={1} title="Your first request goes here" votes={0} />}
-            {top.map((p, i) => <MiniRow key={p.id} rank={i + 1} title={p.title} votes={p.votes} badge={p.status !== 'open' ? <StatusBadge status={p.status} /> : null} />)}
-          </ol>
-        </Tile>
-        <Tile n="02" title="An agent builds it" text="Claude Code picks up the top request, implements it and writes the browser test that should prove it.">
-          <pre className="overflow-hidden rounded-lg border bg-background/60 p-3 font-mono text-[11px] leading-5 text-muted-foreground">
-            <span className="text-faint">$ bun run loop</span>{'\n'}
-            <span className="text-status-shipped">+</span> {'<input type="search"'}{'\n'}
-            <span className="text-status-shipped">+</span> {'  aria-label="Search requests"'}{'\n'}
-            <span className="text-status-shipped">+</span> {'  onChange={…} />'}{'\n'}
-            <span className="text-faint">wrote .hearloop/kane-objective.txt</span>
-          </pre>
-        </Tile>
-        <Tile n="03" title="Kane proves it" text="Kane CLI drives a real browser through the test. A failure goes straight back to the agent.">
-          <ul className="grid gap-2 text-xs leading-5 text-muted-foreground">
-            {(steps.length ? steps : FALLBACK_KANE).map((s) => (
-              <li key={s} className="flex gap-2"><CircleCheck className="mt-0.5 size-4 shrink-0 text-status-shipped" /><span className="line-clamp-2">{s}</span></li>
-            ))}
-          </ul>
-        </Tile>
-        <Tile className="md:col-span-2" n="04" title="Everyone hears" text="The post moves to shipped and a changelog entry, written by the agent, goes live. Voters see their idea land.">
-          {latest ? (
-            <div className="rounded-lg border bg-background/60 p-4">
-              <p className="text-[11px] text-faint">Changelog · {shortDate(latest.createdAt)}</p>
-              <p className="mt-1 text-sm font-semibold">{latest.title}</p>
-              <p className="mt-1 line-clamp-2 text-[13px] leading-5 text-muted-foreground">{latest.body}</p>
-              <span className="mt-3 inline-flex items-center gap-1.5 rounded-md bg-status-shipped/10 px-2 py-0.5 text-[11px] font-medium">
-                <span className="size-1.5 rounded-full bg-status-shipped" />Verified with Kane CLI
-              </span>
+    <Framed id="how">
+      <SectionHeader title="One loop, no hand-offs." sub="A script hands the top request to Claude Code, then asks Kane CLI to prove it. Nobody copies a ticket into a sprint." />
+      <div className="grid md:grid-cols-[380px_1fr]">
+        <dl className="flex flex-col gap-6 border-b p-6 md:border-r md:border-b-0">
+          {BULLETS.map(([t, d]) => (
+            <div key={t}>
+              <dt className="text-[15px] font-medium">{t}</dt>
+              <dd className="mt-1 text-sm leading-relaxed text-muted-foreground">{d}</dd>
             </div>
-          ) : (
-            <p className="rounded-lg border bg-background/60 p-4 text-[13px] text-muted-foreground">The first passing run lands here.</p>
-          )}
-        </Tile>
+          ))}
+        </dl>
+        <div className="min-w-0 p-6">
+          <Terminal title="hearloop-v2 — bun run loop" className="min-h-[320px] md:min-h-[400px]">
+            <TypingAnimation delay={300}>› bun run loop</TypingAnimation>
+            <AnimatedSpan className="text-muted-foreground">● Top request: {lastPass?.title ?? 'the most voted post'}</AnimatedSpan>
+            <AnimatedSpan className="pl-4 text-brand">└ claude -p → change built, build passed</AnimatedSpan>
+            <AnimatedSpan className="pl-4 text-brand">└ kane-cli run --agent → verifying in a real browser</AnimatedSpan>
+            {steps.map((s) => <AnimatedSpan key={s} className="pl-8 text-muted-foreground">· {s}</AnimatedSpan>)}
+            <AnimatedSpan className="pl-4 text-status-shipped">└ Kane: passed → post shipped, changelog published</AnimatedSpan>
+          </Terminal>
+        </div>
       </div>
-    </section>
-  )
-}
-
-function Tile({ n, title, text, children, className }: { n: string; title: string; text: string; children: ReactNode; className?: string }) {
-  return (
-    <Card className={cn('gap-5 rounded-2xl p-6 shadow-none transition-colors hover:border-input', className)}>
-      <div>
-        <p className="text-xs text-faint tabular-nums">{n}</p>
-        <h3 className="mt-2 text-[17px] font-semibold">{title}</h3>
-        <p className="mt-1.5 text-[13px] leading-6 text-muted-foreground">{text}</p>
-      </div>
-      <div className="mt-auto">{children}</div>
-    </Card>
-  )
-}
-
-function MiniRow({ rank, title, votes, badge }: { rank: number; title: string; votes: number; badge?: ReactNode }) {
-  return (
-    <li className="flex items-center gap-3 rounded-lg border bg-background/60 px-3 py-2.5 text-[13px]">
-      <span className="text-[11px] text-faint tabular-nums">{String(rank).padStart(2, '0')}</span>
-      <span className="min-w-0 flex-1 truncate font-medium">{title}</span>
-      {badge}
-      <span className="flex h-8 w-9 flex-col items-center justify-center rounded-md border bg-card text-[11px] font-semibold tabular-nums">
-        <ChevronUp className="size-3" strokeWidth={2.5} />{votes}
-      </span>
-    </li>
+    </Framed>
   )
 }

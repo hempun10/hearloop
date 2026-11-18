@@ -1,6 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Link, useNavigate } from '@tanstack/react-router'
 import { Controller, useForm } from 'react-hook-form'
+import { BackButton } from '#/components/back-button'
 import { BrandMark } from '#/components/brand-mark'
 import { Button } from '#/components/ui/button'
 import { Field, FieldError, FieldGroup, FieldLabel } from '#/components/ui/field'
@@ -26,11 +27,13 @@ export function AuthForm({ mode, next }: { mode: 'signin' | 'signup'; next?: str
     if (res.error) return form.setError('root', { message: res.error.message ?? 'Something went wrong. Try again.' })
     const session = await refreshSession()
     const home = session?.orgs[0] ? `/${session.orgs[0].slug}` : '/new'
-    await navigate({ to: safeRedirect(next) ?? home })
+    // replace /login in history, so Back from the next page skips the sign-in form
+    await navigate({ to: safeRedirect(next) ?? home, replace: true })
   }
 
   return (
     <main className="mx-auto max-w-sm px-4 pt-20">
+      <BackButton />
       <BrandMark className="size-9" />
       <h1 className="mt-6 text-2xl font-semibold">{signup ? 'Create your account' : 'Sign in'}</h1>
       <p className="mt-2 text-sm text-muted-foreground">{signup ? 'Then name your board. It takes a minute.' : 'Welcome back.'}</p>

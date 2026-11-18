@@ -1,5 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useNavigate } from '@tanstack/react-router'
+import { useRef } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { Button } from '#/components/ui/button'
 import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel } from '#/components/ui/field'
@@ -13,6 +14,8 @@ export function CreateOrgForm() {
   const navigate = useNavigate()
   const refreshSession = useRefreshSession()
   const form = useForm<CreateOrgInput>({ resolver: zodResolver(createOrgSchema), defaultValues: { name: '', slug: '' } })
+  // true once someone types their own address; clearing the address hands it back to the name
+  const customSlug = useRef(false)
 
   async function onSubmit(input: CreateOrgInput) {
     try {
@@ -41,8 +44,7 @@ export function CreateOrgForm() {
                 placeholder="Acme"
                 onChange={(e) => {
                   field.onChange(e)
-                  // the address follows the name until someone edits it
-                  if (!form.getFieldState('slug').isDirty) form.setValue('slug', toSlug(e.target.value))
+                  if (!customSlug.current) form.setValue('slug', toSlug(e.target.value), { shouldValidate: form.formState.isSubmitted })
                 }}
               />
               <FieldError errors={[fieldState.error]} />
@@ -62,7 +64,11 @@ export function CreateOrgForm() {
                   id="board-address"
                   placeholder="acme"
                   aria-invalid={fieldState.invalid}
-                  onChange={(e) => field.onChange(toSlug(e.target.value))}
+                  onChange={(e) => {
+                    const slug = toSlug(e.target.value)
+                    customSlug.current = slug !== ''
+                    field.onChange(slug)
+                  }}
                 />
               </InputGroup>
               {fieldState.error ? <FieldError role="alert" errors={[fieldState.error]} /> : <FieldDescription>Your board lives at this address.</FieldDescription>}

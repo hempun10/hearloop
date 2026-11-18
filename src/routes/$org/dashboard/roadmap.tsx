@@ -1,6 +1,6 @@
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { createFileRoute } from '@tanstack/react-router'
-import { PageHeader } from '#/components/page-header'
+import { Panel } from '#/features/dashboard/components/panel'
 import { RoadmapBoard } from '#/features/posts/components/roadmap-board'
 import { postListQuery } from '#/features/posts/post.queries'
 
@@ -10,10 +10,9 @@ export const Route = createFileRoute('/$org/dashboard/roadmap')({
     const { org } = Route.useParams()
     const { data: posts } = useSuspenseQuery(postListQuery(org))
     return (
-      <>
-        <PageHeader title="Roadmap"><span className="text-xs text-faint">Drag a card to change its status</span></PageHeader>
+      <Panel title="Roadmap" actions={<span className="hidden text-[13px] text-faint lg:inline">Drag cards between columns to change status</span>}>
         <RoadmapBoard org={org} posts={posts} />
-      </>
+      </Panel>
     )
   },
 })

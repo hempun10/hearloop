@@ -1,24 +1,16 @@
 import { useMutation, useQueryClient, useSuspenseQuery } from '@tanstack/react-query'
 import { createFileRoute } from '@tanstack/react-router'
-import { ScrollText } from 'lucide-react'
+import { CircleCheck, ExternalLink, Trash2 } from 'lucide-react'
 import { toast } from 'sonner'
-import { PageHeader } from '#/components/page-header'
 import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
+  AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription,
+  AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,
 } from '#/components/ui/alert-dialog'
 import { Button } from '#/components/ui/button'
-import { Empty, EmptyHeader, EmptyMedia, EmptyTitle } from '#/components/ui/empty'
 import { deleteChangelogEntry } from '#/features/changelog/changelog.functions'
 import { changelogQuery } from '#/features/changelog/changelog.queries'
-import { longDate } from '#/lib/format'
+import { Panel } from '#/features/dashboard/components/panel'
+import { longDate, timeAgo } from '#/lib/format'
 
 export const Route = createFileRoute('/$org/dashboard/changelog')({
   loader: ({ context, params }) => context.queryClient.query(changelogQuery(params.org)),
@@ -36,26 +28,29 @@ function DashboardChangelog() {
   })
 
   return (
-    <>
-      <PageHeader title="Changelog">
-        <Button variant="link" size="sm" className="text-brand" asChild>
-          <a href={`/${org}/changelog`} target="_blank" rel="noreferrer">View public page</a>
-        </Button>
-      </PageHeader>
-      <p className="border-b px-6 py-3 text-[13px] text-muted-foreground">Entries are written by the agent and published only when Kane CLI passes. You can remove one here.</p>
+    <Panel title="Changelog" actions={
+      <Button variant="soft" size="sm" asChild>
+        <a href={`/${org}/changelog`} target="_blank" rel="noreferrer"><ExternalLink className="size-3.5" />View public page</a>
+      </Button>
+    }>
       {entries.length === 0 ? (
-        <Empty><EmptyHeader><EmptyMedia variant="icon"><ScrollText /></EmptyMedia><EmptyTitle>Nothing shipped yet</EmptyTitle></EmptyHeader></Empty>
+        <div className="flex flex-col items-center gap-3 px-6 py-24 text-center">
+          <p className="text-[15px] font-semibold">Nothing shipped yet</p>
+          <p className="max-w-sm text-sm text-muted-foreground">Entries are written by the agent and published only when Kane CLI passes.</p>
+        </div>
       ) : (
         <ul>
           {entries.map((e) => (
-            <li key={e.id} className="flex gap-6 border-b px-6 py-5">
-              <time className="w-28 shrink-0 text-xs text-faint tabular-nums">{longDate(e.createdAt)}</time>
-              <div className="min-w-0 flex-1">
-                <p className="text-sm font-semibold">{e.title}</p>
-                <p className="mt-1 text-[13px] leading-6 text-muted-foreground">{e.body}</p>
-              </div>
+            <li key={e.id} className="group flex h-[52px] shrink-0 items-center gap-3.5 border-b px-5 hover:bg-card/60">
+              <CircleCheck className="size-5 shrink-0 fill-status-shipped text-background" />
+              <span className="min-w-0 truncate text-[16px] font-medium">{e.title}</span>
+              <span className="hidden shrink-0 rounded-md bg-status-shipped/15 px-2 py-0.5 text-[12px] font-medium text-status-shipped sm:inline">Verified with Kane CLI</span>
+              <span className="flex-1" />
+              <time className="text-[12px] text-faint tabular-nums" title={longDate(e.createdAt)}>{timeAgo(e.createdAt)}</time>
               <AlertDialog>
-                <AlertDialogTrigger asChild><Button variant="outline" size="xs">Remove</Button></AlertDialogTrigger>
+                <AlertDialogTrigger asChild>
+                  <Button variant="ghost" size="icon-sm" aria-label={`Remove ${e.title}`} className="size-7 text-faint opacity-0 group-hover:opacity-100 focus-visible:opacity-100"><Trash2 /></Button>
+                </AlertDialogTrigger>
                 <AlertDialogContent>
                   <AlertDialogHeader>
                     <AlertDialogTitle>Remove “{e.title}” from the public changelog?</AlertDialogTitle>
@@ -71,6 +66,6 @@ function DashboardChangelog() {
           ))}
         </ul>
       )}
-    </>
+    </Panel>
   )
 }

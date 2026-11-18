@@ -46,36 +46,36 @@
 
 .dark {
   color-scheme: dark;
-  --background: #0d0d0f;
-  --foreground: #ededf0;
-  --card: #121214;
-  --card-foreground: #ededf0;
-  --popover: #18181b;
-  --popover-foreground: #ededf0;
-  --primary: #ededf0;
-  --primary-foreground: #0d0d0f;
-  --secondary: #18181b;
-  --secondary-foreground: #ededf0;
-  --muted: #18181b;
-  --muted-foreground: #9a9aa3;
-  --faint: #63636b;
-  --accent: #202024;
-  --accent-foreground: #ededf0;
-  --destructive: #e5484d;
-  --border: #1f1f23;
-  --input: #2a2a30;
+  --background: #08090a;
+  --foreground: #f7f8f8;
+  --card: #0f1011;
+  --card-foreground: #f7f8f8;
+  --popover: #141516;
+  --popover-foreground: #f7f8f8;
+  --primary: #f7f8f8;
+  --primary-foreground: #08090a;
+  --secondary: #141516;
+  --secondary-foreground: #f7f8f8;
+  --muted: #141516;
+  --muted-foreground: #a1a1aa;
+  --faint: #85858f;
+  --accent: #1c1d1f;
+  --accent-foreground: #f7f8f8;
+  --destructive: #e0705f;
+  --border: #1f2023;
+  --input: #2a2b2f;
 
   --status-open: #9a9aa3;
-  --status-planned: #cdb37a;
-  --status-shipped: #7fb894;
+  --status-planned: #f2b53d;
+  --status-shipped: #3ecf8e;
 
-  --sidebar: #101012;
-  --sidebar-foreground: #ededf0;
-  --sidebar-primary: #ededf0;
-  --sidebar-primary-foreground: #0d0d0f;
-  --sidebar-accent: #202024;
-  --sidebar-accent-foreground: #ededf0;
-  --sidebar-border: #1f1f23;
+  --sidebar: #0a0a0b;
+  --sidebar-foreground: #f7f8f8;
+  --sidebar-primary: #f7f8f8;
+  --sidebar-primary-foreground: #08090a;
+  --sidebar-accent: #141516;
+  --sidebar-accent-foreground: #f7f8f8;
+  --sidebar-border: #1f2023;
 }
 /* after .dark on purpose: a light board inside the dark app wins */
 .light {
@@ -90,7 +90,7 @@
 }
 
 /* the org's accent; set inline on <html> per board */
-:root { --brand: #6e8bff; }
+:root { --brand: #7170ff; }
 
 @theme inline {
   --font-sans: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
@@ -140,37 +140,21 @@
   h1, h2, h3 { letter-spacing: -0.02em; }
 }
 
-/* landing effects */
-@utility dot-grid {
-  background-image: radial-gradient(circle at 1px 1px, rgb(255 255 255 / 0.07) 1px, transparent 0);
-  background-size: 22px 22px;
-  mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 40%, transparent 100%);
+@utility scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+  &:hover, &:focus-within { scrollbar-color: var(--input) transparent; }
 }
-@utility hero-glow {
-  background: radial-gradient(600px 300px at 50% 0%, color-mix(in oklch, var(--brand) 22%, transparent), transparent 70%);
-}
-@property --beam { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
-@utility border-beam {
-  position: relative;
-  &::before {
-    content: ""; position: absolute; inset: -1px; border-radius: inherit; padding: 1px; pointer-events: none;
-    background: conic-gradient(from var(--beam), transparent 0 75%, var(--brand) 85%, #b4c3ff 90%, transparent 95%);
-    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor; mask-composite: exclude;
-    animation: beam 6s linear infinite;
-  }
-}
-@keyframes beam { to { --beam: 360deg; } }
-@utility marquee {
-  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
-  & > div { animation: marquee 40s linear infinite; }
-  &:hover > div { animation-play-state: paused; }
-}
-@keyframes marquee { to { transform: translateX(-50%); } }
-@utility type-in { opacity: 0; animation: type-in 0.4s ease-out forwards; }
-@keyframes type-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+/* Persistent chrome gets its own snapshot so only page content fades on navigation. */
+header.sticky { view-transition-name: site-header; }
+[data-admin-sidebar] { view-transition-name: admin-sidebar; }
+[data-settings-nav] { view-transition-name: settings-nav; }
+::view-transition-group(site-header), ::view-transition-group(admin-sidebar), ::view-transition-group(settings-nav),
+::view-transition-new(site-header), ::view-transition-new(admin-sidebar), ::view-transition-new(settings-nav) { animation: none; }
+::view-transition-old(site-header), ::view-transition-old(admin-sidebar), ::view-transition-old(settings-nav) { display: none; }
 
 @media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
   * { transition: none !important; animation: none !important; }
-  .type-in { opacity: 1; }
 }

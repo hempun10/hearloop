@@ -1,12 +1,11 @@
 import { cn } from '#/lib/utils'
 
-/** hearloop's logo. */
+/** hearloop's logo: an open loop around a dot. */
 export function BrandMark({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" className={cn('size-6 shrink-0', className)} aria-hidden>
-      <rect width="24" height="24" rx="6" fill="#ededf0" />
-      <path d="M8 12a4 4 0 1 1 4 4" stroke="#0d0d0f" strokeWidth="2.2" fill="none" strokeLinecap="round" />
-      <circle cx="9.5" cy="16" r="1.4" fill="#6e8bff" />
+    <svg viewBox="0 0 24 24" className={cn('size-6 shrink-0 text-foreground', className)} aria-hidden>
+      <path d="M12 4a8 8 0 1 1-8 8" fill="none" stroke="currentColor" strokeWidth="2.75" strokeLinecap="round" />
+      <circle cx="12" cy="12" r="2.5" fill="currentColor" />
     </svg>
   )
 }

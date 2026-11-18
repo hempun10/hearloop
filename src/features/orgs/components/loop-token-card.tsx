@@ -13,7 +13,7 @@ import {
   AlertDialogTrigger,
 } from '#/components/ui/alert-dialog'
 import { Button } from '#/components/ui/button'
-import { FieldDescription, FieldLegend, FieldSet } from '#/components/ui/field'
+import { Row, SectionHead } from '#/features/dashboard/components/panel'
 import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from '#/components/ui/input-group'
 import type { PublicOrg } from '../org.server'
 import { rotateLoopToken } from '../org.functions'
@@ -36,12 +36,31 @@ export function LoopTokenCard({ org }: { org: PublicOrg }) {
   }
 
   return (
-    <FieldSet className="mt-10 border-t pt-6">
-      <FieldLegend>Loop API token</FieldLegend>
-      <FieldDescription>The loop uses this to move posts to building and record Kane's verdict. It's shown once; only a hash is kept.</FieldDescription>
-
+    <div>
+      <SectionHead title="Token" />
+      <Row label={org.hasToken ? 'A token is set' : 'No token yet'} help="Regenerating stops the old token right away.">
+        {org.hasToken ? (
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <Button variant="soft" size="sm" disabled={rotate.isPending}><KeyRound />{label}</Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Regenerate the loop token?</AlertDialogTitle>
+                <AlertDialogDescription>The old token stops working right away. Update it wherever the loop runs.</AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                <AlertDialogAction onClick={() => rotate.mutate()}>Regenerate</AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+        ) : (
+          <Button variant="soft" size="sm" disabled={rotate.isPending} onClick={() => rotate.mutate()}><KeyRound />{label}</Button>
+        )}
+      </Row>
       {token ? (
-        <div className="rounded-lg border bg-card p-3">
+        <div className="mb-4 rounded-lg border bg-card p-3">
           <p className="text-xs text-status-planned">Copy it now. You won't see it again.</p>
           <InputGroup className="mt-2">
             <InputGroupInput readOnly value={token} data-testid="token" className="font-mono text-[13px]" aria-label="Loop token" />
@@ -50,36 +69,14 @@ export function LoopTokenCard({ org }: { org: PublicOrg }) {
             </InputGroupAddon>
           </InputGroup>
         </div>
-      ) : (
-        <p className="text-[13px] text-faint">{org.hasToken ? 'A token is set.' : 'No token yet.'}</p>
-      )}
+      ) : null}
 
-      {org.hasToken ? (
-        <AlertDialog>
-          <AlertDialogTrigger asChild>
-            <Button variant="outline" className="w-fit" disabled={rotate.isPending}><KeyRound />{label}</Button>
-          </AlertDialogTrigger>
-          <AlertDialogContent>
-            <AlertDialogHeader>
-              <AlertDialogTitle>Regenerate the loop token?</AlertDialogTitle>
-              <AlertDialogDescription>The old token stops working right away. Update it wherever the loop runs.</AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction onClick={() => rotate.mutate()}>Regenerate</AlertDialogAction>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
-      ) : (
-        <Button variant="outline" className="w-fit" disabled={rotate.isPending} onClick={() => rotate.mutate()}><KeyRound />{label}</Button>
-      )}
-
-      <div>
-        <p className="mb-2 text-xs font-medium text-muted-foreground">Run the loop</p>
+      <div className="border-t pt-5">
+        <SectionHead title="Run the loop" />
         <pre className="overflow-x-auto rounded-lg bg-card p-3 font-mono text-xs leading-5 text-muted-foreground">
           {`APP_URL=${origin} ORG=${org.slug} API_TOKEN=${token || '<token>'} bun run loop`}
         </pre>
       </div>
-    </FieldSet>
+    </div>
   )
 }
