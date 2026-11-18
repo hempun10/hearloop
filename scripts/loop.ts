@@ -3,6 +3,9 @@
 // Usage: APP_URL=http://localhost:3000 API_TOKEN=dev-token bun scripts/loop.ts [--deploy] [--post <id>]
 import { $ } from 'bun'
 
+// Kane needs a Chromium; point KANE_CLI_CHROME_PATH at one if Chrome isn't installed (e.g. Helium)
+process.env.KANE_CLI_CHROME_PATH ??= '/Applications/Helium.app/Contents/MacOS/Helium'
+
 const APP_URL = process.env.APP_URL ?? 'http://localhost:3000'
 const TOKEN = process.env.API_TOKEN ?? 'dev-token'
 const MAX_TRIES = Number(process.env.MAX_TRIES ?? 3)
@@ -47,18 +50,17 @@ async function build(post: Post, failure?: string) {
 
 type KaneResult = { passed: boolean; summary: string }
 
-// ponytail: verdict parsed from Kane's NDJSON by event/field names; tighten once the schema is pinned
+// Kane --agent prints NDJSON; the last line is {"type":"run_end","status":"passed"|"failed",summary,reason,...}
 async function verify(objective: string): Promise<KaneResult> {
-  const out = await $`kane-cli run ${objective} --agent --headless --url ${APP_URL} --timeout 300 --mode testing`.nothrow().text()
+  const out = await $`kane-cli run ${objective} --agent --headless --url ${APP_URL} --timeout 300 --max-steps 30`.nothrow().text()
   const events = out.split('\n').flatMap((l): any[] => { try { return [JSON.parse(l)] } catch { return [] } })
-  const end = [...events].reverse().find((e: any) => /run_end|result|complete/i.test(String(e.type ?? e.event ?? '')))
-  const status = String(end?.status ?? end?.result ?? end?.verdict ?? '').toLowerCase()
-  const passed = end?.passed === true || end?.success === true || /^(pass|passed|success|succeeded)$/.test(status)
+  const end = events.find((e: any) => e.type === 'run_end')
+  const passed = end?.status === 'passed'
   const summary = [
     `Objective: ${objective}`,
-    `Verdict: ${passed ? 'passed' : 'failed'}${status ? ` (${status})` : ''}`,
-    end?.summary ?? end?.message ?? end?.reason ?? '',
-  ].filter(Boolean).join('\n')
+    `Kane: ${end?.status ?? 'no run_end'}${end?.reason ? ` (${end.reason})` : ''}`,
+    end?.summary ?? out.slice(-1500),
+  ].join('\n')
   await Bun.write(`.hearloop/kane-${Date.now()}.ndjson`, out)
   return { passed, summary }
 }
