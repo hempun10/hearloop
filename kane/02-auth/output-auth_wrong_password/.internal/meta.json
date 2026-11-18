@@ -1,0 +1,19 @@
+{
+  "commit_id": "3cc58a08-ca05-4a50-a6b1-c887e9fb50d2",
+  "test_id": "a80997d6-0dde-4497-bee7-208088cf05f4",
+  "testcase_id": "01M7PBN3J4FH4ZDAMSJ18TQSQR",
+  "project_id": "01M7P4G6ZA12MHJEFHMXSZSE9W",
+  "folder_id": "01M7P8FS0JYMBWRAXSR4GPA0QY",
+  "org_id": "3436657",
+  "session_name": "auth_wrong_password",
+  "executions": [
+    {
+      "execution_id": "d4041f8f-c0c6-4cf4-8706-8e21ffecf3d4",
+      "run_kind": "replay",
+      "status": "passed",
+      "valid": true,
+      "uploaded": true,
+      "at": "2026-11-18T04:05:19.767Z"
+    }
+  ]
+}

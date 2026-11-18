@@ -14,7 +14,9 @@
 		"cf-typegen": "wrangler types",
 		"db:migrate": "wrangler d1 migrations apply hearloop-v2 --local",
 		"db:migrate:remote": "wrangler d1 migrations apply hearloop-v2 --remote",
-		"loop": "bun scripts/loop.ts"
+		"loop": "bun scripts/loop.ts",
+		"e2e:seed": "bun scripts/seed-e2e.ts",
+		"kane": "bun scripts/kane.ts"
 	},
 	"dependencies": {
 		"@fontsource-variable/geist": "^5.3.0",

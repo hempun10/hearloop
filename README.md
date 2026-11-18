@@ -31,6 +31,21 @@ set -a; . ./.prod.local; set +a; bun run loop --deploy   # live: APP_URL, ORG, A
 Kane CLI needs a Chromium. If Chrome isn't installed, set `KANE_CLI_CHROME_PATH`.
 If Kane blames its own automation (`verdict.family: automation_bug`), the loop re-runs Kane instead of asking the agent to change working code.
 
+## Kane test suite
+
+Tests live in `kane/<area>/*_test.md`, one folder per Test Manager folder (see `kane/suite.ts`):
+01 Smoke, 02 Auth, 03 Orgs & onboarding, 04 Public board, 05 Roadmap & changelog, 06 Dashboard, 07 Branding & access, 08 Loop verifications.
+
+```bash
+bun run e2e:seed            # reset the fixture: e2e@hearloop.test owning /acme (password in .testmuai/variables/e2e.json)
+bun run kane run smoke      # replay one area (cheap, uses the recorded steps)
+bun run kane run all
+bun run kane record <area>  # record tests added to kane/suite.ts, filed into that area's folder
+```
+
+Every objective starts at `{{base_url}}`, so the same recordings run against any deployment.
+The loop files its Kane runs under 08 Loop verifications.
+
 ## Deploy
 
 ```bash

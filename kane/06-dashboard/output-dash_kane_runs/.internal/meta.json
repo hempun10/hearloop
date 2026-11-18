@@ -1,0 +1,19 @@
+{
+  "commit_id": "fe294a15-60c0-426e-ac22-7c6aea50456a",
+  "test_id": "3806fdd8-1ec2-4970-be1b-57f8ae40a5ff",
+  "testcase_id": "01M7PCJTHVT630XZM760F7Y1GV",
+  "project_id": "01M7P4G6ZA12MHJEFHMXSZSE9W",
+  "folder_id": "01M7P8G4H1AZJV9AK13PCMVHMS",
+  "org_id": "3436657",
+  "session_name": "dash_kane_runs",
+  "executions": [
+    {
+      "execution_id": "871983b4-b8a7-4e35-801d-17303b4e60ad",
+      "run_kind": "replay",
+      "status": "passed",
+      "valid": true,
+      "uploaded": true,
+      "at": "2026-11-18T04:11:52.963Z"
+    }
+  ]
+}

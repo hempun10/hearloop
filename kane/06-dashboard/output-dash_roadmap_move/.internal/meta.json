@@ -1,0 +1,19 @@
+{
+  "commit_id": "355b6321-4dfe-498d-ba10-621156e80e4e",
+  "test_id": "3e6ba111-7528-4636-b028-82d84f424fcc",
+  "testcase_id": "01M7PCEPCAAXW7ER3MR4EQRZKH",
+  "project_id": "01M7P4G6ZA12MHJEFHMXSZSE9W",
+  "folder_id": "01M7P8G4H1AZJV9AK13PCMVHMS",
+  "org_id": "3436657",
+  "session_name": "dash_roadmap_move",
+  "executions": [
+    {
+      "execution_id": "871983b4-b8a7-4e35-801d-17303b4e60ad",
+      "run_kind": "replay",
+      "status": "passed",
+      "valid": true,
+      "uploaded": true,
+      "at": "2026-11-18T04:11:52.964Z"
+    }
+  ]
+}

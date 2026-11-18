@@ -1,0 +1,56 @@
+// The Kane suite: one Test Manager folder per feature area.
+// Record with `bun run kane record <area>`; replay with `bun run kane run <area|all>`.
+// Tests use the e2e fixture from `bun run e2e:seed` ({{e2e_email}} / {{e2e_password}}, board /acme).
+// Every objective starts at {{base_url}}, so the same recordings replay locally or against production.
+
+export const FOLDERS = {
+  smoke: { dir: '01-smoke', id: '01M7P8FEGAF2RP2RM21RQDZVGN', name: '01 Smoke' },
+  auth: { dir: '02-auth', id: '01M7P8FS0JYMBWRAXSR4GPA0QY', name: '02 Auth' },
+  orgs: { dir: '03-orgs', id: '01M7P8FWZVE79K6AD3J2344ECM', name: '03 Orgs & onboarding' },
+  board: { dir: '04-public-board', id: '01M7P8FZHE88458NH63TH4F3EY', name: '04 Public board' },
+  roadmap: { dir: '05-roadmap-changelog', id: '01M7P8G1YZ6FFZN7V4R3YDGGBJ', name: '05 Roadmap & changelog' },
+  dashboard: { dir: '06-dashboard', id: '01M7P8G4H1AZJV9AK13PCMVHMS', name: '06 Dashboard' },
+  branding: { dir: '07-branding-access', id: '01M7P8G6948GZYH1XXSPW7KKR6', name: '07 Branding & access' },
+  loop: { dir: '08-loop', id: '01M7P8G7RQ5T0JYG2GM80M8CQZ', name: '08 Loop verifications' },
+} as const
+
+export type Area = keyof typeof FOLDERS
+type Test = { slug: string; path: string; objective: string }
+
+const signIn = "Sign in with email '{{e2e_email}}' and password '{{e2e_password}}' and verify the Acme board loads."
+
+export const TESTS: Partial<Record<Area, Test[]>> = {
+  smoke: [
+    { slug: 'smoke_landing_to_demo', path: '/', objective: "Go to {{base_url}}/ . Verify the headline 'Feedback that ships itself.' is visible. Click 'Try the live demo' and verify a feedback board with a list of requests and a 'Post idea' button loads." },
+    { slug: 'smoke_vote', path: '/acme', objective: "Go to {{base_url}}/acme . Click the vote button on the first request. Verify that button is now highlighted as voted and its accessible label ends with 'voted'." },
+  ],
+  auth: [
+    { slug: 'auth_sign_up', path: '/login?mode=signup', objective: "Go to {{base_url}}/login?mode=signup . Fill in name 'New Tester', email '{{smart.random_email}}' and password 'correct-horse-9', click 'Create account', then verify the page heading is 'Name your board'." },
+    { slug: 'auth_sign_in_out', path: '/login', objective: `Go to {{base_url}}/login . ${signIn} Verify the header shows a 'Dashboard' link. Click 'Sign out' in the header, then verify the header shows 'Sign in' and no 'Dashboard' link.` },
+    { slug: 'auth_wrong_password', path: '/login', objective: "Go to {{base_url}}/login . Sign in with email '{{e2e_email}}' and password 'not-the-password'. Verify an error message about invalid email or password is shown and the 'Sign in' heading is still on the page." },
+    { slug: 'auth_dashboard_guard', path: '/acme/dashboard', objective: "Go to {{base_url}}/acme/dashboard . Verify the page shows the 'Sign in' heading with email and password fields, not the dashboard." },
+  ],
+  orgs: [
+    { slug: 'org_create_board', path: '/login?mode=signup', objective: "Go to {{base_url}}/login?mode=signup . Create an account with name 'Org Tester', email '{{smart.random_email}}' and password 'correct-horse-9'. On 'Name your board', enter board name 'Team {{smart.random_string_6}}' and verify the Address field fills in with a lowercase version. Click 'Create board' and verify the settings page shows a message ending in 'is live.'" },
+    { slug: 'org_reserved_address', path: '/login?next=/new', objective: `Go to {{base_url}}/login?next=/new . Sign in with email '{{e2e_email}}' and password '{{e2e_password}}'. On 'Name your board', enter board name 'Login' and click 'Create board'. Verify an error says the address is reserved.` },
+    { slug: 'org_loop_token', path: '/login?next=/acme/dashboard/settings', objective: "Go to {{base_url}}/login?next=/acme/dashboard/settings . Sign in with email '{{e2e_email}}' and password '{{e2e_password}}'. In the 'Loop API token' section click 'Generate token' or 'Regenerate token' and accept any confirmation. Verify a token starting with 'hl_' is shown with the note 'Copy it now'." },
+  ],
+  board: [
+    { slug: 'board_new_post_similar', path: '/acme', objective: "Go to {{base_url}}/acme . Click 'Post idea'. Type the title 'Dark mode for the board' and verify a 'Similar requests' box lists 'Dark mode toggle'. Replace the title with 'Kane check {{smart.random_string_6}}', add details 'Created by the Kane suite.', click 'Post', and verify the post page opens with that title and the text 'Not verified yet'." },
+    { slug: 'board_search', path: '/acme', objective: "Go to {{base_url}}/acme . Type 'export' in the 'Search requests' box. Verify 'Export posts to CSV' is listed and 'Dark mode toggle' is not. Replace the search with 'zzqxnomatch' and verify the message 'No requests match' is shown." },
+    { slug: 'board_post_page', path: '/acme', objective: "Go to {{base_url}}/acme . Open the request 'Search the board'. Verify the post page shows its title, a status timeline where 'Shipped' is reached, and a 'Kane CLI verifications' section with a 'Passed' entry." },
+  ],
+  roadmap: [
+    { slug: 'roadmap_public_columns', path: '/acme/roadmap', objective: "Go to {{base_url}}/acme/roadmap . Verify there are columns 'Planned', 'In progress' and 'Shipped'; 'Dark mode toggle' is under Planned, 'Slack notifications' under In progress, and 'Search the board' under Shipped." },
+    { slug: 'changelog_links_to_post', path: '/acme/changelog', objective: "Go to {{base_url}}/acme/changelog . Verify an entry titled 'Search the board' is shown with a 'Verified with Kane CLI' link. Click that link and verify the post page for 'Search the board' opens." },
+  ],
+  dashboard: [
+    { slug: 'dash_inbox_status', path: '/login?next=/acme/dashboard', objective: "Go to {{base_url}}/login?next=/acme/dashboard . Sign in with email '{{e2e_email}}' and password '{{e2e_password}}'. In the Inbox, change the status of 'Export posts to CSV' to 'Planned' and verify the 'Planned' count in the left list is 2. Then change it back to 'Open' and verify the 'Planned' count is 1." },
+    { slug: 'dash_roadmap_move', path: '/login?next=/acme/dashboard/roadmap', objective: "Go to {{base_url}}/login?next=/acme/dashboard/roadmap . Sign in with email '{{e2e_email}}' and password '{{e2e_password}}'. Verify the Roadmap shows columns Open, Planned, In progress and Shipped. Using the dropdown on the 'Export posts to CSV' card, move it to 'In progress' and verify the card is now in the In progress column. Move it back to 'Open' and verify it is in the Open column." },
+    { slug: 'dash_kane_runs', path: '/login?next=/acme/dashboard/runs', objective: "Go to {{base_url}}/login?next=/acme/dashboard/runs . Sign in with email '{{e2e_email}}' and password '{{e2e_password}}'. Verify the Kane runs page lists a 'Passed' run for 'Search the board'. Click that row and verify the expanded report contains 'Kane: passed'." },
+  ],
+  branding: [
+    { slug: 'brand_tagline_accent', path: '/login?next=/acme/dashboard/settings', objective: "Go to {{base_url}}/login?next=/acme/dashboard/settings . Sign in with email '{{e2e_email}}' and password '{{e2e_password}}'. Set the Tagline to 'Built with Kane {{smart.random_string_4}}', click the green accent swatch, click 'Save changes' and verify 'Saved' appears. Store the tagline you typed as 'tagline'. Click 'View public board' and verify the board header shows 'Acme' with no 'hearloop' brand next to the logo, and the stored tagline value appears under the board name." },
+    { slug: 'access_hide_roadmap', path: '/login?next=/acme/dashboard/settings', objective: "Go to {{base_url}}/login?next=/acme/dashboard/settings . Sign in with email '{{e2e_email}}' and password '{{e2e_password}}'. Turn off 'Public roadmap' and click 'Save changes'. Open the address /acme and verify the header has no 'Roadmap' link. Go back to /acme/dashboard/settings, turn 'Public roadmap' on again, save, open /acme and verify the 'Roadmap' link is back." },
+  ],
+}

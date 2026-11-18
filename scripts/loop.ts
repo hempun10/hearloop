@@ -2,6 +2,7 @@
 // The closed loop: top request -> coding agent builds it -> Kane CLI verifies -> shipped or retried.
 // Usage: APP_URL=http://localhost:3000 ORG=demo API_TOKEN=<org token from Settings> bun scripts/loop.ts [--deploy] [--post <id>]
 import { $ } from 'bun'
+import { FOLDERS } from '../kane/suite'
 
 // Kane needs a Chromium; point KANE_CLI_CHROME_PATH at one if Chrome isn't installed (e.g. Helium)
 process.env.KANE_CLI_CHROME_PATH ??= '/Applications/Helium.app/Contents/MacOS/Helium'
@@ -55,6 +56,17 @@ type KaneResult = { passed: boolean; summary: string; kaneFault: boolean }
 
 // Kane --agent prints NDJSON; the last line is {"type":"run_end","status":"passed"|"failed",summary,reason,...}
 async function verify(objective: string): Promise<KaneResult> {
+  // file the run under "08 Loop verifications" in Test Manager, then put the profile's folder back
+  const prev = JSON.parse(await $`kane-cli config show --agent`.text()).folder_id
+  await $`kane-cli config folder ${process.env.KANE_FOLDER ?? FOLDERS.loop.id}`.quiet().nothrow()
+  try {
+    return await verifyIn(objective)
+  } finally {
+    if (prev) await $`kane-cli config folder ${prev}`.quiet().nothrow()
+  }
+}
+
+async function verifyIn(objective: string): Promise<KaneResult> {
   const out = await $`kane-cli run ${objective} --agent --headless --url ${BOARD} --timeout 300 --max-steps 30`.nothrow().text()
   const events = out.split('\n').flatMap((l): any[] => { try { return [JSON.parse(l)] } catch { return [] } })
   const end = events.find((e: any) => e.type === 'run_end')
