@@ -4,7 +4,7 @@ import { createOrg } from '#/lib/fns'
 
 const toSlug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 32)
 
-export const Route = createFileRoute('/new')({
+export const Route = createFileRoute('/_site/new')({
   beforeLoad: ({ context }) => {
     if (!context.me) throw redirect({ to: '/login', search: { mode: 'signup', next: '/new' } })
   },
@@ -29,7 +29,7 @@ function NewOrg() {
       const r = await createOrg({ data: { name, slug: shown } })
       if (!r.ok) throw new Error(r.error)
       await router.invalidate()
-      navigate({ to: '/$org/settings', params: { org: r.slug }, search: { welcome: true } })
+      navigate({ to: '/$org/dashboard/settings', params: { org: r.slug }, search: { welcome: true } })
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Could not create the board.')
       setBusy(false)
@@ -53,7 +53,7 @@ function NewOrg() {
           </div>
         </label>
         {error && <p role="alert" className="m-0 text-[13px] text-planned">{error}</p>}
-        <button disabled={busy || !shown} className="h-10 rounded-lg bg-fg text-[14px] font-semibold text-bg hover:bg-white disabled:opacity-50">
+        <button disabled={busy || !shown} className="h-10 rounded-lg bg-fg text-[14px] font-semibold text-bg hover:opacity-90 disabled:opacity-50">
           {busy ? 'Creating' : 'Create board'}
         </button>
       </form>

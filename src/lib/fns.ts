@@ -3,7 +3,7 @@ import { getRequestHeaders } from '@tanstack/react-start/server'
 import { auth } from './auth'
 import { randomToken, sha256 } from './crypto'
 import * as db from './db'
-import { RESERVED, SLUG_RE, type Me } from './types'
+import { RESERVED, SLUG_RE, STATUSES, type Me, type OrgPatch, type Status } from './types'
 
 const str = (v: unknown, max: number) => (typeof v === 'string' ? v.trim().slice(0, max) : '')
 const num = (v: unknown) => {
@@ -104,8 +104,61 @@ export const createPost = createServerFn({ method: 'POST' })
     if (!title) throw new Error('title required')
     return { org: slug(d?.org), title, body: str(d?.body, 4000) }
   })
-  .handler(async ({ data }) => db.createPost((await requireOrg(data.org)).id, data.title, data.body))
+  .handler(async ({ data }) => {
+    const org = await requireOrg(data.org)
+    if (org.who_can_post === 'signed_in' && !(await session())) throw new Error('Sign in to post.')
+    return db.createPost(org.id, data.title, data.body)
+  })
 
 export const vote = createServerFn({ method: 'POST' })
   .validator((id: number) => num(id))
   .handler(({ data }) => db.vote(data))
+
+// ---- dashboard (members only)
+const orgId = (d: { org: string }) => slug(d?.org)
+
+export const setPostStatus = createServerFn({ method: 'POST' })
+  .validator((d: { org: string; id: number; status: Status }) => {
+    if (!STATUSES.includes(d?.status)) throw new Error('bad status')
+    return { org: orgId(d), id: num(d?.id), status: d.status }
+  })
+  .handler(async ({ data }) => db.setStatus((await requireMember(data.org)).org.id, data.id, data.status))
+
+export const removePost = createServerFn({ method: 'POST' })
+  .validator((d: { org: string; id: number }) => ({ org: orgId(d), id: num(d?.id) }))
+  .handler(async ({ data }) => db.deletePost((await requireMember(data.org)).org.id, data.id))
+
+export const removeEntry = createServerFn({ method: 'POST' })
+  .validator((d: { org: string; id: number }) => ({ org: orgId(d), id: num(d?.id) }))
+  .handler(async ({ data }) => db.deleteEntry((await requireMember(data.org)).org.id, data.id))
+
+export const listRuns = createServerFn()
+  .validator(slug)
+  .handler(async ({ data }) => db.listRuns((await requireMember(data)).org.id))
+
+const HEX = /^#[0-9a-f]{6}$/i
+export const updateOrg = createServerFn({ method: 'POST' })
+  .validator((d: { org: string; patch: OrgPatch }) => {
+    const p = d?.patch ?? {}
+    const out: OrgPatch = {}
+    if ('name' in p) { out.name = str(p.name, 60); if (!out.name) throw new Error('Name can’t be empty.') }
+    if ('tagline' in p) out.tagline = str(p.tagline, 160)
+    if ('accent' in p) {
+      if (p.accent && !HEX.test(p.accent)) throw new Error('Accent must be a hex colour like #6e8bff.')
+      out.accent = p.accent || null
+    }
+    if ('logo_url' in p) {
+      const u = str(p.logo_url, 500)
+      if (u && !/^https:\/\/[^\s"'<>]+$/.test(u)) throw new Error('Logo must be an https:// image URL.')
+      out.logo_url = u || null
+    }
+    if ('theme' in p) out.theme = p.theme === 'light' ? 'light' : 'dark'
+    for (const k of ['powered_by', 'show_roadmap', 'show_changelog'] as const) if (k in p) out[k] = p[k] ? 1 : 0
+    if ('who_can_post' in p) out.who_can_post = p.who_can_post === 'signed_in' ? 'signed_in' : 'anyone'
+    return { org: orgId(d), patch: out }
+  })
+  .handler(async ({ data }) => {
+    const { org } = await requireMember(data.org)
+    await db.updateOrg(org.id, data.patch)
+    return true
+  })

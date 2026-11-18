@@ -23,6 +23,24 @@
 
 html { color-scheme: dark; scroll-behavior: smooth; }
 
+/* an org can pick a warm-white light theme; accent comes in as --color-link */
+[data-theme="light"] {
+  color-scheme: light;
+  --color-bg: #f7f5f0;
+  --color-surface: #ffffff;
+  --color-raised: #f1efe9;
+  --color-hover: #ebe8e1;
+  --color-line: #e6e2da;
+  --color-line-strong: #d6d1c7;
+  --color-fg: #18181b;
+  --color-muted: #5c5c66;
+  --color-faint: #8a8a93;
+  --color-open: #8a8a93;
+  --color-planned: #a8862f;
+  --color-shipped: #3f8f5e;
+}
+dialog::backdrop { background: rgb(0 0 0 / 0.55); backdrop-filter: blur(2px); }
+
 /* landing effects */
 .dot-grid {
   background-image: radial-gradient(circle at 1px 1px, rgb(255 255 255 / 0.07) 1px, transparent 0);

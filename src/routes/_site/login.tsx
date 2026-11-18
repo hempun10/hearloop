@@ -8,7 +8,7 @@ type Search = { mode?: 'signup'; next?: string }
 // only same-site paths, never //evil.com
 const safeNext = (n?: string) => (n && n.startsWith('/') && !n.startsWith('//') ? n : undefined)
 
-export const Route = createFileRoute('/login')({
+export const Route = createFileRoute('/_site/login')({
   validateSearch: (s: Record<string, unknown>): Search => ({
     mode: s.mode === 'signup' ? 'signup' : undefined,
     next: typeof s.next === 'string' ? s.next : undefined,
@@ -67,7 +67,7 @@ function Login() {
             autoComplete={signup ? 'new-password' : 'current-password'} placeholder={signup ? 'At least 8 characters' : ''} />
         </label>
         {error && <p role="alert" className="m-0 text-[13px] text-planned">{error}</p>}
-        <button disabled={busy} className="mt-2 h-10 rounded-lg bg-fg text-[14px] font-semibold text-bg transition-colors hover:bg-white disabled:opacity-50">
+        <button disabled={busy} className="mt-2 h-10 rounded-lg bg-fg text-[14px] font-semibold text-bg transition-colors hover:opacity-90 disabled:opacity-50">
           {busy ? 'One moment' : signup ? 'Create account' : 'Sign in'}
         </button>
       </form>

@@ -1,7 +1,8 @@
-import { Link, createFileRoute } from '@tanstack/react-router'
+import { Link, createFileRoute, useLoaderData } from '@tanstack/react-router'
+import { Hidden } from './roadmap'
 import { listChangelog } from '#/lib/fns'
 
-export const Route = createFileRoute('/$org/changelog')({
+export const Route = createFileRoute('/$org/_public/changelog')({
   loader: ({ params }) => listChangelog({ data: params.org }),
   component: Changelog,
 })
@@ -11,6 +12,8 @@ const fmt = (sec: number) => new Date(sec * 1000).toLocaleDateString('en-US', { 
 function Changelog() {
   const entries = Route.useLoaderData()
   const { org } = Route.useParams()
+  const parent = useLoaderData({ from: '/$org' })
+  if (!parent.org.show_changelog) return <Hidden what="changelog" />
   return (
     <main className="mx-auto max-w-[1008px] px-4 pt-10 md:px-0">
       <h1 className="m-0 text-[24px] font-semibold">Changelog</h1>

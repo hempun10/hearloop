@@ -2,7 +2,7 @@ import { Link, createFileRoute, useRouteContext } from '@tanstack/react-router'
 import StatusPill from '#/components/StatusPill'
 import { landing } from '#/lib/fns'
 
-export const Route = createFileRoute('/')({
+export const Route = createFileRoute('/_site/')({
   loader: () => landing({ data: 'demo' }),
   component: Landing,
 })
@@ -43,7 +43,7 @@ function Landing() {
             Only a passing run reaches the changelog.
           </p>
           <div className="type-in mt-8 flex flex-wrap justify-center gap-3" style={{ animationDelay: '240ms' }}>
-            <a href={primary.to} className="inline-flex h-11 items-center gap-2 rounded-lg bg-fg px-5 text-[14px] font-semibold text-bg transition-colors hover:bg-white active:translate-y-px">
+            <a href={primary.to} className="inline-flex h-11 items-center gap-2 rounded-lg bg-fg px-5 text-[14px] font-semibold text-bg transition-colors hover:opacity-90 active:translate-y-px">
               {primary.label} <span aria-hidden>→</span>
             </a>
             <Link to="/$org" params={{ org: 'demo' }} className="inline-flex h-11 items-center rounded-lg border border-line-strong bg-raised px-5 text-[14px] font-semibold shadow-[inset_0_1px_0_rgb(255_255_255/0.06)] transition-colors hover:bg-hover active:translate-y-px">
@@ -184,7 +184,7 @@ function Landing() {
           <div className="hero-glow pointer-events-none absolute inset-0" aria-hidden />
           <h2 className="relative m-0 text-[32px] font-semibold sm:text-[40px]">Your users have opinions.</h2>
           <p className="relative mt-3 text-[15px] text-muted">Give them a board. Watch their requests get built and proven.</p>
-          <a href={primary.to} className="relative mt-8 inline-flex h-11 items-center gap-2 rounded-lg bg-fg px-5 text-[14px] font-semibold text-bg hover:bg-white">
+          <a href={primary.to} className="relative mt-8 inline-flex h-11 items-center gap-2 rounded-lg bg-fg px-5 text-[14px] font-semibold text-bg hover:opacity-90">
             {primary.label} <span aria-hidden>→</span>
           </a>
         </div>

@@ -1,13 +1,11 @@
-import { Link, useNavigate, useParams, useRouteContext, useRouter } from '@tanstack/react-router'
+import { Link, useNavigate, useRouteContext, useRouter } from '@tanstack/react-router'
 import { authClient } from '#/lib/auth-client'
 
 export default function Header() {
   const { me } = useRouteContext({ from: '__root__' })
-  const { org } = useParams({ strict: false }) as { org?: string }
   const router = useRouter()
   const navigate = useNavigate()
   const home = me?.orgs[0]?.slug
-  const member = !!org && !!me?.orgs.some((o) => o.slug === org)
 
   async function signOut() {
     await authClient.signOut()
@@ -37,32 +35,21 @@ export default function Header() {
         </Link>
         <span className="h-4 w-px bg-line-strong" aria-hidden />
         <nav className="flex min-w-0 items-center gap-0.5">
-          {org ? (
-            <>
-              <span className="mr-1 max-w-[140px] truncate text-[13px] font-semibold">{org}</span>
-              {nav(`/${org}`, 'Board', path === `/${org}` || path.startsWith(`/${org}/posts`))}
-              {nav(`/${org}/changelog`, 'Changelog', path.startsWith(`/${org}/changelog`))}
-              {member && nav(`/${org}/settings`, 'Settings', path.startsWith(`/${org}/settings`))}
-            </>
-          ) : (
-            <>
-              {path === '/' && <a href="#how" className="hidden h-8 items-center rounded-md px-2.5 text-[13px] font-medium text-faint hover:bg-hover/60 hover:text-muted sm:inline-flex">How it works</a>}
-              {nav('/demo', 'Live demo', false)}
-            </>
-          )}
+            {path === '/' && <a href="#how" className="hidden h-8 items-center rounded-md px-2.5 text-[13px] font-medium text-faint hover:bg-hover/60 hover:text-muted sm:inline-flex">How it works</a>}
+            {nav('/demo', 'Live demo', false)}
         </nav>
         <div className="ml-auto flex items-center gap-2">
           {me ? (
             <>
-              {home && home !== org && <Link to="/$org" params={{ org: home }} className="hidden h-8 items-center rounded-md px-3 text-[13px] font-medium text-muted hover:bg-hover sm:inline-flex">Your board</Link>}
-              {!home && <Link to="/new" className="inline-flex h-8 items-center rounded-md bg-fg px-3 text-[13px] font-semibold text-bg hover:bg-white">Create your board</Link>}
+              {home && <Link to="/$org" params={{ org: home }} className="hidden h-8 items-center rounded-md px-3 text-[13px] font-medium text-muted hover:bg-hover sm:inline-flex">Your board</Link>}
+              {!home && <Link to="/new" className="inline-flex h-8 items-center rounded-md bg-fg px-3 text-[13px] font-semibold text-bg hover:opacity-90">Create your board</Link>}
               <span className="hidden max-w-[160px] truncate text-[12px] text-faint md:inline" title={me.user.email}>{me.user.email}</span>
               <button onClick={signOut} className="h-8 rounded-md border border-line px-3 text-[13px] text-muted hover:bg-hover hover:text-fg">Sign out</button>
             </>
           ) : (
             <>
               <Link to="/login" className="h-8 rounded-md px-3 text-[13px] leading-8 font-medium text-muted hover:bg-hover hover:text-fg">Sign in</Link>
-              <Link to="/login" search={{ mode: 'signup' }} className="inline-flex h-8 items-center rounded-md bg-fg px-3 text-[13px] font-semibold text-bg transition-colors hover:bg-white">
+              <Link to="/login" search={{ mode: 'signup' }} className="inline-flex h-8 items-center rounded-md bg-fg px-3 text-[13px] font-semibold text-bg transition-colors hover:opacity-90">
                 Create your board
               </Link>
             </>

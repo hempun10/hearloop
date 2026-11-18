@@ -1,5 +1,5 @@
 import { env } from 'cloudflare:workers'
-import type { Entry, Org, Post, Run, Status } from './types'
+import type { Entry, Org, OrgPatch, Post, Run, RunRow, Status } from './types'
 
 export * from './types'
 
@@ -7,7 +7,16 @@ const db = () => env.DB
 
 // ---- orgs
 export async function orgBySlug(slug: string) {
-  return db().prepare('SELECT id, slug, name, created_at FROM orgs WHERE slug = ?').bind(slug).first<Org>()
+  return db().prepare(`SELECT ${ORG_COLS} FROM orgs WHERE slug = ?`).bind(slug).first<Org>()
+}
+
+const ORG_COLS = 'id, slug, name, tagline, accent, logo_url, theme, powered_by, show_roadmap, show_changelog, who_can_post, created_at'
+const PATCHABLE = ['name', 'tagline', 'accent', 'logo_url', 'theme', 'powered_by', 'show_roadmap', 'show_changelog', 'who_can_post'] as const
+
+export async function updateOrg(orgId: number, patch: OrgPatch) {
+  const keys = PATCHABLE.filter((k) => k in patch)
+  if (!keys.length) return
+  await db().prepare(`UPDATE orgs SET ${keys.map((k) => `${k} = ?`).join(', ')} WHERE id = ?`).bind(...keys.map((k) => patch[k] ?? null), orgId).run()
 }
 
 export async function orgTokenHash(orgId: number) {
@@ -101,4 +110,24 @@ export async function landing(orgId: number) {
     run: (run.results[0] ?? null) as (Run & { title: string }) | null,
     shipped: entry.results as Entry[],
   }
+}
+
+// ---- dashboard
+export async function listRuns(orgId: number) {
+  return (await db().prepare('SELECT r.*, p.title FROM runs r JOIN posts p ON p.id = r.post_id WHERE p.org_id = ? ORDER BY r.id DESC LIMIT 200').bind(orgId).all<RunRow>()).results
+}
+
+export async function deletePost(orgId: number, id: number) {
+  const ok = await db().prepare('SELECT 1 FROM posts WHERE id = ? AND org_id = ?').bind(id, orgId).first()
+  if (!ok) return false
+  await db().batch([
+    db().prepare('DELETE FROM runs WHERE post_id = ?').bind(id),
+    db().prepare('DELETE FROM changelog WHERE post_id = ?').bind(id),
+    db().prepare('DELETE FROM posts WHERE id = ?').bind(id),
+  ])
+  return true
+}
+
+export async function deleteEntry(orgId: number, id: number) {
+  await db().prepare('DELETE FROM changelog WHERE id = ? AND post_id IN (SELECT id FROM posts WHERE org_id = ?)').bind(id, orgId).run()
 }

@@ -9,147 +9,222 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
 import { Route as OrgRouteImport } from './routes/$org'
-import { Route as LoginRouteImport } from './routes/login'
-import { Route as NewRouteImport } from './routes/new'
-import { Route as OrgIndexRouteImport } from './routes/$org/index'
-import { Route as OrgChangelogRouteImport } from './routes/$org/changelog'
-import { Route as OrgSettingsRouteImport } from './routes/$org/settings'
+import { Route as SiteRouteImport } from './routes/_site'
+import { Route as OrgPublicRouteImport } from './routes/$org/_public'
+import { Route as OrgDashboardRouteImport } from './routes/$org/dashboard'
+import { Route as SiteIndexRouteImport } from './routes/_site/index'
+import { Route as SiteLoginRouteImport } from './routes/_site/login'
+import { Route as SiteNewRouteImport } from './routes/_site/new'
 import { Route as ApiSplatRouteImport } from './routes/api/$'
-import { Route as OrgPostsIdRouteImport } from './routes/$org/posts.$id'
+import { Route as OrgPublicIndexRouteImport } from './routes/$org/_public/index'
+import { Route as OrgPublicChangelogRouteImport } from './routes/$org/_public/changelog'
+import { Route as OrgPublicRoadmapRouteImport } from './routes/$org/_public/roadmap'
+import { Route as OrgDashboardIndexRouteImport } from './routes/$org/dashboard/index'
+import { Route as OrgDashboardChangelogRouteImport } from './routes/$org/dashboard/changelog'
+import { Route as OrgDashboardRoadmapRouteImport } from './routes/$org/dashboard/roadmap'
+import { Route as OrgDashboardRunsRouteImport } from './routes/$org/dashboard/runs'
+import { Route as OrgDashboardSettingsRouteImport } from './routes/$org/dashboard/settings'
+import { Route as OrgPublicPostsIdRouteImport } from './routes/$org/_public/posts.$id'
 
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const OrgRoute = OrgRouteImport.update({
   id: '/$org',
   path: '/$org',
   getParentRoute: () => rootRouteImport,
 } as any)
-const LoginRoute = LoginRouteImport.update({
-  id: '/login',
-  path: '/login',
+const SiteRoute = SiteRouteImport.update({
+  id: '/_site',
   getParentRoute: () => rootRouteImport,
 } as any)
-const NewRoute = NewRouteImport.update({
-  id: '/new',
-  path: '/new',
-  getParentRoute: () => rootRouteImport,
+const OrgPublicRoute = OrgPublicRouteImport.update({
+  id: '/_public',
+  getParentRoute: () => OrgRoute,
 } as any)
-const OrgIndexRoute = OrgIndexRouteImport.update({
+const OrgDashboardRoute = OrgDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => OrgRoute,
+} as any)
+const SiteIndexRoute = SiteIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => OrgRoute,
+  getParentRoute: () => SiteRoute,
 } as any)
-const OrgChangelogRoute = OrgChangelogRouteImport.update({
-  id: '/changelog',
-  path: '/changelog',
-  getParentRoute: () => OrgRoute,
+const SiteLoginRoute = SiteLoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => SiteRoute,
 } as any)
-const OrgSettingsRoute = OrgSettingsRouteImport.update({
-  id: '/settings',
-  path: '/settings',
-  getParentRoute: () => OrgRoute,
+const SiteNewRoute = SiteNewRouteImport.update({
+  id: '/new',
+  path: '/new',
+  getParentRoute: () => SiteRoute,
 } as any)
 const ApiSplatRoute = ApiSplatRouteImport.update({
   id: '/api/$',
   path: '/api/$',
   getParentRoute: () => rootRouteImport,
 } as any)
-const OrgPostsIdRoute = OrgPostsIdRouteImport.update({
+const OrgPublicIndexRoute = OrgPublicIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => OrgPublicRoute,
+} as any)
+const OrgPublicChangelogRoute = OrgPublicChangelogRouteImport.update({
+  id: '/changelog',
+  path: '/changelog',
+  getParentRoute: () => OrgPublicRoute,
+} as any)
+const OrgPublicRoadmapRoute = OrgPublicRoadmapRouteImport.update({
+  id: '/roadmap',
+  path: '/roadmap',
+  getParentRoute: () => OrgPublicRoute,
+} as any)
+const OrgDashboardIndexRoute = OrgDashboardIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => OrgDashboardRoute,
+} as any)
+const OrgDashboardChangelogRoute = OrgDashboardChangelogRouteImport.update({
+  id: '/changelog',
+  path: '/changelog',
+  getParentRoute: () => OrgDashboardRoute,
+} as any)
+const OrgDashboardRoadmapRoute = OrgDashboardRoadmapRouteImport.update({
+  id: '/roadmap',
+  path: '/roadmap',
+  getParentRoute: () => OrgDashboardRoute,
+} as any)
+const OrgDashboardRunsRoute = OrgDashboardRunsRouteImport.update({
+  id: '/runs',
+  path: '/runs',
+  getParentRoute: () => OrgDashboardRoute,
+} as any)
+const OrgDashboardSettingsRoute = OrgDashboardSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => OrgDashboardRoute,
+} as any)
+const OrgPublicPostsIdRoute = OrgPublicPostsIdRouteImport.update({
   id: '/posts/$id',
   path: '/posts/$id',
-  getParentRoute: () => OrgRoute,
+  getParentRoute: () => OrgPublicRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
   '/$org': typeof OrgRouteWithChildren
-  '/login': typeof LoginRoute
-  '/new': typeof NewRoute
-  '/$org/changelog': typeof OrgChangelogRoute
-  '/$org/settings': typeof OrgSettingsRoute
+  '/': typeof SiteIndexRoute
+  '/$org/dashboard': typeof OrgDashboardRouteWithChildren
+  '/login': typeof SiteLoginRoute
+  '/new': typeof SiteNewRoute
   '/api/$': typeof ApiSplatRoute
-  '/$org/': typeof OrgIndexRoute
-  '/$org/posts/$id': typeof OrgPostsIdRoute
+  '/$org/changelog': typeof OrgPublicChangelogRoute
+  '/$org/roadmap': typeof OrgPublicRoadmapRoute
+  '/$org/dashboard/changelog': typeof OrgDashboardChangelogRoute
+  '/$org/dashboard/roadmap': typeof OrgDashboardRoadmapRoute
+  '/$org/dashboard/runs': typeof OrgDashboardRunsRoute
+  '/$org/dashboard/settings': typeof OrgDashboardSettingsRoute
+  '/$org/': typeof OrgPublicIndexRoute
+  '/$org/dashboard/': typeof OrgDashboardIndexRoute
+  '/$org/posts/$id': typeof OrgPublicPostsIdRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/login': typeof LoginRoute
-  '/new': typeof NewRoute
-  '/$org/changelog': typeof OrgChangelogRoute
-  '/$org/settings': typeof OrgSettingsRoute
+  '/$org': typeof OrgPublicIndexRoute
+  '/login': typeof SiteLoginRoute
+  '/new': typeof SiteNewRoute
   '/api/$': typeof ApiSplatRoute
-  '/$org': typeof OrgIndexRoute
-  '/$org/posts/$id': typeof OrgPostsIdRoute
+  '/': typeof SiteIndexRoute
+  '/$org/changelog': typeof OrgPublicChangelogRoute
+  '/$org/roadmap': typeof OrgPublicRoadmapRoute
+  '/$org/dashboard/changelog': typeof OrgDashboardChangelogRoute
+  '/$org/dashboard/roadmap': typeof OrgDashboardRoadmapRoute
+  '/$org/dashboard/runs': typeof OrgDashboardRunsRoute
+  '/$org/dashboard/settings': typeof OrgDashboardSettingsRoute
+  '/$org/dashboard': typeof OrgDashboardIndexRoute
+  '/$org/posts/$id': typeof OrgPublicPostsIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
   '/$org': typeof OrgRouteWithChildren
-  '/login': typeof LoginRoute
-  '/new': typeof NewRoute
-  '/$org/changelog': typeof OrgChangelogRoute
-  '/$org/settings': typeof OrgSettingsRoute
+  '/_site': typeof SiteRouteWithChildren
+  '/$org/_public': typeof OrgPublicRouteWithChildren
+  '/$org/dashboard': typeof OrgDashboardRouteWithChildren
+  '/_site/login': typeof SiteLoginRoute
+  '/_site/new': typeof SiteNewRoute
   '/api/$': typeof ApiSplatRoute
-  '/$org/': typeof OrgIndexRoute
-  '/$org/posts/$id': typeof OrgPostsIdRoute
+  '/_site/': typeof SiteIndexRoute
+  '/$org/_public/changelog': typeof OrgPublicChangelogRoute
+  '/$org/_public/roadmap': typeof OrgPublicRoadmapRoute
+  '/$org/dashboard/changelog': typeof OrgDashboardChangelogRoute
+  '/$org/dashboard/roadmap': typeof OrgDashboardRoadmapRoute
+  '/$org/dashboard/runs': typeof OrgDashboardRunsRoute
+  '/$org/dashboard/settings': typeof OrgDashboardSettingsRoute
+  '/$org/_public/': typeof OrgPublicIndexRoute
+  '/$org/dashboard/': typeof OrgDashboardIndexRoute
+  '/$org/_public/posts/$id': typeof OrgPublicPostsIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/'
     | '/$org'
+    | '/'
+    | '/$org/dashboard'
     | '/login'
     | '/new'
-    | '/$org/changelog'
-    | '/$org/settings'
     | '/api/$'
+    | '/$org/changelog'
+    | '/$org/roadmap'
+    | '/$org/dashboard/changelog'
+    | '/$org/dashboard/roadmap'
+    | '/$org/dashboard/runs'
+    | '/$org/dashboard/settings'
     | '/$org/'
+    | '/$org/dashboard/'
     | '/$org/posts/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
+    | '/$org'
     | '/login'
     | '/new'
-    | '/$org/changelog'
-    | '/$org/settings'
     | '/api/$'
-    | '/$org'
+    | '/'
+    | '/$org/changelog'
+    | '/$org/roadmap'
+    | '/$org/dashboard/changelog'
+    | '/$org/dashboard/roadmap'
+    | '/$org/dashboard/runs'
+    | '/$org/dashboard/settings'
+    | '/$org/dashboard'
     | '/$org/posts/$id'
   id:
     | '__root__'
-    | '/'
     | '/$org'
-    | '/login'
-    | '/new'
-    | '/$org/changelog'
-    | '/$org/settings'
+    | '/_site'
+    | '/$org/_public'
+    | '/$org/dashboard'
+    | '/_site/login'
+    | '/_site/new'
     | '/api/$'
-    | '/$org/'
-    | '/$org/posts/$id'
+    | '/_site/'
+    | '/$org/_public/changelog'
+    | '/$org/_public/roadmap'
+    | '/$org/dashboard/changelog'
+    | '/$org/dashboard/roadmap'
+    | '/$org/dashboard/runs'
+    | '/$org/dashboard/settings'
+    | '/$org/_public/'
+    | '/$org/dashboard/'
+    | '/$org/_public/posts/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
   OrgRoute: typeof OrgRouteWithChildren
-  LoginRoute: typeof LoginRoute
-  NewRoute: typeof NewRoute
+  SiteRoute: typeof SiteRouteWithChildren
   ApiSplatRoute: typeof ApiSplatRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/$org': {
       id: '/$org'
       path: '/$org'
@@ -157,40 +232,47 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OrgRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/login': {
-      id: '/login'
+    '/_site': {
+      id: '/_site'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof SiteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/$org/_public': {
+      id: '/$org/_public'
+      path: ''
+      fullPath: '/$org'
+      preLoaderRoute: typeof OrgPublicRouteImport
+      parentRoute: typeof OrgRoute
+    }
+    '/$org/dashboard': {
+      id: '/$org/dashboard'
+      path: '/dashboard'
+      fullPath: '/$org/dashboard'
+      preLoaderRoute: typeof OrgDashboardRouteImport
+      parentRoute: typeof OrgRoute
+    }
+    '/_site/': {
+      id: '/_site/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof SiteIndexRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/login': {
+      id: '/_site/login'
       path: '/login'
       fullPath: '/login'
-      preLoaderRoute: typeof LoginRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof SiteLoginRouteImport
+      parentRoute: typeof SiteRoute
     }
-    '/new': {
-      id: '/new'
+    '/_site/new': {
+      id: '/_site/new'
       path: '/new'
       fullPath: '/new'
-      preLoaderRoute: typeof NewRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/$org/': {
-      id: '/$org/'
-      path: '/'
-      fullPath: '/$org/'
-      preLoaderRoute: typeof OrgIndexRouteImport
-      parentRoute: typeof OrgRoute
-    }
-    '/$org/changelog': {
-      id: '/$org/changelog'
-      path: '/changelog'
-      fullPath: '/$org/changelog'
-      preLoaderRoute: typeof OrgChangelogRouteImport
-      parentRoute: typeof OrgRoute
-    }
-    '/$org/settings': {
-      id: '/$org/settings'
-      path: '/settings'
-      fullPath: '/$org/settings'
-      preLoaderRoute: typeof OrgSettingsRouteImport
-      parentRoute: typeof OrgRoute
+      preLoaderRoute: typeof SiteNewRouteImport
+      parentRoute: typeof SiteRoute
     }
     '/api/$': {
       id: '/api/$'
@@ -199,37 +281,139 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/$org/posts/$id': {
-      id: '/$org/posts/$id'
+    '/$org/_public/': {
+      id: '/$org/_public/'
+      path: '/'
+      fullPath: '/$org/'
+      preLoaderRoute: typeof OrgPublicIndexRouteImport
+      parentRoute: typeof OrgPublicRoute
+    }
+    '/$org/_public/changelog': {
+      id: '/$org/_public/changelog'
+      path: '/changelog'
+      fullPath: '/$org/changelog'
+      preLoaderRoute: typeof OrgPublicChangelogRouteImport
+      parentRoute: typeof OrgPublicRoute
+    }
+    '/$org/_public/roadmap': {
+      id: '/$org/_public/roadmap'
+      path: '/roadmap'
+      fullPath: '/$org/roadmap'
+      preLoaderRoute: typeof OrgPublicRoadmapRouteImport
+      parentRoute: typeof OrgPublicRoute
+    }
+    '/$org/dashboard/': {
+      id: '/$org/dashboard/'
+      path: '/'
+      fullPath: '/$org/dashboard/'
+      preLoaderRoute: typeof OrgDashboardIndexRouteImport
+      parentRoute: typeof OrgDashboardRoute
+    }
+    '/$org/dashboard/changelog': {
+      id: '/$org/dashboard/changelog'
+      path: '/changelog'
+      fullPath: '/$org/dashboard/changelog'
+      preLoaderRoute: typeof OrgDashboardChangelogRouteImport
+      parentRoute: typeof OrgDashboardRoute
+    }
+    '/$org/dashboard/roadmap': {
+      id: '/$org/dashboard/roadmap'
+      path: '/roadmap'
+      fullPath: '/$org/dashboard/roadmap'
+      preLoaderRoute: typeof OrgDashboardRoadmapRouteImport
+      parentRoute: typeof OrgDashboardRoute
+    }
+    '/$org/dashboard/runs': {
+      id: '/$org/dashboard/runs'
+      path: '/runs'
+      fullPath: '/$org/dashboard/runs'
+      preLoaderRoute: typeof OrgDashboardRunsRouteImport
+      parentRoute: typeof OrgDashboardRoute
+    }
+    '/$org/dashboard/settings': {
+      id: '/$org/dashboard/settings'
+      path: '/settings'
+      fullPath: '/$org/dashboard/settings'
+      preLoaderRoute: typeof OrgDashboardSettingsRouteImport
+      parentRoute: typeof OrgDashboardRoute
+    }
+    '/$org/_public/posts/$id': {
+      id: '/$org/_public/posts/$id'
       path: '/posts/$id'
       fullPath: '/$org/posts/$id'
-      preLoaderRoute: typeof OrgPostsIdRouteImport
-      parentRoute: typeof OrgRoute
+      preLoaderRoute: typeof OrgPublicPostsIdRouteImport
+      parentRoute: typeof OrgPublicRoute
     }
   }
 }
 
+interface OrgPublicRouteChildren {
+  OrgPublicChangelogRoute: typeof OrgPublicChangelogRoute
+  OrgPublicRoadmapRoute: typeof OrgPublicRoadmapRoute
+  OrgPublicIndexRoute: typeof OrgPublicIndexRoute
+  OrgPublicPostsIdRoute: typeof OrgPublicPostsIdRoute
+}
+
+const OrgPublicRouteChildren: OrgPublicRouteChildren = {
+  OrgPublicChangelogRoute: OrgPublicChangelogRoute,
+  OrgPublicRoadmapRoute: OrgPublicRoadmapRoute,
+  OrgPublicIndexRoute: OrgPublicIndexRoute,
+  OrgPublicPostsIdRoute: OrgPublicPostsIdRoute,
+}
+
+const OrgPublicRouteWithChildren = OrgPublicRoute._addFileChildren(
+  OrgPublicRouteChildren,
+)
+
+interface OrgDashboardRouteChildren {
+  OrgDashboardChangelogRoute: typeof OrgDashboardChangelogRoute
+  OrgDashboardRoadmapRoute: typeof OrgDashboardRoadmapRoute
+  OrgDashboardRunsRoute: typeof OrgDashboardRunsRoute
+  OrgDashboardSettingsRoute: typeof OrgDashboardSettingsRoute
+  OrgDashboardIndexRoute: typeof OrgDashboardIndexRoute
+}
+
+const OrgDashboardRouteChildren: OrgDashboardRouteChildren = {
+  OrgDashboardChangelogRoute: OrgDashboardChangelogRoute,
+  OrgDashboardRoadmapRoute: OrgDashboardRoadmapRoute,
+  OrgDashboardRunsRoute: OrgDashboardRunsRoute,
+  OrgDashboardSettingsRoute: OrgDashboardSettingsRoute,
+  OrgDashboardIndexRoute: OrgDashboardIndexRoute,
+}
+
+const OrgDashboardRouteWithChildren = OrgDashboardRoute._addFileChildren(
+  OrgDashboardRouteChildren,
+)
+
 interface OrgRouteChildren {
-  OrgChangelogRoute: typeof OrgChangelogRoute
-  OrgSettingsRoute: typeof OrgSettingsRoute
-  OrgIndexRoute: typeof OrgIndexRoute
-  OrgPostsIdRoute: typeof OrgPostsIdRoute
+  OrgPublicRoute: typeof OrgPublicRouteWithChildren
+  OrgDashboardRoute: typeof OrgDashboardRouteWithChildren
 }
 
 const OrgRouteChildren: OrgRouteChildren = {
-  OrgChangelogRoute: OrgChangelogRoute,
-  OrgSettingsRoute: OrgSettingsRoute,
-  OrgIndexRoute: OrgIndexRoute,
-  OrgPostsIdRoute: OrgPostsIdRoute,
+  OrgPublicRoute: OrgPublicRouteWithChildren,
+  OrgDashboardRoute: OrgDashboardRouteWithChildren,
 }
 
 const OrgRouteWithChildren = OrgRoute._addFileChildren(OrgRouteChildren)
 
+interface SiteRouteChildren {
+  SiteLoginRoute: typeof SiteLoginRoute
+  SiteNewRoute: typeof SiteNewRoute
+  SiteIndexRoute: typeof SiteIndexRoute
+}
+
+const SiteRouteChildren: SiteRouteChildren = {
+  SiteLoginRoute: SiteLoginRoute,
+  SiteNewRoute: SiteNewRoute,
+  SiteIndexRoute: SiteIndexRoute,
+}
+
+const SiteRouteWithChildren = SiteRoute._addFileChildren(SiteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
   OrgRoute: OrgRouteWithChildren,
-  LoginRoute: LoginRoute,
-  NewRoute: NewRoute,
+  SiteRoute: SiteRouteWithChildren,
   ApiSplatRoute: ApiSplatRoute,
 }
 export const routeTree = rootRouteImport

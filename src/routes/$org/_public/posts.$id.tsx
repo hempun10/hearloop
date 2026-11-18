@@ -5,7 +5,7 @@ import { STATUSES } from '#/lib/types'
 import { getPost } from '#/lib/fns'
 import { ago } from '#/lib/time'
 
-export const Route = createFileRoute('/$org/posts/$id')({
+export const Route = createFileRoute('/$org/_public/posts/$id')({
   loader: async ({ params }) => {
     const r = await getPost({ data: { org: params.org, id: Number(params.id) } })
     if (!r) throw notFound()

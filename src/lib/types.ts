@@ -12,7 +12,22 @@ export type Post = {
 }
 export type Run = { id: number; post_id: number; passed: number; summary: string; created_at: number }
 export type Entry = { id: number; post_id: number; title: string; body: string; created_at: number }
-export type Org = { id: number; slug: string; name: string; created_at: number }
+export type Org = {
+  id: number
+  slug: string
+  name: string
+  tagline: string
+  accent: string | null
+  logo_url: string | null
+  theme: 'dark' | 'light'
+  powered_by: number
+  show_roadmap: number
+  show_changelog: number
+  who_can_post: 'anyone' | 'signed_in'
+  created_at: number
+}
+export type OrgPatch = Partial<Pick<Org, 'name' | 'tagline' | 'accent' | 'logo_url' | 'theme' | 'powered_by' | 'show_roadmap' | 'show_changelog' | 'who_can_post'>>
+export type RunRow = Run & { title: string }
 export type Me = { user: { id: string; email: string; name: string }; orgs: { slug: string; name: string; role: string }[] }
 
 // slugs that would shadow app routes
