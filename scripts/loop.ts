@@ -51,7 +51,7 @@ type KaneResult = { passed: boolean; summary: string }
 async function verify(objective: string): Promise<KaneResult> {
   const out = await $`kane-cli run ${objective} --agent --headless --url ${APP_URL} --timeout 300 --mode testing`.nothrow().text()
   const events = out.split('\n').flatMap((l): any[] => { try { return [JSON.parse(l)] } catch { return [] } })
-  const end = events.findLast((e) => /run_end|result|complete/i.test(String(e.type ?? e.event ?? '')))
+  const end = [...events].reverse().find((e: any) => /run_end|result|complete/i.test(String(e.type ?? e.event ?? '')))
   const status = String(end?.status ?? end?.result ?? end?.verdict ?? '').toLowerCase()
   const passed = end?.passed === true || end?.success === true || /^(pass|passed|success|succeeded)$/.test(status)
   const summary = [
