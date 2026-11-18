@@ -1,13 +1,15 @@
 #!/usr/bin/env bun
 // The closed loop: top request -> coding agent builds it -> Kane CLI verifies -> shipped or retried.
-// Usage: APP_URL=http://localhost:3000 API_TOKEN=dev-token bun scripts/loop.ts [--deploy] [--post <id>]
+// Usage: APP_URL=http://localhost:3000 ORG=demo API_TOKEN=<org token from Settings> bun scripts/loop.ts [--deploy] [--post <id>]
 import { $ } from 'bun'
 
 // Kane needs a Chromium; point KANE_CLI_CHROME_PATH at one if Chrome isn't installed (e.g. Helium)
 process.env.KANE_CLI_CHROME_PATH ??= '/Applications/Helium.app/Contents/MacOS/Helium'
 
 const APP_URL = process.env.APP_URL ?? 'http://localhost:3000'
+const ORG = process.env.ORG ?? 'demo'
 const TOKEN = process.env.API_TOKEN ?? 'dev-token'
+const BOARD = `${APP_URL}/${ORG}`
 const MAX_TRIES = Number(process.env.MAX_TRIES ?? 3)
 const args = process.argv.slice(2)
 const deploy = args.includes('--deploy')
@@ -16,7 +18,7 @@ const pick = args.includes('--post') ? Number(args[args.indexOf('--post') + 1]) 
 type Post = { id: number; title: string; body: string; status: string; votes: number }
 
 async function api(path: string, body?: unknown): Promise<any> {
-  const res = await fetch(APP_URL + '/api' + path, body === undefined ? {} : {
+  const res = await fetch(`${APP_URL}/api/${ORG}${path}`, body === undefined ? {} : {
     method: 'POST',
     headers: { authorization: `Bearer ${TOKEN}`, 'content-type': 'application/json' },
     body: JSON.stringify(body),
@@ -40,7 +42,7 @@ async function build(post: Post, failure?: string) {
     post.body && `Details: ${post.body}`,
     failure && `Your previous attempt FAILED Kane CLI verification. Kane reported:\n${failure}\nFix it.`,
     `Keep the change small and in the existing style. Run \`bun run build\` and fix any errors.`,
-    `Then write .hearloop/kane-objective.txt: one plain-English browser test, starting from the board page (/board),`,
+    `Then write .hearloop/kane-objective.txt: one plain-English browser test, starting from the board page (/${ORG}),`,
     `that a tester could follow to prove the feature works (what to click/type and what must be visible).`,
     `Also write .hearloop/changelog.md: two sentences for users announcing the change. Do not commit.`,
   ].filter(Boolean).join('\n')
@@ -53,7 +55,7 @@ type KaneResult = { passed: boolean; summary: string; kaneFault: boolean }
 
 // Kane --agent prints NDJSON; the last line is {"type":"run_end","status":"passed"|"failed",summary,reason,...}
 async function verify(objective: string): Promise<KaneResult> {
-  const out = await $`kane-cli run ${objective} --agent --headless --url ${APP_URL}/board --timeout 300 --max-steps 30`.nothrow().text()
+  const out = await $`kane-cli run ${objective} --agent --headless --url ${BOARD} --timeout 300 --max-steps 30`.nothrow().text()
   const events = out.split('\n').flatMap((l): any[] => { try { return [JSON.parse(l)] } catch { return [] } })
   const end = events.find((e: any) => e.type === 'run_end')
   const passed = end?.status === 'passed'

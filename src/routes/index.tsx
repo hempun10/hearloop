@@ -1,9 +1,9 @@
-import { Link, createFileRoute } from '@tanstack/react-router'
+import { Link, createFileRoute, useRouteContext } from '@tanstack/react-router'
 import StatusPill from '#/components/StatusPill'
 import { landing } from '#/lib/fns'
 
 export const Route = createFileRoute('/')({
-  loader: () => landing(),
+  loader: () => landing({ data: 'demo' }),
   component: Landing,
 })
 
@@ -16,6 +16,9 @@ const Check = ({ ok = true }: { ok?: boolean }) => (
 
 function Landing() {
   const { stats, top, run, shipped } = Route.useLoaderData()
+  const { me } = useRouteContext({ from: '__root__' })
+  const home = me?.orgs[0]?.slug
+  const primary = home ? { to: `/${home}`, label: 'Go to your board' } : me ? { to: '/new', label: 'Create your board' } : { to: '/login?mode=signup', label: 'Create your board' }
   // Kane's own words from the latest passing run; the summary is "Objective…\nKane: passed…\nstep\nstep…"
   const kaneSteps = run ? run.summary.split('\n').slice(2).filter(Boolean).slice(0, 4) : []
 
@@ -26,7 +29,7 @@ function Landing() {
         <div className="dot-grid pointer-events-none absolute inset-0" aria-hidden />
         <div className="hero-glow pointer-events-none absolute inset-x-0 top-0 h-[480px]" aria-hidden />
         <div className="relative mx-auto max-w-[1072px] px-4 pt-20 text-center md:px-8 md:pt-28">
-          <Link to="/changelog" className="type-in inline-flex items-center gap-2 rounded-full border border-line-strong bg-surface/80 py-1 pr-3 pl-1.5 text-[12px] text-muted hover:text-fg">
+          <Link to="/$org/changelog" params={{ org: 'demo' }} className="type-in inline-flex items-center gap-2 rounded-full border border-line-strong bg-surface/80 py-1 pr-3 pl-1.5 text-[12px] text-muted hover:text-fg">
             <span className="rounded-full bg-link/15 px-2 py-0.5 font-medium text-link">New</span>
             Every shipped item is verified with Kane CLI
             <span aria-hidden>→</span>
@@ -40,11 +43,11 @@ function Landing() {
             Only a passing run reaches the changelog.
           </p>
           <div className="type-in mt-8 flex flex-wrap justify-center gap-3" style={{ animationDelay: '240ms' }}>
-            <Link to="/board" className="inline-flex h-11 items-center gap-2 rounded-lg bg-fg px-5 text-[14px] font-semibold text-bg transition-colors hover:bg-white active:translate-y-px">
-              Post a request <span aria-hidden>→</span>
-            </Link>
-            <Link to="/changelog" className="inline-flex h-11 items-center rounded-lg border border-line-strong bg-raised px-5 text-[14px] font-semibold shadow-[inset_0_1px_0_rgb(255_255_255/0.06)] transition-colors hover:bg-hover active:translate-y-px">
-              See what shipped
+            <a href={primary.to} className="inline-flex h-11 items-center gap-2 rounded-lg bg-fg px-5 text-[14px] font-semibold text-bg transition-colors hover:bg-white active:translate-y-px">
+              {primary.label} <span aria-hidden>→</span>
+            </a>
+            <Link to="/$org" params={{ org: 'demo' }} className="inline-flex h-11 items-center rounded-lg border border-line-strong bg-raised px-5 text-[14px] font-semibold shadow-[inset_0_1px_0_rgb(255_255_255/0.06)] transition-colors hover:bg-hover active:translate-y-px">
+              Try the live demo
             </Link>
           </div>
 
@@ -142,7 +145,7 @@ function Landing() {
           <div className="marquee overflow-hidden">
             <div className="flex w-max gap-3">
               {Array.from({ length: Math.max(2, Math.ceil(8 / shipped.length)) * 2 }, () => shipped).flat().map((e, i) => (
-                <Link key={i} to="/posts/$id" params={{ id: String(e.post_id) }} aria-hidden={i >= shipped.length || undefined} tabIndex={i >= shipped.length ? -1 : undefined}
+                <Link key={i} to="/$org/posts/$id" params={{ org: 'demo', id: String(e.post_id) }} aria-hidden={i >= shipped.length || undefined} tabIndex={i >= shipped.length ? -1 : undefined}
                   className="flex shrink-0 items-center gap-2 rounded-full border border-line bg-surface px-4 py-2 text-[13px] text-muted hover:text-fg">
                   <span className="size-1.5 rounded-full bg-shipped" />{e.title}
                 </Link>
@@ -180,10 +183,10 @@ function Landing() {
           <div className="dot-grid pointer-events-none absolute inset-0 opacity-60" aria-hidden />
           <div className="hero-glow pointer-events-none absolute inset-0" aria-hidden />
           <h2 className="relative m-0 text-[32px] font-semibold sm:text-[40px]">Your users have opinions.</h2>
-          <p className="relative mt-3 text-[15px] text-muted">Post one. Watch it get built and proven.</p>
-          <Link to="/board" className="relative mt-8 inline-flex h-11 items-center gap-2 rounded-lg bg-fg px-5 text-[14px] font-semibold text-bg hover:bg-white">
-            Open the board <span aria-hidden>→</span>
-          </Link>
+          <p className="relative mt-3 text-[15px] text-muted">Give them a board. Watch their requests get built and proven.</p>
+          <a href={primary.to} className="relative mt-8 inline-flex h-11 items-center gap-2 rounded-lg bg-fg px-5 text-[14px] font-semibold text-bg hover:bg-white">
+            {primary.label} <span aria-hidden>→</span>
+          </a>
         </div>
       </section>
     </main>

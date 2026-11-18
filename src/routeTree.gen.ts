@@ -10,73 +10,135 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as BoardRouteImport } from './routes/board'
-import { Route as ChangelogRouteImport } from './routes/changelog'
+import { Route as OrgRouteImport } from './routes/$org'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as NewRouteImport } from './routes/new'
+import { Route as OrgIndexRouteImport } from './routes/$org/index'
+import { Route as OrgChangelogRouteImport } from './routes/$org/changelog'
+import { Route as OrgSettingsRouteImport } from './routes/$org/settings'
 import { Route as ApiSplatRouteImport } from './routes/api/$'
-import { Route as PostsIdRouteImport } from './routes/posts.$id'
+import { Route as OrgPostsIdRouteImport } from './routes/$org/posts.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const BoardRoute = BoardRouteImport.update({
-  id: '/board',
-  path: '/board',
+const OrgRoute = OrgRouteImport.update({
+  id: '/$org',
+  path: '/$org',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ChangelogRoute = ChangelogRouteImport.update({
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NewRoute = NewRouteImport.update({
+  id: '/new',
+  path: '/new',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OrgIndexRoute = OrgIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => OrgRoute,
+} as any)
+const OrgChangelogRoute = OrgChangelogRouteImport.update({
   id: '/changelog',
   path: '/changelog',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => OrgRoute,
+} as any)
+const OrgSettingsRoute = OrgSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => OrgRoute,
 } as any)
 const ApiSplatRoute = ApiSplatRouteImport.update({
   id: '/api/$',
   path: '/api/$',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PostsIdRoute = PostsIdRouteImport.update({
+const OrgPostsIdRoute = OrgPostsIdRouteImport.update({
   id: '/posts/$id',
   path: '/posts/$id',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => OrgRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/board': typeof BoardRoute
-  '/changelog': typeof ChangelogRoute
+  '/$org': typeof OrgRouteWithChildren
+  '/login': typeof LoginRoute
+  '/new': typeof NewRoute
+  '/$org/changelog': typeof OrgChangelogRoute
+  '/$org/settings': typeof OrgSettingsRoute
   '/api/$': typeof ApiSplatRoute
-  '/posts/$id': typeof PostsIdRoute
+  '/$org/': typeof OrgIndexRoute
+  '/$org/posts/$id': typeof OrgPostsIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/board': typeof BoardRoute
-  '/changelog': typeof ChangelogRoute
+  '/login': typeof LoginRoute
+  '/new': typeof NewRoute
+  '/$org/changelog': typeof OrgChangelogRoute
+  '/$org/settings': typeof OrgSettingsRoute
   '/api/$': typeof ApiSplatRoute
-  '/posts/$id': typeof PostsIdRoute
+  '/$org': typeof OrgIndexRoute
+  '/$org/posts/$id': typeof OrgPostsIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/board': typeof BoardRoute
-  '/changelog': typeof ChangelogRoute
+  '/$org': typeof OrgRouteWithChildren
+  '/login': typeof LoginRoute
+  '/new': typeof NewRoute
+  '/$org/changelog': typeof OrgChangelogRoute
+  '/$org/settings': typeof OrgSettingsRoute
   '/api/$': typeof ApiSplatRoute
-  '/posts/$id': typeof PostsIdRoute
+  '/$org/': typeof OrgIndexRoute
+  '/$org/posts/$id': typeof OrgPostsIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/board' | '/changelog' | '/api/$' | '/posts/$id'
+  fullPaths:
+    | '/'
+    | '/$org'
+    | '/login'
+    | '/new'
+    | '/$org/changelog'
+    | '/$org/settings'
+    | '/api/$'
+    | '/$org/'
+    | '/$org/posts/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/board' | '/changelog' | '/api/$' | '/posts/$id'
-  id: '__root__' | '/' | '/board' | '/changelog' | '/api/$' | '/posts/$id'
+  to:
+    | '/'
+    | '/login'
+    | '/new'
+    | '/$org/changelog'
+    | '/$org/settings'
+    | '/api/$'
+    | '/$org'
+    | '/$org/posts/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/$org'
+    | '/login'
+    | '/new'
+    | '/$org/changelog'
+    | '/$org/settings'
+    | '/api/$'
+    | '/$org/'
+    | '/$org/posts/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  BoardRoute: typeof BoardRoute
-  ChangelogRoute: typeof ChangelogRoute
+  OrgRoute: typeof OrgRouteWithChildren
+  LoginRoute: typeof LoginRoute
+  NewRoute: typeof NewRoute
   ApiSplatRoute: typeof ApiSplatRoute
-  PostsIdRoute: typeof PostsIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -88,19 +150,47 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/board': {
-      id: '/board'
-      path: '/board'
-      fullPath: '/board'
-      preLoaderRoute: typeof BoardRouteImport
+    '/$org': {
+      id: '/$org'
+      path: '/$org'
+      fullPath: '/$org'
+      preLoaderRoute: typeof OrgRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/changelog': {
-      id: '/changelog'
-      path: '/changelog'
-      fullPath: '/changelog'
-      preLoaderRoute: typeof ChangelogRouteImport
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/new': {
+      id: '/new'
+      path: '/new'
+      fullPath: '/new'
+      preLoaderRoute: typeof NewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/$org/': {
+      id: '/$org/'
+      path: '/'
+      fullPath: '/$org/'
+      preLoaderRoute: typeof OrgIndexRouteImport
+      parentRoute: typeof OrgRoute
+    }
+    '/$org/changelog': {
+      id: '/$org/changelog'
+      path: '/changelog'
+      fullPath: '/$org/changelog'
+      preLoaderRoute: typeof OrgChangelogRouteImport
+      parentRoute: typeof OrgRoute
+    }
+    '/$org/settings': {
+      id: '/$org/settings'
+      path: '/settings'
+      fullPath: '/$org/settings'
+      preLoaderRoute: typeof OrgSettingsRouteImport
+      parentRoute: typeof OrgRoute
     }
     '/api/$': {
       id: '/api/$'
@@ -109,22 +199,38 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/posts/$id': {
-      id: '/posts/$id'
+    '/$org/posts/$id': {
+      id: '/$org/posts/$id'
       path: '/posts/$id'
-      fullPath: '/posts/$id'
-      preLoaderRoute: typeof PostsIdRouteImport
-      parentRoute: typeof rootRouteImport
+      fullPath: '/$org/posts/$id'
+      preLoaderRoute: typeof OrgPostsIdRouteImport
+      parentRoute: typeof OrgRoute
     }
   }
 }
 
+interface OrgRouteChildren {
+  OrgChangelogRoute: typeof OrgChangelogRoute
+  OrgSettingsRoute: typeof OrgSettingsRoute
+  OrgIndexRoute: typeof OrgIndexRoute
+  OrgPostsIdRoute: typeof OrgPostsIdRoute
+}
+
+const OrgRouteChildren: OrgRouteChildren = {
+  OrgChangelogRoute: OrgChangelogRoute,
+  OrgSettingsRoute: OrgSettingsRoute,
+  OrgIndexRoute: OrgIndexRoute,
+  OrgPostsIdRoute: OrgPostsIdRoute,
+}
+
+const OrgRouteWithChildren = OrgRoute._addFileChildren(OrgRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  BoardRoute: BoardRoute,
-  ChangelogRoute: ChangelogRoute,
+  OrgRoute: OrgRouteWithChildren,
+  LoginRoute: LoginRoute,
+  NewRoute: NewRoute,
   ApiSplatRoute: ApiSplatRoute,
-  PostsIdRoute: PostsIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

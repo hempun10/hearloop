@@ -9,13 +9,14 @@ import { ago } from '#/lib/time'
 
 type Sort = 'top' | 'new'
 
-export const Route = createFileRoute('/board')({
+export const Route = createFileRoute('/$org/')({
   validateSearch: (s: Record<string, unknown>): { sort?: Sort } => (s.sort === 'new' ? { sort: 'new' } : {}),
-  loader: () => listPosts(),
+  loader: ({ params }) => listPosts({ data: params.org }),
   component: Board,
 })
 
 function Board() {
+  const { org } = Route.useParams()
   const all = Route.useLoaderData()
   const { sort = 'top' } = Route.useSearch()
   const [q, setQ] = useState('')
@@ -37,7 +38,7 @@ function Board() {
       else if (e.key === 'j') setSel((i) => Math.min(posts.length - 1, i + 1))
       else if (e.key === 'k') setSel((i) => Math.max(0, i - 1))
       else if (e.key === 'v' && posts[sel]) rows.current[sel]?.querySelector<HTMLButtonElement>('[data-vote]')?.click()
-      else if (e.key === 'Enter' && posts[sel]) navigate({ to: '/posts/$id', params: { id: String(posts[sel].id) } })
+      else if (e.key === 'Enter' && posts[sel]) navigate({ to: '/$org/posts/$id', params: { org, id: String(posts[sel].id) } })
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
@@ -51,7 +52,7 @@ function Board() {
       <section className="min-w-0 flex-1 md:max-w-[720px]">
         <div className="mb-4 flex items-center gap-5 text-[14px]">
           {(['top', 'new'] as const).map((s) => (
-            <Link key={s} to="/board" search={s === 'top' ? {} : { sort: s }}
+            <Link key={s} to="/$org" params={{ org }} search={s === 'top' ? {} : { sort: s }}
               className={sort === s ? 'font-semibold text-fg' : 'text-muted hover:text-fg'}>
               {s === 'top' ? 'Top' : 'New'}
             </Link>
@@ -64,7 +65,7 @@ function Board() {
           placeholder="Search requests" aria-label="Search requests"
           className="mb-4 h-9 w-full rounded-md border border-line bg-surface px-3 text-[14px] outline-none placeholder:text-faint focus:border-muted" />
 
-        {composing && <Composer onDone={() => { setComposing(false); router.invalidate() }} />}
+        {composing && <Composer org={org} onDone={() => { setComposing(false); router.invalidate() }} />}
 
         {posts.length === 0 ? (
           <p className="border-t border-line py-10 text-[14px] text-muted">
@@ -77,7 +78,7 @@ function Board() {
                 className={`flex gap-4 border-t border-line py-4 transition-colors duration-150 first:border-t-0 ${sel === i ? 'bg-surface' : ''}`}>
                 <span className="w-8 shrink-0 pt-0.5 text-[12px] text-faint tabular-nums">{String(i + 1).padStart(2, '0')}</span>
                 <div className="min-w-0 flex-1">
-                  <Link to="/posts/$id" params={{ id: String(p.id) }} className="text-[15px] font-semibold hover:underline">
+                  <Link to="/$org/posts/$id" params={{ org, id: String(p.id) }} className="text-[15px] font-semibold hover:underline">
                     {p.title}
                   </Link>
                   {p.body && <p className="mt-1.5 mb-0 line-clamp-2 text-[14px] leading-6 text-muted">{p.body}</p>}
@@ -113,7 +114,7 @@ function Board() {
   )
 }
 
-function Composer({ onDone }: { onDone: () => void }) {
+function Composer({ org, onDone }: { org: string; onDone: () => void }) {
   const [title, setTitle] = useState('')
   const [body, setBody] = useState('')
   const [busy, setBusy] = useState(false)
@@ -124,7 +125,7 @@ function Composer({ onDone }: { onDone: () => void }) {
     if (!title.trim()) return setError('Give it a title.')
     setBusy(true)
     try {
-      await createPost({ data: { title, body } })
+      await createPost({ data: { org, title, body } })
       onDone()
     } catch {
       setError('Could not post. Try again.')

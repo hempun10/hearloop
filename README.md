@@ -13,16 +13,19 @@ Nothing reaches the changelog without a passing Kane run.
 
 ```bash
 bun install
-cp .dev.vars.example .dev.vars   # set API_TOKEN
+cp .dev.vars.example .dev.vars   # set BETTER_AUTH_SECRET (openssl rand -hex 32)
 bun run db:migrate
 bun run dev                      # http://localhost:3000
 ```
 
+Sign up, name your board (it lives at `/<your-org>`), then generate a loop token in Settings.
+Boards are public to read, post and vote; only members see Settings.
+
 ## The loop
 
 ```bash
-bun run loop                                   # local: http://localhost:3000, token from .dev.vars
-set -a; . ./.prod.local; set +a; bun run loop --deploy   # live: builds, deploys, then Kane tests the live URL
+ORG=acme API_TOKEN=hl_… bun run loop                      # local
+set -a; . ./.prod.local; set +a; bun run loop --deploy   # live: APP_URL, ORG, API_TOKEN; deploys, then Kane tests the live URL
 ```
 
 Kane CLI needs a Chromium. If Chrome isn't installed, set `KANE_CLI_CHROME_PATH`.
@@ -34,20 +37,20 @@ If Kane blames its own automation (`verdict.family: automation_bug`), the loop r
 bunx wrangler d1 create hearloop-v2            # put the id in wrangler.jsonc
 bun run db:migrate:remote
 bun run deploy
-bunx wrangler secret put API_TOKEN
+bunx wrangler secret put BETTER_AUTH_SECRET    # and set BETTER_AUTH_URL in wrangler.jsonc vars
 ```
 
 ## Agent API
 
-Reads are public. Writes need `Authorization: Bearer $API_TOKEN`.
+Every path is scoped to an org. Reads are public. Writes need `Authorization: Bearer <org token>`.
 
 | Method | Path | Body |
 |---|---|---|
-| GET | `/api/posts?status=open` | |
-| GET | `/api/posts/:id` | |
-| POST | `/api/posts/:id/status` | `{"status":"building"}` |
-| POST | `/api/posts/:id/runs` | `{"passed":true,"summary":"…","changelog":"…"}` |
-| GET | `/api/changelog` | |
+| GET | `/api/:org/posts?status=open` | |
+| GET | `/api/:org/posts/:id` | |
+| POST | `/api/:org/posts/:id/status` | `{"status":"building"}` |
+| POST | `/api/:org/posts/:id/runs` | `{"passed":true,"summary":"…","changelog":"…"}` |
+| GET | `/api/:org/changelog` | |
 
 ## Stack
 

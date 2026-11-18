@@ -1,10 +1,12 @@
 import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
+import { me } from '../lib/fns'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 
 import appCss from '../styles.css?url'
 
 export const Route = createRootRoute({
+  beforeLoad: async () => ({ me: await me() }),
   head: () => ({
     meta: [
       {

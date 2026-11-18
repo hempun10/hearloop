@@ -1,9 +1,10 @@
-import { Link, useLocation } from '@tanstack/react-router'
+import { Link, useLocation, useParams } from '@tanstack/react-router'
 import { Mark } from './Header'
 
 export default function Footer() {
-  const { pathname } = useLocation()
-  if (pathname === '/') return <SiteFooter />
+  useLocation()
+  const { org } = useParams({ strict: false }) as { org?: string }
+  if (!org) return <SiteFooter />
   return (
     <footer className="mx-auto mt-24 flex max-w-[1008px] flex-wrap items-center justify-center gap-x-5 gap-y-2 px-4 pb-12 text-[12px] text-faint">
       <span><Kbd>j</Kbd> <Kbd>k</Kbd> move</span>
@@ -26,9 +27,9 @@ function SiteFooter() {
         <nav className="flex gap-16 text-[13px] md:ml-auto">
           <div className="grid content-start gap-2.5">
             <p className="m-0 text-[12px] font-medium text-faint">Product</p>
-            <Link to="/board" className="text-muted hover:text-fg">Board</Link>
-            <Link to="/changelog" className="text-muted hover:text-fg">Changelog</Link>
-            <a href="#how" className="text-muted hover:text-fg">How it works</a>
+            <Link to="/$org" params={{ org: 'demo' }} className="text-muted hover:text-fg">Live demo</Link>
+            <Link to="/login" search={{ mode: 'signup' }} className="text-muted hover:text-fg">Create your board</Link>
+            <a href="/#how" className="text-muted hover:text-fg">How it works</a>
           </div>
           <div className="grid content-start gap-2.5">
             <p className="m-0 text-[12px] font-medium text-faint">Built with</p>

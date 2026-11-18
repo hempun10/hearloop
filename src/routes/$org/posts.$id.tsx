@@ -5,9 +5,9 @@ import { STATUSES } from '#/lib/types'
 import { getPost } from '#/lib/fns'
 import { ago } from '#/lib/time'
 
-export const Route = createFileRoute('/posts/$id')({
+export const Route = createFileRoute('/$org/posts/$id')({
   loader: async ({ params }) => {
-    const r = await getPost({ data: Number(params.id) })
+    const r = await getPost({ data: { org: params.org, id: Number(params.id) } })
     if (!r) throw notFound()
     return r
   },
@@ -16,11 +16,12 @@ export const Route = createFileRoute('/posts/$id')({
 
 function PostPage() {
   const { post, runs } = Route.useLoaderData()
+  const { org } = Route.useParams()
   const step = STATUSES.indexOf(post.status)
   return (
     <main className="mx-auto flex max-w-[1008px] flex-col gap-12 px-4 pt-10 md:flex-row md:px-0">
       <section className="min-w-0 flex-1 md:max-w-[720px]">
-        <Link to="/board" className="text-[13px] text-muted hover:text-fg">← Board</Link>
+        <Link to="/$org" params={{ org }} className="text-[13px] text-muted hover:text-fg">← Board</Link>
         <div className="mt-5 flex items-start gap-4">
           <div className="min-w-0 flex-1">
             <h1 className="m-0 text-[24px] font-semibold">{post.title}</h1>

@@ -1,8 +1,8 @@
 import { Link, createFileRoute } from '@tanstack/react-router'
 import { listChangelog } from '#/lib/fns'
 
-export const Route = createFileRoute('/changelog')({
-  loader: () => listChangelog(),
+export const Route = createFileRoute('/$org/changelog')({
+  loader: ({ params }) => listChangelog({ data: params.org }),
   component: Changelog,
 })
 
@@ -10,6 +10,7 @@ const fmt = (sec: number) => new Date(sec * 1000).toLocaleDateString('en-US', { 
 
 function Changelog() {
   const entries = Route.useLoaderData()
+  const { org } = Route.useParams()
   return (
     <main className="mx-auto max-w-[1008px] px-4 pt-10 md:px-0">
       <h1 className="m-0 text-[24px] font-semibold">Changelog</h1>
@@ -24,7 +25,7 @@ function Changelog() {
               <div className="min-w-0 flex-1 md:max-w-[720px]">
                 <h2 className="m-0 text-[18px] font-semibold">{e.title}</h2>
                 <p className="mt-2 mb-0 whitespace-pre-wrap text-[15px] leading-7 text-muted">{e.body}</p>
-                <Link to="/posts/$id" params={{ id: String(e.post_id) }}
+                <Link to="/$org/posts/$id" params={{ org, id: String(e.post_id) }}
                   className="mt-4 inline-flex items-center gap-1.5 rounded-md bg-shipped/10 px-2 py-0.5 text-[12px] font-medium text-fg hover:bg-shipped/20">
                   <span className="size-1.5 rounded-full bg-shipped" />
                   Verified with Kane CLI · from post #{e.post_id}
