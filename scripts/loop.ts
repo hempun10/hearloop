@@ -40,7 +40,7 @@ async function build(post: Post, failure?: string) {
     post.body && `Details: ${post.body}`,
     failure && `Your previous attempt FAILED Kane CLI verification. Kane reported:\n${failure}\nFix it.`,
     `Keep the change small and in the existing style. Run \`bun run build\` and fix any errors.`,
-    `Then write .hearloop/kane-objective.txt: one plain-English browser test, starting from the board page,`,
+    `Then write .hearloop/kane-objective.txt: one plain-English browser test, starting from the board page (/board),`,
     `that a tester could follow to prove the feature works (what to click/type and what must be visible).`,
     `Also write .hearloop/changelog.md: two sentences for users announcing the change. Do not commit.`,
   ].filter(Boolean).join('\n')
@@ -52,7 +52,7 @@ type KaneResult = { passed: boolean; summary: string }
 
 // Kane --agent prints NDJSON; the last line is {"type":"run_end","status":"passed"|"failed",summary,reason,...}
 async function verify(objective: string): Promise<KaneResult> {
-  const out = await $`kane-cli run ${objective} --agent --headless --url ${APP_URL} --timeout 300 --max-steps 30`.nothrow().text()
+  const out = await $`kane-cli run ${objective} --agent --headless --url ${APP_URL}/board --timeout 300 --max-steps 30`.nothrow().text()
   const events = out.split('\n').flatMap((l): any[] => { try { return [JSON.parse(l)] } catch { return [] } })
   const end = events.find((e: any) => e.type === 'run_end')
   const passed = end?.status === 'passed'

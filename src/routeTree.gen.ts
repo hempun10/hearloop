@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BoardRouteImport } from './routes/board'
 import { Route as ChangelogRouteImport } from './routes/changelog'
 import { Route as ApiSplatRouteImport } from './routes/api/$'
 import { Route as PostsIdRouteImport } from './routes/posts.$id'
@@ -17,6 +18,11 @@ import { Route as PostsIdRouteImport } from './routes/posts.$id'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BoardRoute = BoardRouteImport.update({
+  id: '/board',
+  path: '/board',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ChangelogRoute = ChangelogRouteImport.update({
@@ -37,12 +43,14 @@ const PostsIdRoute = PostsIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/board': typeof BoardRoute
   '/changelog': typeof ChangelogRoute
   '/api/$': typeof ApiSplatRoute
   '/posts/$id': typeof PostsIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/board': typeof BoardRoute
   '/changelog': typeof ChangelogRoute
   '/api/$': typeof ApiSplatRoute
   '/posts/$id': typeof PostsIdRoute
@@ -50,20 +58,22 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/board': typeof BoardRoute
   '/changelog': typeof ChangelogRoute
   '/api/$': typeof ApiSplatRoute
   '/posts/$id': typeof PostsIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/changelog' | '/api/$' | '/posts/$id'
+  fullPaths: '/' | '/board' | '/changelog' | '/api/$' | '/posts/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/changelog' | '/api/$' | '/posts/$id'
-  id: '__root__' | '/' | '/changelog' | '/api/$' | '/posts/$id'
+  to: '/' | '/board' | '/changelog' | '/api/$' | '/posts/$id'
+  id: '__root__' | '/' | '/board' | '/changelog' | '/api/$' | '/posts/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BoardRoute: typeof BoardRoute
   ChangelogRoute: typeof ChangelogRoute
   ApiSplatRoute: typeof ApiSplatRoute
   PostsIdRoute: typeof PostsIdRoute
@@ -76,6 +86,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/board': {
+      id: '/board'
+      path: '/board'
+      fullPath: '/board'
+      preLoaderRoute: typeof BoardRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/changelog': {
@@ -104,6 +121,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BoardRoute: BoardRoute,
   ChangelogRoute: ChangelogRoute,
   ApiSplatRoute: ApiSplatRoute,
   PostsIdRoute: PostsIdRoute,

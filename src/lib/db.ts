@@ -44,6 +44,25 @@ export async function recordRun(id: number, passed: boolean, summary: string, ch
   return getPost(id)
 }
 
+export async function landing() {
+  const [stats, top, run, entry] = await db().batch([
+    db().prepare(`SELECT
+      (SELECT COUNT(*) FROM posts) AS posts,
+      (SELECT COUNT(*) FROM posts WHERE status = 'shipped') AS shipped,
+      (SELECT COUNT(*) FROM runs) AS runs,
+      (SELECT COALESCE(SUM(votes), 0) FROM posts) AS votes`),
+    db().prepare(`SELECT * FROM posts WHERE status != 'shipped' ORDER BY votes DESC LIMIT 3`),
+    db().prepare('SELECT runs.*, posts.title FROM runs JOIN posts ON posts.id = runs.post_id WHERE passed = 1 ORDER BY runs.id DESC LIMIT 1'),
+    db().prepare('SELECT * FROM changelog ORDER BY id DESC LIMIT 6'),
+  ])
+  return {
+    stats: stats.results[0] as { posts: number; shipped: number; runs: number; votes: number },
+    top: top.results as Post[],
+    run: (run.results[0] ?? null) as (Run & { title: string }) | null,
+    shipped: entry.results as Entry[],
+  }
+}
+
 export async function listChangelog() {
   return (await db().prepare('SELECT * FROM changelog ORDER BY id DESC').all<Entry>()).results
 }

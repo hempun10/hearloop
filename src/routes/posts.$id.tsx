@@ -20,7 +20,7 @@ function PostPage() {
   return (
     <main className="mx-auto flex max-w-[1008px] flex-col gap-12 px-4 pt-10 md:flex-row md:px-0">
       <section className="min-w-0 flex-1 md:max-w-[720px]">
-        <Link to="/" className="text-[13px] text-muted hover:text-fg">← Board</Link>
+        <Link to="/board" className="text-[13px] text-muted hover:text-fg">← Board</Link>
         <div className="mt-5 flex items-start gap-4">
           <div className="min-w-0 flex-1">
             <h1 className="m-0 text-[24px] font-semibold">{post.title}</h1>

@@ -9,6 +9,7 @@ const num = (v: unknown) => {
 }
 
 export const listPosts = createServerFn().handler(() => db.listPosts())
+export const landing = createServerFn().handler(() => db.landing())
 export const listChangelog = createServerFn().handler(() => db.listChangelog())
 export const getPost = createServerFn()
   .validator((id: number) => num(id))
