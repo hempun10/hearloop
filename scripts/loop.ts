@@ -12,7 +12,7 @@ const pick = args.includes('--post') ? Number(args[args.indexOf('--post') + 1]) 
 
 type Post = { id: number; title: string; body: string; status: string; votes: number }
 
-async function api(path: string, body?: unknown) {
+async function api(path: string, body?: unknown): Promise<any> {
   const res = await fetch(APP_URL + '/api' + path, body === undefined ? {} : {
     method: 'POST',
     headers: { authorization: `Bearer ${TOKEN}`, 'content-type': 'application/json' },
@@ -50,7 +50,7 @@ type KaneResult = { passed: boolean; summary: string }
 // ponytail: verdict parsed from Kane's NDJSON by event/field names; tighten once the schema is pinned
 async function verify(objective: string): Promise<KaneResult> {
   const out = await $`kane-cli run ${objective} --agent --headless --url ${APP_URL} --timeout 300 --mode testing`.nothrow().text()
-  const events = out.split('\n').flatMap((l) => { try { return [JSON.parse(l)] } catch { return [] } })
+  const events = out.split('\n').flatMap((l): any[] => { try { return [JSON.parse(l)] } catch { return [] } })
   const end = events.findLast((e) => /run_end|result|complete/i.test(String(e.type ?? e.event ?? '')))
   const status = String(end?.status ?? end?.result ?? end?.verdict ?? '').toLowerCase()
   const passed = end?.passed === true || end?.success === true || /^(pass|passed|success|succeeded)$/.test(status)
