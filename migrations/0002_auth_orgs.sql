@@ -63,5 +63,6 @@ CREATE INDEX members_user ON members(user_id);
 
 -- existing posts become the public demo board
 INSERT INTO orgs (id, slug, name) VALUES (1, 'demo', 'hearloop demo');
-ALTER TABLE posts ADD COLUMN org_id INTEGER NOT NULL DEFAULT 1 REFERENCES orgs(id);
+-- no REFERENCES here: SQLite rejects ADD COLUMN ... REFERENCES with a non-NULL default when foreign keys are on (as on D1)
+ALTER TABLE posts ADD COLUMN org_id INTEGER NOT NULL DEFAULT 1;
 CREATE INDEX posts_org ON posts(org_id, votes DESC);
