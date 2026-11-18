@@ -18,7 +18,10 @@ export const Route = createFileRoute('/')({
 function Board() {
   const all = Route.useLoaderData()
   const { sort = 'top' } = Route.useSearch()
-  const posts = sort === 'new' ? [...all].sort((a, b) => b.id - a.id) : all
+  const [q, setQ] = useState('')
+  const sorted = sort === 'new' ? [...all].sort((a, b) => b.id - a.id) : all
+  const needle = q.trim().toLowerCase()
+  const posts = needle ? sorted.filter((p) => p.title.toLowerCase().includes(needle)) : sorted
   const [composing, setComposing] = useState(false)
   const [sel, setSel] = useState(-1)
   const navigate = useNavigate()
@@ -56,10 +59,17 @@ function Board() {
           <span className="ml-auto text-[12px] text-muted tabular-nums">{all.length} posts</span>
         </div>
 
+        <input type="search" value={q} onChange={(e) => { setQ(e.target.value); setSel(-1) }}
+          onKeyDown={(e) => { if (e.key === 'Escape') setQ('') }}
+          placeholder="Search requests" aria-label="Search requests"
+          className="mb-4 h-9 w-full rounded-md border border-line bg-surface px-3 text-[14px] outline-none placeholder:text-faint focus:border-muted" />
+
         {composing && <Composer onDone={() => { setComposing(false); router.invalidate() }} />}
 
         {posts.length === 0 ? (
-          <p className="border-t border-line py-10 text-[14px] text-muted">No requests yet. Post the first idea.</p>
+          <p className="border-t border-line py-10 text-[14px] text-muted">
+            {needle ? `No requests match "${q.trim()}".` : 'No requests yet. Post the first idea.'}
+          </p>
         ) : (
           <ol className="m-0 list-none p-0" aria-label="Requests">
             {posts.map((p, i) => (

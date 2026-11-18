@@ -84,7 +84,7 @@ for (let attempt = 1; attempt <= MAX_TRIES; attempt++) {
   const changelog = r.passed ? (await Bun.file('.hearloop/changelog.md').text().catch(() => post.title)).trim() : undefined
   await api(`/posts/${post.id}/runs`, { passed: r.passed, summary: r.summary, changelog })
   if (r.passed) {
-    await $`git add -A -- . ':!.hearloop' && git commit -qm ${`Ship #${post.id}: ${post.title}\n\nVerified with Kane CLI.`}`.nothrow()
+    await $`git add -A && git commit -qm ${`Ship #${post.id}: ${post.title}\n\nVerified with Kane CLI.`}`.nothrow()
     console.log(`  ✓ shipped. Changelog published.`)
     process.exit(0)
   }
