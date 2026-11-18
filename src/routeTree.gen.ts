@@ -16,7 +16,6 @@ import { Route as OrgDashboardRouteImport } from './routes/$org/dashboard'
 import { Route as SiteIndexRouteImport } from './routes/_site/index'
 import { Route as SiteLoginRouteImport } from './routes/_site/login'
 import { Route as SiteNewRouteImport } from './routes/_site/new'
-import { Route as ApiSplatRouteImport } from './routes/api/$'
 import { Route as OrgPublicIndexRouteImport } from './routes/$org/_public/index'
 import { Route as OrgPublicChangelogRouteImport } from './routes/$org/_public/changelog'
 import { Route as OrgPublicRoadmapRouteImport } from './routes/$org/_public/roadmap'
@@ -25,7 +24,13 @@ import { Route as OrgDashboardChangelogRouteImport } from './routes/$org/dashboa
 import { Route as OrgDashboardRoadmapRouteImport } from './routes/$org/dashboard/roadmap'
 import { Route as OrgDashboardRunsRouteImport } from './routes/$org/dashboard/runs'
 import { Route as OrgDashboardSettingsRouteImport } from './routes/$org/dashboard/settings'
+import { Route as ApiOrgChangelogRouteImport } from './routes/api/$org/changelog'
+import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 import { Route as OrgPublicPostsIdRouteImport } from './routes/$org/_public/posts.$id'
+import { Route as ApiOrgPostsIndexRouteImport } from './routes/api/$org/posts.index'
+import { Route as ApiOrgPostsIdIndexRouteImport } from './routes/api/$org/posts.$id.index'
+import { Route as ApiOrgPostsIdRunsRouteImport } from './routes/api/$org/posts.$id.runs'
+import { Route as ApiOrgPostsIdStatusRouteImport } from './routes/api/$org/posts.$id.status'
 
 const OrgRoute = OrgRouteImport.update({
   id: '/$org',
@@ -59,11 +64,6 @@ const SiteNewRoute = SiteNewRouteImport.update({
   id: '/new',
   path: '/new',
   getParentRoute: () => SiteRoute,
-} as any)
-const ApiSplatRoute = ApiSplatRouteImport.update({
-  id: '/api/$',
-  path: '/api/$',
-  getParentRoute: () => rootRouteImport,
 } as any)
 const OrgPublicIndexRoute = OrgPublicIndexRouteImport.update({
   id: '/',
@@ -105,10 +105,40 @@ const OrgDashboardSettingsRoute = OrgDashboardSettingsRouteImport.update({
   path: '/settings',
   getParentRoute: () => OrgDashboardRoute,
 } as any)
+const ApiOrgChangelogRoute = ApiOrgChangelogRouteImport.update({
+  id: '/api/$org/changelog',
+  path: '/api/$org/changelog',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
+  id: '/api/auth/$',
+  path: '/api/auth/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const OrgPublicPostsIdRoute = OrgPublicPostsIdRouteImport.update({
   id: '/posts/$id',
   path: '/posts/$id',
   getParentRoute: () => OrgPublicRoute,
+} as any)
+const ApiOrgPostsIndexRoute = ApiOrgPostsIndexRouteImport.update({
+  id: '/api/$org/posts/',
+  path: '/api/$org/posts/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiOrgPostsIdIndexRoute = ApiOrgPostsIdIndexRouteImport.update({
+  id: '/api/$org/posts/$id/',
+  path: '/api/$org/posts/$id/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiOrgPostsIdRunsRoute = ApiOrgPostsIdRunsRouteImport.update({
+  id: '/api/$org/posts/$id/runs',
+  path: '/api/$org/posts/$id/runs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiOrgPostsIdStatusRoute = ApiOrgPostsIdStatusRouteImport.update({
+  id: '/api/$org/posts/$id/status',
+  path: '/api/$org/posts/$id/status',
+  getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -117,22 +147,26 @@ export interface FileRoutesByFullPath {
   '/$org/dashboard': typeof OrgDashboardRouteWithChildren
   '/login': typeof SiteLoginRoute
   '/new': typeof SiteNewRoute
-  '/api/$': typeof ApiSplatRoute
   '/$org/changelog': typeof OrgPublicChangelogRoute
   '/$org/roadmap': typeof OrgPublicRoadmapRoute
   '/$org/dashboard/changelog': typeof OrgDashboardChangelogRoute
   '/$org/dashboard/roadmap': typeof OrgDashboardRoadmapRoute
   '/$org/dashboard/runs': typeof OrgDashboardRunsRoute
   '/$org/dashboard/settings': typeof OrgDashboardSettingsRoute
+  '/api/$org/changelog': typeof ApiOrgChangelogRoute
+  '/api/auth/$': typeof ApiAuthSplatRoute
   '/$org/': typeof OrgPublicIndexRoute
   '/$org/dashboard/': typeof OrgDashboardIndexRoute
   '/$org/posts/$id': typeof OrgPublicPostsIdRoute
+  '/api/$org/posts/': typeof ApiOrgPostsIndexRoute
+  '/api/$org/posts/$id/runs': typeof ApiOrgPostsIdRunsRoute
+  '/api/$org/posts/$id/status': typeof ApiOrgPostsIdStatusRoute
+  '/api/$org/posts/$id/': typeof ApiOrgPostsIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/$org': typeof OrgPublicIndexRoute
   '/login': typeof SiteLoginRoute
   '/new': typeof SiteNewRoute
-  '/api/$': typeof ApiSplatRoute
   '/': typeof SiteIndexRoute
   '/$org/changelog': typeof OrgPublicChangelogRoute
   '/$org/roadmap': typeof OrgPublicRoadmapRoute
@@ -140,8 +174,14 @@ export interface FileRoutesByTo {
   '/$org/dashboard/roadmap': typeof OrgDashboardRoadmapRoute
   '/$org/dashboard/runs': typeof OrgDashboardRunsRoute
   '/$org/dashboard/settings': typeof OrgDashboardSettingsRoute
+  '/api/$org/changelog': typeof ApiOrgChangelogRoute
+  '/api/auth/$': typeof ApiAuthSplatRoute
   '/$org/dashboard': typeof OrgDashboardIndexRoute
   '/$org/posts/$id': typeof OrgPublicPostsIdRoute
+  '/api/$org/posts': typeof ApiOrgPostsIndexRoute
+  '/api/$org/posts/$id/runs': typeof ApiOrgPostsIdRunsRoute
+  '/api/$org/posts/$id/status': typeof ApiOrgPostsIdStatusRoute
+  '/api/$org/posts/$id': typeof ApiOrgPostsIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -151,7 +191,6 @@ export interface FileRoutesById {
   '/$org/dashboard': typeof OrgDashboardRouteWithChildren
   '/_site/login': typeof SiteLoginRoute
   '/_site/new': typeof SiteNewRoute
-  '/api/$': typeof ApiSplatRoute
   '/_site/': typeof SiteIndexRoute
   '/$org/_public/changelog': typeof OrgPublicChangelogRoute
   '/$org/_public/roadmap': typeof OrgPublicRoadmapRoute
@@ -159,9 +198,15 @@ export interface FileRoutesById {
   '/$org/dashboard/roadmap': typeof OrgDashboardRoadmapRoute
   '/$org/dashboard/runs': typeof OrgDashboardRunsRoute
   '/$org/dashboard/settings': typeof OrgDashboardSettingsRoute
+  '/api/$org/changelog': typeof ApiOrgChangelogRoute
+  '/api/auth/$': typeof ApiAuthSplatRoute
   '/$org/_public/': typeof OrgPublicIndexRoute
   '/$org/dashboard/': typeof OrgDashboardIndexRoute
   '/$org/_public/posts/$id': typeof OrgPublicPostsIdRoute
+  '/api/$org/posts/': typeof ApiOrgPostsIndexRoute
+  '/api/$org/posts/$id/runs': typeof ApiOrgPostsIdRunsRoute
+  '/api/$org/posts/$id/status': typeof ApiOrgPostsIdStatusRoute
+  '/api/$org/posts/$id/': typeof ApiOrgPostsIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -171,22 +216,26 @@ export interface FileRouteTypes {
     | '/$org/dashboard'
     | '/login'
     | '/new'
-    | '/api/$'
     | '/$org/changelog'
     | '/$org/roadmap'
     | '/$org/dashboard/changelog'
     | '/$org/dashboard/roadmap'
     | '/$org/dashboard/runs'
     | '/$org/dashboard/settings'
+    | '/api/$org/changelog'
+    | '/api/auth/$'
     | '/$org/'
     | '/$org/dashboard/'
     | '/$org/posts/$id'
+    | '/api/$org/posts/'
+    | '/api/$org/posts/$id/runs'
+    | '/api/$org/posts/$id/status'
+    | '/api/$org/posts/$id/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/$org'
     | '/login'
     | '/new'
-    | '/api/$'
     | '/'
     | '/$org/changelog'
     | '/$org/roadmap'
@@ -194,8 +243,14 @@ export interface FileRouteTypes {
     | '/$org/dashboard/roadmap'
     | '/$org/dashboard/runs'
     | '/$org/dashboard/settings'
+    | '/api/$org/changelog'
+    | '/api/auth/$'
     | '/$org/dashboard'
     | '/$org/posts/$id'
+    | '/api/$org/posts'
+    | '/api/$org/posts/$id/runs'
+    | '/api/$org/posts/$id/status'
+    | '/api/$org/posts/$id'
   id:
     | '__root__'
     | '/$org'
@@ -204,7 +259,6 @@ export interface FileRouteTypes {
     | '/$org/dashboard'
     | '/_site/login'
     | '/_site/new'
-    | '/api/$'
     | '/_site/'
     | '/$org/_public/changelog'
     | '/$org/_public/roadmap'
@@ -212,15 +266,26 @@ export interface FileRouteTypes {
     | '/$org/dashboard/roadmap'
     | '/$org/dashboard/runs'
     | '/$org/dashboard/settings'
+    | '/api/$org/changelog'
+    | '/api/auth/$'
     | '/$org/_public/'
     | '/$org/dashboard/'
     | '/$org/_public/posts/$id'
+    | '/api/$org/posts/'
+    | '/api/$org/posts/$id/runs'
+    | '/api/$org/posts/$id/status'
+    | '/api/$org/posts/$id/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   OrgRoute: typeof OrgRouteWithChildren
   SiteRoute: typeof SiteRouteWithChildren
-  ApiSplatRoute: typeof ApiSplatRoute
+  ApiOrgChangelogRoute: typeof ApiOrgChangelogRoute
+  ApiAuthSplatRoute: typeof ApiAuthSplatRoute
+  ApiOrgPostsIndexRoute: typeof ApiOrgPostsIndexRoute
+  ApiOrgPostsIdRunsRoute: typeof ApiOrgPostsIdRunsRoute
+  ApiOrgPostsIdStatusRoute: typeof ApiOrgPostsIdStatusRoute
+  ApiOrgPostsIdIndexRoute: typeof ApiOrgPostsIdIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -273,13 +338,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/new'
       preLoaderRoute: typeof SiteNewRouteImport
       parentRoute: typeof SiteRoute
-    }
-    '/api/$': {
-      id: '/api/$'
-      path: '/api/$'
-      fullPath: '/api/$'
-      preLoaderRoute: typeof ApiSplatRouteImport
-      parentRoute: typeof rootRouteImport
     }
     '/$org/_public/': {
       id: '/$org/_public/'
@@ -337,12 +395,54 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OrgDashboardSettingsRouteImport
       parentRoute: typeof OrgDashboardRoute
     }
+    '/api/$org/changelog': {
+      id: '/api/$org/changelog'
+      path: '/api/$org/changelog'
+      fullPath: '/api/$org/changelog'
+      preLoaderRoute: typeof ApiOrgChangelogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/auth/$': {
+      id: '/api/auth/$'
+      path: '/api/auth/$'
+      fullPath: '/api/auth/$'
+      preLoaderRoute: typeof ApiAuthSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/$org/_public/posts/$id': {
       id: '/$org/_public/posts/$id'
       path: '/posts/$id'
       fullPath: '/$org/posts/$id'
       preLoaderRoute: typeof OrgPublicPostsIdRouteImport
       parentRoute: typeof OrgPublicRoute
+    }
+    '/api/$org/posts/': {
+      id: '/api/$org/posts/'
+      path: '/api/$org/posts'
+      fullPath: '/api/$org/posts/'
+      preLoaderRoute: typeof ApiOrgPostsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/$org/posts/$id/': {
+      id: '/api/$org/posts/$id/'
+      path: '/api/$org/posts/$id'
+      fullPath: '/api/$org/posts/$id/'
+      preLoaderRoute: typeof ApiOrgPostsIdIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/$org/posts/$id/runs': {
+      id: '/api/$org/posts/$id/runs'
+      path: '/api/$org/posts/$id/runs'
+      fullPath: '/api/$org/posts/$id/runs'
+      preLoaderRoute: typeof ApiOrgPostsIdRunsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/$org/posts/$id/status': {
+      id: '/api/$org/posts/$id/status'
+      path: '/api/$org/posts/$id/status'
+      fullPath: '/api/$org/posts/$id/status'
+      preLoaderRoute: typeof ApiOrgPostsIdStatusRouteImport
+      parentRoute: typeof rootRouteImport
     }
   }
 }
@@ -414,7 +514,12 @@ const SiteRouteWithChildren = SiteRoute._addFileChildren(SiteRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   OrgRoute: OrgRouteWithChildren,
   SiteRoute: SiteRouteWithChildren,
-  ApiSplatRoute: ApiSplatRoute,
+  ApiOrgChangelogRoute: ApiOrgChangelogRoute,
+  ApiAuthSplatRoute: ApiAuthSplatRoute,
+  ApiOrgPostsIndexRoute: ApiOrgPostsIndexRoute,
+  ApiOrgPostsIdRunsRoute: ApiOrgPostsIdRunsRoute,
+  ApiOrgPostsIdStatusRoute: ApiOrgPostsIdStatusRoute,
+  ApiOrgPostsIdIndexRoute: ApiOrgPostsIdIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -1,19 +1,19 @@
 {
-  "commit_id": "456dde73-5d85-4b05-9598-b4864464ab9c",
-  "test_id": "24929c6b-d860-4a6b-9a09-ecc56711b07e",
-  "testcase_id": "01M7PBZAN938T4QVREVHZEPXEM",
+  "commit_id": "2372ea16-7d88-44a1-bb1a-3e4626d2e4f2",
+  "test_id": "2ef00654-d5f5-44c7-84a8-68274e0bee1b",
+  "testcase_id": "01M7PJKDEW9ZAF27CQSRYFC1PW",
   "project_id": "01M7P4G6ZA12MHJEFHMXSZSE9W",
   "folder_id": "01M7P8FZHE88458NH63TH4F3EY",
   "org_id": "3436657",
   "session_name": "board_new_post_similar",
   "executions": [
     {
-      "execution_id": "4dddb5b1-e7c3-47ec-979e-37db496157a0",
-      "run_kind": "replay",
+      "execution_id": "bc9fa0cd-c3be-435b-a3b7-9ded8341774a",
+      "run_kind": "author",
       "status": "passed",
       "valid": true,
       "uploaded": true,
-      "at": "2026-11-18T04:10:03.632Z"
+      "at": "2026-11-18T05:48:57.247Z"
     }
   ]
 }

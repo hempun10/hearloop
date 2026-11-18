@@ -1,38 +1,35 @@
-import { Link, createFileRoute, useLoaderData } from '@tanstack/react-router'
-import { Hidden } from './roadmap'
-import { listChangelog } from '#/lib/fns'
+import { useSuspenseQuery } from '@tanstack/react-query'
+import { createFileRoute } from '@tanstack/react-router'
+import { VerifiedBadge } from '#/features/changelog/components/verified-badge'
+import { changelogQuery } from '#/features/changelog/changelog.queries'
+import { NotPublic } from '#/features/orgs/components/not-public'
+import { useOrg } from '#/features/orgs/use-org'
+import { longDate } from '#/lib/format'
 
 export const Route = createFileRoute('/$org/_public/changelog')({
-  loader: ({ params }) => listChangelog({ data: params.org }),
-  component: Changelog,
+  loader: ({ context, params }) => context.queryClient.query(changelogQuery(params.org)),
+  component: ChangelogPage,
 })
 
-const fmt = (sec: number) => new Date(sec * 1000).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
-
-function Changelog() {
-  const entries = Route.useLoaderData()
-  const { org } = Route.useParams()
-  const parent = useLoaderData({ from: '/$org' })
-  if (!parent.org.show_changelog) return <Hidden what="changelog" />
+function ChangelogPage() {
+  const { org } = useOrg()
+  const { data: entries } = useSuspenseQuery(changelogQuery(org.slug))
+  if (!org.showChangelog) return <NotPublic what="changelog" />
   return (
-    <main className="mx-auto max-w-[1008px] px-4 pt-10 md:px-0">
-      <h1 className="m-0 text-[24px] font-semibold">Changelog</h1>
-      <p className="mt-2 mb-10 text-[14px] text-muted">Every entry here passed a Kane CLI verification before it was published.</p>
+    <main className="mx-auto max-w-5xl px-4 pt-10 md:px-0">
+      <h1 className="text-2xl font-semibold">Changelog</h1>
+      <p className="mt-2 mb-10 text-sm text-muted-foreground">Every entry here passed a Kane CLI verification before it was published.</p>
       {entries.length === 0 ? (
-        <p className="border-t border-line pt-6 text-[14px] text-muted">Nothing shipped yet. The first passing Kane run lands here.</p>
+        <p className="border-t pt-6 text-sm text-muted-foreground">Nothing shipped yet. The first passing Kane run lands here.</p>
       ) : (
-        <ol className="m-0 list-none p-0">
+        <ol>
           {entries.map((e) => (
-            <li key={e.id} data-testid="entry" className="flex flex-col gap-2 border-t border-line py-8 md:flex-row md:gap-12">
-              <time className="w-[160px] shrink-0 text-[13px] text-muted tabular-nums">{fmt(e.created_at)}</time>
+            <li key={e.id} data-testid="entry" className="flex flex-col gap-2 border-t py-8 md:flex-row md:gap-12">
+              <time className="w-40 shrink-0 text-[13px] text-muted-foreground tabular-nums">{longDate(e.createdAt)}</time>
               <div className="min-w-0 flex-1 md:max-w-[720px]">
-                <h2 className="m-0 text-[18px] font-semibold">{e.title}</h2>
-                <p className="mt-2 mb-0 whitespace-pre-wrap text-[15px] leading-7 text-muted">{e.body}</p>
-                <Link to="/$org/posts/$id" params={{ org, id: String(e.post_id) }}
-                  className="mt-4 inline-flex items-center gap-1.5 rounded-md bg-shipped/10 px-2 py-0.5 text-[12px] font-medium text-fg hover:bg-shipped/20">
-                  <span className="size-1.5 rounded-full bg-shipped" />
-                  Verified with Kane CLI · from post #{e.post_id}
-                </Link>
+                <h2 className="text-lg font-semibold">{e.title}</h2>
+                <p className="mt-2 text-[15px] leading-7 whitespace-pre-wrap text-muted-foreground">{e.body}</p>
+                <VerifiedBadge org={org.slug} postId={e.postId} className="mt-4" />
               </div>
             </li>
           ))}

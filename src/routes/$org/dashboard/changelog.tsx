@@ -1,43 +1,72 @@
-import { createFileRoute, useRouter } from '@tanstack/react-router'
-import { listChangelog, removeEntry } from '#/lib/fns'
-import { PageHead } from '../dashboard'
+import { useMutation, useQueryClient, useSuspenseQuery } from '@tanstack/react-query'
+import { createFileRoute } from '@tanstack/react-router'
+import { ScrollText } from 'lucide-react'
+import { toast } from 'sonner'
+import { PageHeader } from '#/components/page-header'
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '#/components/ui/alert-dialog'
+import { Button } from '#/components/ui/button'
+import { Empty, EmptyHeader, EmptyMedia, EmptyTitle } from '#/components/ui/empty'
+import { deleteChangelogEntry } from '#/features/changelog/changelog.functions'
+import { changelogQuery } from '#/features/changelog/changelog.queries'
+import { longDate } from '#/lib/format'
 
 export const Route = createFileRoute('/$org/dashboard/changelog')({
-  loader: ({ params }) => listChangelog({ data: params.org }),
-  component: Changelog,
+  loader: ({ context, params }) => context.queryClient.query(changelogQuery(params.org)),
+  component: DashboardChangelog,
 })
 
-const fmt = (sec: number) => new Date(sec * 1000).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
-
-function Changelog() {
-  const entries = Route.useLoaderData()
+function DashboardChangelog() {
   const { org } = Route.useParams()
-  const router = useRouter()
-
-  async function remove(id: number, title: string) {
-    if (!confirm(`Remove "${title}" from the public changelog? The post stays shipped.`)) return
-    await removeEntry({ data: { org, id } })
-    router.invalidate()
-  }
+  const qc = useQueryClient()
+  const { data: entries } = useSuspenseQuery(changelogQuery(org))
+  const remove = useMutation({
+    mutationFn: (id: number) => deleteChangelogEntry({ data: { org, id } }),
+    onSuccess: () => { toast.success('Removed from the changelog'); qc.invalidateQueries({ queryKey: changelogQuery(org).queryKey }) },
+    onError: (e) => toast.error(e.message),
+  })
 
   return (
     <>
-      <PageHead title="Changelog">
-        <a href={`/${org}/changelog`} target="_blank" rel="noreferrer" className="text-[12px] text-link hover:underline">View public page</a>
-      </PageHead>
-      <p className="border-b border-line px-6 py-3 text-[13px] text-muted">Entries are written by the agent and published only when Kane CLI passes. You can remove one here.</p>
+      <PageHeader title="Changelog">
+        <Button variant="link" size="sm" className="text-brand" asChild>
+          <a href={`/${org}/changelog`} target="_blank" rel="noreferrer">View public page</a>
+        </Button>
+      </PageHeader>
+      <p className="border-b px-6 py-3 text-[13px] text-muted-foreground">Entries are written by the agent and published only when Kane CLI passes. You can remove one here.</p>
       {entries.length === 0 ? (
-        <p className="px-6 py-10 text-[14px] text-muted">Nothing shipped yet.</p>
+        <Empty><EmptyHeader><EmptyMedia variant="icon"><ScrollText /></EmptyMedia><EmptyTitle>Nothing shipped yet</EmptyTitle></EmptyHeader></Empty>
       ) : (
-        <ul className="m-0 list-none p-0">
+        <ul>
           {entries.map((e) => (
-            <li key={e.id} className="flex gap-6 border-b border-line px-6 py-5">
-              <time className="w-[110px] shrink-0 text-[12px] text-faint tabular-nums">{fmt(e.created_at)}</time>
+            <li key={e.id} className="flex gap-6 border-b px-6 py-5">
+              <time className="w-28 shrink-0 text-xs text-faint tabular-nums">{longDate(e.createdAt)}</time>
               <div className="min-w-0 flex-1">
-                <p className="m-0 text-[14px] font-semibold">{e.title}</p>
-                <p className="mt-1 mb-0 text-[13px] leading-6 text-muted">{e.body}</p>
+                <p className="text-sm font-semibold">{e.title}</p>
+                <p className="mt-1 text-[13px] leading-6 text-muted-foreground">{e.body}</p>
               </div>
-              <button onClick={() => remove(e.id, e.title)} className="h-7 shrink-0 rounded-md border border-line px-2.5 text-[12px] text-muted hover:bg-hover hover:text-fg">Remove</button>
+              <AlertDialog>
+                <AlertDialogTrigger asChild><Button variant="outline" size="xs">Remove</Button></AlertDialogTrigger>
+                <AlertDialogContent>
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>Remove “{e.title}” from the public changelog?</AlertDialogTitle>
+                    <AlertDialogDescription>The post stays shipped.</AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                    <AlertDialogAction onClick={() => remove.mutate(e.id)}>Remove</AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
             </li>
           ))}
         </ul>

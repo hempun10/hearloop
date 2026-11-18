@@ -1,5 +1,5 @@
 {
-  "commit_id": "7cbdb45b-51ef-42a6-8614-967d409365b8",
+  "commit_id": "4aa1ece6-cd60-44ee-94ee-2b62157a4c68",
   "test_id": "2725fc77-df55-4761-ab21-05a5cdd087d9",
   "testcase_id": "01M7PBJFTF2PAXMHQBT7QS1WRC",
   "project_id": "01M7P4G6ZA12MHJEFHMXSZSE9W",
@@ -8,12 +8,12 @@
   "session_name": "auth_sign_in_out",
   "executions": [
     {
-      "execution_id": "d4041f8f-c0c6-4cf4-8706-8e21ffecf3d4",
-      "run_kind": "replay",
+      "execution_id": "1013d3c6-284c-4e6e-8ac7-afcbaf7517f2",
+      "run_kind": "author",
       "status": "passed",
       "valid": true,
       "uploaded": true,
-      "at": "2026-11-18T04:05:19.764Z"
+      "at": "2026-11-18T05:18:33.230Z"
     }
   ]
 }

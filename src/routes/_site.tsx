@@ -1,13 +1,13 @@
 import { Outlet, createFileRoute } from '@tanstack/react-router'
-import Footer from '#/components/Footer'
-import Header from '#/components/Header'
+import { SiteFooter } from '#/components/site-footer'
+import { SiteHeader } from '#/components/site-header'
 
 export const Route = createFileRoute('/_site')({
   component: () => (
     <>
-      <Header />
+      <SiteHeader />
       <Outlet />
-      <Footer />
+      <SiteFooter />
     </>
   ),
 })

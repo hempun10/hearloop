@@ -2,24 +2,24 @@
   "test_id": "4d39e528-0473-48fe-bf21-b0ec408a2eed",
   "version": "v4",
   "auto_heal_version": "AH2",
-  "session_id": "bf778390-fe7c-4ec4-8338-0fc0cc3fa76c",
+  "session_id": "3b899eb2-98ca-4751-8335-243a20763151",
   "org_id": "3436657",
   "user_id": "3615379",
   "url": "",
-  "start_timestamp": "2026-11-18T04:16:00.888Z",
-  "end_timestamp": "2026-11-18T04:16:34.275Z",
+  "start_timestamp": "2026-11-18T05:14:07.062Z",
+  "end_timestamp": "2026-11-18T05:15:38.855Z",
   "status": "success",
-  "commit_id": "bf778390-fe7c-4ec4-8338-0fc0cc3fa76c",
+  "commit_id": "3b899eb2-98ca-4751-8335-243a20763151",
   "instructions": [
     {
       "content_type": "generative_block",
-      "instruction_id": "generative_block_141141dda5b64719b75baad6789439fe",
-      "generative_id": "141141dda5b64719b75baad6789439fe",
+      "instruction_id": "generative_block_19e171e3695844d08bddd5dfb6ddfc00",
+      "generative_id": "19e171e3695844d08bddd5dfb6ddfc00",
       "objective": "Go to {{global.base_url}}/acme . Click the vote button on the first request. Verify that button is now highlighted as voted and its accessible label ends with 'voted'.",
       "status": "success",
       "children": [
         {
-          "instruction_id": "0856ffa8-e5a5-4768-81d2-71a93677804d",
+          "instruction_id": "24f110eb-ecc1-4342-aa28-be075bc2d258",
           "instruction_class": "driver_action",
           "module_id": "",
           "instruction": "Navigate to {{global.base_url}}/acme",
@@ -30,12 +30,12 @@
           "classification_error": {},
           "operations": [
             {
-              "operation_id": "bf3435e2-9b3d-4bdb-b8d8-2a84bfacf38a",
-              "instruction_id": "0856ffa8-e5a5-4768-81d2-71a93677804d",
+              "operation_id": "1234a143-08d4-4ace-91b3-aceb6c20ebf4",
+              "instruction_id": "24f110eb-ecc1-4342-aa28-be075bc2d258",
               "instruction": "Navigate to {{global.base_url}}/acme",
               "intent": "Navigate to {{global.base_url}}/acme",
-              "operation_start": "2026-11-18T04:16:09.978260+00:00",
-              "operation_end": "2026-11-18T04:16:10.170Z",
+              "operation_start": "2026-11-18T05:15:08.110966+00:00",
+              "operation_end": "2026-11-18T05:15:08.872Z",
               "status": "success",
               "command": "OPEN",
               "name": "",
@@ -60,7 +60,7 @@
               "update_time_stamp": "",
               "locator_variable": "",
               "locator_variable_name": "",
-              "image_url": "https://prodauteurartefacts.blob.core.windows.net/test-screenshots/test_screenshots/untagged_screenshot/bf3435e2-9b3d-4bdb-b8d8-2a84bfacf38a.webp",
+              "image_url": "https://prodauteurartefacts.blob.core.windows.net/test-screenshots/test_screenshots/untagged_screenshot/1234a143-08d4-4ace-91b3-aceb6c20ebf4.webp",
               "alternative_xpaths": [],
               "attribute": "",
               "value_description": "",
@@ -158,8 +158,8 @@
             }
           ],
           "status": "success",
-          "start_timestamp": "2026-11-18T04:16:09.978260+00:00",
-          "end_timestamp": "2026-11-18T04:16:10.170Z",
+          "start_timestamp": "2026-11-18T05:15:08.110966+00:00",
+          "end_timestamp": "2026-11-18T05:15:08.872Z",
           "type": "agent_generated",
           "tags": [],
           "html_paths": [],
@@ -185,7 +185,7 @@
           "network_assertion_content": {},
           "screenshot_command": "",
           "smartui_contents": {},
-          "generative_id": "141141dda5b64719b75baad6789439fe",
+          "generative_id": "19e171e3695844d08bddd5dfb6ddfc00",
           "plan_id": "",
           "generative_objective": "Go to {{global.base_url}}/acme . Click the vote button on the first request. Verify that button is now highlighted as voted and its accessible label ends with 'voted'.",
           "error_message": "",
@@ -196,7 +196,7 @@
           "reasoning": "Navigate to {{global.base_url}}/acme"
         },
         {
-          "instruction_id": "05413c70-f507-4701-80d8-d0a845800eca",
+          "instruction_id": "8bd55d6e-2172-47ad-834e-fa0bcc455084",
           "instruction_class": "driver_action",
           "module_id": "",
           "instruction": "Clicking the vote button on the first request",
@@ -207,12 +207,12 @@
           "classification_error": {},
           "operations": [
             {
-              "operation_id": "b1496540-9b51-4bf0-8295-791e8902c9e5",
-              "instruction_id": "05413c70-f507-4701-80d8-d0a845800eca",
+              "operation_id": "ad201c60-d1d9-4613-bbab-324d372e2d87",
+              "instruction_id": "8bd55d6e-2172-47ad-834e-fa0bcc455084",
               "instruction": "Clicking the vote button on the first request",
               "intent": "Clicking the vote button on the first request",
-              "operation_start": "2026-11-18T04:16:18.507266+00:00",
-              "operation_end": "2026-11-18T04:16:18.525Z",
+              "operation_start": "2026-11-18T05:15:21.003898+00:00",
+              "operation_end": "2026-11-18T05:15:21.125Z",
               "status": "success",
               "command": "CLICK",
               "name": "",
@@ -226,7 +226,7 @@
               "grounded_by": "",
               "error_message": "",
               "code_snippet": "",
-              "sub_instruction_obj": "{\"operation\":\"Clicking the vote button on the first request\",\"agent\":\"Vision Agent\",\"operation_dict\":{\"operation_type\":\"CLICK\"},\"reasoning\":\"PRIMARY: Click the vote button on the first request; role=button; text=\\\"13 votes, vote\\\" | HINTS: container=Requests list; position=first request row\",\"variable\":{},\"secrets\":{},\"params\":{}}",
+              "sub_instruction_obj": "{\"operation\":\"Clicking the vote button on the first request\",\"agent\":\"Vision Agent\",\"operation_dict\":{\"operation_type\":\"CLICK\"},\"reasoning\":\"PRIMARY: Click the vote button on the first request; role=button; text=\\\"12 votes, vote\\\" | HINTS: container=Requests list; position=first row beside Dark mode toggle\",\"variable\":{},\"secrets\":{},\"params\":{}}",
               "test_id": "",
               "test_version": "",
               "action": "",
@@ -237,7 +237,7 @@
               "update_time_stamp": "",
               "locator_variable": "",
               "locator_variable_name": "",
-              "image_url": "https://prodauteurartefacts.blob.core.windows.net/test-screenshots/test_screenshots/untagged_screenshot/b1496540-9b51-4bf0-8295-791e8902c9e5.webp",
+              "image_url": "https://prodauteurartefacts.blob.core.windows.net/test-screenshots/test_screenshots/untagged_screenshot/ad201c60-d1d9-4613-bbab-324d372e2d87.webp",
               "alternative_xpaths": [],
               "attribute": "",
               "value_description": "",
@@ -293,7 +293,7 @@
               "clicks_order_code": "se_js_ac",
               "selector": [
                 {
-                  "selector": "internal:role=button[name=\"13 votes, vote\"i]",
+                  "selector": "internal:role=button[name=\"12 votes, vote\"i]",
                   "score": 100,
                   "isXPath": false,
                   "type": "css"
@@ -338,12 +338,12 @@
               "api_data": {},
               "output_variables": {},
               "visual_context": {
-                "x": 1152,
-                "y": 328,
+                "x": 1144,
+                "y": 323,
                 "confidence": 0,
                 "bbox": {
-                  "x": 1129,
-                  "y": 301,
+                  "x": 1121,
+                  "y": 296,
                   "width": 46,
                   "height": 54
                 },
@@ -351,17 +351,17 @@
                 "viewport_width": 1920,
                 "viewport_height": 1080,
                 "scale_factor": null,
-                "raw_image_url": "https://prodauteurartefacts.blob.core.windows.net/test-screenshots/test_screenshots/untagged_screenshot/b1496540-9b51-4bf0-8295-791e8902c9e5.webp",
+                "raw_image_url": "https://prodauteurartefacts.blob.core.windows.net/test-screenshots/test_screenshots/untagged_screenshot/ad201c60-d1d9-4613-bbab-324d372e2d87.webp",
                 "raw_image_sas_url": "",
                 "annotated_image_url": "",
                 "annotated_image_sas_url": ""
               },
-              "reasoning": "PRIMARY: Click the vote button on the first request; role=button; text=\"13 votes, vote\" | HINTS: container=Requests list; position=first request row"
+              "reasoning": "PRIMARY: Click the vote button on the first request; role=button; text=\"12 votes, vote\" | HINTS: container=Requests list; position=first row beside Dark mode toggle"
             }
           ],
           "status": "success",
-          "start_timestamp": "2026-11-18T04:16:18.507266+00:00",
-          "end_timestamp": "2026-11-18T04:16:18.525Z",
+          "start_timestamp": "2026-11-18T05:15:21.003898+00:00",
+          "end_timestamp": "2026-11-18T05:15:21.125Z",
           "type": "agent_generated",
           "tags": [],
           "html_paths": [],
@@ -387,7 +387,7 @@
           "network_assertion_content": {},
           "screenshot_command": "",
           "smartui_contents": {},
-          "generative_id": "141141dda5b64719b75baad6789439fe",
+          "generative_id": "19e171e3695844d08bddd5dfb6ddfc00",
           "plan_id": "",
           "generative_objective": "Go to {{global.base_url}}/acme . Click the vote button on the first request. Verify that button is now highlighted as voted and its accessible label ends with 'voted'.",
           "error_message": "",
@@ -395,10 +395,10 @@
           "reason": "",
           "title": "",
           "used_variables": [],
-          "reasoning": "PRIMARY: Click the vote button on the first request; role=button; text=\"13 votes, vote\" | HINTS: container=Requests list; position=first request row"
+          "reasoning": "PRIMARY: Click the vote button on the first request; role=button; text=\"12 votes, vote\" | HINTS: container=Requests list; position=first row beside Dark mode toggle"
         },
         {
-          "instruction_id": "4c42dfa1-b7d2-4c94-94e4-88c74fca3deb",
+          "instruction_id": "96f9fdbb-ce05-4a5a-84b8-0e5c39720f5f",
           "instruction_class": "driver_action",
           "module_id": "",
           "instruction": "Checking whether the first request vote button is highlighted as voted",
@@ -409,11 +409,11 @@
           "classification_error": {},
           "operations": [
             {
-              "operation_id": "9b45d870-3afb-4185-baa5-751f302651e5",
-              "instruction_id": "4c42dfa1-b7d2-4c94-94e4-88c74fca3deb",
+              "operation_id": "8706ed2b-d612-41c8-8fba-98949ca9a877",
+              "instruction_id": "96f9fdbb-ce05-4a5a-84b8-0e5c39720f5f",
               "instruction": "Checking whether the first request vote button is highlighted as voted",
               "intent": "Checking whether the first request vote button is highlighted as voted",
-              "operation_start": "2026-11-18T04:16:31.548541+00:00",
+              "operation_start": "2026-11-18T05:15:34.833391+00:00",
               "operation_end": "",
               "status": "success",
               "command": "TEXTUAL_ANALYZER",
@@ -428,7 +428,7 @@
               "grounded_by": "",
               "error_message": "",
               "code_snippet": "",
-              "sub_instruction_obj": "{\"operation\":\"Checking whether the first request vote button is highlighted as voted\",\"agent\":\"Operation Agent\",\"operation_dict\":{\"operation_type\":\"TEXTUAL_ANALYZER\"},\"reasoning\":\"whether the vote button on the first request in the Requests list is highlighted as voted\",\"variable\":{},\"secrets\":{},\"params\":{},\"code_js\":\"el(20).getAttribute('aria-pressed') === 'true'\",\"wrapped_js\":\"(els) => {\\n  const __m = {20: 0};\\n  const el = (i) => els[__m[i]];\\n  const __v = (el(20).getAttribute('aria-pressed') === 'true');\\n  return (typeof __v === 'boolean' ? String(__v) : __v);\\n}\",\"locators\":[\"internal:role=button[name=\\\"votes, voted\\\"i]\"],\"operator\":\"equals\",\"transforms\":[],\"query\":\"whether the vote button on the first request in the Requests list is highlighted as voted\",\"expected_value\":\"true\",\"needs_unit_conversion\":false,\"condition\":\"The vote button on the first request is highlighted as voted.\"}",
+              "sub_instruction_obj": "{\"operation\":\"Checking whether the first request vote button is highlighted as voted\",\"agent\":\"Operation Agent\",\"operation_dict\":{\"operation_type\":\"TEXTUAL_ANALYZER\"},\"reasoning\":\"whether the vote button on the first request in the Requests list is highlighted as voted\",\"variable\":{},\"secrets\":{},\"params\":{},\"code_js\":\"el(22).getAttribute('aria-pressed') === 'true'\",\"wrapped_js\":\"(els) => {\\n  const __m = {22: 0};\\n  const el = (i) => els[__m[i]];\\n  const __v = (el(22).getAttribute('aria-pressed') === 'true');\\n  return (typeof __v === 'boolean' ? String(__v) : __v);\\n}\",\"locators\":[\"internal:role=button[name=\\\"votes, voted\\\"i]\"],\"operator\":\"equals\",\"transforms\":[],\"query\":\"whether the vote button on the first request in the Requests list is highlighted as voted\",\"expected_value\":\"true\",\"needs_unit_conversion\":false,\"condition\":\"The vote button on the first request is highlighted as voted.\"}",
               "test_id": "",
               "test_version": "",
               "action": "",
@@ -439,7 +439,7 @@
               "update_time_stamp": "",
               "locator_variable": "",
               "locator_variable_name": "",
-              "image_url": "https://prodauteurartefacts.blob.core.windows.net/test-screenshots/test_screenshots/untagged_screenshot/9b45d870-3afb-4185-baa5-751f302651e5.webp",
+              "image_url": "https://prodauteurartefacts.blob.core.windows.net/test-screenshots/test_screenshots/untagged_screenshot/8706ed2b-d612-41c8-8fba-98949ca9a877.webp",
               "alternative_xpaths": [],
               "attribute": "",
               "value_description": "",
@@ -539,7 +539,7 @@
             }
           ],
           "status": "success",
-          "start_timestamp": "2026-11-18T04:16:31.548541+00:00",
+          "start_timestamp": "2026-11-18T05:15:34.833391+00:00",
           "end_timestamp": "",
           "type": "agent_generated",
           "tags": [],
@@ -566,7 +566,7 @@
           "network_assertion_content": {},
           "screenshot_command": "",
           "smartui_contents": {},
-          "generative_id": "141141dda5b64719b75baad6789439fe",
+          "generative_id": "19e171e3695844d08bddd5dfb6ddfc00",
           "plan_id": "",
           "generative_objective": "Go to {{global.base_url}}/acme . Click the vote button on the first request. Verify that button is now highlighted as voted and its accessible label ends with 'voted'.",
           "error_message": "",
@@ -577,10 +577,10 @@
           "reasoning": "whether the vote button on the first request in the Requests list is highlighted as voted"
         },
         {
-          "instruction_id": "0bb1b042-5050-4520-9276-adcc1957db6b",
+          "instruction_id": "d1bc7b4d-6b20-447f-a438-e4e43b81211f",
           "instruction_class": "driver_action",
           "module_id": "",
-          "instruction": "Reading the first request vote button accessible label ending",
+          "instruction": "Checking the ending of the first request vote button accessible label",
           "command": "TEXTUAL_ANALYZER",
           "error": null,
           "parent_instruction_id": "",
@@ -588,11 +588,11 @@
           "classification_error": {},
           "operations": [
             {
-              "operation_id": "18e87659-833e-4334-8ad2-32decac2da2f",
-              "instruction_id": "0bb1b042-5050-4520-9276-adcc1957db6b",
-              "instruction": "Reading the first request vote button accessible label ending",
-              "intent": "Reading the first request vote button accessible label ending",
-              "operation_start": "2026-11-18T04:16:31.548905+00:00",
+              "operation_id": "d72cde57-2589-49b3-9d1c-476d12589ba6",
+              "instruction_id": "d1bc7b4d-6b20-447f-a438-e4e43b81211f",
+              "instruction": "Checking the ending of the first request vote button accessible label",
+              "intent": "Checking the ending of the first request vote button accessible label",
+              "operation_start": "2026-11-18T05:15:34.833665+00:00",
               "operation_end": "",
               "status": "success",
               "command": "TEXTUAL_ANALYZER",
@@ -607,7 +607,7 @@
               "grounded_by": "",
               "error_message": "",
               "code_snippet": "",
-              "sub_instruction_obj": "{\"operation\":\"Reading the first request vote button accessible label ending\",\"agent\":\"Operation Agent\",\"operation_dict\":{\"operation_type\":\"TEXTUAL_ANALYZER\"},\"reasoning\":\"the final word of the accessible label on the vote button for the first request in the Requests list\",\"variable\":{},\"secrets\":{},\"params\":{},\"code_js\":\"(el(20).getAttribute('aria-label') || '').trim().split(/\\\\s+/).pop()\",\"wrapped_js\":\"(els) => {\\n  const __m = {20: 0};\\n  const el = (i) => els[__m[i]];\\n  const __v = ((el(20).getAttribute('aria-label') || '').trim().split(/\\\\s+/).pop());\\n  return (typeof __v === 'boolean' ? String(__v) : __v);\\n}\",\"locators\":[\"internal:role=button[name=\\\"votes, voted\\\"i]\"],\"operator\":\"equals\",\"transforms\":[\"lowercase\"],\"query\":\"the final word of the accessible label on the vote button for the first request in the Requests list\",\"expected_value\":\"voted\",\"needs_unit_conversion\":false,\"condition\":\"The accessible label of the vote button on the first request ends with 'voted'.\"}",
+              "sub_instruction_obj": "{\"operation\":\"Checking the ending of the first request vote button accessible label\",\"agent\":\"Operation Agent\",\"operation_dict\":{\"operation_type\":\"TEXTUAL_ANALYZER\"},\"reasoning\":\"whether the accessible label of the vote button on the first request in the Requests list ends with voted\",\"variable\":{},\"secrets\":{},\"params\":{},\"code_js\":\"(el(22).getAttribute('aria-label') || el(22).getAttribute('title') || '').endsWith('voted')\",\"wrapped_js\":\"(els) => {\\n  const __m = {22: 0};\\n  const el = (i) => els[__m[i]];\\n  const __v = ((el(22).getAttribute('aria-label') || el(22).getAttribute('title') || '').endsWith('voted'));\\n  return (typeof __v === 'boolean' ? String(__v) : __v);\\n}\",\"locators\":[\"internal:role=button[name=\\\"votes, voted\\\"i]\"],\"operator\":\"equals\",\"transforms\":[],\"query\":\"whether the accessible label of the vote button on the first request in the Requests list ends with voted\",\"expected_value\":\"true\",\"needs_unit_conversion\":false,\"condition\":\"The accessible label of the vote button on the first request ends with 'voted'.\"}",
               "test_id": "",
               "test_version": "",
               "action": "",
@@ -618,7 +618,7 @@
               "update_time_stamp": "",
               "locator_variable": "",
               "locator_variable_name": "",
-              "image_url": "https://prodauteurartefacts.blob.core.windows.net/test-screenshots/test_screenshots/untagged_screenshot/18e87659-833e-4334-8ad2-32decac2da2f.webp",
+              "image_url": "https://prodauteurartefacts.blob.core.windows.net/test-screenshots/test_screenshots/untagged_screenshot/d72cde57-2589-49b3-9d1c-476d12589ba6.webp",
               "alternative_xpaths": [],
               "attribute": "",
               "value_description": "",
@@ -626,7 +626,7 @@
               "navigation_direction": "",
               "tagified_image_url": "",
               "query_variable_name": "first_request_vote_button_accessible_label",
-              "query_variable_value": "voted",
+              "query_variable_value": "true",
               "query_variable_type": "",
               "expected_value": "",
               "queried_value": "",
@@ -711,14 +711,14 @@
               "until_settle_ms": 0,
               "api_data": {},
               "output_variables": {
-                "first_request_vote_button_accessible_label": "voted"
+                "first_request_vote_button_accessible_label": "true"
               },
               "visual_context": null,
-              "reasoning": "the final word of the accessible label on the vote button for the first request in the Requests list"
+              "reasoning": "whether the accessible label of the vote button on the first request in the Requests list ends with voted"
             }
           ],
           "status": "success",
-          "start_timestamp": "2026-11-18T04:16:31.548905+00:00",
+          "start_timestamp": "2026-11-18T05:15:34.833665+00:00",
           "end_timestamp": "",
           "type": "agent_generated",
           "tags": [],
@@ -745,7 +745,7 @@
           "network_assertion_content": {},
           "screenshot_command": "",
           "smartui_contents": {},
-          "generative_id": "141141dda5b64719b75baad6789439fe",
+          "generative_id": "19e171e3695844d08bddd5dfb6ddfc00",
           "plan_id": "",
           "generative_objective": "Go to {{global.base_url}}/acme . Click the vote button on the first request. Verify that button is now highlighted as voted and its accessible label ends with 'voted'.",
           "error_message": "",
@@ -753,10 +753,10 @@
           "reason": "",
           "title": "",
           "used_variables": [],
-          "reasoning": "the final word of the accessible label on the vote button for the first request in the Requests list"
+          "reasoning": "whether the accessible label of the vote button on the first request in the Requests list ends with voted"
         },
         {
-          "instruction_id": "ef51a0c1-a288-4a09-a41a-1dc7788bd1cb",
+          "instruction_id": "a566e44b-983d-4a83-8049-d1405f9a0dca",
           "instruction_class": "non_driver_action",
           "module_id": "",
           "instruction": "Assertion check",
@@ -788,15 +788,13 @@
                       "description": "The accessible label of the vote button on the first request ends with 'voted'.",
                       "passed": true,
                       "operator": "equals",
-                      "transforms": [
-                        "lowercase"
-                      ],
+                      "transforms": [],
                       "json_path": null,
-                      "expected": "voted",
+                      "expected": "true",
                       "extracted_value": "{{first_request_vote_button_accessible_label}}",
                       "store_key": "first_request_vote_button_accessible_label",
                       "variable_refs": {
-                        "{{first_request_vote_button_accessible_label}}": "voted"
+                        "{{first_request_vote_button_accessible_label}}": "true"
                       }
                     }
                   ],
@@ -812,12 +810,10 @@
                     {
                       "description": "The accessible label of the vote button on the first request ends with 'voted'.",
                       "store_key": "first_request_vote_button_accessible_label",
-                      "expected_value": "voted",
+                      "expected_value": "true",
                       "extracted_value": "{{first_request_vote_button_accessible_label}}",
                       "operator": "equals",
-                      "transforms": [
-                        "lowercase"
-                      ]
+                      "transforms": []
                     }
                   ],
                   "composite_operator": "and",
@@ -838,11 +834,11 @@
           "classification_error": {},
           "operations": [
             {
-              "operation_id": "0068ff8f-a68e-432a-8056-f10d879eab14",
-              "instruction_id": "ef51a0c1-a288-4a09-a41a-1dc7788bd1cb",
+              "operation_id": "89228e26-b347-479a-9b26-c54e292d7d58",
+              "instruction_id": "a566e44b-983d-4a83-8049-d1405f9a0dca",
               "instruction": "Assertion check",
               "intent": "Assertion check",
-              "operation_start": "2026-11-18T04:16:32.142169+00:00",
+              "operation_start": "2026-11-18T05:15:35.410659+00:00",
               "operation_end": "",
               "status": "success",
               "command": "ASSERTION",
@@ -868,7 +864,7 @@
               "update_time_stamp": "",
               "locator_variable": "",
               "locator_variable_name": "",
-              "image_url": "https://prodauteurartefacts.blob.core.windows.net/test-screenshots/test_screenshots/untagged_screenshot/0068ff8f-a68e-432a-8056-f10d879eab14.webp",
+              "image_url": "https://prodauteurartefacts.blob.core.windows.net/test-screenshots/test_screenshots/untagged_screenshot/89228e26-b347-479a-9b26-c54e292d7d58.webp",
               "alternative_xpaths": [],
               "attribute": "",
               "value_description": "",
@@ -950,15 +946,13 @@
                     "description": "The accessible label of the vote button on the first request ends with 'voted'.",
                     "passed": true,
                     "operator": "equals",
-                    "transforms": [
-                      "lowercase"
-                    ],
+                    "transforms": [],
                     "json_path": null,
-                    "expected": "voted",
+                    "expected": "true",
                     "extracted_value": "{{first_request_vote_button_accessible_label}}",
                     "store_key": "first_request_vote_button_accessible_label",
                     "variable_refs": {
-                      "{{first_request_vote_button_accessible_label}}": "voted"
+                      "{{first_request_vote_button_accessible_label}}": "true"
                     }
                   }
                 ],
@@ -974,16 +968,14 @@
                   {
                     "description": "The accessible label of the vote button on the first request ends with 'voted'.",
                     "store_key": "first_request_vote_button_accessible_label",
-                    "expected_value": "voted",
+                    "expected_value": "true",
                     "extracted_value": "{{first_request_vote_button_accessible_label}}",
                     "operator": "equals",
-                    "transforms": [
-                      "lowercase"
-                    ]
+                    "transforms": []
                   }
                 ],
                 "composite_operator": "and",
-                "verification": "The vote button on the first request is highlighted as voted and its accessible label ends with 'voted'.",
+                "verification": "The vote button on the first request is highlighted as voted, and its accessible label ends with 'voted'.",
                 "claim": "the button is now highlighted as voted and its accessible label ends with 'voted'."
               },
               "assertion_tree": {
@@ -1008,15 +1000,13 @@
                     "description": "The accessible label of the vote button on the first request ends with 'voted'.",
                     "passed": true,
                     "operator": "equals",
-                    "transforms": [
-                      "lowercase"
-                    ],
+                    "transforms": [],
                     "json_path": null,
-                    "expected": "voted",
+                    "expected": "true",
                     "extracted_value": "{{first_request_vote_button_accessible_label}}",
                     "store_key": "first_request_vote_button_accessible_label",
                     "variable_refs": {
-                      "{{first_request_vote_button_accessible_label}}": "voted"
+                      "{{first_request_vote_button_accessible_label}}": "true"
                     }
                   }
                 ],
@@ -1024,7 +1014,7 @@
                 "passed": true,
                 "step": 4,
                 "is_final": true,
-                "verification": "The vote button on the first request is highlighted as voted and its accessible label ends with 'voted'.",
+                "verification": "The vote button on the first request is highlighted as voted, and its accessible label ends with 'voted'.",
                 "error_message": null,
                 "duration_ms": 0
               },
@@ -1066,7 +1056,7 @@
             }
           ],
           "status": "success",
-          "start_timestamp": "2026-11-18T04:16:32.142169+00:00",
+          "start_timestamp": "2026-11-18T05:15:35.410659+00:00",
           "end_timestamp": "",
           "type": "agent_generated",
           "tags": [],
@@ -1093,7 +1083,7 @@
           "network_assertion_content": {},
           "screenshot_command": "",
           "smartui_contents": {},
-          "generative_id": "141141dda5b64719b75baad6789439fe",
+          "generative_id": "19e171e3695844d08bddd5dfb6ddfc00",
           "plan_id": "",
           "generative_objective": "Go to {{global.base_url}}/acme . Click the vote button on the first request. Verify that button is now highlighted as voted and its accessible label ends with 'voted'.",
           "error_message": "",
@@ -1109,8 +1099,9 @@
       "result_code": null,
       "bifurcation_context": [],
       "approach_reason": [
-        "Clicked the vote button for the first request on the Acme requests page.",
-        "The first request is now marked as voted, with its vote button highlighted."
+        "You asked to vote for the first request.",
+        "Clicked the vote button for the first request.",
+        "The vote was recorded: the button is highlighted and marked as voted."
       ],
       "one_liner": null
     }
@@ -1118,7 +1109,7 @@
   "modules": [],
   "uploaded_files": [],
   "test_params": [],
-  "test_level_variables": "[{\"name\":\"first_request_vote_button_highlighted_voted\",\"value\":\"true\",\"value_type\":\"test_level\",\"variable_description\":\"ANALYZE result\"},{\"name\":\"first_request_vote_button_accessible_label\",\"value\":\"voted\",\"value_type\":\"test_level\",\"variable_description\":\"ANALYZE result\"}]",
+  "test_level_variables": "[{\"name\":\"first_request_vote_button_highlighted_voted\",\"value\":\"true\",\"value_type\":\"test_level\",\"variable_description\":\"ANALYZE result\"},{\"name\":\"first_request_vote_button_accessible_label\",\"value\":\"true\",\"value_type\":\"test_level\",\"variable_description\":\"ANALYZE result\"}]",
   "test_global_variables": [
     {
       "id": 623263,

@@ -1,42 +1,56 @@
+import { useSuspenseQuery } from '@tanstack/react-query'
 import { createFileRoute } from '@tanstack/react-router'
-import { listRuns } from '#/lib/fns'
-import { ago } from '#/lib/time'
-import { PageHead } from '../dashboard'
+import { ChevronRight, FlaskConical } from 'lucide-react'
+import { PageHeader } from '#/components/page-header'
+import { Button } from '#/components/ui/button'
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '#/components/ui/collapsible'
+import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from '#/components/ui/empty'
+import { RunReport, RunResult } from '#/features/runs/components/run-result'
+import { runsQuery } from '#/features/runs/runs.queries'
+import { timeAgo } from '#/lib/format'
 
 export const Route = createFileRoute('/$org/dashboard/runs')({
-  loader: ({ params }) => listRuns({ data: params.org }),
+  loader: ({ context, params }) => context.queryClient.query(runsQuery(params.org)),
   component: Runs,
 })
 
 function Runs() {
-  const runs = Route.useLoaderData()
   const { org } = Route.useParams()
+  const { data: runs } = useSuspenseQuery(runsQuery(org))
   const passed = runs.filter((r) => r.passed).length
+
   return (
     <>
-      <PageHead title="Kane runs">
-        <span className="text-[12px] text-muted tabular-nums">{runs.length} runs · {passed} passed · {runs.length - passed} failed</span>
-      </PageHead>
+      <PageHeader title="Kane runs">
+        <span className="text-xs text-muted-foreground tabular-nums">{runs.length} runs · {passed} passed · {runs.length - passed} failed</span>
+      </PageHeader>
       {runs.length === 0 ? (
-        <p className="px-6 py-10 text-[14px] text-muted">No Kane runs yet. Generate a loop token in Settings and run <code className="font-mono text-[13px]">bun run loop</code>.</p>
+        <Empty>
+          <EmptyHeader>
+            <EmptyMedia variant="icon"><FlaskConical /></EmptyMedia>
+            <EmptyTitle>No Kane runs yet</EmptyTitle>
+            <EmptyDescription>Generate a loop token in Settings and run <code>bun run loop</code>.</EmptyDescription>
+          </EmptyHeader>
+        </Empty>
       ) : (
-        <ul className="m-0 list-none p-0">
+        <ul>
           {runs.map((r) => (
-            <li key={r.id} data-testid="run-row" className="border-b border-line">
-              <details className="group">
-                <summary className="flex h-[52px] cursor-pointer list-none items-center gap-3 px-6 hover:bg-surface/60">
-                  <span className={`size-2 shrink-0 rounded-full ${r.passed ? 'bg-shipped' : 'bg-planned'}`} />
-                  <span className="w-14 text-[12px] font-medium">{r.passed ? 'Passed' : 'Failed'}</span>
-                  <span className="min-w-0 flex-1 truncate text-[14px]">{r.title}</span>
-                  <span className="text-[12px] text-faint tabular-nums">{ago(r.created_at)}</span>
-                  <svg viewBox="0 0 12 12" className="size-3 text-faint transition-transform group-open:rotate-90" aria-hidden><path d="M4.5 3 7.5 6l-3 3" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></svg>
-                </summary>
-                <div className="px-6 pb-4">
-                  <pre className="m-0 overflow-x-auto rounded-lg bg-surface p-3 font-mono text-[12px] leading-5 whitespace-pre-wrap text-muted">{r.summary}</pre>
-                  <a href={`/${org}/posts/${r.post_id}`} target="_blank" rel="noreferrer" className="mt-2 inline-block text-[12px] text-link hover:underline">Open post</a>
-                </div>
-              </details>
-            </li>
+            <Collapsible key={r.id} asChild>
+              <li data-testid="run-row" className="group border-b">
+                <CollapsibleTrigger className="flex h-[52px] w-full items-center gap-3 px-6 text-left hover:bg-card/60">
+                  <RunResult passed={r.passed} className="w-20" />
+                  <span className="min-w-0 flex-1 truncate text-sm">{r.title}</span>
+                  <span className="text-xs text-faint">{timeAgo(r.createdAt)}</span>
+                  <ChevronRight className="size-4 text-faint transition-transform group-data-[state=open]:rotate-90" />
+                </CollapsibleTrigger>
+                <CollapsibleContent className="px-6 pb-4">
+                  <RunReport summary={r.summary} />
+                  <Button variant="link" size="sm" className="mt-1 px-0 text-brand" asChild>
+                    <a href={`/${org}/posts/${r.postId}`} target="_blank" rel="noreferrer">Open post</a>
+                  </Button>
+                </CollapsibleContent>
+              </li>
+            </Collapsible>
           ))}
         </ul>
       )}
