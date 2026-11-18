@@ -48,7 +48,8 @@ async function build(post: Post, failure?: string) {
   await $`claude -p ${prompt} --permission-mode acceptEdits --allowedTools "Bash(bun run build) Bash(bun run build:*) Read Edit Write Glob Grep"`
 }
 
-type KaneResult = { passed: boolean; summary: string }
+// kaneFault: Kane blamed its own automation, not the app, so rebuilding would "fix" working code
+type KaneResult = { passed: boolean; summary: string; kaneFault: boolean }
 
 // Kane --agent prints NDJSON; the last line is {"type":"run_end","status":"passed"|"failed",summary,reason,...}
 async function verify(objective: string): Promise<KaneResult> {
@@ -56,13 +57,15 @@ async function verify(objective: string): Promise<KaneResult> {
   const events = out.split('\n').flatMap((l): any[] => { try { return [JSON.parse(l)] } catch { return [] } })
   const end = events.find((e: any) => e.type === 'run_end')
   const passed = end?.status === 'passed'
+  const kaneFault = !passed && end?.verdict?.family === 'automation_bug'
   const summary = [
     `Objective: ${objective}`,
     `Kane: ${end?.status ?? 'no run_end'}${end?.reason ? ` (${end.reason})` : ''}`,
     end?.summary ?? out.slice(-1500),
-  ].join('\n')
+    !passed && end?.verdict?.root_cause && `Root cause (${end.verdict.family}): ${end.verdict.root_cause}`,
+  ].filter(Boolean).join('\n')
   await Bun.write(`.hearloop/kane-${Date.now()}.ndjson`, out)
-  return { passed, summary }
+  return { passed, summary, kaneFault }
 }
 
 const post = await nextPost()
@@ -73,11 +76,14 @@ if (!post) {
 console.log(`▶ #${post.id} ${post.title} (${post.votes} votes)`)
 
 let failure: string | undefined
+let rebuild = true
 for (let attempt = 1; attempt <= MAX_TRIES; attempt++) {
   await api(`/posts/${post.id}/status`, { status: 'building' })
-  console.log(`  attempt ${attempt}: agent building…`)
-  await build(post, failure)
-  if (deploy) await $`bun run deploy`
+  if (rebuild) {
+    console.log(`  attempt ${attempt}: agent building…`)
+    await build(post, failure)
+    if (deploy) await $`bun run deploy`
+  } else console.log(`  attempt ${attempt}: re-running Kane on the same build`)
   const objective = (await Bun.file('.hearloop/kane-objective.txt').text()).trim()
   console.log(`  Kane verifying: ${objective}`)
   const r = await verify(objective)
@@ -88,8 +94,12 @@ for (let attempt = 1; attempt <= MAX_TRIES; attempt++) {
     console.log(`  ✓ shipped. Changelog published.`)
     process.exit(0)
   }
-  console.log(`  ✗ Kane failed. Feeding the report back to the agent.`)
-  failure = r.summary
+  rebuild = !r.kaneFault
+  if (r.kaneFault) console.log(`  ✗ Kane blamed its own automation, not the app. Retrying the test.`)
+  else {
+    console.log(`  ✗ Kane failed. Feeding the report back to the agent.`)
+    failure = r.summary
+  }
 }
 console.log(`Gave up after ${MAX_TRIES} attempts. Post is back in planned with every Kane report attached.`)
 process.exit(1)

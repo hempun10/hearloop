@@ -18,7 +18,7 @@
 		{
 			"binding": "DB",
 			"database_name": "hearloop-v2",
-			"database_id": "local",
+			"database_id": "6d739329-58a2-427a-bc6b-4a6cf7503b21",
 			"migrations_dir": "migrations"
 		}
 	]
