@@ -10,7 +10,8 @@ const [cmd = 'run', which = 'all'] = process.argv.slice(2)
 // overrides {{base_url}} from .testmuai/variables when set
 const VARS = process.env.BASE_URL ? ['--variables', JSON.stringify({ base_url: { value: process.env.BASE_URL } })] : []
 process.env.KANE_CLI_USER_AGENT = 'claude-code'
-process.env.KANE_CLI_CHROME_PATH ??= '/Applications/Helium.app/Contents/MacOS/Helium'
+// ||= not ??=: a shell can export it empty, and Kane then can't find the browser
+process.env.KANE_CLI_CHROME_PATH ||= '/Applications/Helium.app/Contents/MacOS/Helium'
 
 const areas = (which === 'all' ? Object.keys(FOLDERS) : [which]) as Area[]
 if (!areas.every((a) => a in FOLDERS)) throw new Error(`unknown area; use one of: ${Object.keys(FOLDERS).join(', ')}, all`)
@@ -57,13 +58,18 @@ try {
     } else {
       const files = tests.map((t) => `${dir}/${t.slug}_test.md`).filter(existsSync)
       if (!files.length) { console.log('  nothing recorded yet'); continue }
-      const out = await $`kane-cli testrun run ${files} --agent --headless < /dev/null`.nothrow().text()
-      const done = events(out).find((e) => e.type === 'testrun_done')
-      for (const m of events(out).filter((e) => e.type === 'testrun_member_end')) {
+      const run = async (paths: string[]) => events(await $`kane-cli testrun run ${paths} --agent --headless < /dev/null`.nothrow().text())
+      let ev = await run(files)
+      // a batch may hold only one Test Manager project's tests; runs recorded later can land in another, so run each group
+      const mismatch = ev.find((e) => e.code === 'PROJECT_MISMATCH')
+      if (mismatch) { ev = []; for (const p of mismatch.projects) ev.push(...await run(p.tests)) }
+      const dones = ev.filter((e) => e.type === 'testrun_done')
+      for (const m of ev.filter((e) => e.type === 'testrun_member_end')) {
         console.log(`  ${m.status === 'passed' ? '✓' : '✗'} ${String(m.path).split('/').pop()}  ${m.duration_s}s${m.failure ? `  — ${m.failure.message}` : ''}`)
       }
-      console.log(`  ${done?.overall_status ?? 'no result'}`)
-      if (done?.overall_status !== 'passed') failed++
+      const ok = dones.length > 0 && dones.every((d) => d.overall_status === 'passed')
+      console.log(`  ${dones.length ? (ok ? 'passed' : 'failed') : 'no result'}`)
+      if (!ok) failed++
     }
   }
 } finally {

@@ -4,6 +4,7 @@ const HINTS = [
   [['j', 'k'], 'move'],
   [['v'], 'vote'],
   [['enter'], 'open'],
+  [['esc'], 'back'],
   [['c'], 'new post'],
 ] as const
 

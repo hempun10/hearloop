@@ -5,5 +5,15 @@
   "project_id": "01M7S4DG4PE128S4KT7FAECK73",
   "folder_id": "01M7SCZZ4PTY0XA7HXMZFYZA31",
   "org_id": "3436657",
-  "session_name": "board_keyboard_nav"
+  "session_name": "board_keyboard_nav",
+  "executions": [
+    {
+      "execution_id": "6404eb92-34d0-4f1c-8013-3f284ae21b5d",
+      "run_kind": "replay",
+      "status": "passed",
+      "valid": true,
+      "uploaded": true,
+      "at": "2026-11-20T01:53:49.191Z"
+    }
+  ]
 }

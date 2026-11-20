@@ -1,6 +1,7 @@
 import { useSuspenseQuery } from '@tanstack/react-query'
-import { Link, createFileRoute, notFound } from '@tanstack/react-router'
+import { Link, createFileRoute, notFound, useNavigate } from '@tanstack/react-router'
 import { ArrowLeft } from 'lucide-react'
+import { useHotkeys } from 'react-hotkeys-hook'
 import { StatusBadge } from '#/features/posts/components/status-badge'
 import { StatusTimeline } from '#/features/posts/components/status-timeline'
 import { VoteButton } from '#/features/posts/components/vote-button'
@@ -19,13 +20,17 @@ export const Route = createFileRoute('/$org/_public/posts/$id')({
 function PostPage() {
   const { org, id } = Route.useParams()
   const { data } = useSuspenseQuery(postQuery(org, Number(id)))
+  const navigate = useNavigate()
+  const backToBoard = () => navigate({ to: '/$org', params: { org } })
+  // Esc does what the Board link does (react-hotkeys-hook ignores it while typing in a field)
+  useHotkeys('escape', backToBoard, [org])
   if (!data) return null
   const { post, runs } = data
 
   return (
     <main className="mx-auto flex max-w-5xl flex-col gap-12 px-4 pt-10 md:flex-row md:px-0">
       <section className="min-w-0 flex-1 md:max-w-[720px]">
-        <Link to="/$org" params={{ org }} className="inline-flex items-center gap-1 text-[13px] text-muted-foreground hover:text-foreground">
+        <Link to="/$org" params={{ org }} onClick={(e) => { e.preventDefault(); backToBoard() }} className="inline-flex items-center gap-1 text-[13px] text-muted-foreground hover:text-foreground">
           <ArrowLeft className="size-3.5" /> Board
         </Link>
         <div className="mt-5 flex items-start gap-4">
