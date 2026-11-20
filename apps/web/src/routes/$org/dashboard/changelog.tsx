@@ -36,7 +36,7 @@ function DashboardChangelog() {
       {entries.length === 0 ? (
         <div className="flex flex-col items-center gap-3 px-6 py-24 text-center">
           <p className="text-[15px] font-semibold">Nothing shipped yet</p>
-          <p className="max-w-sm text-sm text-muted-foreground">Entries are written by the agent and published only when Kane CLI passes.</p>
+          <p className="max-w-sm text-sm text-muted-foreground">An entry appears when a request ships. Ones a Kane run shipped are marked Verified with Kane CLI.</p>
         </div>
       ) : (
         <ul>
@@ -44,7 +44,9 @@ function DashboardChangelog() {
             <li key={e.id} className="group flex h-[52px] shrink-0 items-center gap-3.5 border-b px-5 hover:bg-card/60">
               <CircleCheck className="size-5 shrink-0 fill-status-shipped text-background" />
               <span className="min-w-0 truncate text-[16px] font-medium">{e.title}</span>
-              <span className="hidden shrink-0 rounded-md bg-status-shipped/15 px-2 py-0.5 text-[12px] font-medium text-status-shipped sm:inline">Verified with Kane CLI</span>
+              {e.verified
+                ? <span className="hidden shrink-0 rounded-md bg-status-shipped/15 px-2 py-0.5 text-[12px] font-medium text-status-shipped sm:inline">Verified with Kane CLI</span>
+                : <span className="hidden shrink-0 rounded-md bg-secondary px-2 py-0.5 text-[12px] font-medium text-muted-foreground sm:inline">Shipped by hand</span>}
               <span className="flex-1" />
               <time className="text-[12px] text-faint tabular-nums" title={longDate(e.createdAt)}>{timeAgo(e.createdAt)}</time>
               <AlertDialog>

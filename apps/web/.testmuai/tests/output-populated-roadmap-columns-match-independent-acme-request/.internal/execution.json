@@ -1,0 +1,183 @@
+{
+  "test_id": "eea6a404-54e3-4671-a8ea-0de7623f3656",
+  "version": "v4",
+  "auto_heal_version": "AH2",
+  "session_id": "4eb8f30a-4abc-44d0-9252-87bed238ddc2",
+  "org_id": "3436657",
+  "user_id": "3615379",
+  "url": "",
+  "start_timestamp": "2026-11-20T04:59:38.727Z",
+  "end_timestamp": "2026-11-20T05:00:00.095Z",
+  "status": "error",
+  "commit_id": "4eb8f30a-4abc-44d0-9252-87bed238ddc2",
+  "instructions": [],
+  "modules": [],
+  "uploaded_files": [],
+  "test_params": [],
+  "test_level_variables": "[]",
+  "test_global_variables": [
+    {
+      "id": 648465,
+      "name": "nonmember_email",
+      "value": "nonmember@hearloop.test",
+      "session_value": "nonmember@hearloop.test",
+      "is_persist": false,
+      "environment_id": 0,
+      "environment_name": "No Env"
+    },
+    {
+      "id": 648466,
+      "name": "fresh_board_name",
+      "value": "Kane Board 6215fb",
+      "session_value": "Kane Board 6215fb",
+      "is_persist": false,
+      "environment_id": 0,
+      "environment_name": "No Env"
+    },
+    {
+      "id": 648467,
+      "name": "post_title",
+      "value": "Kane check request",
+      "session_value": "Kane check request",
+      "is_persist": false,
+      "environment_id": 0,
+      "environment_name": "No Env"
+    },
+    {
+      "id": 648468,
+      "name": "branding_logo_url",
+      "value": "https://avatars.githubusercontent.com/u/9919?v=4",
+      "session_value": "https://avatars.githubusercontent.com/u/9919?v=4",
+      "is_persist": false,
+      "environment_id": 0,
+      "environment_name": "No Env"
+    },
+    {
+      "id": 648469,
+      "name": "unmatched_title",
+      "value": "zzqxnomatch",
+      "session_value": "zzqxnomatch",
+      "is_persist": false,
+      "environment_id": 0,
+      "environment_name": "No Env"
+    },
+    {
+      "id": 648470,
+      "name": "other_status_title",
+      "value": "Export posts to CSV",
+      "session_value": "Export posts to CSV",
+      "is_persist": false,
+      "environment_id": 0,
+      "environment_name": "No Env"
+    },
+    {
+      "id": 648471,
+      "name": "long_word_title",
+      "value": "Supercalifragilisticexpialidociousintegrationwitheverythingplease",
+      "session_value": "Supercalifragilisticexpialidociousintegrationwitheverythingplease",
+      "is_persist": false,
+      "environment_id": 0,
+      "environment_name": "No Env"
+    },
+    {
+      "id": 648472,
+      "name": "kane_run_inventory",
+      "value": "Two Acme runs, newest first: 'Search the board' passed, 'Dark mode toggle' failed",
+      "session_value": "Two Acme runs, newest first: 'Search the board' passed, 'Dark mode toggle' failed",
+      "is_persist": false,
+      "environment_id": 0,
+      "environment_name": "No Env"
+    },
+    {
+      "id": 648473,
+      "name": "foreign_board_run_id",
+      "value": "the failed Kane run for 'Globex secret feature' on the Globex board",
+      "session_value": "the failed Kane run for 'Globex secret feature' on the Globex board",
+      "is_persist": false,
+      "environment_id": 0,
+      "environment_name": "No Env"
+    },
+    {
+      "id": 648474,
+      "name": "kane_run_id",
+      "value": "the passed Kane run for 'Search the board'",
+      "session_value": "the passed Kane run for 'Search the board'",
+      "is_persist": false,
+      "environment_id": 0,
+      "environment_name": "No Env"
+    },
+    {
+      "id": 648475,
+      "name": "kane_request_title",
+      "value": "Search the board",
+      "session_value": "Search the board",
+      "is_persist": false,
+      "environment_id": 0,
+      "environment_name": "No Env"
+    },
+    {
+      "id": 648476,
+      "name": "loop_api_probe_url",
+      "value": "http://localhost:3000/api/acme/posts",
+      "session_value": "http://localhost:3000/api/acme/posts",
+      "is_persist": false,
+      "environment_id": 0,
+      "environment_name": "No Env"
+    },
+    {
+      "id": 648477,
+      "name": "stale_changelog_title",
+      "value": "Search the board",
+      "session_value": "Search the board",
+      "is_persist": false,
+      "environment_id": 0,
+      "environment_name": "No Env"
+    },
+    {
+      "id": 623263,
+      "name": "e2e_email",
+      "value": "e2e@hearloop.test",
+      "session_value": "e2e@hearloop.test",
+      "is_persist": false,
+      "environment_id": 0,
+      "environment_name": "No Env"
+    },
+    {
+      "id": 623294,
+      "name": "base_url",
+      "value": "http://localhost:3000",
+      "session_value": "http://localhost:3000",
+      "is_persist": false,
+      "environment_id": 0,
+      "environment_name": "No Env"
+    }
+  ],
+  "max_network_wait": 0,
+  "wait_buffer": 0,
+  "network_throttle": {},
+  "secrets": [
+    {
+      "key_name": "nonmember_password",
+      "scope": "user"
+    },
+    {
+      "key_name": "e2e_password",
+      "scope": "user"
+    },
+    {
+      "key_name": "mcp_authorize_url",
+      "scope": "user"
+    },
+    {
+      "key_name": "mcp_deny_url",
+      "scope": "user"
+    }
+  ],
+  "totp": [],
+  "environment_id": 0,
+  "environment": "",
+  "mobile_browser": false,
+  "native_popups": [],
+  "smartui": {},
+  "module_index": 0
+}

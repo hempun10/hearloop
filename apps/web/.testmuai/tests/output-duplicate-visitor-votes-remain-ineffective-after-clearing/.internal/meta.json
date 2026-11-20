@@ -1,0 +1,18 @@
+{
+  "test_id": "077d21b6-c0b6-4e56-9e0c-14024ed644a8",
+  "project_id": "01M7S4DG4PE128S4KT7FAECK73",
+  "folder_id": "01M7SCZZ4PTY0XA7HXMZFYZA31",
+  "org_id": "3436657",
+  "session_name": "duplicate-visitor-votes-remain-ineffective-after-clearing",
+  "commit_id": "6891de2c-2277-4bc8-b517-50780d6327af",
+  "testcase_id": "01M7VKF1HF8ABXT4VHAW6M657R",
+  "executions": [
+    {
+      "execution_id": "21b6f07c-8d22-441c-ad4e-2cbc8c978e5e",
+      "run_kind": "author",
+      "status": "failed",
+      "valid": true,
+      "at": "2026-11-20T04:33:01.868Z"
+    }
+  ]
+}

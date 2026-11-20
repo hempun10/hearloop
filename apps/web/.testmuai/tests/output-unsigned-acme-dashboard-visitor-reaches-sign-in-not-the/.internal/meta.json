@@ -1,0 +1,18 @@
+{
+  "test_id": "338e3f37-d402-4b79-866d-fe8960389ec0",
+  "project_id": "01M7S4DG4PE128S4KT7FAECK73",
+  "folder_id": "01M7SCZZ4PTY0XA7HXMZFYZA31",
+  "org_id": "3436657",
+  "session_name": "unsigned-acme-dashboard-visitor-reaches-sign-in-not-the",
+  "commit_id": "484b6f12-ee66-46fd-aa85-7c6463e40f62",
+  "testcase_id": "01M7VNTNW8NGX3HD8H1JFPS56J",
+  "executions": [
+    {
+      "execution_id": "15013cbf-dba9-4690-bb8f-607d0f876065",
+      "run_kind": "author",
+      "status": "failed",
+      "valid": true,
+      "at": "2026-11-20T05:11:40.712Z"
+    }
+  ]
+}

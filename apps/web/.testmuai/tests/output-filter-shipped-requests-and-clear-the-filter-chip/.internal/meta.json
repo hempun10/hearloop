@@ -1,0 +1,18 @@
+{
+  "test_id": "bab9d830-1849-4818-a462-99fe264cdf30",
+  "project_id": "01M7S4DG4PE128S4KT7FAECK73",
+  "folder_id": "01M7SCZZ4PTY0XA7HXMZFYZA31",
+  "org_id": "3436657",
+  "session_name": "filter-shipped-requests-and-clear-the-filter-chip",
+  "commit_id": "f883e8cd-1537-4a9f-bceb-37efaa8b9ca3",
+  "testcase_id": "01M7VKSTTNN9XTN4ERZ9GBSP73",
+  "executions": [
+    {
+      "execution_id": "75dc63aa-3f08-45c0-b0d1-1c8b3b564d60",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-20T04:37:33.909Z"
+    }
+  ]
+}

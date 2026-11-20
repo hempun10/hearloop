@@ -1,6 +1,6 @@
 import { and, desc, eq, inArray, isNull, lt, or, sql } from 'drizzle-orm'
 import { db } from '#/db/client.server'
-import { changelog, posts, runs, type PostStatus } from '#/db/schema'
+import { changelog, postVotes, posts, runs, type PostStatus } from '#/db/schema'
 import type { Actor } from '#/features/tokens/tokens.server'
 
 /** How long a loop's claim lasts without a renewal; the CLI renews every minute. */
@@ -31,18 +31,28 @@ export async function insertPost(orgId: number, title: string, body: string) {
   return post
 }
 
-export async function addVote(id: number) {
-  const [row] = await db
-    .update(posts)
-    .set({ votes: sql`${posts.votes} + 1` })
-    .where(eq(posts.id, id))
-    .returning({ votes: posts.votes })
+/** Counts one vote per voter; a repeat returns the current count unchanged. */
+export async function addVote(id: number, voter: string) {
+  const post = await db.query.posts.findFirst({ where: eq(posts.id, id), columns: { votes: true } })
+  if (!post) return null
+  const [fresh] = await db.insert(postVotes).values({ postId: id, voter }).onConflictDoNothing().returning({ postId: postVotes.postId })
+  if (!fresh) return { votes: post.votes }
+  const [row] = await db.update(posts).set({ votes: sql`${posts.votes} + 1` }).where(eq(posts.id, id)).returning({ votes: posts.votes })
   return row ?? null
 }
 
-/** A member moving a post by hand also drops any loop's claim on it. */
+/**
+ * A member moving a post by hand. It drops any loop's claim, and keeps the public changelog honest:
+ * shipping by hand publishes an entry without the Kane label; leaving Shipped takes the entry down.
+ */
 export async function updateStatus(orgId: number, id: number, status: PostStatus) {
-  const [post] = await db.update(posts).set({ status, ...noClaim }).where(and(eq(posts.id, id), eq(posts.orgId, orgId))).returning()
+  const before = await db.query.posts.findFirst({ where: and(eq(posts.id, id), eq(posts.orgId, orgId)) })
+  if (!before) return null
+  const move = db.update(posts).set({ status, ...noClaim }).where(eq(posts.id, id)).returning()
+  const [[post]] = before.status === status ? await db.batch([move])
+    : status === 'shipped' ? await db.batch([move, db.insert(changelog).values({ postId: id, title: before.title, body: before.body, verified: false })])
+    : before.status === 'shipped' ? await db.batch([move, db.delete(changelog).where(eq(changelog.postId, id))])
+    : await db.batch([move])
   return post ?? null
 }
 
@@ -86,6 +96,7 @@ export async function deletePost(orgId: number, id: number) {
   await db.batch([
     db.delete(runs).where(eq(runs.postId, id)),
     db.delete(changelog).where(eq(changelog.postId, id)),
+    db.delete(postVotes).where(eq(postVotes.postId, id)),
     db.delete(posts).where(eq(posts.id, id)),
   ])
   return true

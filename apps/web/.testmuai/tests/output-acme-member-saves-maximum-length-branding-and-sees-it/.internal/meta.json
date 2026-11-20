@@ -1,0 +1,18 @@
+{
+  "test_id": "9c805217-0b44-49bb-8ff2-8fbfd8f4c538",
+  "project_id": "01M7S4DG4PE128S4KT7FAECK73",
+  "folder_id": "01M7SCZZ4PTY0XA7HXMZFYZA31",
+  "org_id": "3436657",
+  "session_name": "acme-member-saves-maximum-length-branding-and-sees-it",
+  "commit_id": "9d29d2b3-4323-4bb8-afe0-f0537fae2feb",
+  "testcase_id": "01M7VH9RCYQY3TYZXXJ5RR9PVR",
+  "executions": [
+    {
+      "execution_id": "84b3c92f-ee9c-46e0-880d-a8d12b7a139e",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-20T03:59:26.777Z"
+    }
+  ]
+}

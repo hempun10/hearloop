@@ -249,8 +249,17 @@ export const changelog = sqliteTable('changelog', {
   postId: integer().notNull().references(() => posts.id),
   title: text().notNull(),
   body: text().notNull().default(''),
+  // true when a passing Kane run shipped it; false when a member moved it to Shipped by hand
+  verified: integer({ mode: 'boolean' }).notNull().default(true),
   createdAt: createdAt(),
 })
+
+// one vote per voter per post: 'u:<user id>' when signed in, 'v:<cookie id>' for visitors
+export const postVotes = sqliteTable('post_votes', {
+  postId: integer().notNull().references(() => posts.id),
+  voter: text().notNull(),
+  createdAt: createdAt(),
+}, (t) => [primaryKey({ columns: [t.postId, t.voter] })])
 
 export type Org = typeof orgs.$inferSelect
 export type Post = typeof posts.$inferSelect

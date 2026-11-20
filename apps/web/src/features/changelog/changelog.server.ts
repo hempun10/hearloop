@@ -4,7 +4,7 @@ import { changelog, posts } from '#/db/schema'
 
 export function listChangelog(orgId: number, limit = 200) {
   return db
-    .select({ id: changelog.id, postId: changelog.postId, title: changelog.title, body: changelog.body, createdAt: changelog.createdAt })
+    .select({ id: changelog.id, postId: changelog.postId, title: changelog.title, body: changelog.body, verified: changelog.verified, createdAt: changelog.createdAt })
     .from(changelog)
     .innerJoin(posts, eq(posts.id, changelog.postId))
     .where(eq(posts.orgId, orgId))

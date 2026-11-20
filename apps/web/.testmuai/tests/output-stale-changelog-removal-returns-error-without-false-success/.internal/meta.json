@@ -1,0 +1,18 @@
+{
+  "test_id": "a852828f-7e5a-4717-91cc-acf4535004fd",
+  "project_id": "01M7S4DG4PE128S4KT7FAECK73",
+  "folder_id": "01M7SCZZ4PTY0XA7HXMZFYZA31",
+  "org_id": "3436657",
+  "session_name": "stale-changelog-removal-returns-error-without-false-success",
+  "commit_id": "424ddc12-5757-49bc-b145-fbeede3e42bf",
+  "testcase_id": "01M7VNH1E1CCMCGHZD2PQ9BEET",
+  "executions": [
+    {
+      "execution_id": "3985c747-b46f-495b-9227-9dd091120d7b",
+      "run_kind": "author",
+      "status": "failed",
+      "valid": true,
+      "at": "2026-11-20T05:08:20.644Z"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "test_id": "9e0e93ff-55a6-449e-a315-177fb14da1d2",
+  "project_id": "01M7S4DG4PE128S4KT7FAECK73",
+  "folder_id": "01M7SCZZ4PTY0XA7HXMZFYZA31",
+  "org_id": "3436657",
+  "session_name": "acme-branding-rejects-a-non-hex-colour-without-saving",
+  "commit_id": "bc99f4d8-c241-41a0-9973-a6eef312f954",
+  "testcase_id": "01M7VG77WF7AZYM7BRJV2JDP2W",
+  "executions": [
+    {
+      "execution_id": "c18e3f28-b58a-4d41-89df-da535c53e73b",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-20T03:35:44.539Z"
+    }
+  ]
+}

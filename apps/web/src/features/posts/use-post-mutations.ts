@@ -38,7 +38,10 @@ export function useSetPostStatus(org: string) {
       return { undo: patchPostInCache(qc, org, id, (p) => ({ ...p, status })) }
     },
     onError: (e, _v, ctx) => { ctx?.undo(); errorToast(e) },
-    onSettled: () => qc.invalidateQueries({ queryKey: postKeys.all(org) }),
+    onSettled: () => {
+      qc.invalidateQueries({ queryKey: postKeys.all(org) })
+      qc.invalidateQueries({ queryKey: ['changelog', org] }) // shipping or un-shipping adds or removes an entry
+    },
   })
 }
 

@@ -1,0 +1,18 @@
+{
+  "test_id": "9d241916-c234-4054-9a5a-57b377616456",
+  "project_id": "01M7S4DG4PE128S4KT7FAECK73",
+  "folder_id": "01M7SCZZ4PTY0XA7HXMZFYZA31",
+  "org_id": "3436657",
+  "session_name": "known-other-status-request-is-excluded-from-the-wrong",
+  "commit_id": "49ca9d8f-f81a-48fe-861b-a43c624d171c",
+  "testcase_id": "01M7VME789BSYF4JN40DS85TBQ",
+  "executions": [
+    {
+      "execution_id": "b4cb19c4-8996-4782-9550-b1a3d90e7b7b",
+      "run_kind": "author",
+      "status": "failed",
+      "valid": true,
+      "at": "2026-11-20T04:49:14.947Z"
+    }
+  ]
+}

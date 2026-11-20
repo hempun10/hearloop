@@ -3,16 +3,17 @@ import { ChevronUp, GripVertical } from 'lucide-react'
 import type { Post } from '#/db/schema'
 import { cn } from '@hearloop/ui/lib/utils'
 import { POST_STATUSES, STATUS_LABEL, type PostStatus } from '../status'
-import { useSetPostStatus } from '../use-post-mutations'
+import { useMovePost } from '../use-move-post'
 import { StatusIcon } from './status-icon'
 import { StatusSelect } from './status-select'
 
 /** Drag cards between status columns; each card also has a status dropdown for keyboard and touch users. */
 export function RoadmapBoard({ org, posts }: { org: string; posts: Post[] }) {
-  const setStatus = useSetPostStatus(org)
+  const { move: movePost, dialog } = useMovePost(org)
   const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 4 } }), useSensor(KeyboardSensor))
   const move = (id: number, status: PostStatus) => {
-    if (posts.find((p) => p.id === id)?.status !== status) setStatus.mutate({ id, status })
+    const post = posts.find((p) => p.id === id)
+    if (post) movePost(post, status)
   }
   const onDragEnd = ({ active, over }: DragEndEvent) => {
     if (over) move(Number(active.id), over.id as PostStatus)
@@ -25,6 +26,7 @@ export function RoadmapBoard({ org, posts }: { org: string; posts: Post[] }) {
           <Column key={status} status={status} posts={posts.filter((p) => p.status === status)} onMove={move} />
         ))}
       </div>
+      {dialog}
     </DndContext>
   )
 }

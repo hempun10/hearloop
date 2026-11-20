@@ -1,0 +1,18 @@
+{
+  "test_id": "14bfd9cc-9c28-4e93-91b8-9288d1b11841",
+  "project_id": "01M7S4DG4PE128S4KT7FAECK73",
+  "folder_id": "01M7SCZZ4PTY0XA7HXMZFYZA31",
+  "org_id": "3436657",
+  "session_name": "phone-sized-acme-dashboard-menu-opens-and-closes-on-page",
+  "commit_id": "040cf4f6-0764-469f-a183-4041f16f58ba",
+  "testcase_id": "01M7VN2B0CXEEA4CQ8MD7AXC82",
+  "executions": [
+    {
+      "execution_id": "e020fcea-a132-44f2-b501-e45af48afb5a",
+      "run_kind": "author",
+      "status": "failed",
+      "valid": true,
+      "at": "2026-11-20T04:59:18.294Z"
+    }
+  ]
+}

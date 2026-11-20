@@ -11,7 +11,7 @@ import { StatusIcon } from '#/features/posts/components/status-icon'
 import { StatusSelect } from '#/features/posts/components/status-select'
 import { postListQuery } from '#/features/posts/post.queries'
 import { POST_STATUSES, STATUS_LABEL, type PostStatus } from '#/features/posts/status'
-import { useSetPostStatus } from '#/features/posts/use-post-mutations'
+import { useMovePost } from '#/features/posts/use-move-post'
 import { timeAgo } from '#/lib/format'
 import { cn } from '@hearloop/ui/lib/utils'
 
@@ -32,7 +32,7 @@ function Inbox() {
   const { status, sort } = Route.useSearch()
   const navigate = Route.useNavigate()
   const { data: all } = useSuspenseQuery(postListQuery(org))
-  const setStatus = useSetPostStatus(org)
+  const { move, dialog } = useMovePost(org)
   const [search, setSearch] = useState('')
 
   const needle = search.trim().toLowerCase()
@@ -93,7 +93,7 @@ function Inbox() {
               <a href={`/${org}/posts/${p.id}`} target="_blank" rel="noreferrer" className="min-w-0 truncate text-[14px] font-medium hover:underline">{p.title}</a>
               <span className="flex-1" />
               <span className="hidden text-[12px] whitespace-nowrap text-faint tabular-nums sm:inline">{timeAgo(p.createdAt)}</span>
-              <StatusSelect value={p.status} label={`Status of ${p.title}`} onChange={(s) => setStatus.mutate({ id: p.id, status: s })}
+              <StatusSelect value={p.status} label={`Status of ${p.title}`} onChange={(s) => move(p, s)}
                 className="h-7 w-[124px] rounded-md border-input bg-card text-[12px] shadow-none" />
               <span className="inline-flex h-7 min-w-11 items-center justify-center gap-1 rounded-md border border-input px-2 text-[12px] tabular-nums">
                 <ChevronUp className="size-3 text-muted-foreground" strokeWidth={2.5} />{p.votes}
@@ -103,6 +103,7 @@ function Inbox() {
           ))}
         </ul>
       )}
+      {dialog}
     </Panel>
   )
 }

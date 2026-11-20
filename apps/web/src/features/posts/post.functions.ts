@@ -32,10 +32,18 @@ export const createPost = createServerFn({ method: 'POST' })
   })
 
 export const votePost = createServerFn({ method: 'POST' })
+  .middleware([sessionMiddleware])
   .validator(z.object({ id: postIdSchema }))
-  .handler(async ({ data }) => {
+  .handler(async ({ data, context: { user } }) => {
+    const { getCookie, setCookie } = await import('@tanstack/react-start/server')
     const { addVote } = await import('./post.server')
-    return addVote(data.id)
+    // visitors get a long-lived random id, so clearing local storage doesn't buy a second vote
+    let visitor = getCookie('hl_voter')
+    if (!user && !visitor) {
+      visitor = crypto.randomUUID()
+      setCookie('hl_voter', visitor, { httpOnly: true, sameSite: 'lax', secure: true, path: '/', maxAge: 60 * 60 * 24 * 365 })
+    }
+    return addVote(data.id, user ? `u:${user.id}` : `v:${visitor}`)
   })
 
 // ---- members only
