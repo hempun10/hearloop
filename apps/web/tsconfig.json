@@ -1,0 +1,23 @@
+{
+  "extends": "@hearloop/typescript-config/react.json",
+  "compilerOptions": {
+    "types": [
+      "./worker-configuration.d.ts",
+      "node",
+      "vite/client"
+    ],
+    "paths": {
+      "#/*": [
+        "./src/*"
+      ]
+    }
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}

@@ -1,0 +1,9 @@
+@import "@hearloop/ui/globals.css";
+@import "fumadocs-ui/css/shadcn.css";
+@import "fumadocs-ui/css/preset.css";
+
+/* shadcn.css maps Fumadocs colours onto the shared tokens; active links wear the brand accent */
+:root, .dark {
+  --color-fd-primary: var(--brand);
+  --color-fd-primary-foreground: #fff;
+}

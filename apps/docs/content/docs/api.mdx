@@ -1,0 +1,83 @@
+---
+title: API and MCP tools
+description: The HTTP endpoints the CLI uses, and the tools the MCP server offers.
+---
+
+## HTTP API
+
+Every path belongs to one board, `:org`. Reads are public. Writes need a loop token in the `Authorization` header:
+
+```http
+Authorization: Bearer hl_…
+```
+
+Request and response bodies are JSON, with camelCase fields such as `createdAt` and `postId`.
+
+### Endpoints
+
+| Method | Path | Body |
+|---|---|---|
+| GET | `/api/:org/posts?status=planned` | |
+| GET | `/api/:org/posts/:id` | |
+| POST | `/api/:org/posts/:id/claim` | `{}` |
+| POST | `/api/:org/posts/:id/release` | `{}` |
+| POST | `/api/:org/posts/:id/status` | `{"status": "planned"}` |
+| POST | `/api/:org/posts/:id/runs` | `{"passed": true, "summary": "…", "changelog": "…"}` |
+| GET | `/api/:org/changelog` | |
+
+A post's status is `open`, `planned`, `building`, or `shipped`. Lists are sorted by votes, highest first.
+
+### Errors
+
+| Status | When |
+|---|---|
+| `400` | The body is invalid. The response is `{"error": "…"}` |
+| `401` | The token is missing, wrong, or revoked |
+| `404` | The board or post doesn't exist, or your token holds no claim to release |
+| `409` | A claim or report conflicts. The response names the reason |
+
+### Claim
+
+`POST /claim` sets the post to `building` and holds it for your token for 15 minutes. Call it again to renew the claim.
+
+It returns `409` in these cases:
+
+- The post is `open`. A member must move it to `planned` first.
+- The post is `shipped`.
+- Another token holds a live claim. The error names the holder, for example `"Asha · laptop is building this."`
+
+`POST /release` ends your claim and sets the post back to `planned`.
+
+### Report a Kane run
+
+`POST /runs` records Kane's result on the post and ends the claim.
+
+- `passed: true` sets the post to `shipped`. If you send `changelog`, the board publishes it.
+- `passed: false` sets the post back to `planned`.
+- `summary` is Kane's report. The post shows it in both cases.
+- Your token must hold the claim. Otherwise the endpoint returns `409`.
+
+```bash
+curl -X POST https://hearloop-v2.hembdrpun10.workers.dev/api/acme/posts/12/runs \
+  -H "Authorization: Bearer $HEARLOOP_TOKEN" -H "content-type: application/json" \
+  -d '{"passed": true, "summary": "Kane: passed", "changelog": "Search is here."}'
+```
+
+## MCP tools
+
+The MCP server is at `/mcp`. It uses OAuth sign-in. A loop token doesn't work there, and an MCP sign-in doesn't work on the HTTP API.
+
+Every tool except `list_boards` takes `board`, the board's slug. Tools that act on one request also take `id`.
+
+| Tool | Does |
+|---|---|
+| `list_boards` | Lists the boards you're a member of |
+| `list_requests` | Lists requests by votes. `status` defaults to `planned` |
+| `get_request` | Returns one request and its past Kane reports |
+| `claim_request` | Claims a Planned request for 15 minutes. Call again to renew |
+| `release_request` | Ends your claim and sets the request back to Planned |
+| `report_verification` | Records Kane's result. Takes `passed`, `summary`, and an optional `changelog` |
+
+The server also offers one prompt, `build`. It tells the agent to claim the top request, build it, test it with Kane CLI, and report the result.
+
+The tools return request text inside `<user-request>` tags. The server removes those tags from the text itself, so a request can't close the tag early.

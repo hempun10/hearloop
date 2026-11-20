@@ -1,0 +1,45 @@
+---
+title: Set up Kane CLI and write good tests
+description: Install Kane CLI and write the plain-English test that decides whether a request ships.
+---
+
+Kane CLI opens your app in a real browser and follows a plain-English test, called an objective.
+
+## Install Kane CLI
+
+Run:
+
+```bash
+npm i -g @testmuai/kane-cli
+kane-cli login
+```
+
+Kane needs a Chromium-based browser. If Chrome isn't installed, set `KANE_CLI_CHROME_PATH` to another browser:
+
+```bash
+export KANE_CLI_CHROME_PATH=/Applications/Helium.app/Contents/MacOS/Helium
+```
+
+## Write an objective that proves the feature
+
+Usually the agent writes the objective. You write it yourself in [manual mode](/docs/agents#write-the-code-yourself) and in [CI](/docs/ci). A good objective:
+
+- Names each thing to click or type by its visible label.
+- Says exactly what must be visible afterwards.
+- Tests the new behaviour. A page that loads proves nothing.
+
+For example:
+
+```text
+Go to the board. Type 'export' in the 'Search requests' box. Verify 'Export posts to CSV'
+is listed and 'Dark mode toggle' is not. Clear the box and verify all requests are back.
+```
+
+## Find the results
+
+- The request's page, `/your-board/posts/:id`, lists every Kane run under **Kane CLI verifications**.
+- The dashboard page `/your-board/dashboard/runs` lists all runs. Click a run to read its report.
+- Each changelog entry links to its request and says **Verified with Kane CLI**.
+- Kane's Test Manager files each run in the folder that `kaneFolder` in `hearloop.json` names.
+
+For the exact command the CLI runs, see the [CLI reference](/docs/cli#how-the-cli-calls-kane).

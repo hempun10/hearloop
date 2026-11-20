@@ -1,0 +1,75 @@
+---
+title: Run the loop with the CLI
+description: Build your top request with a coding agent and verify it with Kane CLI, from your own repository.
+---
+
+The `hearloop` CLI runs in your repository. It takes the most voted **Planned** request, gives it to your coding agent, runs your build, and asks Kane CLI to test your app. Then it reports the result to your board.
+
+## Before you start
+
+You need:
+
+- Node 20 or later.
+- [Kane CLI](/docs/kane), installed and signed in.
+- A coding agent, such as Claude Code or Codex. You can also [write the code yourself](/docs/agents#write-the-code-yourself).
+- A loop token from [the quickstart](/docs/quickstart#create-a-loop-token).
+
+## Set up your repository
+
+In your repository, run:
+
+```bash
+npx hearloop init
+```
+
+The CLI asks five questions and writes `hearloop.json`:
+
+```json title="hearloop.json"
+{
+  "board": "https://hearloop-v2.hembdrpun10.workers.dev/acme",
+  "app": "http://localhost:5173",
+  "agent": "claude",
+  "build": "pnpm build",
+  "deploy": "pnpm deploy:staging"
+}
+```
+
+`hearloop.json` holds no secrets, so you can commit it. `init` also adds `.hearloop/` to `.gitignore`. For every field, see the [CLI reference](/docs/cli#hearloopjson).
+
+## Build the top request
+
+Start your app, so Kane can reach the `app` URL. Then run:
+
+```bash
+HEARLOOP_TOKEN=hl_… npx hearloop run
+```
+
+The CLI prints each step. When Kane passes, the request moves to **Shipped** and the changelog entry goes live.
+
+The CLI never commits. Review the diff and commit it yourself.
+
+## Build one specific request
+
+To build request 12 instead of the top one, run:
+
+```bash
+HEARLOOP_TOKEN=hl_… npx hearloop run --post 12
+```
+
+The request must be **Planned**. If another person is already building it, the CLI tells you who and stops.
+
+## Test against another environment
+
+To test a staging or production deployment, write a second config file and pass it with `--config`:
+
+```bash
+HEARLOOP_TOKEN=hl_… npx hearloop run --config hearloop.prod.json
+```
+
+## If a run fails
+
+The CLI tries up to three times. Before each new try, it gives the agent Kane's report from the last one. After the last try, the request stays **Planned** with every report attached, so you can read what went wrong on the request's page.
+
+If the agent or the build crashes, the CLI releases the request and puts it back to **Planned**. It never leaves a request stuck in **In progress**.
+
+To learn what the loop does at each step, see [How hearloop works](/docs/how-it-works).

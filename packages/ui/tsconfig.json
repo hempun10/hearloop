@@ -1,0 +1,13 @@
+{
+  "extends": "@hearloop/typescript-config/react.json",
+  "compilerOptions": {
+    "paths": {
+      "@hearloop/ui/*": [
+        "./src/*"
+      ]
+    }
+  },
+  "include": [
+    "src"
+  ]
+}

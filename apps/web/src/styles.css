@@ -1,0 +1,9 @@
+@import "@hearloop/ui/globals.css";
+
+/* Persistent chrome gets its own snapshot so only page content fades on navigation. */
+header.sticky { view-transition-name: site-header; }
+[data-admin-sidebar] { view-transition-name: admin-sidebar; }
+[data-settings-nav] { view-transition-name: settings-nav; }
+::view-transition-group(site-header), ::view-transition-group(admin-sidebar), ::view-transition-group(settings-nav),
+::view-transition-new(site-header), ::view-transition-new(admin-sidebar), ::view-transition-new(settings-nav) { animation: none; }
+::view-transition-old(site-header), ::view-transition-old(admin-sidebar), ::view-transition-old(settings-nav) { display: none; }
