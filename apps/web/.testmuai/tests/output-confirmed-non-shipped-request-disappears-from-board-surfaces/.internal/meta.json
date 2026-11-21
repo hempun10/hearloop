@@ -1,18 +1,19 @@
 {
+  "commit_id": "f11c0bd2-9c03-428c-81d0-5d6d1b9dad9c",
   "test_id": "98dbfbd2-18a7-4376-a294-68e85383f5ca",
+  "testcase_id": "01M7VHRXTDQS48T7NB16YAF723",
   "project_id": "01M7S4DG4PE128S4KT7FAECK73",
   "folder_id": "01M7SCZZ4PTY0XA7HXMZFYZA31",
   "org_id": "3436657",
   "session_name": "confirmed-non-shipped-request-disappears-from-board-surfaces",
-  "commit_id": "88bf08ff-bce0-4890-98ae-eea26ac7126b",
-  "testcase_id": "01M7VHRXTDQS48T7NB16YAF723",
   "executions": [
     {
-      "execution_id": "4cd0b940-7aa2-4fc9-8769-930f771e18e2",
+      "execution_id": "67537ce5-214a-4712-a612-2b73ce0c77b1",
       "run_kind": "author",
       "status": "passed",
       "valid": true,
-      "at": "2026-11-20T04:03:53.009Z"
+      "uploaded": true,
+      "at": "2026-11-20T14:06:08.848Z"
     }
   ]
 }

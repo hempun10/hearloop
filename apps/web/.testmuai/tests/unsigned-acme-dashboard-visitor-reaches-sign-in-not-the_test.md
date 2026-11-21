@@ -1,12 +1,12 @@
 ---
 assurance:
-  id: t-1
-  base: sha256:89dca39159ab212bf73b89d784caeb18be9511c7da45779c901c0795540d3772
+  id: t-63
+  base: sha256:342040d84a2c04d7dae206269ecddc327cb2f7a99331c91458850558837d03bc
 ---
 # Unsigned Acme dashboard visitor reaches sign-in, not the dashboard
 
 > Prove direct dashboard entry by an unsigned visitor is redirected to sign-in without dashboard access.
 
-## Step 1 @verifies ac-1, ac-2
+## Step 1 @verifies ac-1, ac-2, ac-95
 
-In a fresh signed-out browser session, visit {{base_url}}/acme/dashboard, then assert the browser reaches {{base_url}}/login and Acme dashboard content is not accessible.
+In a fresh signed-out browser session, visit {{base_url}}/acme/dashboard, then assert the browser reaches {{base_url}}/login, shows a sign-in form, and does not expose Acme dashboard content.

@@ -1,0 +1,25 @@
+{
+  "test_id": "be272a3b-46c2-42ec-9d3f-50be4e0f7a5e",
+  "project_id": "01M7S4DG4PE128S4KT7FAECK73",
+  "folder_id": "01M7SCZZ4PTY0XA7HXMZFYZA31",
+  "org_id": "3436657",
+  "session_name": "general-rejects-a-61-character-board-name-and-saves-no",
+  "commit_id": "6deceae8-3bf7-4d25-bd18-5dc996bc389e",
+  "testcase_id": "01M7WQFWTKDPZ39DJ1658Q2FNY",
+  "executions": [
+    {
+      "execution_id": "e31d9797-7de5-4b5d-ab66-7983f5c4f416",
+      "run_kind": "author",
+      "status": "failed",
+      "valid": true,
+      "at": "2026-11-20T15:03:34.564Z"
+    },
+    {
+      "execution_id": "eaccc96d-ba49-4887-95d8-72ae500ecbff",
+      "run_kind": "author",
+      "status": "failed",
+      "at": "2026-11-20T15:03:50.029Z",
+      "uploaded": true
+    }
+  ]
+}

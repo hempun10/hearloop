@@ -58,7 +58,9 @@ Members can move any request to any status. Nothing blocks the team. The public 
 
 ## Settings
 
-- **Branding**: name (required, at most 60 characters), tagline (at most 160), accent colour (a hex colour like #6e8bff), logo (an https image link), theme (dark or light), and "Powered by hearloop". Invalid input shows an error next to the field and saves nothing. Saved changes show on the public board.
+- **General**: board name (required) and tagline (optional). The board name field stops accepting text at 60 characters and the tagline field at 160, so an overlong value can't be typed or saved.
+- **Branding**: accent colour (a hex colour like #6e8bff), logo (an https image link), theme (dark or light), and "Powered by hearloop".
+- On both pages, invalid input shows an error next to the field and saves nothing. Saved changes show on the public board.
 - **Access**: show or hide the public roadmap and public changelog, and choose who can post: anyone, or signed-in people only. A hidden page says it isn't public, even when opened by its address. With "signed-in people only", a visitor who isn't signed in is asked to sign in before posting.
 - **Loop API tokens**: create a named token (shown once), see each token's last use, and revoke it. A revoked token stops working at once.
 

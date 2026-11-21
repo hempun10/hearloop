@@ -1,18 +1,25 @@
 {
-  "test_id": "3301baa3-338f-4659-b9d9-ba61f6e84cfa",
+  "test_id": "b83e5e3f-a870-4022-9691-54e1e301d42f",
   "project_id": "01M7S4DG4PE128S4KT7FAECK73",
   "folder_id": "01M7SCZZ4PTY0XA7HXMZFYZA31",
   "org_id": "3436657",
   "session_name": "empty-roadmap-status-retains-its-column-and-zero-count",
-  "commit_id": "cc07e253-1f5e-41a5-8c34-2dc2b2e82cb8",
-  "testcase_id": "01M7VKNWRCRZS8YD9WD6QXEWGX",
+  "commit_id": "647cd567-31d6-4e30-b110-115a7a22f2f8",
+  "testcase_id": "01M7WQ0XZ61V1GYQX5BPQJAX5R",
   "executions": [
     {
-      "execution_id": "2d4150c8-127c-4175-8ec7-b3e3f28b7b4a",
+      "execution_id": "22d4c817-3667-4175-a402-b7a9848db619",
       "run_kind": "author",
-      "status": "failed",
+      "status": "passed",
       "valid": true,
-      "at": "2026-11-20T04:35:05.290Z"
+      "at": "2026-11-20T14:57:08.050Z"
+    },
+    {
+      "execution_id": "bc139270-7eb6-409a-99f2-c4d228622383",
+      "run_kind": "author",
+      "status": "passed",
+      "at": "2026-11-20T14:57:25.116Z",
+      "uploaded": true
     }
   ]
 }

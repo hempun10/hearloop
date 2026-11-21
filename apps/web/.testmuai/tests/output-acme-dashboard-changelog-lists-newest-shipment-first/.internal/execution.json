@@ -2,24 +2,24 @@
   "test_id": "4f566f9e-2107-4f36-b0f4-d4cc29ec2ee3",
   "version": "v4",
   "auto_heal_version": "AH2",
-  "session_id": "01319820-a996-456b-b0a8-f97ea37d4eb0",
+  "session_id": "1ff42a83-f41f-4fb8-91b1-84b147c2a96b",
   "org_id": "3436657",
   "user_id": "3615379",
   "url": "",
-  "start_timestamp": "2026-11-20T05:45:50.337Z",
-  "end_timestamp": "2026-11-20T05:47:12.264Z",
+  "start_timestamp": "2026-11-20T09:21:37.198Z",
+  "end_timestamp": "2026-11-20T09:23:12.766Z",
   "status": "error",
-  "commit_id": "01319820-a996-456b-b0a8-f97ea37d4eb0",
+  "commit_id": "1ff42a83-f41f-4fb8-91b1-84b147c2a96b",
   "instructions": [
     {
       "content_type": "generative_block",
-      "instruction_id": "generative_block_c733fb61909b481897518ab2ece5a018",
-      "generative_id": "c733fb61909b481897518ab2ece5a018",
+      "instruction_id": "generative_block_e3759202415c46c99dd24d3cd29e64db",
+      "generative_id": "e3759202415c46c99dd24d3cd29e64db",
       "objective": "At {{global.base_url}}/login, sign in to hearloop as the Acme board member with {{global.e2e_email}} and {{secrets.user.e2e_password}}, then reach the Acme dashboard.",
       "status": "success",
       "children": [
         {
-          "instruction_id": "08f903d1-8360-41c1-b6fa-d74fa62cd0c5",
+          "instruction_id": "4a4ab598-f686-4305-8394-1d9646421525",
           "instruction_class": "driver_action",
           "module_id": "",
           "instruction": "Navigate to {{global.base_url}}/login",
@@ -31,11 +31,11 @@
           "operations": [
             {
               "operation_id": "93fc444c-002f-4628-8fdd-f512a082bf9d",
-              "instruction_id": "08f903d1-8360-41c1-b6fa-d74fa62cd0c5",
+              "instruction_id": "4a4ab598-f686-4305-8394-1d9646421525",
               "instruction": "Navigate to {{global.base_url}}/login",
               "intent": "Navigate to {{global.base_url}}/login",
-              "operation_start": "2026-11-20T05:46:08.647515+00:00",
-              "operation_end": "2026-11-20T05:46:08.768Z",
+              "operation_start": "2026-11-20T09:21:56.455601+00:00",
+              "operation_end": "2026-11-20T09:21:56.708Z",
               "status": "success",
               "command": "OPEN",
               "name": "",
@@ -158,8 +158,8 @@
             }
           ],
           "status": "success",
-          "start_timestamp": "2026-11-20T05:46:08.647515+00:00",
-          "end_timestamp": "2026-11-20T05:46:08.768Z",
+          "start_timestamp": "2026-11-20T09:21:56.455601+00:00",
+          "end_timestamp": "2026-11-20T09:21:56.708Z",
           "type": "agent_generated",
           "tags": [],
           "html_paths": [],
@@ -185,7 +185,7 @@
           "network_assertion_content": {},
           "screenshot_command": "",
           "smartui_contents": {},
-          "generative_id": "c733fb61909b481897518ab2ece5a018",
+          "generative_id": "e3759202415c46c99dd24d3cd29e64db",
           "plan_id": "",
           "generative_objective": "At {{global.base_url}}/login, sign in to hearloop as the Acme board member with {{global.e2e_email}} and {{secrets.user.e2e_password}}, then reach the Acme dashboard.",
           "error_message": "",
@@ -196,7 +196,7 @@
           "reasoning": "Navigate to {{global.base_url}}/login"
         },
         {
-          "instruction_id": "d7241b17-564f-4ee8-bb16-5cf43f3bc20c",
+          "instruction_id": "91d82ae4-f3fc-479c-884c-cd08ab1c7705",
           "instruction_class": "driver_action",
           "module_id": "",
           "instruction": "Waiting for the plan to be completed",
@@ -208,11 +208,11 @@
           "operations": [
             {
               "operation_id": "1db154ae-c35e-4b92-8f21-6157175d3866",
-              "instruction_id": "d7241b17-564f-4ee8-bb16-5cf43f3bc20c",
+              "instruction_id": "91d82ae4-f3fc-479c-884c-cd08ab1c7705",
               "instruction": "Waiting for the plan to be completed",
               "intent": "Waiting for the plan to be completed",
-              "operation_start": "2026-11-20T05:46:10.422214+00:00",
-              "operation_end": "2026-11-20T05:46:11.427Z",
+              "operation_start": "2026-11-20T09:21:58.031034+00:00",
+              "operation_end": "2026-11-20T09:21:59.034Z",
               "status": "success",
               "command": "WAIT",
               "name": "",
@@ -335,8 +335,8 @@
             }
           ],
           "status": "success",
-          "start_timestamp": "2026-11-20T05:46:10.422214+00:00",
-          "end_timestamp": "2026-11-20T05:46:11.427Z",
+          "start_timestamp": "2026-11-20T09:21:58.031034+00:00",
+          "end_timestamp": "2026-11-20T09:21:59.034Z",
           "type": "agent_generated",
           "tags": [],
           "html_paths": [],
@@ -362,7 +362,7 @@
           "network_assertion_content": {},
           "screenshot_command": "",
           "smartui_contents": {},
-          "generative_id": "c733fb61909b481897518ab2ece5a018",
+          "generative_id": "e3759202415c46c99dd24d3cd29e64db",
           "plan_id": "",
           "generative_objective": "At {{global.base_url}}/login, sign in to hearloop as the Acme board member with {{global.e2e_email}} and {{secrets.user.e2e_password}}, then reach the Acme dashboard.",
           "error_message": "",
@@ -373,7 +373,7 @@
           "reasoning": "queued plan (3 steps): type \"Email\"; type \"Password\"; click \"Sign in\""
         },
         {
-          "instruction_id": "b7967465-e377-4096-b4ed-ff7556b5e282",
+          "instruction_id": "fedfd9e0-aec5-4714-8727-7bb175103156",
           "instruction_class": "driver_action",
           "module_id": "",
           "instruction": "Type \"{{global.e2e_email}}\" into \"Email\"",
@@ -385,11 +385,11 @@
           "operations": [
             {
               "operation_id": "7254496e-df15-4d64-8d2f-dc58a53cb5ff",
-              "instruction_id": "b7967465-e377-4096-b4ed-ff7556b5e282",
+              "instruction_id": "fedfd9e0-aec5-4714-8727-7bb175103156",
               "instruction": "Type \"{{global.e2e_email}}\" into \"Email\"",
               "intent": "Type \"{{global.e2e_email}}\" into \"Email\"",
-              "operation_start": "2026-11-20T05:46:10.546783+00:00",
-              "operation_end": "2026-11-20T05:46:10.625Z",
+              "operation_start": "2026-11-20T09:21:58.242158+00:00",
+              "operation_end": "2026-11-20T09:21:58.417Z",
               "status": "success",
               "command": "TYPE",
               "name": "",
@@ -537,8 +537,8 @@
             }
           ],
           "status": "success",
-          "start_timestamp": "2026-11-20T05:46:10.546783+00:00",
-          "end_timestamp": "2026-11-20T05:46:10.625Z",
+          "start_timestamp": "2026-11-20T09:21:58.242158+00:00",
+          "end_timestamp": "2026-11-20T09:21:58.417Z",
           "type": "agent_generated",
           "tags": [],
           "html_paths": [],
@@ -564,7 +564,7 @@
           "network_assertion_content": {},
           "screenshot_command": "",
           "smartui_contents": {},
-          "generative_id": "c733fb61909b481897518ab2ece5a018",
+          "generative_id": "e3759202415c46c99dd24d3cd29e64db",
           "plan_id": "",
           "generative_objective": "At {{global.base_url}}/login, sign in to hearloop as the Acme board member with {{global.e2e_email}} and {{secrets.user.e2e_password}}, then reach the Acme dashboard.",
           "error_message": "",
@@ -575,7 +575,7 @@
           "reasoning": "PRIMARY: Sign in to hearloop as the Acme board member with {{global.e2e_email}} and {{secrets.user.e2e_password}}; role=textbox; text=\"Email\" | HINTS: container=Sign in form"
         },
         {
-          "instruction_id": "692dace3-5461-4889-8210-adb3e9bce66a",
+          "instruction_id": "f11ae694-0db6-407b-8a64-2c8d75aa58ff",
           "instruction_class": "driver_action",
           "module_id": "",
           "instruction": "Type \"{{secrets.user.e2e_password}}\" into \"Password\"",
@@ -587,11 +587,11 @@
           "operations": [
             {
               "operation_id": "10056756-0b9c-4f36-992f-fbe8f8dfcc98",
-              "instruction_id": "692dace3-5461-4889-8210-adb3e9bce66a",
+              "instruction_id": "f11ae694-0db6-407b-8a64-2c8d75aa58ff",
               "instruction": "Type \"{{secrets.user.e2e_password}}\" into \"Password\"",
               "intent": "Type \"{{secrets.user.e2e_password}}\" into \"Password\"",
-              "operation_start": "2026-11-20T05:46:10.712457+00:00",
-              "operation_end": "2026-11-20T05:46:10.793Z",
+              "operation_start": "2026-11-20T09:21:58.407062+00:00",
+              "operation_end": "2026-11-20T09:21:58.480Z",
               "status": "success",
               "command": "TYPE",
               "name": "",
@@ -739,8 +739,8 @@
             }
           ],
           "status": "success",
-          "start_timestamp": "2026-11-20T05:46:10.712457+00:00",
-          "end_timestamp": "2026-11-20T05:46:10.793Z",
+          "start_timestamp": "2026-11-20T09:21:58.407062+00:00",
+          "end_timestamp": "2026-11-20T09:21:58.480Z",
           "type": "agent_generated",
           "tags": [],
           "html_paths": [],
@@ -766,7 +766,7 @@
           "network_assertion_content": {},
           "screenshot_command": "",
           "smartui_contents": {},
-          "generative_id": "c733fb61909b481897518ab2ece5a018",
+          "generative_id": "e3759202415c46c99dd24d3cd29e64db",
           "plan_id": "",
           "generative_objective": "At {{global.base_url}}/login, sign in to hearloop as the Acme board member with {{global.e2e_email}} and {{secrets.user.e2e_password}}, then reach the Acme dashboard.",
           "error_message": "",
@@ -777,7 +777,7 @@
           "reasoning": "PRIMARY: Sign in to hearloop as the Acme board member with {{global.e2e_email}} and {{secrets.user.e2e_password}}; role=textbox; text=\"Password\" | HINTS: container=Sign in form"
         },
         {
-          "instruction_id": "d11ad16c-2a82-4e27-918c-6e023a986e4b",
+          "instruction_id": "3d119cf1-205e-49e9-a69b-37a1c3299562",
           "instruction_class": "driver_action",
           "module_id": "",
           "instruction": "Clicking Sign in to hearloop",
@@ -789,11 +789,11 @@
           "operations": [
             {
               "operation_id": "b00298b9-3bdd-4e48-a93a-03f1009cf679",
-              "instruction_id": "d11ad16c-2a82-4e27-918c-6e023a986e4b",
+              "instruction_id": "3d119cf1-205e-49e9-a69b-37a1c3299562",
               "instruction": "Clicking Sign in to hearloop",
               "intent": "Clicking Sign in to hearloop",
-              "operation_start": "2026-11-20T05:46:10.830955+00:00",
-              "operation_end": "2026-11-20T05:46:10.878Z",
+              "operation_start": "2026-11-20T09:21:58.575632+00:00",
+              "operation_end": "2026-11-20T09:21:58.650Z",
               "status": "success",
               "command": "CLICK",
               "name": "",
@@ -941,8 +941,8 @@
             }
           ],
           "status": "success",
-          "start_timestamp": "2026-11-20T05:46:10.830955+00:00",
-          "end_timestamp": "2026-11-20T05:46:10.878Z",
+          "start_timestamp": "2026-11-20T09:21:58.575632+00:00",
+          "end_timestamp": "2026-11-20T09:21:58.650Z",
           "type": "agent_generated",
           "tags": [],
           "html_paths": [],
@@ -968,7 +968,7 @@
           "network_assertion_content": {},
           "screenshot_command": "",
           "smartui_contents": {},
-          "generative_id": "c733fb61909b481897518ab2ece5a018",
+          "generative_id": "e3759202415c46c99dd24d3cd29e64db",
           "plan_id": "",
           "generative_objective": "At {{global.base_url}}/login, sign in to hearloop as the Acme board member with {{global.e2e_email}} and {{secrets.user.e2e_password}}, then reach the Acme dashboard.",
           "error_message": "",
@@ -979,7 +979,7 @@
           "reasoning": "PRIMARY: Sign in to hearloop as the Acme board member with {{global.e2e_email}} and {{secrets.user.e2e_password}}; role=button; text=\"Sign in\" | HINTS: container=Sign in form"
         },
         {
-          "instruction_id": "de7f014b-8f0d-4ed0-b4ce-9bd72424f2c8",
+          "instruction_id": "e4f50af1-7c0c-4afe-a849-a2d91ea965f0",
           "instruction_class": "driver_action",
           "module_id": "",
           "instruction": "Clicking the Dashboard link in the top navigation",
@@ -991,11 +991,11 @@
           "operations": [
             {
               "operation_id": "262b1d39-d758-47f2-818b-ae82b6654f9f",
-              "instruction_id": "de7f014b-8f0d-4ed0-b4ce-9bd72424f2c8",
+              "instruction_id": "e4f50af1-7c0c-4afe-a849-a2d91ea965f0",
               "instruction": "Clicking the Dashboard link in the top navigation",
               "intent": "Clicking the Dashboard link in the top navigation",
-              "operation_start": "2026-11-20T05:46:11.466764+00:00",
-              "operation_end": "2026-11-20T05:46:11.515Z",
+              "operation_start": "2026-11-20T09:22:00.536744+00:00",
+              "operation_end": "2026-11-20T09:22:01.918Z",
               "status": "success",
               "command": "CLICK",
               "name": "",
@@ -1143,8 +1143,8 @@
             }
           ],
           "status": "success",
-          "start_timestamp": "2026-11-20T05:46:11.466764+00:00",
-          "end_timestamp": "2026-11-20T05:46:11.515Z",
+          "start_timestamp": "2026-11-20T09:22:00.536744+00:00",
+          "end_timestamp": "2026-11-20T09:22:01.918Z",
           "type": "agent_generated",
           "tags": [],
           "html_paths": [],
@@ -1170,7 +1170,7 @@
           "network_assertion_content": {},
           "screenshot_command": "",
           "smartui_contents": {},
-          "generative_id": "c733fb61909b481897518ab2ece5a018",
+          "generative_id": "e3759202415c46c99dd24d3cd29e64db",
           "plan_id": "",
           "generative_objective": "At {{global.base_url}}/login, sign in to hearloop as the Acme board member with {{global.e2e_email}} and {{secrets.user.e2e_password}}, then reach the Acme dashboard.",
           "error_message": "",
@@ -1190,13 +1190,13 @@
     },
     {
       "content_type": "generative_block",
-      "instruction_id": "generative_block_a81a5f1ca1ec4c20ad3f8c0af77bef75",
-      "generative_id": "a81a5f1ca1ec4c20ad3f8c0af77bef75",
+      "instruction_id": "generative_block_ea2903a8430042688e59bd61c1bb1ea7",
+      "generative_id": "ea2903a8430042688e59bd61c1bb1ea7",
       "objective": "On the Acme dashboard post list, locate two distinct requests {{global.other_status_title}} and {{global.kane_request_title}} and move {{global.other_status_title}} to Shipped before moving {{global.kane_request_title}} to Shipped.",
       "status": "success",
       "children": [
         {
-          "instruction_id": "cc2a802f-9d0b-45a9-be9c-4eec6ed77cd2",
+          "instruction_id": "98d2b00f-b7ee-4180-9b9a-cb4009b28bfd",
           "instruction_class": "driver_action",
           "module_id": "",
           "instruction": "Clicking the request {{global.other_status_title}} and moving it to Shipped",
@@ -1208,11 +1208,11 @@
           "operations": [
             {
               "operation_id": "910f96e8-c61f-4fd5-b6db-ba9bbca8f3eb",
-              "instruction_id": "cc2a802f-9d0b-45a9-be9c-4eec6ed77cd2",
+              "instruction_id": "98d2b00f-b7ee-4180-9b9a-cb4009b28bfd",
               "instruction": "Clicking the request {{global.other_status_title}} and moving it to Shipped",
               "intent": "Clicking the request {{global.other_status_title}} and moving it to Shipped",
-              "operation_start": "2026-11-20T05:46:14.813581+00:00",
-              "operation_end": "2026-11-20T05:46:17.509Z",
+              "operation_start": "2026-11-20T09:22:04.181594+00:00",
+              "operation_end": "2026-11-20T09:22:07.130Z",
               "status": "success",
               "command": "CLICK",
               "name": "",
@@ -1360,8 +1360,8 @@
             }
           ],
           "status": "success",
-          "start_timestamp": "2026-11-20T05:46:14.813581+00:00",
-          "end_timestamp": "2026-11-20T05:46:17.509Z",
+          "start_timestamp": "2026-11-20T09:22:04.181594+00:00",
+          "end_timestamp": "2026-11-20T09:22:07.130Z",
           "type": "agent_generated",
           "tags": [],
           "html_paths": [],
@@ -1387,7 +1387,7 @@
           "network_assertion_content": {},
           "screenshot_command": "",
           "smartui_contents": {},
-          "generative_id": "a81a5f1ca1ec4c20ad3f8c0af77bef75",
+          "generative_id": "ea2903a8430042688e59bd61c1bb1ea7",
           "plan_id": "",
           "generative_objective": "On the Acme dashboard post list, locate two distinct requests {{global.other_status_title}} and {{global.kane_request_title}} and move {{global.other_status_title}} to Shipped before moving {{global.kane_request_title}} to Shipped.",
           "error_message": "",
@@ -1398,7 +1398,7 @@
           "reasoning": "PRIMARY: locate the request {{global.other_status_title}} and move it to Shipped"
         },
         {
-          "instruction_id": "be9e851b-39ee-4309-a1a4-0312f460d714",
+          "instruction_id": "4ef47745-c2e7-438c-9f86-f13fe35d5915",
           "instruction_class": "driver_action",
           "module_id": "",
           "instruction": "Clicking the request and moving it to Shipped",
@@ -1410,11 +1410,11 @@
           "operations": [
             {
               "operation_id": "1d682780-84cf-4f13-901c-8e166f9591d3",
-              "instruction_id": "be9e851b-39ee-4309-a1a4-0312f460d714",
+              "instruction_id": "4ef47745-c2e7-438c-9f86-f13fe35d5915",
               "instruction": "Clicking the request and moving it to Shipped",
               "intent": "Clicking the request and moving it to Shipped",
-              "operation_start": "2026-11-20T05:46:17.398348+00:00",
-              "operation_end": "2026-11-20T05:46:19.395Z",
+              "operation_start": "2026-11-20T09:22:07.350430+00:00",
+              "operation_end": "2026-11-20T09:22:09.931Z",
               "status": "success",
               "command": "CLICK",
               "name": "",
@@ -1562,8 +1562,8 @@
             }
           ],
           "status": "success",
-          "start_timestamp": "2026-11-20T05:46:17.398348+00:00",
-          "end_timestamp": "2026-11-20T05:46:19.395Z",
+          "start_timestamp": "2026-11-20T09:22:07.350430+00:00",
+          "end_timestamp": "2026-11-20T09:22:09.931Z",
           "type": "agent_generated",
           "tags": [],
           "html_paths": [],
@@ -1589,7 +1589,7 @@
           "network_assertion_content": {},
           "screenshot_command": "",
           "smartui_contents": {},
-          "generative_id": "a81a5f1ca1ec4c20ad3f8c0af77bef75",
+          "generative_id": "ea2903a8430042688e59bd61c1bb1ea7",
           "plan_id": "",
           "generative_objective": "On the Acme dashboard post list, locate two distinct requests {{global.other_status_title}} and {{global.kane_request_title}} and move {{global.other_status_title}} to Shipped before moving {{global.kane_request_title}} to Shipped.",
           "error_message": "",
@@ -1609,16 +1609,16 @@
     },
     {
       "content_type": "generative_block",
-      "instruction_id": "generative_block_ba5dc5b047ba49d68b783044c15fa090",
-      "generative_id": "ba5dc5b047ba49d68b783044c15fa090",
+      "instruction_id": "generative_block_a1dcd21474554ae2bbf855d42ca87fa2",
+      "generative_id": "a1dcd21474554ae2bbf855d42ca87fa2",
       "objective": "Open the Acme dashboard Changelog page after shipping {{global.kane_request_title}}, then assert {{global.kane_request_title}} appears ahead of {{global.other_status_title}} and every displayed entry is ordered newest first.",
       "status": "error",
       "children": [
         {
-          "instruction_id": "acdd5a49-16d8-4d23-a439-6520a6c97db1",
+          "instruction_id": "aeab5973-18aa-44f2-8d52-90a7d304efc2",
           "instruction_class": "driver_action",
           "module_id": "",
-          "instruction": "Waiting for the search status dropdown to load",
+          "instruction": "Waiting for the board status dropdown to load",
           "command": "WAIT",
           "error": null,
           "parent_instruction_id": "",
@@ -1626,12 +1626,12 @@
           "classification_error": {},
           "operations": [
             {
-              "operation_id": "ca4127ea-51a9-4ba7-8ba8-013fa42703ac",
-              "instruction_id": "acdd5a49-16d8-4d23-a439-6520a6c97db1",
-              "instruction": "Waiting for the search status dropdown to load",
-              "intent": "Waiting for the search status dropdown to load",
-              "operation_start": "2026-11-20T05:46:28.969464+00:00",
-              "operation_end": "2026-11-20T05:46:29.973Z",
+              "operation_id": "0a384655-db0f-404f-a7b9-b03b3305f86e",
+              "instruction_id": "aeab5973-18aa-44f2-8d52-90a7d304efc2",
+              "instruction": "Waiting for the board status dropdown to load",
+              "intent": "Waiting for the board status dropdown to load",
+              "operation_start": "2026-11-20T09:22:20.649820+00:00",
+              "operation_end": "2026-11-20T09:22:21.653Z",
               "status": "success",
               "command": "WAIT",
               "name": "",
@@ -1645,7 +1645,7 @@
               "grounded_by": "",
               "error_message": "",
               "code_snippet": "",
-              "sub_instruction_obj": "{\"operation\":\"Waiting for the search status dropdown to load\",\"agent\":\"Operation Agent\",\"operation_dict\":{\"operation_type\":\"WAIT\"},\"reasoning\":\"PRIMARY: Ship {{global.kane_request_title}}; role=combobox; text=\\\"Status of Search the board\\\" | HINTS: container=Posts list\",\"variable\":{},\"secrets\":{},\"params\":{}}",
+              "sub_instruction_obj": "{\"operation\":\"Waiting for the board status dropdown to load\",\"agent\":\"Operation Agent\",\"operation_dict\":{\"operation_type\":\"WAIT\"},\"reasoning\":\"PRIMARY: Ship {{global.kane_request_title}}; role=combobox; text=\\\"Status of Search the board\\\" | HINTS: container=Posts list\",\"variable\":{},\"secrets\":{},\"params\":{}}",
               "test_id": "",
               "test_version": "",
               "action": "",
@@ -1656,7 +1656,7 @@
               "update_time_stamp": "",
               "locator_variable": "",
               "locator_variable_name": "",
-              "image_url": "https://prodauteurartefacts.blob.core.windows.net/test-screenshots/test_screenshots/untagged_screenshot/ca4127ea-51a9-4ba7-8ba8-013fa42703ac.webp",
+              "image_url": "https://prodauteurartefacts.blob.core.windows.net/test-screenshots/test_screenshots/untagged_screenshot/0a384655-db0f-404f-a7b9-b03b3305f86e.webp",
               "alternative_xpaths": [],
               "attribute": "",
               "value_description": "",
@@ -1754,8 +1754,8 @@
             }
           ],
           "status": "success",
-          "start_timestamp": "2026-11-20T05:46:28.969464+00:00",
-          "end_timestamp": "2026-11-20T05:46:29.973Z",
+          "start_timestamp": "2026-11-20T09:22:20.649820+00:00",
+          "end_timestamp": "2026-11-20T09:22:21.653Z",
           "type": "agent_generated",
           "tags": [],
           "html_paths": [],
@@ -1781,7 +1781,7 @@
           "network_assertion_content": {},
           "screenshot_command": "",
           "smartui_contents": {},
-          "generative_id": "ba5dc5b047ba49d68b783044c15fa090",
+          "generative_id": "a1dcd21474554ae2bbf855d42ca87fa2",
           "plan_id": "",
           "generative_objective": "Open the Acme dashboard Changelog page after shipping {{global.kane_request_title}}, then assert {{global.kane_request_title}} appears ahead of {{global.other_status_title}} and every displayed entry is ordered newest first.",
           "error_message": "",
@@ -1792,10 +1792,10 @@
           "reasoning": "PRIMARY: Ship {{global.kane_request_title}}; role=combobox; text=\"Status of Search the board\" | HINTS: container=Posts list"
         },
         {
-          "instruction_id": "4278e943-6a9b-4aac-8b14-212790e79167",
+          "instruction_id": "50259f5d-48e9-4124-8924-b8b6097d8735",
           "instruction_class": "driver_action",
           "module_id": "",
-          "instruction": "Clicking the Changelog link in the dashboard navigation",
+          "instruction": "Clicking Changelog in the Dashboard navigation",
           "command": "CLICK",
           "error": null,
           "parent_instruction_id": "",
@@ -1803,12 +1803,12 @@
           "classification_error": {},
           "operations": [
             {
-              "operation_id": "f9dbc353-8003-4221-800f-b0d25d4033f7",
-              "instruction_id": "4278e943-6a9b-4aac-8b14-212790e79167",
-              "instruction": "Clicking the Changelog link in the dashboard navigation",
-              "intent": "Clicking the Changelog link in the dashboard navigation",
-              "operation_start": "2026-11-20T05:46:33.893635+00:00",
-              "operation_end": "2026-11-20T05:46:33.957Z",
+              "operation_id": "3be88f43-e7df-4d72-93f7-07f2d55cd84a",
+              "instruction_id": "50259f5d-48e9-4124-8924-b8b6097d8735",
+              "instruction": "Clicking Changelog in the Dashboard navigation",
+              "intent": "Clicking Changelog in the Dashboard navigation",
+              "operation_start": "2026-11-20T09:22:25.475176+00:00",
+              "operation_end": "2026-11-20T09:22:25.520Z",
               "status": "success",
               "command": "CLICK",
               "name": "",
@@ -1822,7 +1822,7 @@
               "grounded_by": "",
               "error_message": "",
               "code_snippet": "",
-              "sub_instruction_obj": "{\"operation\":\"Clicking the Changelog link in the dashboard navigation\",\"agent\":\"Vision Agent\",\"operation_dict\":{\"operation_type\":\"CLICK\"},\"reasoning\":\"PRIMARY: Open the Acme dashboard Changelog page; role=link; text=\\\"Changelog\\\" | HINTS: container=Dashboard navigation\",\"variable\":{},\"secrets\":{},\"params\":{}}",
+              "sub_instruction_obj": "{\"operation\":\"Clicking Changelog in the Dashboard navigation\",\"agent\":\"Vision Agent\",\"operation_dict\":{\"operation_type\":\"CLICK\"},\"reasoning\":\"PRIMARY: Open the Acme dashboard Changelog page; role=link; text=\\\"Changelog\\\" | HINTS: container=Dashboard navigation\",\"variable\":{},\"secrets\":{},\"params\":{}}",
               "test_id": "",
               "test_version": "",
               "action": "",
@@ -1833,7 +1833,7 @@
               "update_time_stamp": "",
               "locator_variable": "",
               "locator_variable_name": "",
-              "image_url": "https://prodauteurartefacts.blob.core.windows.net/test-screenshots/test_screenshots/untagged_screenshot/f9dbc353-8003-4221-800f-b0d25d4033f7.webp",
+              "image_url": "https://prodauteurartefacts.blob.core.windows.net/test-screenshots/test_screenshots/untagged_screenshot/3be88f43-e7df-4d72-93f7-07f2d55cd84a.webp",
               "alternative_xpaths": [],
               "attribute": "",
               "value_description": "",
@@ -1947,7 +1947,7 @@
                 "viewport_width": 1920,
                 "viewport_height": 1080,
                 "scale_factor": null,
-                "raw_image_url": "https://prodauteurartefacts.blob.core.windows.net/test-screenshots/test_screenshots/untagged_screenshot/f9dbc353-8003-4221-800f-b0d25d4033f7.webp",
+                "raw_image_url": "https://prodauteurartefacts.blob.core.windows.net/test-screenshots/test_screenshots/untagged_screenshot/3be88f43-e7df-4d72-93f7-07f2d55cd84a.webp",
                 "raw_image_sas_url": "",
                 "annotated_image_url": "",
                 "annotated_image_sas_url": ""
@@ -1956,8 +1956,8 @@
             }
           ],
           "status": "success",
-          "start_timestamp": "2026-11-20T05:46:33.893635+00:00",
-          "end_timestamp": "2026-11-20T05:46:33.957Z",
+          "start_timestamp": "2026-11-20T09:22:25.475176+00:00",
+          "end_timestamp": "2026-11-20T09:22:25.520Z",
           "type": "agent_generated",
           "tags": [],
           "html_paths": [],
@@ -1983,7 +1983,7 @@
           "network_assertion_content": {},
           "screenshot_command": "",
           "smartui_contents": {},
-          "generative_id": "ba5dc5b047ba49d68b783044c15fa090",
+          "generative_id": "a1dcd21474554ae2bbf855d42ca87fa2",
           "plan_id": "",
           "generative_objective": "Open the Acme dashboard Changelog page after shipping {{global.kane_request_title}}, then assert {{global.kane_request_title}} appears ahead of {{global.other_status_title}} and every displayed entry is ordered newest first.",
           "error_message": "",
@@ -1995,18 +1995,18 @@
         },
         {
           "content_type": "until_block",
-          "instruction_id": "until_d3ae44e1",
-          "condition": "the heading \"Changelog\" is visible",
+          "instruction_id": "until_df02a0c7",
+          "condition": "the heading 'Changelog' is visible",
           "max_retries": 10,
           "settle_ms": 500,
           "current_count": 0,
           "condition_met": true,
           "children": [
             {
-              "instruction_id": "0e2611fe-1c9b-4d5b-af65-094107f95eaf",
+              "instruction_id": "f5b4cbbf-4016-44ca-ab97-65f24d1c79de",
               "instruction_class": "driver_action",
               "module_id": "",
-              "instruction": "Waiting for the Changelog page heading to load",
+              "instruction": "Waiting for the Changelog page to load",
               "command": "WAIT",
               "error": null,
               "parent_instruction_id": "",
@@ -2014,17 +2014,17 @@
               "classification_error": {},
               "operations": [
                 {
-                  "operation_id": "29b5d481-e4e6-4ace-bfd4-71787724a94a",
-                  "instruction_id": "0e2611fe-1c9b-4d5b-af65-094107f95eaf",
-                  "instruction": "Waiting for the Changelog page heading to load",
-                  "intent": "Waiting for the Changelog page heading to load",
-                  "operation_start": "2026-11-20T05:46:42.401668+00:00",
-                  "operation_end": "2026-11-20T05:46:46.452Z",
+                  "operation_id": "02661084-681f-405b-a91f-8113046d4d87",
+                  "instruction_id": "f5b4cbbf-4016-44ca-ab97-65f24d1c79de",
+                  "instruction": "Waiting for the Changelog page to load",
+                  "intent": "Waiting for the Changelog page to load",
+                  "operation_start": "2026-11-20T09:22:33.175487+00:00",
+                  "operation_end": "2026-11-20T09:22:36.594Z",
                   "status": "success",
                   "command": "WAIT",
                   "name": "",
                   "target": "",
-                  "value": "1000",
+                  "value": "500",
                   "message": "",
                   "operation_dict": "",
                   "frame": "",
@@ -2033,7 +2033,7 @@
                   "grounded_by": "",
                   "error_message": "",
                   "code_snippet": "",
-                  "sub_instruction_obj": "{\"operation\":\"Waiting for the Changelog page heading to load\",\"agent\":\"Operation Agent\",\"operation_dict\":{\"operation_type\":\"WAIT\"},\"reasoning\":\"PRIMARY: wait for the Changelog page heading to load\",\"variable\":{},\"secrets\":{},\"params\":{}}",
+                  "sub_instruction_obj": "{\"operation\":\"Waiting for the Changelog page to load\",\"agent\":\"Operation Agent\",\"operation_dict\":{\"operation_type\":\"WAIT\"},\"reasoning\":\"PRIMARY: wait for the Changelog page to load\",\"variable\":{},\"secrets\":{},\"params\":{}}",
                   "test_id": "",
                   "test_version": "",
                   "action": "",
@@ -2044,7 +2044,7 @@
                   "update_time_stamp": "",
                   "locator_variable": "",
                   "locator_variable_name": "",
-                  "image_url": "https://prodauteurartefacts.blob.core.windows.net/test-screenshots/test_screenshots/untagged_screenshot/29b5d481-e4e6-4ace-bfd4-71787724a94a.webp",
+                  "image_url": "https://prodauteurartefacts.blob.core.windows.net/test-screenshots/test_screenshots/untagged_screenshot/02661084-681f-405b-a91f-8113046d4d87.webp",
                   "alternative_xpaths": [],
                   "attribute": "",
                   "value_description": "",
@@ -2138,12 +2138,12 @@
                   "api_data": {},
                   "output_variables": {},
                   "visual_context": null,
-                  "reasoning": "PRIMARY: wait for the Changelog page heading to load"
+                  "reasoning": "PRIMARY: wait for the Changelog page to load"
                 }
               ],
               "status": "success",
-              "start_timestamp": "2026-11-20T05:46:42.401668+00:00",
-              "end_timestamp": "2026-11-20T05:46:46.452Z",
+              "start_timestamp": "2026-11-20T09:22:33.175487+00:00",
+              "end_timestamp": "2026-11-20T09:22:36.594Z",
               "type": "agent_generated",
               "tags": [],
               "html_paths": [],
@@ -2177,7 +2177,7 @@
               "reason": "",
               "title": "",
               "used_variables": [],
-              "reasoning": "PRIMARY: wait for the Changelog page heading to load"
+              "reasoning": "PRIMARY: wait for the Changelog page to load"
             }
           ],
           "generative_id": "",
@@ -2186,10 +2186,10 @@
           "status": "success"
         },
         {
-          "instruction_id": "6bef9981-eb19-4617-b508-e86512abc613",
+          "instruction_id": "b5f6413a-7cf2-474e-9b4d-08a3e3925182",
           "instruction_class": "driver_action",
           "module_id": "",
-          "instruction": "Checking the displayed changelog entry order",
+          "instruction": "Checking the displayed changelog order",
           "command": "TEXTUAL_ANALYZER",
           "error": null,
           "parent_instruction_id": "",
@@ -2197,11 +2197,11 @@
           "classification_error": {},
           "operations": [
             {
-              "operation_id": "6923ab85-6b63-40ac-be79-c64c29972bfd",
-              "instruction_id": "6bef9981-eb19-4617-b508-e86512abc613",
-              "instruction": "Checking the displayed changelog entry order",
-              "intent": "Checking the displayed changelog entry order",
-              "operation_start": "2026-11-20T05:47:00.380063+00:00",
+              "operation_id": "d26bd7b3-b0ed-46b5-8c55-a5905a22b950",
+              "instruction_id": "b5f6413a-7cf2-474e-9b4d-08a3e3925182",
+              "instruction": "Checking the displayed changelog order",
+              "intent": "Checking the displayed changelog order",
+              "operation_start": "2026-11-20T09:22:52.189275+00:00",
               "operation_end": "",
               "status": "success",
               "command": "TEXTUAL_ANALYZER",
@@ -2216,7 +2216,7 @@
               "grounded_by": "",
               "error_message": "",
               "code_snippet": "",
-              "sub_instruction_obj": "{\"operation\":\"Checking the displayed changelog entry order\",\"agent\":\"Operation Agent\",\"operation_dict\":{\"operation_type\":\"TEXTUAL_ANALYZER\"},\"reasoning\":\"whether the displayed Changelog entries are ordered from newest to oldest by their relative timestamps\",\"variable\":{},\"secrets\":{},\"params\":{},\"code_js\":\"(() => { const ages = [...el(16).querySelectorAll('time')].map(t => { const m = t.innerText.match(/^(\\\\d+)\\\\s+seconds?\\\\s+ago$/); return m ? Number(m[1]) : NaN; }); return ages.length > 0 && ages.every((age, i) => i === 0 || ages[i - 1] <= age); })()\",\"wrapped_js\":\"(els) => {\\n  const __m = {16: 0};\\n  const el = (i) => els[__m[i]];\\n  const __v = ((() => { const ages = [...el(16).querySelectorAll('time')].map(t => { const m = t.innerText.match(/^(\\\\d+)\\\\s+seconds?\\\\s+ago$/); return m ? Number(m[1]) : NaN; }); return ages.length > 0 && ages.every((age, i) => i === 0 || ages[i - 1] <= age); })());\\n  return (typeof __v === 'boolean' ? String(__v) : __v);\\n}\",\"locators\":[\"internal:text=\\\"Export posts to CSVShipped by hand17 seconds agoSearch the boardVerified with\\\"i\"],\"operator\":\"equals\",\"transforms\":[],\"query\":\"whether the displayed Changelog entries are ordered from newest to oldest by their relative timestamps\",\"expected_value\":\"true\",\"needs_unit_conversion\":false,\"condition\":\"Every displayed entry is ordered newest first.\"}",
+              "sub_instruction_obj": "{\"operation\":\"Checking the displayed changelog order\",\"agent\":\"Operation Agent\",\"operation_dict\":{\"operation_type\":\"TEXTUAL_ANALYZER\"},\"reasoning\":\"whether the displayed entries in the Changelog list are ordered from newest to oldest by their shown relative timestamps\",\"variable\":{},\"secrets\":{},\"params\":{},\"code_js\":\"(()=>{const items=Array.from(el(16).querySelectorAll(':scope > li'));const age=li=>{const s=li.querySelector('time')?.innerText.trim().toLowerCase()||'';const m=s.match(/(\\\\d+)\\\\s*(second|minute|hour|day|week|month|year)/);if(!m)return NaN;const units={second:1,minute:60,hour:3600,day:86400,week:604800,month:2592000,year:31536000};return +m[1]*units[m[2]]};return items.length>0&&items.every((li,i)=>i===0||age(items[i-1])<=age(li));})()\",\"wrapped_js\":\"(els) => {\\n  const __m = {16: 0};\\n  const el = (i) => els[__m[i]];\\n  const __v = ((()=>{const items=Array.from(el(16).querySelectorAll(':scope > li'));const age=li=>{const s=li.querySelector('time')?.innerText.trim().toLowerCase()||'';const m=s.match(/(\\\\d+)\\\\s*(second|minute|hour|day|week|month|year)/);if(!m)return NaN;const units={second:1,minute:60,hour:3600,day:86400,week:604800,month:2592000,year:31536000};return +m[1]*units[m[2]]};return items.length>0&&items.every((li,i)=>i===0||age(items[i-1])<=age(li));})());\\n  return (typeof __v === 'boolean' ? String(__v) : __v);\\n}\",\"locators\":[\"internal:text=\\\"Export posts to CSVShipped by hand19 seconds agoSearch the boardVerified with\\\"i\"],\"operator\":\"equals\",\"transforms\":[],\"query\":\"whether the displayed entries in the Changelog list are ordered from newest to oldest by their shown relative timestamps\",\"expected_value\":\"true\",\"needs_unit_conversion\":false,\"condition\":\"Every displayed entry is ordered newest first.\"}",
               "test_id": "",
               "test_version": "",
               "action": "",
@@ -2227,14 +2227,14 @@
               "update_time_stamp": "",
               "locator_variable": "",
               "locator_variable_name": "",
-              "image_url": "https://prodauteurartefacts.blob.core.windows.net/test-screenshots/test_screenshots/untagged_screenshot/6923ab85-6b63-40ac-be79-c64c29972bfd.webp",
+              "image_url": "https://prodauteurartefacts.blob.core.windows.net/test-screenshots/test_screenshots/untagged_screenshot/d26bd7b3-b0ed-46b5-8c55-a5905a22b950.webp",
               "alternative_xpaths": [],
               "attribute": "",
               "value_description": "",
               "url": "",
               "navigation_direction": "",
               "tagified_image_url": "",
-              "query_variable_name": "displayed_entries_newest_first",
+              "query_variable_name": "displayed_entries_newest_first_check",
               "query_variable_value": "true",
               "query_variable_type": "",
               "expected_value": "",
@@ -2320,14 +2320,14 @@
               "until_settle_ms": 0,
               "api_data": {},
               "output_variables": {
-                "displayed_entries_newest_first": "true"
+                "displayed_entries_newest_first_check": "true"
               },
               "visual_context": null,
-              "reasoning": "whether the displayed Changelog entries are ordered from newest to oldest by their relative timestamps"
+              "reasoning": "whether the displayed entries in the Changelog list are ordered from newest to oldest by their shown relative timestamps"
             }
           ],
           "status": "success",
-          "start_timestamp": "2026-11-20T05:47:00.380063+00:00",
+          "start_timestamp": "2026-11-20T09:22:52.189275+00:00",
           "end_timestamp": "",
           "type": "agent_generated",
           "tags": [],
@@ -2354,7 +2354,7 @@
           "network_assertion_content": {},
           "screenshot_command": "",
           "smartui_contents": {},
-          "generative_id": "ba5dc5b047ba49d68b783044c15fa090",
+          "generative_id": "a1dcd21474554ae2bbf855d42ca87fa2",
           "plan_id": "",
           "generative_objective": "Open the Acme dashboard Changelog page after shipping {{global.kane_request_title}}, then assert {{global.kane_request_title}} appears ahead of {{global.other_status_title}} and every displayed entry is ordered newest first.",
           "error_message": "",
@@ -2362,10 +2362,10 @@
           "reason": "",
           "title": "",
           "used_variables": [],
-          "reasoning": "whether the displayed Changelog entries are ordered from newest to oldest by their relative timestamps"
+          "reasoning": "whether the displayed entries in the Changelog list are ordered from newest to oldest by their shown relative timestamps"
         },
         {
-          "instruction_id": "f6ae189d-396e-425c-96c8-c39ec9870732",
+          "instruction_id": "1adeaa65-ed47-4e95-8fd7-9de08c124ecd",
           "instruction_class": "driver_action",
           "module_id": "",
           "instruction": "Checking the relative order of the two changelog entries",
@@ -2376,11 +2376,11 @@
           "classification_error": {},
           "operations": [
             {
-              "operation_id": "1a12e410-3e0c-4ed2-9319-6aeb874b36c8",
-              "instruction_id": "f6ae189d-396e-425c-96c8-c39ec9870732",
+              "operation_id": "ada31cac-31af-4138-b37f-1a1096b3cb79",
+              "instruction_id": "1adeaa65-ed47-4e95-8fd7-9de08c124ecd",
               "instruction": "Checking the relative order of the two changelog entries",
               "intent": "Checking the relative order of the two changelog entries",
-              "operation_start": "2026-11-20T05:47:00.381833+00:00",
+              "operation_start": "2026-11-20T09:22:52.189905+00:00",
               "operation_end": "",
               "status": "success",
               "command": "TEXTUAL_ANALYZER",
@@ -2395,7 +2395,7 @@
               "grounded_by": "",
               "error_message": "",
               "code_snippet": "",
-              "sub_instruction_obj": "{\"operation\":\"Checking the relative order of the two changelog entries\",\"agent\":\"Operation Agent\",\"operation_dict\":{\"operation_type\":\"TEXTUAL_ANALYZER\"},\"reasoning\":\"whether the {{global.kane_request_title}} entry appears before the {{global.other_status_title}} entry in the Changelog list\",\"variable\":{},\"secrets\":{},\"params\":{},\"code_js\":\"(() => { const items = [...el(16).querySelectorAll(':scope > *')]; const p = title => items.findIndex(x => x.innerText.includes(title)); return p('{{global.kane_request_title}}') < p('{{global.other_status_title}}'); })()\",\"wrapped_js\":\"(els) => {\\n  const __m = {16: 0};\\n  const el = (i) => els[__m[i]];\\n  const __v = ((() => { const items = [...el(16).querySelectorAll(':scope > *')]; const p = title => items.findIndex(x => x.innerText.includes(title)); return p('{{global.kane_request_title}}') < p('{{global.other_status_title}}'); })());\\n  return (typeof __v === 'boolean' ? String(__v) : __v);\\n}\",\"locators\":[\"internal:text=\\\"Export posts to CSVShipped by hand17 seconds agoSearch the boardVerified with\\\"i\"],\"operator\":\"equals\",\"transforms\":[],\"query\":\"whether the {{global.kane_request_title}} entry appears before the {{global.other_status_title}} entry in the Changelog list\",\"expected_value\":\"true\",\"needs_unit_conversion\":false,\"condition\":\"{{global.kane_request_title}} appears ahead of {{global.other_status_title}}.\"}",
+              "sub_instruction_obj": "{\"operation\":\"Checking the relative order of the two changelog entries\",\"agent\":\"Operation Agent\",\"operation_dict\":{\"operation_type\":\"TEXTUAL_ANALYZER\"},\"reasoning\":\"whether the {{global.kane_request_title}} entry appears ahead of the {{global.other_status_title}} entry in the Changelog list\",\"variable\":{},\"secrets\":{},\"params\":{},\"code_js\":\"(()=>{const items=Array.from(el(16).querySelectorAll(':scope > li'));const title=x=>x.childNodes[0]?.textContent.trim()||x.innerText.split('\\\\n')[0].trim();return items.findIndex(x=>title(x)==='{{global.kane_request_title}}')<items.findIndex(x=>title(x)==='{{global.other_status_title}}');})()\",\"wrapped_js\":\"(els) => {\\n  const __m = {16: 0};\\n  const el = (i) => els[__m[i]];\\n  const __v = ((()=>{const items=Array.from(el(16).querySelectorAll(':scope > li'));const title=x=>x.childNodes[0]?.textContent.trim()||x.innerText.split('\\\\n')[0].trim();return items.findIndex(x=>title(x)==='{{global.kane_request_title}}')<items.findIndex(x=>title(x)==='{{global.other_status_title}}');})());\\n  return (typeof __v === 'boolean' ? String(__v) : __v);\\n}\",\"locators\":[\"internal:text=\\\"Export posts to CSVShipped by hand19 seconds agoSearch the boardVerified with\\\"i\"],\"operator\":\"equals\",\"transforms\":[],\"query\":\"whether the {{global.kane_request_title}} entry appears ahead of the {{global.other_status_title}} entry in the Changelog list\",\"expected_value\":\"true\",\"needs_unit_conversion\":false,\"condition\":\"{{global.kane_request_title}} appears ahead of {{global.other_status_title}}.\"}",
               "test_id": "",
               "test_version": "",
               "action": "",
@@ -2406,14 +2406,14 @@
               "update_time_stamp": "",
               "locator_variable": "",
               "locator_variable_name": "",
-              "image_url": "https://prodauteurartefacts.blob.core.windows.net/test-screenshots/test_screenshots/untagged_screenshot/1a12e410-3e0c-4ed2-9319-6aeb874b36c8.webp",
+              "image_url": "https://prodauteurartefacts.blob.core.windows.net/test-screenshots/test_screenshots/untagged_screenshot/ada31cac-31af-4138-b37f-1a1096b3cb79.webp",
               "alternative_xpaths": [],
               "attribute": "",
               "value_description": "",
               "url": "",
               "navigation_direction": "",
               "tagified_image_url": "",
-              "query_variable_name": "request_title_ahead_of_other_status_title",
+              "query_variable_name": "kane_request_ahead_of_other_status_check",
               "query_variable_value": "false",
               "query_variable_type": "",
               "expected_value": "",
@@ -2499,14 +2499,14 @@
               "until_settle_ms": 0,
               "api_data": {},
               "output_variables": {
-                "request_title_ahead_of_other_status_title": "false"
+                "kane_request_ahead_of_other_status_check": "false"
               },
               "visual_context": null,
-              "reasoning": "whether the {{global.kane_request_title}} entry appears before the {{global.other_status_title}} entry in the Changelog list"
+              "reasoning": "whether the {{global.kane_request_title}} entry appears ahead of the {{global.other_status_title}} entry in the Changelog list"
             }
           ],
           "status": "success",
-          "start_timestamp": "2026-11-20T05:47:00.381833+00:00",
+          "start_timestamp": "2026-11-20T09:22:52.189905+00:00",
           "end_timestamp": "",
           "type": "agent_generated",
           "tags": [],
@@ -2533,7 +2533,7 @@
           "network_assertion_content": {},
           "screenshot_command": "",
           "smartui_contents": {},
-          "generative_id": "ba5dc5b047ba49d68b783044c15fa090",
+          "generative_id": "a1dcd21474554ae2bbf855d42ca87fa2",
           "plan_id": "",
           "generative_objective": "Open the Acme dashboard Changelog page after shipping {{global.kane_request_title}}, then assert {{global.kane_request_title}} appears ahead of {{global.other_status_title}} and every displayed entry is ordered newest first.",
           "error_message": "",
@@ -2541,10 +2541,10 @@
           "reason": "",
           "title": "",
           "used_variables": [],
-          "reasoning": "whether the {{global.kane_request_title}} entry appears before the {{global.other_status_title}} entry in the Changelog list"
+          "reasoning": "whether the {{global.kane_request_title}} entry appears ahead of the {{global.other_status_title}} entry in the Changelog list"
         },
         {
-          "instruction_id": "15538fa8-f1b0-4c11-afd4-c5467c56ea8b",
+          "instruction_id": "51cfa605-70cf-4349-bdd4-916e7dc5bec0",
           "instruction_class": "non_driver_action",
           "module_id": "",
           "instruction": "Assertion check",
@@ -2566,10 +2566,10 @@
                       "transforms": [],
                       "json_path": null,
                       "expected": "true",
-                      "extracted_value": "{{request_title_ahead_of_other_status_title}}",
-                      "store_key": "request_title_ahead_of_other_status_title",
+                      "extracted_value": "{{kane_request_ahead_of_other_status_check}}",
+                      "store_key": "kane_request_ahead_of_other_status_check",
                       "variable_refs": {
-                        "{{request_title_ahead_of_other_status_title}}": "false",
+                        "{{kane_request_ahead_of_other_status_check}}": "false",
                         "{{global.kane_request_title}}": "Search the board",
                         "{{global.other_status_title}}": "Export posts to CSV"
                       }
@@ -2581,27 +2581,27 @@
                       "transforms": [],
                       "json_path": null,
                       "expected": "true",
-                      "extracted_value": "{{displayed_entries_newest_first}}",
-                      "store_key": "displayed_entries_newest_first",
+                      "extracted_value": "{{displayed_entries_newest_first_check}}",
+                      "store_key": "displayed_entries_newest_first_check",
                       "variable_refs": {
-                        "{{displayed_entries_newest_first}}": "true"
+                        "{{displayed_entries_newest_first_check}}": "true"
                       }
                     }
                   ],
                   "sub_checks": [
                     {
                       "description": "{{global.kane_request_title}} appears ahead of {{global.other_status_title}}.",
-                      "store_key": "request_title_ahead_of_other_status_title",
+                      "store_key": "kane_request_ahead_of_other_status_check",
                       "expected_value": "true",
-                      "extracted_value": "{{request_title_ahead_of_other_status_title}}",
+                      "extracted_value": "{{kane_request_ahead_of_other_status_check}}",
                       "operator": "equals",
                       "transforms": []
                     },
                     {
                       "description": "Every displayed entry is ordered newest first.",
-                      "store_key": "displayed_entries_newest_first",
+                      "store_key": "displayed_entries_newest_first_check",
                       "expected_value": "true",
-                      "extracted_value": "{{displayed_entries_newest_first}}",
+                      "extracted_value": "{{displayed_entries_newest_first_check}}",
                       "operator": "equals",
                       "transforms": []
                     }
@@ -2624,11 +2624,11 @@
           "classification_error": {},
           "operations": [
             {
-              "operation_id": "2ccbf8ba-c065-4e9c-aa2e-9a4568cf5ebc",
-              "instruction_id": "15538fa8-f1b0-4c11-afd4-c5467c56ea8b",
+              "operation_id": "5291831f-4070-4d4d-8e7a-f0fe5dd9e907",
+              "instruction_id": "51cfa605-70cf-4349-bdd4-916e7dc5bec0",
               "instruction": "Assertion check",
               "intent": "Assertion check",
-              "operation_start": "2026-11-20T05:47:00.940649+00:00",
+              "operation_start": "2026-11-20T09:22:52.774684+00:00",
               "operation_end": "",
               "status": "failed",
               "command": "ASSERTION",
@@ -2654,7 +2654,7 @@
               "update_time_stamp": "",
               "locator_variable": "",
               "locator_variable_name": "",
-              "image_url": "https://prodauteurartefacts.blob.core.windows.net/test-screenshots/test_screenshots/untagged_screenshot/2ccbf8ba-c065-4e9c-aa2e-9a4568cf5ebc.webp",
+              "image_url": "https://prodauteurartefacts.blob.core.windows.net/test-screenshots/test_screenshots/untagged_screenshot/5291831f-4070-4d4d-8e7a-f0fe5dd9e907.webp",
               "alternative_xpaths": [],
               "attribute": "",
               "value_description": "",
@@ -2726,10 +2726,10 @@
                     "transforms": [],
                     "json_path": null,
                     "expected": "true",
-                    "extracted_value": "{{request_title_ahead_of_other_status_title}}",
-                    "store_key": "request_title_ahead_of_other_status_title",
+                    "extracted_value": "{{kane_request_ahead_of_other_status_check}}",
+                    "store_key": "kane_request_ahead_of_other_status_check",
                     "variable_refs": {
-                      "{{request_title_ahead_of_other_status_title}}": "false",
+                      "{{kane_request_ahead_of_other_status_check}}": "false",
                       "{{global.kane_request_title}}": "Search the board",
                       "{{global.other_status_title}}": "Export posts to CSV"
                     }
@@ -2741,33 +2741,33 @@
                     "transforms": [],
                     "json_path": null,
                     "expected": "true",
-                    "extracted_value": "{{displayed_entries_newest_first}}",
-                    "store_key": "displayed_entries_newest_first",
+                    "extracted_value": "{{displayed_entries_newest_first_check}}",
+                    "store_key": "displayed_entries_newest_first_check",
                     "variable_refs": {
-                      "{{displayed_entries_newest_first}}": "true"
+                      "{{displayed_entries_newest_first_check}}": "true"
                     }
                   }
                 ],
                 "sub_checks": [
                   {
                     "description": "{{global.kane_request_title}} appears ahead of {{global.other_status_title}}.",
-                    "store_key": "request_title_ahead_of_other_status_title",
+                    "store_key": "kane_request_ahead_of_other_status_check",
                     "expected_value": "true",
-                    "extracted_value": "{{request_title_ahead_of_other_status_title}}",
+                    "extracted_value": "{{kane_request_ahead_of_other_status_check}}",
                     "operator": "equals",
                     "transforms": []
                   },
                   {
                     "description": "Every displayed entry is ordered newest first.",
-                    "store_key": "displayed_entries_newest_first",
+                    "store_key": "displayed_entries_newest_first_check",
                     "expected_value": "true",
-                    "extracted_value": "{{displayed_entries_newest_first}}",
+                    "extracted_value": "{{displayed_entries_newest_first_check}}",
                     "operator": "equals",
                     "transforms": []
                   }
                 ],
                 "composite_operator": "and",
-                "verification": "The Changelog page shows {{global.kane_request_title}} ahead of {{global.other_status_title}}, and the displayed entries are ordered newest first.",
+                "verification": "The Changelog page shows {{global.kane_request_title}} ahead of {{global.other_status_title}}, with every displayed entry ordered newest first.",
                 "claim": "{{global.kane_request_title}} appears ahead of {{global.other_status_title}} and every displayed entry is ordered newest first."
               },
               "assertion_tree": {
@@ -2782,10 +2782,10 @@
                     "transforms": [],
                     "json_path": null,
                     "expected": "true",
-                    "extracted_value": "{{request_title_ahead_of_other_status_title}}",
-                    "store_key": "request_title_ahead_of_other_status_title",
+                    "extracted_value": "{{kane_request_ahead_of_other_status_check}}",
+                    "store_key": "kane_request_ahead_of_other_status_check",
                     "variable_refs": {
-                      "{{request_title_ahead_of_other_status_title}}": "false",
+                      "{{kane_request_ahead_of_other_status_check}}": "false",
                       "{{global.kane_request_title}}": "Search the board",
                       "{{global.other_status_title}}": "Export posts to CSV"
                     }
@@ -2797,10 +2797,10 @@
                     "transforms": [],
                     "json_path": null,
                     "expected": "true",
-                    "extracted_value": "{{displayed_entries_newest_first}}",
-                    "store_key": "displayed_entries_newest_first",
+                    "extracted_value": "{{displayed_entries_newest_first_check}}",
+                    "store_key": "displayed_entries_newest_first_check",
                     "variable_refs": {
-                      "{{displayed_entries_newest_first}}": "true"
+                      "{{displayed_entries_newest_first_check}}": "true"
                     }
                   }
                 ],
@@ -2808,7 +2808,7 @@
                 "passed": false,
                 "step": 5,
                 "is_final": true,
-                "verification": "The Changelog page shows {{global.kane_request_title}} ahead of {{global.other_status_title}}, and the displayed entries are ordered newest first.",
+                "verification": "The Changelog page shows {{global.kane_request_title}} ahead of {{global.other_status_title}}, with every displayed entry ordered newest first.",
                 "error_message": "Checkpoint failed: \"{{global.kane_request_title}} appears ahead of {{global.other_status_title}} and every displayed entry is ordered newest first.\"",
                 "duration_ms": 0
               },
@@ -2850,7 +2850,7 @@
             }
           ],
           "status": "failed",
-          "start_timestamp": "2026-11-20T05:47:00.940649+00:00",
+          "start_timestamp": "2026-11-20T09:22:52.774684+00:00",
           "end_timestamp": "",
           "type": "agent_generated",
           "tags": [],
@@ -2877,7 +2877,7 @@
           "network_assertion_content": {},
           "screenshot_command": "",
           "smartui_contents": {},
-          "generative_id": "ba5dc5b047ba49d68b783044c15fa090",
+          "generative_id": "a1dcd21474554ae2bbf855d42ca87fa2",
           "plan_id": "",
           "generative_objective": "Open the Acme dashboard Changelog page after shipping {{global.kane_request_title}}, then assert {{global.kane_request_title}} appears ahead of {{global.other_status_title}} and every displayed entry is ordered newest first.",
           "error_message": "",
@@ -2893,8 +2893,8 @@
       "result_code": null,
       "bifurcation_context": [],
       "approach_reason": [
-        "The agent proceeded to the Changelog after waiting on a status control associated with a different post. The target post, “Kane check request,” was still shown as Open in the captured dashboard state, so it could not appear in the shipped changelog.",
-        "Update the automation to select the status control for the exact request title, set it to Shipped, verify that change on the posts page, and only then open the Changelog and check its order."
+        "The target post was not newly shipped for this check. The Changelog shows “Export posts to CSV” at 19 seconds ago above “Search the board” at 52 seconds ago, which is correctly newest-first but does not satisfy the requested title order.",
+        "Reset or create the target post in a non-shipped state, ship it during this run, and record its new changelog event before asserting it is first."
       ],
       "one_liner": null
     }
@@ -2902,7 +2902,7 @@
   "modules": [],
   "uploaded_files": [],
   "test_params": [],
-  "test_level_variables": "[{\"name\":\"displayed_entries_newest_first\",\"value\":\"true\",\"value_type\":\"test_level\",\"variable_description\":\"ANALYZE result\"},{\"name\":\"request_title_ahead_of_other_status_title\",\"value\":\"false\",\"value_type\":\"test_level\",\"variable_description\":\"ANALYZE result\"}]",
+  "test_level_variables": "[{\"name\":\"displayed_entries_newest_first_check\",\"value\":\"true\",\"value_type\":\"test_level\",\"variable_description\":\"ANALYZE result\"},{\"name\":\"kane_request_ahead_of_other_status_check\",\"value\":\"false\",\"value_type\":\"test_level\",\"variable_description\":\"ANALYZE result\"}]",
   "test_global_variables": [
     {
       "id": 648465,
@@ -2916,8 +2916,8 @@
     {
       "id": 648466,
       "name": "fresh_board_name",
-      "value": "Kane Board fa4c20",
-      "session_value": "Kane Board fa4c20",
+      "value": "Kane Board 804685",
+      "session_value": "Kane Board 804685",
       "is_persist": false,
       "environment_id": 0,
       "environment_name": "No Env"
@@ -3017,6 +3017,15 @@
       "name": "stale_changelog_title",
       "value": "Search the board",
       "session_value": "Search the board",
+      "is_persist": false,
+      "environment_id": 0,
+      "environment_name": "No Env"
+    },
+    {
+      "id": 650152,
+      "name": "claimed_request_title",
+      "value": "Slack notifications",
+      "session_value": "Slack notifications",
       "is_persist": false,
       "environment_id": 0,
       "environment_name": "No Env"

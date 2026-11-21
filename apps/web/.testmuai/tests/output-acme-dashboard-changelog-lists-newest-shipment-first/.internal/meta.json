@@ -8,11 +8,12 @@
   "session_name": "acme-dashboard-changelog-lists-newest-shipment-first",
   "executions": [
     {
-      "execution_id": "1175061a-8c48-4f88-8e7e-52c07aa1b674",
+      "execution_id": "c9dcbea4-f233-4ba8-9310-7b455e85e0d3",
       "run_kind": "author",
       "status": "failed",
       "valid": true,
-      "at": "2026-11-20T05:47:12.563Z"
+      "uploaded": true,
+      "at": "2026-11-20T09:23:20.008Z"
     }
   ]
 }

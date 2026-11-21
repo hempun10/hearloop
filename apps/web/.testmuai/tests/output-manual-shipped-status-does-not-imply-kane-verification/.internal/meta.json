@@ -1,0 +1,19 @@
+{
+  "commit_id": "3d6b20a1-f5a8-433a-9c7b-0f86a2c330ed",
+  "test_id": "4e6bce98-fded-4239-b573-f9b207eaf2bc",
+  "testcase_id": "01M7W6TCKCAH23QWKSR13MVGVT",
+  "project_id": "01M7S4DG4PE128S4KT7FAECK73",
+  "folder_id": "01M7SCZZ4PTY0XA7HXMZFYZA31",
+  "org_id": "3436657",
+  "session_name": "manual-shipped-status-does-not-imply-kane-verification",
+  "executions": [
+    {
+      "execution_id": "a477c7d8-61b6-46c6-a7cd-a8cb6e0683d0",
+      "run_kind": "author",
+      "status": "failed",
+      "valid": true,
+      "uploaded": true,
+      "at": "2026-11-20T14:01:49.894Z"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "commit_id": "35fc814d-c80e-4bd4-a118-f5270f5aa7c3",
+  "test_id": "0fdc5645-9c62-4970-836b-ac2d19b58e30",
+  "testcase_id": "01M7W4Y492RTRBRJ83B0ZC43M4",
+  "project_id": "01M7S4DG4PE128S4KT7FAECK73",
+  "folder_id": "01M7SCZZ4PTY0XA7HXMZFYZA31",
+  "org_id": "3436657",
+  "session_name": "confirm-agent-held-request-move-after-work-stopping-warning",
+  "executions": [
+    {
+      "execution_id": "0ee44829-a1ca-4d9e-be80-775196ab7903",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "uploaded": true,
+      "at": "2026-11-20T13:57:57.651Z"
+    }
+  ]
+}

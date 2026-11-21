@@ -26,7 +26,7 @@ export function useMovePost(org: string) {
         <AlertDialogHeader>
           <AlertDialogTitle>{pending?.post.claimedBy ?? 'A coding agent'} is building this</AlertDialogTitle>
           <AlertDialogDescription>
-            Moving “{pending?.post.title}” to {pending && STATUS_LABEL[pending.status]} stops that work. The agent sees the change on its next check-in.
+            Moving it stops that work. “{pending?.post.title}” goes to {pending && STATUS_LABEL[pending.status]}, and the agent sees the change on its next check-in.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>

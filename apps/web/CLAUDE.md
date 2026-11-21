@@ -36,4 +36,41 @@ src/
 
 `bun run typecheck && bun run build` (from the repo root), then `bun run kane run <area>` for the area you touched.
 
+## Testing with Kane CLI: follow this every time, without being asked
+
+Any change to how the app behaves goes through this loop. The `kane-cli` skill has the details for each command.
+
+1. **Requirement first.** Write the expected behaviour in `kane/requirements/<area>.md`: plain sentences with the labels users see. Never hand-write tests or Kane objectives for new behaviour.
+2. **Give it to Kane.** A new file: `kane-cli context ingest kane/requirements/<area>.md --mode agent`. A changed file: `kane-cli maintain reconcile --from kane/requirements/<area>.md --source-id <area> --mode agent`.
+3. **Checkpoint: the user approves the use-cases.** List them with `kane-cli context list --json --inferred`, show the titles, then `kane-cli context review --approve <refs>`. Never approve on the user's behalf.
+4. **Design**, one use-case at a time: `kane-cli design tests --use-case <uc> --mode agent --max 4`. Never run two Kane commands that write the store at once.
+5. **Checkpoint: the user approves the designed tests.** Show the test titles, gaps and the variables that need values, then record the decision with `kane-cli context review`.
+6. **Test data.** Values for the variables Kane declares go in `scripts/seed-e2e.ts`, which writes `.testmuai/variables/assurance.json` (gitignored; passwords `secret: true`). Run `bun run e2e:seed` before every run.
+7. **First run, then batches.** Run each new test once with `kane-cli testmd run .testmuai/tests/<t>_test.md --agent --headless`. After that, replay together: `kane-cli testrun run <paths> --agent --headless < /dev/null`.
+8. **Coverage.** After a suite run, run `kane-cli cover gaps` and report the figure.
+9. **A test fails: classify it before touching anything.**
+   - App bug: post it on the board (hearloop's own loop), fix it, then rerun the failing test so it goes from fail to pass.
+   - The requirement changed: update the requirements file, then `maintain reconcile`.
+   - The test is wrong (no start page, wrong assertion, wrong data): `kane-cli maintain evolve <test-ref>` or `design tests --use-case <uc> --force`. Never edit a `_test.md` by hand.
+   - Kane or the environment failed: say so, and don't rerun a paid command blindly.
+   - Kane's verdict is a hint, not proof. An "automation_bug" can still be an app bug, so check the app.
+10. **Before a commit:** `bun run check`, then replay the suites for the areas you touched.
+
+The older objectives in `kane/suite.ts` (`bun run kane run|record <area>`) are regression replays. New behaviour goes through steps 1–9.
+
+### Guardrails
+
+- **Credits.** Say the cost before a paid step: design is about 15–20 credits a use-case, a first run about 25–45 a test, and replays are cheap.
+- **Memory.** The machine has 16 GB. Run one browser at a time, always `--headless`, never in parallel. Check `memory_pressure` before each run and stop below 20% free.
+- **Browser.** Helium: `KANE_CLI_CHROME_PATH=/Applications/Helium.app/Contents/MacOS/Helium` (`bun run kane` sets it).
+- **Sleep.** Run long suites under `caffeinate -i`, and keep the lid open: a sleeping Mac stalls the dev server and expires Kane's sign-in mid-run.
+- **Results.** When a failing command's output is cut off, read the verdict from Kane's own log, `~/.testmuai/kaneai/sessions/<id>/events.ndjson`.
+- **Ports.** Test servers use 3002 and up. Never 4000s or 5174.
+
+## Development process
+
+- Work on a branch, never `main`. One commit per logical change. Open a PR and get a review before merging.
+- Every bug is posted on the board, claimed, fixed, and shipped by a passing Kane verdict, just like a feature request.
+- Migrations run locally only. Apply them to production, and deploy, only when the user asks. List new migrations in the commit message.
+
 MCP server (`/mcp`, `features/mcp`): `bun run e2e:seed && bun run e2e:mcp` checks every protocol edge case; the Kane `mcp` area needs `bun run e2e:mcp --prep` after the seed (fresh OAuth clients each run).

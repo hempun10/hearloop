@@ -1,0 +1,25 @@
+{
+  "test_id": "8f351e81-e8b9-4e5c-98ac-016c8d9daf05",
+  "project_id": "01M7S4DG4PE128S4KT7FAECK73",
+  "folder_id": "01M7SCZZ4PTY0XA7HXMZFYZA31",
+  "org_id": "3436657",
+  "session_name": "general-tagline-stops-accepting-text-after-160-characters",
+  "commit_id": "4475352e-7b7e-43b8-b583-d53a76f444a0",
+  "testcase_id": "01M7YX69BRXR0ZQE4APC36CEDA",
+  "executions": [
+    {
+      "execution_id": "f95434d8-c405-45f6-9c7c-55d12dab93fc",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-21T11:19:39.100Z"
+    },
+    {
+      "execution_id": "447f7f95-298e-4896-b998-be1c6ca0e126",
+      "run_kind": "author",
+      "status": "passed",
+      "at": "2026-11-21T11:19:54.392Z",
+      "uploaded": true
+    }
+  ]
+}

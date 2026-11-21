@@ -1,18 +1,19 @@
 {
+  "commit_id": "e9f88dd2-8712-4267-8da5-82e8c6152e70",
   "test_id": "3e5d6030-4f48-4f77-8e36-c4bf606d448b",
+  "testcase_id": "01M7VJG01V891GSND1ZJR02G8P",
   "project_id": "01M7S4DG4PE128S4KT7FAECK73",
   "folder_id": "01M7SCZZ4PTY0XA7HXMZFYZA31",
   "org_id": "3436657",
   "session_name": "creator-enters-newly-created-board-dashboard-without-a",
-  "commit_id": "86ef3f6e-a234-43ce-8306-c251a5ecb451",
-  "testcase_id": "01M7VJG01V891GSND1ZJR02G8P",
   "executions": [
     {
-      "execution_id": "134f3a00-1595-435b-9506-5aea4cfc1408",
+      "execution_id": "49786830-f1e7-40f2-a869-8c7c1cab9ac4",
       "run_kind": "author",
       "status": "passed",
       "valid": true,
-      "at": "2026-11-20T04:14:46.049Z"
+      "uploaded": true,
+      "at": "2026-11-20T09:48:23.432Z"
     }
   ]
 }

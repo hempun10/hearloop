@@ -1,0 +1,25 @@
+{
+  "test_id": "89e6ee50-604a-4fbf-8813-6eb452884432",
+  "project_id": "01M7S4DG4PE128S4KT7FAECK73",
+  "folder_id": "01M7SCZZ4PTY0XA7HXMZFYZA31",
+  "org_id": "3436657",
+  "session_name": "acme-dashboard-changelog-lists-newest-shipment-first-2",
+  "commit_id": "2a6ad735-a9e2-4801-b7ea-e22159326a29",
+  "testcase_id": "01M7WPVEGNZE8DNV8SRPZ6NCAZ",
+  "executions": [
+    {
+      "execution_id": "e9950c81-76e6-4253-8352-e2d0699b145a",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-20T14:50:36.900Z"
+    },
+    {
+      "execution_id": "9ade6096-6509-4258-b3bd-7581d79b4eb6",
+      "run_kind": "author",
+      "status": "passed",
+      "at": "2026-11-20T14:50:52.864Z",
+      "uploaded": true
+    }
+  ]
+}

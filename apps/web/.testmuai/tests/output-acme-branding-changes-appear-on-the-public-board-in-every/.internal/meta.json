@@ -1,0 +1,25 @@
+{
+  "test_id": "2c145448-21fb-43dc-98bd-b82a91734ef3",
+  "project_id": "01M7S4DG4PE128S4KT7FAECK73",
+  "folder_id": "01M7SCZZ4PTY0XA7HXMZFYZA31",
+  "org_id": "3436657",
+  "session_name": "acme-branding-changes-appear-on-the-public-board-in-every",
+  "commit_id": "9831dfa6-305b-4030-b7fa-51678ae3338b",
+  "testcase_id": "01M7WQYXH51BNWF88ZF8FKX054",
+  "executions": [
+    {
+      "execution_id": "bc69cf83-f611-4dc2-9ee4-0048193f919d",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-20T15:14:59.968Z"
+    },
+    {
+      "execution_id": "6787f7bd-d7eb-4c5d-8888-7695f7f482cc",
+      "run_kind": "author",
+      "status": "passed",
+      "at": "2026-11-20T15:15:18.274Z",
+      "uploaded": true
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "test_id": "847b7c22-c908-4ccf-a7a3-4a27e1777400",
+  "project_id": "01M7S4DG4PE128S4KT7FAECK73",
+  "folder_id": "01M7SCZZ4PTY0XA7HXMZFYZA31",
+  "org_id": "3436657",
+  "session_name": "general-board-name-stops-accepting-text-after-60-characters",
+  "commit_id": "fc575f6a-5436-4352-a679-d7eac168104e",
+  "testcase_id": "01M7YX0XKBB7T9YCJJ5Y5Z2S0A",
+  "executions": [
+    {
+      "execution_id": "5facaaf0-2df8-4820-8996-dc2c486c5717",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-21T11:16:48.052Z"
+    },
+    {
+      "execution_id": "405d64d3-7768-4c77-b995-d2a1301845bf",
+      "run_kind": "author",
+      "status": "passed",
+      "at": "2026-11-21T11:17:09.501Z",
+      "uploaded": true
+    }
+  ]
+}

@@ -49,6 +49,7 @@ INSERT INTO posts (org_id, title, body, status, votes) SELECT id, 'Dark mode tog
 INSERT INTO posts (org_id, title, body, status, votes) SELECT id, 'Search the board', 'Filter posts by title as I type.', 'shipped', 9 FROM orgs WHERE slug = 'acme';
 INSERT INTO posts (org_id, title, body, status, votes) SELECT id, 'Export posts to CSV', 'One click export from the dashboard.', 'open', 7 FROM orgs WHERE slug = 'acme';
 INSERT INTO posts (org_id, title, body, status, votes) SELECT id, 'Slack notifications', 'Post to a channel when a request ships.', 'building', 5 FROM orgs WHERE slug = 'acme';
+INSERT INTO posts (org_id, title, body, status, votes) SELECT id, 'Weekly digest email', 'A Monday email with what shipped last week.', 'building', 4 FROM orgs WHERE slug = 'acme';
 INSERT INTO posts (org_id, title, body, status, votes) SELECT id, 'Kane check request', 'A request the Kane dashboard suite votes on, ships and deletes.', 'open', 0 FROM orgs WHERE slug = 'acme';
 INSERT INTO posts (org_id, title, body, status, votes) SELECT id, '${LONG_TITLE}', 'A title with one very long word.', 'open', 1 FROM orgs WHERE slug = 'acme';
 INSERT INTO api_tokens (org_id, name, token_hash, hint) SELECT id, 'Claude Code', 'seed-claim-not-a-real-token', 'mcp' FROM orgs WHERE slug = 'acme';
@@ -81,6 +82,9 @@ const values: Record<string, string> = {
   kane_request_title: 'Search the board',
   loop_api_probe_url: `${APP}/api/acme/posts`,
   stale_changelog_title: 'Search the board',
+  claimed_request_title: 'Slack notifications',
+  unclaimed_request_title: 'Weekly digest email',
+  planned_request_title: 'Dark mode toggle',
 }
 for (const [k, value] of Object.entries(values)) decl[k] = { ...decl[k], value, secret: k.endsWith('password') }
 await Bun.write(ASSURANCE, JSON.stringify(decl, null, 2))

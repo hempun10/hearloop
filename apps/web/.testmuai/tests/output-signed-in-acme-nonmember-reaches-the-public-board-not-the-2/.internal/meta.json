@@ -1,0 +1,25 @@
+{
+  "test_id": "70370438-0a33-40ec-a4c7-8714c8449c0b",
+  "project_id": "01M7S4DG4PE128S4KT7FAECK73",
+  "folder_id": "01M7SCZZ4PTY0XA7HXMZFYZA31",
+  "org_id": "3436657",
+  "session_name": "signed-in-acme-nonmember-reaches-the-public-board-not-the-2",
+  "commit_id": "f0239b4c-5369-4237-9b17-5cba53ba8074",
+  "testcase_id": "01M7WQCXJGYC98S2AF3H37DJ2D",
+  "executions": [
+    {
+      "execution_id": "f7e08c4c-e040-493a-9596-458c05f4bc0b",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-20T14:58:50.206Z"
+    },
+    {
+      "execution_id": "a6759500-6e25-4fde-8d84-facbee6b3287",
+      "run_kind": "author",
+      "status": "passed",
+      "at": "2026-11-20T14:59:03.630Z",
+      "uploaded": true
+    }
+  ]
+}

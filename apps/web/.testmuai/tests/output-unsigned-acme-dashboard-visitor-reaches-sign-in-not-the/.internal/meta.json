@@ -1,18 +1,25 @@
 {
-  "test_id": "338e3f37-d402-4b79-866d-fe8960389ec0",
+  "test_id": "196fe659-b31b-41ff-9ce0-74400aa8e1a0",
   "project_id": "01M7S4DG4PE128S4KT7FAECK73",
   "folder_id": "01M7SCZZ4PTY0XA7HXMZFYZA31",
   "org_id": "3436657",
   "session_name": "unsigned-acme-dashboard-visitor-reaches-sign-in-not-the",
-  "commit_id": "484b6f12-ee66-46fd-aa85-7c6463e40f62",
-  "testcase_id": "01M7VNTNW8NGX3HD8H1JFPS56J",
+  "commit_id": "b924160b-0059-47ae-bc47-2d749d19fe33",
+  "testcase_id": "01M7YXMSCW12BM3G4JVX48TVG5",
   "executions": [
     {
-      "execution_id": "15013cbf-dba9-4690-bb8f-607d0f876065",
+      "execution_id": "fc9a2379-50d0-4ef1-8b25-e1de8ea1d4e9",
       "run_kind": "author",
       "status": "failed",
       "valid": true,
-      "at": "2026-11-20T05:11:40.712Z"
+      "at": "2026-11-21T11:25:58.212Z"
+    },
+    {
+      "execution_id": "33b9f97c-164f-4858-b97d-3ec398706fd0",
+      "run_kind": "author",
+      "status": "failed",
+      "at": "2026-11-21T11:26:03.496Z",
+      "uploaded": true
     }
   ]
 }
