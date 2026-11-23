@@ -54,7 +54,7 @@ Members can move any request to any status. Nothing blocks the team. The public 
 
 - Lists the board's public changelog entries, newest first. **View public page** opens the public changelog.
 - Removing an entry asks for confirmation. After **Remove**, the entry is gone from the dashboard and the public changelog, and the request stays shipped.
-- Removing an entry that is already gone shows an error, not "Removed from the changelog".
+- Removing an entry that is already gone shows an error, not "Removed from the changelog". For example: open the dashboard changelog in two tabs, remove an entry in the second tab, then click **Remove** on the same entry in the first tab. The first tab shows "That entry was already removed. Reload to see the current changelog."
 
 ## Settings
 

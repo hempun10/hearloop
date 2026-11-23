@@ -1,0 +1,25 @@
+{
+  "test_id": "4546105f-94ff-40da-aa46-4dce8c22de8e",
+  "project_id": "01M7S4DG4PE128S4KT7FAECK73",
+  "folder_id": "01M8312EDHJ40P1B34NY1RA14A",
+  "org_id": "3436657",
+  "session_name": "stale-acme-changelog-removal-reports-exact-error-in-first",
+  "commit_id": "f8b55d9e-4051-40f1-b0be-d9a60be17f0d",
+  "testcase_id": "01M835QMGQ89G8PXN9T05NQWQA",
+  "executions": [
+    {
+      "execution_id": "78c16380-d1da-46ef-8422-ae09d3c663f5",
+      "run_kind": "author",
+      "status": "failed",
+      "valid": true,
+      "at": "2026-11-23T03:07:19.071Z"
+    },
+    {
+      "execution_id": "dbde807d-92bc-4467-89ce-0016b0d8a523",
+      "run_kind": "author",
+      "status": "failed",
+      "at": "2026-11-23T03:07:29.389Z",
+      "uploaded": true
+    }
+  ]
+}
