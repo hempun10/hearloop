@@ -1,0 +1,25 @@
+{
+  "test_id": "a422ee3a-cc18-479d-b3c3-7aaaaa6dee5b",
+  "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
+  "folder_id": "01M8393DTHT287AEC1VC5S0M7S",
+  "org_id": "3447606",
+  "session_name": "move-shipped-request-away-without-losing-kane-runs",
+  "commit_id": "20d25980-e55f-4a3b-ad72-39717b74b581",
+  "testcase_id": "01M84MEWY5RXHGGFNAXM416GSG",
+  "executions": [
+    {
+      "execution_id": "393c33ea-f598-4a2f-9f39-6389d13e4e99",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-23T16:45:08.055Z"
+    },
+    {
+      "execution_id": "bddbdfbd-df57-4cb0-a09c-1a1873dff276",
+      "run_kind": "author",
+      "status": "passed",
+      "at": "2026-11-23T16:45:25.092Z",
+      "uploaded": true
+    }
+  ]
+}
