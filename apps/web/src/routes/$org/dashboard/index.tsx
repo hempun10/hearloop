@@ -1,7 +1,6 @@
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { Link, createFileRoute } from '@tanstack/react-router'
 import { ArrowUpDown, Check, ChevronDown, ChevronUp, Inbox as InboxIcon, ListFilter, X } from 'lucide-react'
-import { useState } from 'react'
 import { z } from 'zod'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from '@hearloop/ui/components/dropdown-menu'
 import type { Post } from '#/db/schema'
@@ -19,6 +18,7 @@ export const Route = createFileRoute('/$org/dashboard/')({
   validateSearch: z.object({
     status: z.enum(POST_STATUSES).optional().catch(undefined),
     sort: z.literal('new').optional().catch(undefined),
+    q: z.string().optional().catch(undefined),
   }),
   loader: ({ context, params }) => context.queryClient.query(postListQuery(params.org)),
   component: Inbox,
@@ -29,18 +29,18 @@ const toolbarButton = 'inline-flex h-8 items-center gap-1.5 rounded-md px-2.5 te
 
 function Inbox() {
   const { org } = Route.useParams()
-  const { status, sort } = Route.useSearch()
+  const { status, sort, q = '' } = Route.useSearch()
   const navigate = Route.useNavigate()
   const { data: all } = useSuspenseQuery(postListQuery(org))
   const { move, dialog } = useMovePost(org)
-  const [search, setSearch] = useState('')
+  const setSearch = (v: string) => navigate({ search: (p) => ({ ...p, q: v || undefined }), replace: true })
 
-  const needle = search.trim().toLowerCase()
+  const needle = q.trim().toLowerCase()
   let posts = all.filter((p) => (!status || p.status === status) && (!needle || p.title.toLowerCase().includes(needle)))
   if (sort === 'new') posts = [...posts].sort((a, b) => b.id - a.id)
 
   return (
-    <Panel title={status ? STATUS_LABEL[status] : 'Posts'} className="flex flex-col" aside={<FilterColumn org={org} all={all} status={status} sort={sort} />} onSearch={setSearch}>
+    <Panel title={status ? STATUS_LABEL[status] : 'Posts'} className="flex flex-col" aside={<FilterColumn org={org} all={all} status={status} sort={sort} q={q} />} onSearch={setSearch} search={q}>
       <div className="flex items-center gap-1.5 px-3 pt-3 pb-2.5">
         <DropdownMenu>
           <DropdownMenuTrigger className={cn(toolbarButton, 'text-muted-foreground')}>
@@ -75,7 +75,7 @@ function Inbox() {
         <div className="flex flex-wrap gap-1.5 px-4 pb-2.5 animate-in fade-in-0 slide-in-from-top-1 duration-150 motion-reduce:animate-none">
           <span className="inline-flex h-[26px] items-center gap-1.5 rounded-md border bg-card pr-1 pl-2 text-xs">
             <StatusIcon status={status} className="size-3" />{STATUS_LABEL[status]}
-            <Link to="/$org/dashboard" params={{ org }} search={{ sort }} aria-label="Clear status filter" className="inline-flex size-5 items-center justify-center rounded text-faint hover:bg-accent hover:text-foreground">
+            <Link to="/$org/dashboard" params={{ org }} search={{ sort, q: q || undefined }} aria-label="Clear status filter" className="inline-flex size-5 items-center justify-center rounded text-faint hover:bg-accent hover:text-foreground">
               <X className="size-3" />
             </Link>
           </span>
@@ -83,7 +83,7 @@ function Inbox() {
       )}
       {posts.length === 0 ? (
         <p className="px-5 py-12 text-center text-sm text-faint">
-          {needle ? `Nothing matches “${search}”.` : status ? `Nothing ${STATUS_LABEL[status].toLowerCase()} right now.` : 'No posts yet. Share your board link to get the first one.'}
+          {needle ? `Nothing matches “${q}”.` : status ? `Nothing ${STATUS_LABEL[status].toLowerCase()} right now.` : 'No posts yet. Share your board link to get the first one.'}
         </p>
       ) : (
         <ul aria-label="Posts">
@@ -109,7 +109,7 @@ function Inbox() {
 }
 
 /** The 220px column beside the list: all posts, then one row per status with its count. */
-function FilterColumn({ org, all, status, sort }: { org: string; all: Post[]; status?: PostStatus; sort?: 'new' }) {
+function FilterColumn({ org, all, status, sort, q }: { org: string; all: Post[]; status?: PostStatus; sort?: 'new'; q: string }) {
   const row = (on: boolean) => cn(
     'flex h-8 w-full items-center gap-2.5 rounded-md px-2 text-[13px] font-medium select-none',
     on ? 'bg-secondary text-foreground' : 'text-muted-foreground hover:bg-accent/60 hover:text-foreground',
@@ -118,7 +118,7 @@ function FilterColumn({ org, all, status, sort }: { org: string; all: Post[]; st
     <nav aria-label="Filter by status" className="hidden h-full w-[220px] shrink-0 flex-col overflow-y-auto border-r px-3 pt-[15px] pb-4 [scrollbar-width:none] lg:flex">
       <div className="flex h-7 items-center pl-2"><span className="text-[15px] font-semibold">Posts</span></div>
       <div className="flex flex-col gap-1 pt-3">
-        <Link to="/$org/dashboard" params={{ org }} search={{ sort }} className={row(!status)}>
+        <Link to="/$org/dashboard" params={{ org }} search={{ sort, q: q || undefined }} className={row(!status)}>
           <InboxIcon className="size-4 shrink-0" /><span className="flex-1">All posts</span>
           <span className="text-[13px] text-faint tabular-nums">{all.length}</span>
         </Link>
@@ -126,7 +126,7 @@ function FilterColumn({ org, all, status, sort }: { org: string; all: Post[]; st
       <div className="flex flex-col gap-1 pt-4">
         <p className="px-2 pb-1 text-[13px] text-faint">Status</p>
         {POST_STATUSES.map((s) => (
-          <Link key={s} to="/$org/dashboard" params={{ org }} search={{ status: s, sort }} className={row(status === s)}>
+          <Link key={s} to="/$org/dashboard" params={{ org }} search={{ status: s, sort, q: q || undefined }} className={row(status === s)}>
             <StatusIcon status={s} /><span className="flex-1">{STATUS_LABEL[s]}</span>
             <span className="text-[13px] text-faint tabular-nums">{all.filter((p) => p.status === s).length}</span>
           </Link>

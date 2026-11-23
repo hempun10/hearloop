@@ -5,11 +5,12 @@ import { Kbd } from '@hearloop/ui/components/kbd'
 import { cn } from '@hearloop/ui/lib/utils'
 
 /** The rounded panel every dashboard page lives in, with its 52px top bar. */
-export function Panel({ title, actions, aside, onSearch, className, children }: {
+export function Panel({ title, actions, aside, onSearch, search, className, children }: {
   title: ReactNode
   actions?: ReactNode
   aside?: ReactNode
   onSearch?: (q: string) => void
+  search?: string
   className?: string
   children: ReactNode
 }) {
@@ -22,7 +23,7 @@ export function Panel({ title, actions, aside, onSearch, className, children }: 
             <h1 className="truncate text-[17px] font-semibold">{title}</h1>
             <div className="flex items-center gap-2">
               {actions}
-              {onSearch && <PanelSearch onSearch={onSearch} />}
+              {onSearch && <PanelSearch onSearch={onSearch} initial={search} />}
             </div>
           </div>
           <div key={typeof title === 'string' ? title : undefined}
@@ -35,8 +36,8 @@ export function Panel({ title, actions, aside, onSearch, className, children }: 
   )
 }
 
-function PanelSearch({ onSearch }: { onSearch: (q: string) => void }) {
-  const [q, setQ] = useState('')
+function PanelSearch({ onSearch, initial = '' }: { onSearch: (q: string) => void; initial?: string }) {
+  const [q, setQ] = useState(initial)
   const ref = useRef<HTMLInputElement>(null)
   useHotkeys('mod+k', (e) => { e.preventDefault(); ref.current?.focus() })
   const set = (v: string) => { setQ(v); onSearch(v) }

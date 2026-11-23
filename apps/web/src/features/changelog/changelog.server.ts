@@ -14,5 +14,6 @@ export function listChangelog(orgId: number, limit = 200) {
 
 export async function deleteEntry(orgId: number, id: number) {
   const orgPosts = db.select({ id: posts.id }).from(posts).where(eq(posts.orgId, orgId))
-  await db.delete(changelog).where(and(eq(changelog.id, id), inArray(changelog.postId, orgPosts)))
+  const gone = await db.delete(changelog).where(and(eq(changelog.id, id), inArray(changelog.postId, orgPosts))).returning({ id: changelog.id })
+  if (!gone.length) throw new Error('That entry was already removed. Reload to see the current changelog.')
 }

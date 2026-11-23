@@ -35,10 +35,12 @@ export async function insertPost(orgId: number, title: string, body: string) {
 export async function addVote(id: number, voter: string) {
   const post = await db.query.posts.findFirst({ where: eq(posts.id, id), columns: { votes: true } })
   if (!post) return null
-  const [fresh] = await db.insert(postVotes).values({ postId: id, voter }).onConflictDoNothing().returning({ postId: postVotes.postId })
-  if (!fresh) return { votes: post.votes }
-  const [row] = await db.update(posts).set({ votes: sql`${posts.votes} + 1` }).where(eq(posts.id, id)).returning({ votes: posts.votes })
-  return row ?? null
+  // one transaction: the count rises only when the insert added a row (changes() = 1), so the two never drift
+  const [, [row]] = await db.batch([
+    db.insert(postVotes).values({ postId: id, voter }).onConflictDoNothing(),
+    db.update(posts).set({ votes: sql`${posts.votes} + 1` }).where(and(eq(posts.id, id), sql`changes() = 1`)).returning({ votes: posts.votes }),
+  ])
+  return row ?? { votes: post.votes }
 }
 
 /**
