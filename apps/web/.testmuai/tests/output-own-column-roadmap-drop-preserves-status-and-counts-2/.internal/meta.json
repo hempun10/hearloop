@@ -1,0 +1,25 @@
+{
+  "test_id": "abb1739d-eac3-4cd0-8872-6cd7949e158d",
+  "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
+  "folder_id": "01M8393H0E7RN2CVV5HGBB8VSA",
+  "org_id": "3447606",
+  "session_name": "own-column-roadmap-drop-preserves-status-and-counts-2",
+  "commit_id": "e8857734-43ca-442f-945c-87737fa73663",
+  "testcase_id": "01M84P46871BQHQEG21J5B6E0E",
+  "executions": [
+    {
+      "execution_id": "5672c85b-6470-4e6b-8629-7be5411485e6",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-23T17:13:26.394Z"
+    },
+    {
+      "execution_id": "7c31a7b2-50ce-4b78-82b6-c020b958e447",
+      "run_kind": "author",
+      "status": "passed",
+      "at": "2026-11-23T17:13:42.696Z",
+      "uploaded": true
+    }
+  ]
+}

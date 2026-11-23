@@ -1,0 +1,25 @@
+{
+  "test_id": "a529e721-6363-4d13-b8d5-bef32669d91c",
+  "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
+  "folder_id": "01M8393H0E7RN2CVV5HGBB8VSA",
+  "org_id": "3447606",
+  "session_name": "roadmap-card-status-dropdown-changes-an-unclaimed-request-2",
+  "commit_id": "31cf6eb3-927f-4284-9a02-46f4774615ca",
+  "testcase_id": "01M84PN1WJCGMENNRJFMQ1JHAG",
+  "executions": [
+    {
+      "execution_id": "1af002f3-a423-4195-9377-5ca3c05f6dd0",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-23T17:22:23.303Z"
+    },
+    {
+      "execution_id": "5ff0b557-dda7-45fa-8b0a-dd3794acdf93",
+      "run_kind": "author",
+      "status": "passed",
+      "at": "2026-11-23T17:22:37.987Z",
+      "uploaded": true
+    }
+  ]
+}

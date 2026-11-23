@@ -1,0 +1,25 @@
+{
+  "test_id": "59a869f7-448c-4dd0-9bc1-c23ce3c3e541",
+  "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
+  "folder_id": "01M8393H0E7RN2CVV5HGBB8VSA",
+  "org_id": "3447606",
+  "session_name": "cross-column-roadmap-drag-moves-an-unclaimed-request-2",
+  "commit_id": "a694f35a-4442-41ca-9d93-9634c0e872f8",
+  "testcase_id": "01M84PCNYSYS49HZGXXWT19H14",
+  "executions": [
+    {
+      "execution_id": "4a7205d8-8fc7-44a3-9bae-030fd09fc287",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-23T17:18:01.471Z"
+    },
+    {
+      "execution_id": "416b5ecf-b32e-4f5f-8a63-ed2887f4be50",
+      "run_kind": "author",
+      "status": "passed",
+      "at": "2026-11-23T17:18:17.192Z",
+      "uploaded": true
+    }
+  ]
+}

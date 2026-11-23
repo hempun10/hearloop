@@ -56,7 +56,7 @@ INSERT INTO api_tokens (org_id, name, token_hash, hint) SELECT id, 'Claude Code'
 UPDATE posts SET claim_token_id = (SELECT t.id FROM api_tokens t JOIN orgs o ON o.id = t.org_id WHERE o.slug = 'acme' AND t.name = 'Claude Code'),
   claimed_by = 'E2E Tester · Claude Code', claim_expires_at = unixepoch() + 86400
   WHERE title = 'Slack notifications' AND org_id = (SELECT id FROM orgs WHERE slug = 'acme');
-INSERT INTO runs (post_id, passed, summary) SELECT p.id, 0, 'Kane: failed (Checkpoint assertion failed)' || char(10) || 'The theme switched back after a reload.' FROM posts p JOIN orgs o ON o.id = p.org_id WHERE o.slug = 'acme' AND p.title = 'Dark mode toggle';
+INSERT INTO runs (post_id, passed, summary, created_at) SELECT p.id, 0, 'Kane: failed (Checkpoint assertion failed)' || char(10) || 'The theme switched back after a reload.', unixepoch() - 3600 FROM posts p JOIN orgs o ON o.id = p.org_id WHERE o.slug = 'acme' AND p.title = 'Dark mode toggle';
 INSERT INTO orgs (slug, name, tagline) VALUES ('globex', 'Globex', 'Another board.');
 INSERT INTO posts (org_id, title, body, status, votes) SELECT id, 'Globex secret feature', 'Only on Globex.', 'planned', 3 FROM orgs WHERE slug = 'globex';
 INSERT INTO runs (post_id, passed, summary) SELECT p.id, 0, 'Kane: failed' || char(10) || 'A Globex run.' FROM posts p JOIN orgs o ON o.id = p.org_id WHERE o.slug = 'globex';
