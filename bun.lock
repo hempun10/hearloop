@@ -74,23 +74,9 @@
         "@types/react-dom": "^19.2.0",
         "@vitejs/plugin-react": "^6.0.1",
         "drizzle-kit": "^0.31.11",
-        "hearloop": "workspace:*",
         "typescript": "^6.0.2",
         "vite": "^8.0.0",
         "wrangler": "^4.164.0",
-      },
-    },
-    "packages/cli": {
-      "name": "hearloop",
-      "version": "0.1.0",
-      "bin": {
-        "hearloop": "dist/cli.js",
-      },
-      "devDependencies": {
-        "@hearloop/typescript-config": "workspace:*",
-        "@types/bun": "^1.4.4",
-        "@types/node": "^26.6.6",
-        "typescript": "^6.0.2",
       },
     },
     "packages/typescript-config": {
@@ -989,8 +975,6 @@
     "hast-util-whitespace": ["hast-util-whitespace@3.0.0", "", { "dependencies": { "@types/hast": "^3.0.0" } }, "sha512-88JUN06ipLwsnv+dVn+OIYOvAuvBMy/Qoi6O7mQHxdPXpjy+Cd6xRkWwux7DKO+4sYILtLBRIKgsdpS2gQc7qw=="],
 
     "hastscript": ["hastscript@9.0.3", "", { "dependencies": { "@types/hast": "^3.0.0", "comma-separated-tokens": "^2.0.0", "hast-util-parse-selector": "^4.0.0", "property-information": "^7.0.0", "space-separated-tokens": "^2.0.0" } }, "sha512-1ALZXSmCGmW3h8AMz4R4+QKSKFi7sNgXLVwmwB8FYVtl1CwQ3WDkSAEY/d5tp1g/vbQgq2s1WlHgfO3jbw1TsA=="],
-
-    "hearloop": ["hearloop@workspace:packages/cli"],
 
     "html-void-elements": ["html-void-elements@3.0.0", "", {}, "sha512-bEqo66MRXsUGxWHV5IP0PUiAWwoEjba4VCzg0LjFJBpchPaTfyfCKTG6bc5F8ucKec3q5y6qOdGyYTSBEvhCrg=="],
 

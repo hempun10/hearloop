@@ -214,7 +214,7 @@ export const posts = sqliteTable('posts', {
   body: text().notNull().default(''),
   status: text({ enum: POST_STATUSES }).notNull().default('open'),
   votes: integer().notNull().default(0),
-  // a loop's claim: who is building it, until when (a lease the CLI renews; an expired one can be taken)
+  // a loop's claim: who is building it, until when (a lease; claiming again renews it, an expired one can be taken)
   claimTokenId: integer(),
   claimedBy: text(),
   claimExpiresAt: integer({ mode: 'timestamp' }),

@@ -3,7 +3,7 @@ import { Eyebrow, Framed } from './frame'
 
 const MOMENTS = [
   ['01', 'Post', 'Anyone posts an idea. Votes push the most wanted one to the top.'],
-  ['02', 'Build', 'The loop hands the top request to Claude Code, which builds it and writes the test.'],
+  ['02', 'Build', 'Claude Code takes the top request over MCP, builds it and writes the test.'],
   ['03', 'Prove', 'Kane CLI runs that test in a real browser against the live app.'],
   ['04', 'Ship', "Pass: shipped, with Kane's report on the post. Fail: back to the agent."],
 ] as const

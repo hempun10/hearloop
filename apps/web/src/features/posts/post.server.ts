@@ -3,7 +3,7 @@ import { db } from '#/db/client.server'
 import { changelog, postVotes, posts, runs, type PostStatus } from '#/db/schema'
 import type { Actor } from '#/features/tokens/tokens.server'
 
-/** How long a loop's claim lasts without a renewal; the CLI renews every minute. */
+/** How long a claim lasts without a renewal; claiming the same request again renews it. */
 export const CLAIM_LEASE_MS = 15 * 60_000
 
 const noClaim = { claimTokenId: null, claimedBy: null, claimExpiresAt: null }
