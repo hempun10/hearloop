@@ -22,7 +22,7 @@ export KANE_CLI_CHROME_PATH=/Applications/Helium.app/Contents/MacOS/Helium
 
 ## Write an objective that proves the feature
 
-Usually the agent writes the objective. You write it yourself in [manual mode](/docs/agents#write-the-code-yourself) and in [CI](/docs/ci). A good objective:
+Usually the agent writes the objective. A good objective:
 
 - Names each thing to click or type by its visible label.
 - Says exactly what must be visible afterwards.
@@ -40,6 +40,3 @@ is listed and 'Dark mode toggle' is not. Clear the box and verify all requests a
 - The request's page, `/your-board/posts/:id`, lists every Kane run under **Kane CLI verifications**.
 - The dashboard page `/your-board/dashboard/runs` lists all runs. Click a run to read its report.
 - Each changelog entry links to its request and says **Verified with Kane CLI**.
-- Kane's Test Manager files each run in the folder that `kaneFolder` in `hearloop.json` names.
-
-For the exact command the CLI runs, see the [CLI reference](/docs/cli#how-the-cli-calls-kane).

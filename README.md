@@ -17,7 +17,6 @@ Bun workspaces + Turborepo.
 apps/web/                    the hearloop app: boards, dashboard, agent API (Cloudflare Worker + D1)
 apps/docs/                   docs site, Fumadocs (its own Worker)
 packages/ui/                 shared design system: shadcn components, theme, cn()
-packages/cli/                `hearloop` CLI: runs the loop in any team's repo, with any coding agent
 packages/typescript-config/  shared tsconfig
 ```
 
@@ -30,24 +29,20 @@ bun run db:migrate
 bun run dev                      # web http://localhost:3000, docs http://localhost:3001
 ```
 
-Sign up, name your board (it lives at `/<your-org>`), then generate a loop token in Settings.
+Sign up and name your board (it lives at `/<your-org>`).
 Boards are public to read, post and vote; only members see Settings.
 
-## The loop, in any repo
+## Build requests with your coding agent
 
-The CLI is stack-agnostic: it reads `hearloop.json` in the repo it runs in.
+Connect Claude Code, Cursor or any MCP client to the board's MCP server (`/mcp`). It signs in through your browser, so there's no token to copy:
 
 ```bash
-npx hearloop init                         # board URL, app URL Kane tests, agent, build/deploy commands
-HEARLOOP_TOKEN=hl_… npx hearloop run      # top request -> agent -> build -> deploy -> Kane -> board
-npx hearloop verify <post> "<objective>"  # Kane + report only (CI, or code written by hand)
+claude mcp add --transport http --scope user hearloop http://localhost:3000/mcp
 ```
 
-Agents: `claude`, `codex`, `cursor`, `gemini`, `aider`, `manual` (you write the code), or any command with `{prompt}`.
-In this repo the app uses the CLI like anyone else: `bun run loop` (`apps/web/hearloop.json`, local) and `bun run loop:live` (`hearloop.prod.json`, deploys then tests the live URL).
+A repo's `hearloop.json` names its board and app URL (`apps/web/hearloop.json` locally, `hearloop.prod.json` live). Run `/mcp__hearloop__build` and the agent claims the top Planned request, builds it, verifies it with Kane CLI and reports the result.
 
 Kane CLI needs a Chromium. If Chrome isn't installed, set `KANE_CLI_CHROME_PATH`.
-If Kane blames its own automation (`verdict.family: automation_bug`), the loop re-runs Kane instead of asking the agent to change working code.
 
 ## Kane test suite
 
@@ -62,7 +57,6 @@ bun run kane record <area>  # record tests added to kane/suite.ts, filed into th
 ```
 
 Every objective starts at `{{base_url}}`, so the same recordings run against any deployment.
-The loop files its Kane runs under 08 Loop verifications.
 
 ## Deploy
 

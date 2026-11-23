@@ -8,7 +8,6 @@ apps/
   docs/                 @hearloop/docs  Fumadocs site, content in apps/docs/content/docs (own Worker)
 packages/
   ui/                   @hearloop/ui    shadcn primitives, magic/ motion components, brand-mark, cn(), globals.css (theme tokens)
-  cli/                  hearloop        the loop CLI teams run in their own repo (published to npm)
   typescript-config/    @hearloop/typescript-config  base.json, react.json
 ```
 
@@ -16,16 +15,15 @@ packages/
 
 - Used by more than one app, or a design-system piece → `packages/ui`. App features stay in the app.
 - Import shared code through package exports: `@hearloop/ui/components/button`, `@hearloop/ui/lib/utils`, `@hearloop/ui/globals.css`. Never `../../packages/...`.
-- Internal packages are just-in-time: they export TypeScript source, no build step. Only `packages/cli` builds (it ships to npm).
+- Internal packages are just-in-time: they export TypeScript source, no build step.
 - New shadcn component: run `bunx shadcn@latest add <name>` in `apps/web`; it installs into `packages/ui`.
 - Every package's tsconfig extends `@hearloop/typescript-config`; every package declares the deps it imports.
-- The CLI stays stack-agnostic: no imports from apps or ui, Node APIs only, config in the user's `hearloop.json`.
-- The web app is a user of the CLI like anyone else: `apps/web/hearloop.json` (local), `hearloop.prod.json` (live).
+- Coding agents build requests through the MCP server (`/mcp`). A repo's `hearloop.json` names its board and app URL: `apps/web/hearloop.json` (local), `hearloop.prod.json` (live).
 - Cross-app links use env: `VITE_DOCS_URL` (web), `VITE_WEB_URL` (docs), in each app's `.env.development` / `.env.production`.
 
 ## Commands (root)
 
-`bun run dev` (web :3000, docs :3001) · `build` · `typecheck` · `test` · `check` · `deploy:web` · `deploy:docs` · `loop` · `loop:live` · `kane run|record <area>` · `e2e:seed` · `db:migrate`
+`bun run dev` (web :3000, docs :3001) · `build` · `typecheck` · `test` · `check` · `deploy:web` · `deploy:docs` · `kane run|record <area>` · `e2e:seed` · `db:migrate`
 
 ## Check
 

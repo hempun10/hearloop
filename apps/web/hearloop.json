@@ -1,7 +1,4 @@
 {
   "board": "http://localhost:3000/demo",
-  "app": "http://localhost:3000/demo",
-  "agent": "claude",
-  "build": "bun run build",
-  "kaneFolder": "01M7P8G7RQ5T0JYG2GM80M8CQZ"
+  "app": "http://localhost:3000/demo"
 }

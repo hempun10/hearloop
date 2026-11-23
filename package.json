@@ -14,8 +14,6 @@
     "check": "turbo run typecheck test",
     "deploy:web": "turbo run deploy --filter=@hearloop/web",
     "deploy:docs": "turbo run deploy --filter=@hearloop/docs",
-    "loop": "bun --filter @hearloop/web loop",
-    "loop:live": "bun --filter @hearloop/web loop:live",
     "kane": "bun --cwd=apps/web run kane",
     "e2e:seed": "bun --filter @hearloop/web e2e:seed",
     "db:migrate": "bun --filter @hearloop/web db:migrate"

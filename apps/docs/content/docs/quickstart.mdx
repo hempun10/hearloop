@@ -1,6 +1,6 @@
 ---
 title: Quickstart
-description: Create a board, approve a request, and get a token for the loop.
+description: Create a board, approve a request, and connect your coding agent.
 ---
 
 <Steps>
@@ -50,20 +50,16 @@ Send people the link to `/acme-inc`. Anyone can read and vote. Who can post depe
 
 Open your dashboard. In the **Inbox**, change a request's status from **Open** to **Planned**.
 
-The CLI and the MCP server only build **Planned** requests. Open requests are unreviewed public input, so agents can't claim them.
+The MCP server only builds **Planned** requests. Open requests are unreviewed public input, so agents can't claim them.
 
 </Step>
 <Step>
 
-### Create a loop token
+### Connect your agent
 
-Open **Settings**, then **Loop API tokens**. Type a name for where the token runs, such as `Asha's laptop` or `GitHub Actions`, and click **Create token**.
-
-Copy the token now. It starts with `hl_`, and hearloop shows it only once.
-
-Create one token per person or machine. The board shows whose token built each request, and you can revoke one token without affecting the others.
+Connect Claude Code, Cursor or another MCP client to hearloop. Your browser opens once to sign in and approve it, and you don't copy any token. See [Build from your agent session](/docs/mcp).
 
 </Step>
 </Steps>
 
-Next, [run the loop](/docs/loop) in your repository with that token. To work from your own Claude Code session instead, [connect the MCP server](/docs/mcp). It doesn't need a token.
+Next, [build your first request](/docs/mcp#build-a-request) from your agent session.

@@ -3,7 +3,7 @@ title: Build from your agent session (MCP)
 description: Connect Claude Code, Cursor, or another MCP client once, then build requests from inside your own session.
 ---
 
-The MCP server lets your coding agent read your board and report Kane's results while you work in your own session. Use it when you want to watch and steer the work. For unattended runs and CI, use [the CLI](/docs/loop).
+The MCP server lets your coding agent read your board and report Kane's results while you work in your own session. You watch and steer the work.
 
 The connection belongs to you, so it works for every board you're a member of.
 
@@ -41,7 +41,13 @@ Your browser opens. Sign in to hearloop, check that the page names your agent, a
 
 ## Point each repository at its board
 
-Run `npx hearloop init` in each repository. It writes `hearloop.json`, which tells your agent which board and which app URL belong to that repository. To work on another project, open that repository. You don't reconnect or sign in again.
+Add a `hearloop.json` to each repository. It tells your agent which board and which app URL belong to that repository, and it holds no secrets, so you can commit it:
+
+```json title="hearloop.json"
+{ "board": "https://hearloop-v2.hembdrpun10.workers.dev/acme", "app": "http://localhost:5173" }
+```
+
+Without the file, your agent calls `list_boards` and asks you which board and app URL to use. To work on another project, open that repository. You don't reconnect or sign in again.
 
 ## Build a request
 

@@ -83,7 +83,7 @@ export function TokenManager({ org }: { org: string }) {
             <AlertDialogContent>
               <AlertDialogHeader>
                 <AlertDialogTitle>Revoke "{t.name}"?</AlertDialogTitle>
-                <AlertDialogDescription>Loops using it stop working right away. Other tokens keep working.</AlertDialogDescription>
+                <AlertDialogDescription>Anything using it stops working right away. Other tokens keep working.</AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>
                 <AlertDialogCancel>Cancel</AlertDialogCancel>
@@ -95,10 +95,10 @@ export function TokenManager({ org }: { org: string }) {
       ))}
 
       <div className="border-t pt-5">
-        <SectionHead title="Run the loop" />
+        <SectionHead title="Call the API" />
         <pre className="overflow-x-auto rounded-lg bg-card p-3 font-mono text-xs leading-5 text-muted-foreground">
-          {`npx hearloop init        # in your repo
-HEARLOOP_TOKEN=${token || 'hl_…'} npx hearloop run`}
+          {`curl -H "Authorization: Bearer ${token || 'hl_…'}" \\
+  <your hearloop URL>/api/${org}/posts?status=planned`}
         </pre>
       </div>
     </div>

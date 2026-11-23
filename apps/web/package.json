@@ -13,12 +13,10 @@
 		"cf-typegen": "wrangler types",
 		"db:migrate": "wrangler d1 migrations apply hearloop-v2 --local",
 		"db:migrate:remote": "wrangler d1 migrations apply hearloop-v2 --remote",
-		"loop": "hearloop run",
 		"e2e:mcp": "bun scripts/mcp-e2e.ts",
     "e2e:seed": "bun scripts/seed-e2e.ts",
 		"kane": "bun scripts/kane.ts",
 		"db:generate": "drizzle-kit generate",
-		"loop:live": "hearloop run --config hearloop.prod.json",
 		"typecheck": "tsc --noEmit"
 	},
 	"dependencies": {
@@ -57,7 +55,6 @@
 		"@types/react-dom": "^19.2.0",
 		"@vitejs/plugin-react": "^6.0.1",
 		"drizzle-kit": "^0.31.11",
-		"hearloop": "workspace:*",
 		"typescript": "^6.0.2",
 		"vite": "^8.0.0",
 		"wrangler": "^4.164.0"
