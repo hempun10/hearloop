@@ -62,6 +62,8 @@ INSERT INTO posts (org_id, title, body, status, votes) SELECT id, 'Globex secret
 INSERT INTO runs (post_id, passed, summary) SELECT p.id, 0, 'Kane: failed' || char(10) || 'A Globex run.' FROM posts p JOIN orgs o ON o.id = p.org_id WHERE o.slug = 'globex';
 INSERT INTO runs (post_id, passed, summary) SELECT p.id, 1, 'Kane: passed (Objective completed)' || char(10) || 'Typed in the search box and only matching requests stayed.' FROM posts p JOIN orgs o ON o.id = p.org_id WHERE o.slug = 'acme' AND p.title = 'Search the board';
 INSERT INTO changelog (post_id, title, body) SELECT p.id, p.title, 'You can now search the board as you type.' FROM posts p JOIN orgs o ON o.id = p.org_id WHERE o.slug = 'acme' AND p.title = 'Search the board';
+INSERT INTO posts (org_id, title, body, status, votes) SELECT id, 'Saved filters', 'Keep a filter and open it again later.', 'shipped', 6 FROM orgs WHERE slug = 'acme';
+INSERT INTO changelog (post_id, title, body, verified) SELECT p.id, p.title, 'Save a filter and reopen it from the sidebar.', 0 FROM posts p JOIN orgs o ON o.id = p.org_id WHERE o.slug = 'acme' AND p.title = 'Saved filters';
 `
 await $`bunx wrangler d1 execute hearloop-v2 --local --command ${sql}`.quiet()
 // values for the tests Kane designed from kane/requirements/dashboard.md (it declared the names, with descriptions)
@@ -85,6 +87,13 @@ const values: Record<string, string> = {
   claimed_request_title: 'Slack notifications',
   unclaimed_request_title: 'Weekly digest email',
   planned_request_title: 'Dark mode toggle',
+  public_roadmap_url: `${APP}/acme/roadmap`,
+  public_changelog_url: `${APP}/acme/changelog`,
+  visitor_first_vote_request_title: 'Export posts to CSV',
+  visitor_retry_vote_request_title: 'Kane check request',
+  account_first_vote_request_title: 'Dark mode toggle',
+  account_retry_vote_request_title: 'Weekly digest email',
+  removable_changelog_title: 'Saved filters',
 }
 for (const [k, value] of Object.entries(values)) decl[k] = { ...decl[k], value, secret: k.endsWith('password') }
 await Bun.write(ASSURANCE, JSON.stringify(decl, null, 2))

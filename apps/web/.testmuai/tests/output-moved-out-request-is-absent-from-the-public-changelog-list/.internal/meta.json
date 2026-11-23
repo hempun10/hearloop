@@ -1,0 +1,25 @@
+{
+  "test_id": "80e742e7-f564-4b53-9585-4e29e5a936bd",
+  "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
+  "folder_id": "01M8393JJYMDSX3QKTG3SCHZJ6",
+  "org_id": "3447606",
+  "session_name": "moved-out-request-is-absent-from-the-public-changelog-list",
+  "commit_id": "1b9c684c-05bb-47d8-85ed-fe60b9082971",
+  "testcase_id": "01M83ECMQTF77TN2X7G25HF4SW",
+  "executions": [
+    {
+      "execution_id": "c79ed955-c929-435a-9f1f-992833d2d2f5",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-23T05:40:39.186Z"
+    },
+    {
+      "execution_id": "811caa82-4ec2-4bda-b00c-2a90951200f5",
+      "run_kind": "author",
+      "status": "passed",
+      "at": "2026-11-23T05:41:07.610Z",
+      "uploaded": true
+    }
+  ]
+}

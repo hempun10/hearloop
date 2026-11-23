@@ -1,0 +1,25 @@
+{
+  "test_id": "6ecc431d-0b0d-43c1-a69e-86d38c3e30da",
+  "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
+  "folder_id": "01M8393NGPPA44GMTB8Y57QMKA",
+  "org_id": "3447606",
+  "session_name": "member-creates-named-loop-api-token-and-sees-its-value",
+  "commit_id": "90512db0-7692-48a7-8d52-0fbdfe2cba27",
+  "testcase_id": "01M83AA2TSSDWZQQSMM5QD53BR",
+  "executions": [
+    {
+      "execution_id": "e73fa3e9-2775-4806-940a-62dd77392670",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-23T04:25:11.215Z"
+    },
+    {
+      "execution_id": "d6a80a7f-1fe8-4c34-ac31-79637c218dd0",
+      "run_kind": "author",
+      "status": "passed",
+      "at": "2026-11-23T04:25:35.849Z",
+      "uploaded": true
+    }
+  ]
+}

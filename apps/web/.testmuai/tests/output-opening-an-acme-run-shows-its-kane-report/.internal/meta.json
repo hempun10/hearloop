@@ -1,0 +1,25 @@
+{
+  "test_id": "6ed0d4cd-dd5b-41c6-90c8-60e4fc00c042",
+  "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
+  "folder_id": "01M8393M1DE9MKY4Y3FJXYZCNR",
+  "org_id": "3447606",
+  "session_name": "opening-an-acme-run-shows-its-kane-report",
+  "commit_id": "bc35429b-cf69-464c-97d5-6608176c9ab5",
+  "testcase_id": "01M83E48NWRA90JT11BRA0M375",
+  "executions": [
+    {
+      "execution_id": "b4c10888-e8f0-4fdb-97a2-484cf9ebc9a7",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-23T05:32:01.771Z"
+    },
+    {
+      "execution_id": "4a97885c-2e6b-4c2f-9c9f-39d5513b0ac4",
+      "run_kind": "author",
+      "status": "passed",
+      "at": "2026-11-23T05:32:16.912Z",
+      "uploaded": true
+    }
+  ]
+}

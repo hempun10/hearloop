@@ -1,0 +1,19 @@
+{
+  "commit_id": "04716cce-2c94-48db-8b90-a75f8300a8bb",
+  "test_id": "ea37a648-ad9c-4b0b-8e46-0fd74547b8d8",
+  "testcase_id": "01M838HNYXYKQMZNRHYMBWM7EA",
+  "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
+  "folder_id": "01M836WWFMTDM95NPTXNEA1YMM",
+  "org_id": "3447606",
+  "session_name": "nonmember-is-redirected-away-from-acme-dashboard",
+  "executions": [
+    {
+      "execution_id": "6a194c24-ff5a-494c-a83e-10974ead1306",
+      "run_kind": "author",
+      "status": "failed",
+      "valid": true,
+      "uploaded": true,
+      "at": "2026-11-23T03:56:56.846Z"
+    }
+  ]
+}

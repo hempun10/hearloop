@@ -1,0 +1,25 @@
+{
+  "test_id": "d731e114-21a4-43ab-a8a6-695cfcb174c2",
+  "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
+  "folder_id": "01M8393M1DE9MKY4Y3FJXYZCNR",
+  "org_id": "3447606",
+  "session_name": "foreign-board-run-is-absent-from-acme-kane-history",
+  "commit_id": "163649aa-61f6-4c0c-b11d-23fb8ba11c29",
+  "testcase_id": "01M83DSRHW9APHX92C6QBQDEVY",
+  "executions": [
+    {
+      "execution_id": "907f9bb4-2c25-487f-907c-4999103dc2a9",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-23T05:27:12.714Z"
+    },
+    {
+      "execution_id": "6f897446-c84d-41f2-b956-2f3a77a54da7",
+      "run_kind": "author",
+      "status": "passed",
+      "at": "2026-11-23T05:27:30.422Z",
+      "uploaded": true
+    }
+  ]
+}

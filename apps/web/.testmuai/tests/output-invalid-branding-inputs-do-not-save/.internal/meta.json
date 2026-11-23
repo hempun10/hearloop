@@ -1,0 +1,25 @@
+{
+  "test_id": "1e2f503e-96af-4eb4-ab3a-e91770b56de5",
+  "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
+  "folder_id": "01M8393NGPPA44GMTB8Y57QMKA",
+  "org_id": "3447606",
+  "session_name": "invalid-branding-inputs-do-not-save",
+  "commit_id": "afc9af84-5a38-4b92-867c-ebf04ac653bc",
+  "testcase_id": "01M83C2DYF0A4M9XBDC48S9KBR",
+  "executions": [
+    {
+      "execution_id": "a88ec50c-3608-4cb9-869b-2654c0f2a4c9",
+      "run_kind": "author",
+      "status": "failed",
+      "valid": true,
+      "at": "2026-11-23T04:56:26.983Z"
+    },
+    {
+      "execution_id": "b858dbff-2549-4685-8167-c59f0dd22ba5",
+      "run_kind": "author",
+      "status": "failed",
+      "at": "2026-11-23T04:56:33.518Z",
+      "uploaded": true
+    }
+  ]
+}

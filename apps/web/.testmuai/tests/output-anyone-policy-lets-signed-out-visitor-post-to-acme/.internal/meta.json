@@ -1,0 +1,25 @@
+{
+  "test_id": "426e4e20-c956-4d2a-86aa-07af3565e9eb",
+  "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
+  "folder_id": "01M8393AYW5EC5KNQ55TXGYRKD",
+  "org_id": "3447606",
+  "session_name": "anyone-policy-lets-signed-out-visitor-post-to-acme",
+  "commit_id": "3f19cb8c-8ccc-4d36-84e1-9be9b377bf04",
+  "testcase_id": "01M839HS86Y1ZVERAGWKDAMK49",
+  "executions": [
+    {
+      "execution_id": "d2f8b129-18cc-48ee-8ef1-96a5ff60514e",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-23T04:12:56.294Z"
+    },
+    {
+      "execution_id": "43d024ea-5f44-4ea4-9e88-d157c90121ae",
+      "run_kind": "author",
+      "status": "passed",
+      "at": "2026-11-23T04:13:13.688Z",
+      "uploaded": true
+    }
+  ]
+}
