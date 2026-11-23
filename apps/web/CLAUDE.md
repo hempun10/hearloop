@@ -38,6 +38,10 @@ src/
 
 ## Testing with Kane CLI: follow this every time, without being asked
 
+**Before you run any Kane CLI command, read [TestMu AI's agent guide](https://www.testmuai.com/kane-cli-agent/AGENTS.md) and follow it.** It is the source of truth for flags, exit codes and objectives. Where it and this file disagree on Kane CLI usage, the guide wins. Rules in this file about this repo still apply on top of it: approvals, the seed, memory and ports.
+
+**People who run Kane themselves** can use `kane-cli --tui`, the interactive terminal app. It needs a real terminal, so agents always use `--agent` instead.
+
 Any change to how the app behaves goes through this loop. The `kane-cli` skill has the details for each command.
 
 1. **Requirement first.** Write the expected behaviour in `kane/requirements/<area>.md`: plain sentences with the labels users see. Never hand-write tests or Kane objectives for new behaviour.
@@ -54,6 +58,8 @@ Any change to how the app behaves goes through this loop. The `kane-cli` skill h
    - The test is wrong (no start page, wrong assertion, wrong data): `kane-cli maintain evolve <test-ref>` or `design tests --use-case <uc> --force`. Never edit a `_test.md` by hand.
    - Kane or the environment failed: say so, and don't rerun a paid command blindly.
    - Kane's verdict is a hint, not proof. An "automation_bug" can still be an app bug, so check the app.
+   - Never weaken a test's expected result to get a pass.
+   - A replayed recording doesn't prove a fix: it can pass before and after. After a fix, run a fresh check.
 10. **Before a commit:** `bun run check`, then replay the suites for the areas you touched.
 11. **CI** (`.github/workflows/ci.yml`) runs `check` and `build` on every PR, then replays every designed test against a fresh local app. It needs the repository secrets `LT_USERNAME` and `LT_ACCESS_KEY`.
 
@@ -67,6 +73,7 @@ The older objectives in `kane/suite.ts` (`bun run kane run|record <area>`) are r
 - **Sleep.** Run long suites under `caffeinate -i`, and keep the lid open: a sleeping Mac stalls the dev server and expires Kane's sign-in mid-run.
 - **Results.** When a failing command's output is cut off, read the verdict from Kane's own log, `~/.testmuai/kaneai/sessions/<id>/events.ndjson`.
 - **Ports.** Test servers use 3002 and up. Never 4000s or 5174.
+- **Git.** Commit each test's `output-<test>/` folder with its `_test.md`; replays need it. Never commit `.testmuai/evidence/` or `.testmuai/variables/`.
 
 ## Development process
 
