@@ -1,0 +1,25 @@
+{
+  "test_id": "f15a88e6-4ace-4213-9484-1f120ef76777",
+  "project_id": "01M7S4DG4PE128S4KT7FAECK73",
+  "folder_id": "01M7SCZZ4PTY0XA7HXMZFYZA31",
+  "org_id": "3436657",
+  "session_name": "acme-member-creates-a-named-loop-token-and-sees-its-issued-2",
+  "commit_id": "3ed38df2-6bcf-4f61-96c0-35764897323f",
+  "testcase_id": "01M7W4DT08ZDSHX9N1C2GXEW2Z",
+  "executions": [
+    {
+      "execution_id": "4da34d17-9a23-4e54-944c-77528fdc3b1a",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-20T09:28:26.819Z"
+    },
+    {
+      "execution_id": "ebc51be2-6790-4d41-916b-ad280717baef",
+      "run_kind": "author",
+      "status": "passed",
+      "at": "2026-11-20T09:28:44.837Z",
+      "uploaded": true
+    }
+  ]
+}

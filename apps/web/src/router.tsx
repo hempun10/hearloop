@@ -1,0 +1,26 @@
+import { QueryClient } from '@tanstack/react-query'
+import { createRouter } from '@tanstack/react-router'
+import { setupRouterSsrQueryIntegration } from '@tanstack/react-router-ssr-query'
+import { routeTree } from './routeTree.gen'
+
+export function getRouter() {
+  const queryClient = new QueryClient({ defaultOptions: { queries: { staleTime: 30_000 } } })
+  const router = createRouter({
+    routeTree,
+    context: { queryClient },
+    scrollRestoration: true,
+    defaultPreload: 'intent',
+    // let Query decide freshness; the router always runs loaders, which read the cache
+    defaultPreloadStaleTime: 0,
+    // the old app's smoothness: cross-fade between pages, persistent chrome excluded in styles.css
+    defaultViewTransition: true,
+  })
+  setupRouterSsrQueryIntegration({ router, queryClient })
+  return router
+}
+
+declare module '@tanstack/react-router' {
+  interface Register {
+    router: ReturnType<typeof getRouter>
+  }
+}

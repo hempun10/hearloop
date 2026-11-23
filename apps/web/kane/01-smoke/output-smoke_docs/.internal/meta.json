@@ -1,0 +1,19 @@
+{
+  "commit_id": "df5b1bc1-dba9-4270-8a36-b40905298463",
+  "test_id": "a4d2269e-bcca-48c4-94be-e454d3261916",
+  "project_id": "01M7S4DG4PE128S4KT7FAECK73",
+  "folder_id": "01M7SCZZ4PTY0XA7HXMZFYZA31",
+  "org_id": "3436657",
+  "session_name": "smoke_docs",
+  "testcase_id": "01M7SFSB23EW5E4GQXDGGJEQNX",
+  "executions": [
+    {
+      "execution_id": "8430fb96-e600-4e60-9d15-ead65a6b3385",
+      "run_kind": "replay",
+      "status": "passed",
+      "valid": true,
+      "uploaded": true,
+      "at": "2026-11-19T09:23:43.325Z"
+    }
+  ]
+}

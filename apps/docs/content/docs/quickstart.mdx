@@ -1,0 +1,69 @@
+---
+title: Quickstart
+description: Create a board, approve a request, and get a token for the loop.
+---
+
+<Steps>
+<Step>
+
+### Create an account
+
+Open hearloop and click **Sign in**, then **Create account**. Enter your email and a password.
+
+You land on a page that asks you to name your board.
+
+</Step>
+<Step>
+
+### Name your board
+
+Type a name, for example `Acme Inc`. The **Address** field fills in with `acme-inc`, and your board is now at `/acme-inc`.
+
+You can type a different address. A few words, such as `login` and `docs`, are reserved.
+
+You land in **Settings**.
+
+</Step>
+<Step>
+
+### Set up the board
+
+Settings has three pages:
+
+- **General** sets the board name and tagline.
+- **Branding** sets the accent colour, logo, theme, and the "Powered by hearloop" credit.
+- **Access** sets who can post and whether the roadmap and changelog are public.
+
+The defaults work. You can change them later.
+
+</Step>
+<Step>
+
+### Share the board
+
+Send people the link to `/acme-inc`. Anyone can read and vote. Who can post depends on your **Access** setting.
+
+</Step>
+<Step>
+
+### Approve a request
+
+Open your dashboard. In the **Inbox**, change a request's status from **Open** to **Planned**.
+
+The CLI and the MCP server only build **Planned** requests. Open requests are unreviewed public input, so agents can't claim them.
+
+</Step>
+<Step>
+
+### Create a loop token
+
+Open **Settings**, then **Loop API tokens**. Type a name for where the token runs, such as `Asha's laptop` or `GitHub Actions`, and click **Create token**.
+
+Copy the token now. It starts with `hl_`, and hearloop shows it only once.
+
+Create one token per person or machine. The board shows whose token built each request, and you can revoke one token without affecting the others.
+
+</Step>
+</Steps>
+
+Next, [run the loop](/docs/loop) in your repository with that token. To work from your own Claude Code session instead, [connect the MCP server](/docs/mcp). It doesn't need a token.

@@ -1,0 +1,63 @@
+---
+title: Build from your agent session (MCP)
+description: Connect Claude Code, Cursor, or another MCP client once, then build requests from inside your own session.
+---
+
+The MCP server lets your coding agent read your board and report Kane's results while you work in your own session. Use it when you want to watch and steer the work. For unattended runs and CI, use [the CLI](/docs/loop).
+
+The connection belongs to you, so it works for every board you're a member of.
+
+## Connect your agent
+
+<Tabs items={['Claude Code', 'Cursor', 'Other clients']}>
+<Tab value="Claude Code">
+
+Run:
+
+```bash
+claude mcp add --transport http --scope user hearloop https://hearloop-v2.hembdrpun10.workers.dev/mcp
+```
+
+Then run `/mcp` in Claude Code and select **hearloop**.
+
+</Tab>
+<Tab value="Cursor">
+
+Add hearloop to `~/.cursor/mcp.json`:
+
+```json
+{ "mcpServers": { "hearloop": { "url": "https://hearloop-v2.hembdrpun10.workers.dev/mcp" } } }
+```
+
+</Tab>
+<Tab value="Other clients">
+
+Add a remote MCP server with the URL `https://hearloop-v2.hembdrpun10.workers.dev/mcp`. The client must support OAuth sign-in.
+
+</Tab>
+</Tabs>
+
+Your browser opens. Sign in to hearloop, check that the page names your agent, and click **Allow**. You don't copy any token.
+
+## Point each repository at its board
+
+Run `npx hearloop init` in each repository. It writes `hearloop.json`, which tells your agent which board and which app URL belong to that repository. To work on another project, open that repository. You don't reconnect or sign in again.
+
+## Build a request
+
+In Claude Code, run `/mcp__hearloop__build`. You can also ask in your own words, for example "build the top request on our board".
+
+Your agent then:
+
+1. Takes the most voted **Planned** request and claims it. The board shows it as **In progress**, with your name and your agent's name.
+2. Changes your code.
+3. Runs Kane CLI against your app.
+4. Reports the result. A pass ships the request. A fail sends it back to **Planned** with Kane's report.
+
+Review the diff and commit it yourself.
+
+## Disconnect an agent
+
+Open **Settings**, then **Loop API tokens**, on the board. Each MCP connection is listed with the note **Connected via MCP**. Click **Revoke** to stop that connection on that board.
+
+For the list of tools, see the [MCP tools reference](/docs/api#mcp-tools).

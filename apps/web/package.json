@@ -1,0 +1,73 @@
+{
+	"name": "@hearloop/web",
+	"private": true,
+	"type": "module",
+	"imports": {
+		"#/*": "./src/*"
+	},
+	"scripts": {
+		"dev": "vite dev --port 3000",
+		"build": "vite build",
+		"preview": "bun run build && vite preview",
+		"deploy": "bun run build && wrangler deploy",
+		"cf-typegen": "wrangler types",
+		"db:migrate": "wrangler d1 migrations apply hearloop-v2 --local",
+		"db:migrate:remote": "wrangler d1 migrations apply hearloop-v2 --remote",
+		"loop": "hearloop run",
+		"e2e:mcp": "bun scripts/mcp-e2e.ts",
+    "e2e:seed": "bun scripts/seed-e2e.ts",
+		"kane": "bun scripts/kane.ts",
+		"db:generate": "drizzle-kit generate",
+		"loop:live": "hearloop run --config hearloop.prod.json",
+		"typecheck": "tsc --noEmit"
+	},
+	"dependencies": {
+		"@better-auth/mcp": "1.7.26",
+		"@better-auth/oauth-provider": "1.7.26",
+		"@dnd-kit/core": "^6.3.1",
+		"@hearloop/ui": "workspace:*",
+		"@hookform/resolvers": "^7.0.7",
+		"@modelcontextprotocol/server": "^2",
+		"@tailwindcss/vite": "^4.1.18",
+		"@tanstack/react-query": "^5.108.0",
+		"@tanstack/react-router": "1.170.46",
+		"@tanstack/react-router-ssr-query": "^1.167.3",
+		"@tanstack/react-start": "1.169.5",
+		"better-auth": "^1.7.25",
+		"date-fns": "^4.4.0",
+		"drizzle-orm": "^0.45.4",
+		"lucide-react": "^1.74.0",
+		"motion": "^14.14.0",
+		"react": "^19.2.0",
+		"react-dom": "^19.2.0",
+		"react-hook-form": "^7.92.0",
+		"react-hotkeys-hook": "^5.4.0",
+		"sonner": "^2.0.8",
+		"tailwindcss": "^4.1.18",
+		"zod": "^4.6.7"
+	},
+	"devDependencies": {
+		"@cloudflare/vite-plugin": "^1.26.0",
+		"@hearloop/typescript-config": "workspace:*",
+		"@modelcontextprotocol/client": "^2",
+		"@tanstack/devtools-vite": "0.8.6",
+		"@types/bun": "^1.4.4",
+		"@types/node": "^26.6.6",
+		"@types/react": "^19.2.0",
+		"@types/react-dom": "^19.2.0",
+		"@vitejs/plugin-react": "^6.0.1",
+		"drizzle-kit": "^0.31.11",
+		"hearloop": "workspace:*",
+		"typescript": "^6.0.2",
+		"vite": "^8.0.0",
+		"wrangler": "^4.164.0"
+	},
+	"pnpm": {
+		"onlyBuiltDependencies": [
+			"esbuild",
+			"lightningcss",
+			"sharp",
+			"workerd"
+		]
+	}
+}

@@ -1,0 +1,19 @@
+{
+  "commit_id": "06169d0f-7c81-42d5-a603-01579be4370f",
+  "test_id": "3a764c6b-d3a3-4d2a-9686-4d1ea8a27ceb",
+  "testcase_id": "01M7VP2978FZN8DVX48FEYNY9Y",
+  "project_id": "01M7S4DG4PE128S4KT7FAECK73",
+  "folder_id": "01M7SCZZ4PTY0XA7HXMZFYZA31",
+  "org_id": "3436657",
+  "session_name": "unsigned-acme-visitor-posts-when-anyone-is-eligible",
+  "executions": [
+    {
+      "execution_id": "9ee6e28b-8f12-4ec4-8c9e-34ecde97bb5e",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "uploaded": true,
+      "at": "2026-11-20T14:23:10.281Z"
+    }
+  ]
+}

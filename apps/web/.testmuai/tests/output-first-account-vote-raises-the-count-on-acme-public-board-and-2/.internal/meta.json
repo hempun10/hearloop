@@ -1,0 +1,25 @@
+{
+  "test_id": "ff6b1f4b-31dc-4467-9fa1-5b9ad1abb9d3",
+  "project_id": "01M7S4DG4PE128S4KT7FAECK73",
+  "folder_id": "01M7SCZZ4PTY0XA7HXMZFYZA31",
+  "org_id": "3436657",
+  "session_name": "first-account-vote-raises-the-count-on-acme-public-board-and-2",
+  "commit_id": "c00851b7-2305-4ea5-a1a5-9afe25b8397a",
+  "testcase_id": "01M7W6CCR6HW6G27FHSWK3M1N0",
+  "executions": [
+    {
+      "execution_id": "a5894659-3af3-4a54-905e-094fdf016e63",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-20T10:02:50.615Z"
+    },
+    {
+      "execution_id": "e8ad12cc-e255-4c75-a75b-b291bea1c31e",
+      "run_kind": "author",
+      "status": "passed",
+      "at": "2026-11-20T10:03:06.751Z",
+      "uploaded": true
+    }
+  ]
+}

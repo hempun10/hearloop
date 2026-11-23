@@ -1,0 +1,8 @@
+{
+  "board": "https://hearloop-v2.hembdrpun10.workers.dev/demo",
+  "app": "https://hearloop-v2.hembdrpun10.workers.dev/demo",
+  "agent": "claude",
+  "build": "bun run build",
+  "deploy": "bun run deploy",
+  "kaneFolder": "01M7P8G7RQ5T0JYG2GM80M8CQZ"
+}

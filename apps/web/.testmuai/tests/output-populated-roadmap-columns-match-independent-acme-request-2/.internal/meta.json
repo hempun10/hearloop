@@ -1,0 +1,25 @@
+{
+  "test_id": "f6886dd7-d12f-4d49-9642-1356fc7b279e",
+  "project_id": "01M7S4DG4PE128S4KT7FAECK73",
+  "folder_id": "01M7SCZZ4PTY0XA7HXMZFYZA31",
+  "org_id": "3436657",
+  "session_name": "populated-roadmap-columns-match-independent-acme-request-2",
+  "commit_id": "8c845f9e-4315-4356-9f12-bb77f9f89b2d",
+  "testcase_id": "01M7W77KXC7NCD1PK3P4X61VT4",
+  "executions": [
+    {
+      "execution_id": "a0822c8e-eb47-479f-b826-67fe0d64b39c",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-20T10:17:45.343Z"
+    },
+    {
+      "execution_id": "c220e63e-c3b9-4e67-9c81-120706f6b10a",
+      "run_kind": "author",
+      "status": "passed",
+      "at": "2026-11-20T10:18:00.280Z",
+      "uploaded": true
+    }
+  ]
+}

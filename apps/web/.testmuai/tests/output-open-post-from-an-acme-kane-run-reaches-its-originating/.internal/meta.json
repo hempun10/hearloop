@@ -1,0 +1,26 @@
+{
+  "test_id": "4ebd098e-1dac-4d95-ae7a-6eed28b733e8",
+  "project_id": "01M7S4DG4PE128S4KT7FAECK73",
+  "folder_id": "01M7SCZZ4PTY0XA7HXMZFYZA31",
+  "org_id": "3436657",
+  "session_name": "open-post-from-an-acme-kane-run-reaches-its-originating",
+  "commit_id": "3aa8c9f3-260c-4ff4-809a-26774719a605",
+  "testcase_id": "01M7VMV86GHKBXX0YTQ860ADHM",
+  "executions": [
+    {
+      "execution_id": "232a6eb8-80e6-4078-ab84-e08341e9be8d",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-20T04:55:23.203Z"
+    },
+    {
+      "execution_id": "4ac07706-8966-4acc-b54c-9dd48156f46d",
+      "run_kind": "replay",
+      "status": "passed",
+      "valid": true,
+      "uploaded": true,
+      "at": "2026-11-20T10:11:35.896Z"
+    }
+  ]
+}

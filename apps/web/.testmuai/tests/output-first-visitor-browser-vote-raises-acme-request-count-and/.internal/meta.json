@@ -1,0 +1,19 @@
+{
+  "commit_id": "af6832c6-f427-4973-9a76-09637197e52e",
+  "test_id": "25a7b6cf-6d9f-4604-8819-ccc154a43b72",
+  "testcase_id": "01M7VM3WXMW20S3YA0SY11GCZT",
+  "project_id": "01M7S4DG4PE128S4KT7FAECK73",
+  "folder_id": "01M7SCZZ4PTY0XA7HXMZFYZA31",
+  "org_id": "3436657",
+  "session_name": "first-visitor-browser-vote-raises-acme-request-count-and",
+  "executions": [
+    {
+      "execution_id": "c640f9df-03db-4806-9a41-13b9a2802b0b",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "uploaded": true,
+      "at": "2026-11-23T02:42:19.810Z"
+    }
+  ]
+}

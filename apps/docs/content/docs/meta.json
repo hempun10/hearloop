@@ -1,0 +1,20 @@
+{
+  "title": "hearloop",
+  "pages": [
+    "---Get started---",
+    "index",
+    "quickstart",
+    "---Guides---",
+    "loop",
+    "mcp",
+    "agents",
+    "kane",
+    "ci",
+    "self-host",
+    "---Reference---",
+    "cli",
+    "api",
+    "---Concepts---",
+    "how-it-works"
+  ]
+}

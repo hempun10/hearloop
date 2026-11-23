@@ -1,0 +1,57 @@
+---
+title: CLI reference
+description: Commands, options, environment variables, hearloop.json fields, and the files the CLI writes.
+---
+
+## Commands
+
+| Command | Does |
+|---|---|
+| `hearloop init` | Asks five questions and writes `hearloop.json` |
+| `hearloop run` | Builds the most voted Planned request, verifies it with Kane, and reports the result |
+| `hearloop run --post <id>` | Builds one request. The request must be Planned |
+| `hearloop verify <id> [objective]` | Runs Kane only and reports the result. Exits with `0` on a pass and `1` on a fail |
+
+## Options
+
+| Option | Default | Does |
+|---|---|---|
+| `--config <file>` | `hearloop.json` | Reads another config file |
+
+## Environment variables
+
+| Variable | Used by | Value |
+|---|---|---|
+| `HEARLOOP_TOKEN` | `run`, `verify` | A loop token from **Settings** > **Loop API tokens**. The CLI removes it from the agent's environment |
+| `KANE_CLI_CHROME_PATH` | Kane CLI | Path to a Chromium-based browser |
+
+## hearloop.json
+
+| Field | Required | Value |
+|---|---|---|
+| `board` | Yes | Your board's URL, such as `https://hearloop-v2.hembdrpun10.workers.dev/acme` |
+| `app` | Yes | The URL Kane tests: a local dev server, a preview, or staging |
+| `agent` | Yes | `claude`, `codex`, `cursor`, `gemini`, `aider`, `manual`, or a command that contains `{prompt}` |
+| `build` | No | Runs after the agent. If it fails, the attempt fails |
+| `deploy` | No | Runs after `build` and before Kane |
+| `maxTries` | No | Attempts before the CLI gives up. Default `3` |
+| `kaneFolder` | No | The Kane Test Manager folder ID for the runs |
+
+## Files the CLI writes
+
+The CLI writes to `.hearloop/` in your repository. `init` adds that directory to `.gitignore`.
+
+| File | Contains |
+|---|---|
+| `.hearloop/prompt.md` | The prompt the agent got |
+| `.hearloop/kane-objective.txt` | The Kane test. The agent writes it, or you do |
+| `.hearloop/changelog.md` | Two sentences for users, published when Kane passes |
+| `.hearloop/kane-<time>.ndjson` | Kane's raw output for one attempt |
+
+## How the CLI calls Kane
+
+```bash
+kane-cli run "<objective>" --agent --headless --url <app> --timeout 300 --max-steps 30
+```
+
+`--agent` makes Kane print one JSON event per line. The CLI reads the last event, `run_end`, and uses its `status`, `reason`, and `summary`. On a fail, it also uses `verdict.root_cause`. Together they become the report on the request.

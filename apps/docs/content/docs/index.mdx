@@ -1,0 +1,30 @@
+---
+title: What hearloop does
+description: A public feedback board where a coding agent builds the top request and Kane CLI tests it before it ships.
+---
+
+Your users post requests and vote on them. When you approve a request, a coding agent builds it in your repository. Kane CLI then opens your app in a real browser and checks that the feature works.
+
+A request ships only if that check passes. The board moves it to **Shipped** and publishes a changelog entry. If the check fails, the request goes back to **Planned** with Kane's report attached, and the agent can try again.
+
+## The path of one request
+
+1. A user posts a request on your board, and other users vote on it.
+2. You move the request from **Open** to **Planned**. Agents never see a request you haven't approved.
+3. A coding agent claims the request and changes your code. The board shows the request as **In progress** and names who is building it.
+4. Kane CLI tests the change in a browser against your app.
+5. The verdict goes back to the board. A pass ships the request. A fail sends it back to **Planned**.
+
+You can run the agent in two ways. The [hearloop CLI](/docs/loop) runs unattended in a terminal or in CI. The [MCP server](/docs/mcp) lets you work from your own Claude Code or Cursor session.
+
+## Pages on your board
+
+| Path | Shows |
+|---|---|
+| `/your-board` | Requests, votes, and statuses |
+| `/your-board/posts/:id` | One request, its status history, and every Kane run |
+| `/your-board/roadmap` | Requests in **Planned**, **In progress**, and **Shipped** |
+| `/your-board/changelog` | Releases that passed Kane |
+| `/your-board/dashboard` | Your inbox, roadmap, Kane runs, changelog, and settings |
+
+To set up a board, start with the [Quickstart](/docs/quickstart).

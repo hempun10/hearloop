@@ -16,3 +16,8 @@ todos.json
 .hearloop
 !.dev.vars.example
 !.env.example
+**/.testmuai/variables
+**/.testmuai/evidence
+**/.testmuai/sessions
+.turbo
+.source

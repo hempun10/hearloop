@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "style": "new-york",
+  "rsc": false,
+  "tsx": true,
+  "iconLibrary": "lucide",
+  "tailwind": {
+    "config": "",
+    "css": "src/styles/globals.css",
+    "baseColor": "zinc",
+    "cssVariables": true
+  },
+  "aliases": {
+    "components": "@hearloop/ui/components",
+    "utils": "@hearloop/ui/lib/utils",
+    "hooks": "@hearloop/ui/hooks",
+    "lib": "@hearloop/ui/lib",
+    "ui": "@hearloop/ui/components"
+  }
+}
