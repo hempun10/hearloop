@@ -29,4 +29,6 @@ packages/
 
 `bun run check && bun run build`, then `bun run kane run <area>` for the app area you touched.
 
+Before any Kane CLI command, read https://www.testmuai.com/kane-cli-agent/AGENTS.md and follow it.
+
 Testing and the development process (Kane CLI requirements → designed tests → coverage, bugs through the board, branches and PRs): follow `apps/web/CLAUDE.md` § Testing with Kane CLI, every time.
