@@ -55,6 +55,7 @@ Any change to how the app behaves goes through this loop. The `kane-cli` skill h
    - Kane or the environment failed: say so, and don't rerun a paid command blindly.
    - Kane's verdict is a hint, not proof. An "automation_bug" can still be an app bug, so check the app.
 10. **Before a commit:** `bun run check`, then replay the suites for the areas you touched.
+11. **CI** (`.github/workflows/ci.yml`) runs `check` and `build` on every PR, then replays every designed test against a fresh local app. It needs the repository secrets `LT_USERNAME` and `LT_ACCESS_KEY`.
 
 The older objectives in `kane/suite.ts` (`bun run kane run|record <area>`) are regression replays. New behaviour goes through steps 1–9.
 
