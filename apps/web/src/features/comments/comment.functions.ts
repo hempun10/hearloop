@@ -24,7 +24,7 @@ export const postComment = createServerFn({ method: 'POST' })
     const org = await findOrgOrThrow(data.org)
     const team = await isMember(org.id, user.id)
     if (data.internal && !team) throw new Error('Only board members can write internal notes.')
-    const row = await addComment(org.id, data.id, { userId: user.id, author: user.name || user.email, team, internal: data.internal, body: data.body })
+    const row = await addComment(org.id, data.id, { userId: user.id, author: user.name || user.email, team, internal: data.internal, body: data.body, parentId: data.parentId })
     if (!row) throw new Error('That request is gone.')
     return row
   })

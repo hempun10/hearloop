@@ -296,6 +296,7 @@ export const comments = sqliteTable('comments', {
   team: integer({ mode: 'boolean' }).notNull().default(false), // written by a board member
   internal: integer({ mode: 'boolean' }).notNull().default(false),
   body: text().notNull(),
+  parentId: integer(), // a reply's top-level comment; replies are one level deep
   createdAt: createdAt(),
 }, (t) => [index('comments_post').on(t.postId)])
 

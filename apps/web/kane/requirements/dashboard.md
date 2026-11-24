@@ -54,9 +54,10 @@ A member reviews the board's roadmap on the dashboard's **Roadmap** page.
 Each request has its own page at `{{base_url}}/acme/posts/<id>`.
 
 - Anyone sees the request's public comments, oldest first, each with its author and age. A comment from a board member carries a **Team** label.
-- A signed-in person can write a comment and post it with **Comment**. A visitor who isn't signed in sees "Sign in to comment" instead of the form.
+- A signed-in person writes in **Leave a comment…** and posts it with the round arrow button (named **Comment**) or ⌘ Enter. A visitor who isn't signed in sees "Sign in to comment" instead of the form.
+- Each comment is a card with its author's initials, name and age, its replies beneath it, and a **Leave a reply…** bar at the bottom. A signed-in person can reply; replies are one level deep. A reply to an internal note is internal too.
 - A member can turn on **Internal note (team only)** before posting. Internal notes show only to members, marked "Internal note". Visitors and signed-in non-members never see them.
-- A member can remove any comment with its remove button, after confirming.
+- A member can remove any comment or reply with its remove button, after confirming. Removing a comment removes its replies.
 - A member ticks tags in **Add tag** (or **Edit tags**); the menu stays open for several. Typing a new name offers **Create "<name>"**. Ticking a tag again takes it off. Tags show on the request page for everyone.
 - A member can merge an Open or Planned request into another with **Merge into…**: pick the request that stays, then **Merge**. Its votes (each voter once), comments and tags move to the request that stays, and the merged request leaves the board, the roadmap and the post list. Opening the merged request's address says "Merged into" with a link to the request that stays.
 
