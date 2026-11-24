@@ -1,12 +1,9 @@
 import { Link } from '@tanstack/react-router'
-import { BadgeCheck, Bot, Cloud } from 'lucide-react'
 import { BlurFade } from '@hearloop/ui/components/magic/blur-fade'
 import { BorderBeam } from '@hearloop/ui/components/magic/border-beam'
 import { Button } from '@hearloop/ui/components/button'
 import { DEMO_ORG } from '../landing.functions'
 import { PrimaryCta } from './cta'
-
-const BUILT_WITH = [['Claude Code', Bot], ['Kane CLI', BadgeCheck], ['Cloudflare Workers', Cloud]] as const
 
 export function Hero() {
   return (
@@ -22,26 +19,16 @@ export function Hero() {
             </BlurFade>
             <BlurFade delay={0.08}>
               <p className="max-w-[54ch] text-center text-base leading-relaxed font-medium tracking-tight text-balance text-muted-foreground md:text-lg">
-                Users post and vote. Claude Code builds the top request, Kane CLI tests it in a real browser, and only a passing run reaches the changelog.
+                Users post and vote. Your team approves a request and hands it to a coding agent. The agent builds it, Kane CLI tests it in a real browser, and only a passing run reaches the changelog.
               </p>
             </BlurFade>
           </div>
           <BlurFade delay={0.16}>
-            <div className="flex flex-col items-center gap-6">
-              <div className="flex flex-wrap items-center justify-center gap-3">
-                <PrimaryCta />
-                <Button variant="soft" size="lg" asChild>
-                  <Link to="/$org" params={{ org: DEMO_ORG }}>Try the live demo</Link>
-                </Button>
-              </div>
-              <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
-                <span className="text-xs font-medium text-muted-foreground">Built with</span>
-                {BUILT_WITH.map(([name, Icon]) => (
-                  <span key={name} className="inline-flex items-center gap-2 text-[13px] text-muted-foreground">
-                    <Icon className="size-3.5" />{name}
-                  </span>
-                ))}
-              </div>
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              <PrimaryCta />
+              <Button variant="soft" size="lg" asChild>
+                <Link to="/$org" params={{ org: DEMO_ORG }}>Try the live demo</Link>
+              </Button>
             </div>
           </BlurFade>
         </div>
