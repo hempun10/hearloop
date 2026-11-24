@@ -1,0 +1,44 @@
+---
+title: Notifications
+description: Post your board's news to Slack or Discord, and pick which events each channel gets.
+---
+
+hearloop can post to a Slack or Discord channel whenever something happens on your board. You connect each one with an incoming webhook, then choose the events it receives.
+
+## Connect a channel
+
+<Tabs items={['Slack', 'Discord']}>
+<Tab value="Slack">
+
+1. In Slack, create an **incoming webhook** for the channel.
+2. Copy its URL. It starts with `https://hooks.slack.com/services/`.
+
+</Tab>
+<Tab value="Discord">
+
+1. In the channel settings, open **Integrations → Webhooks** and create a webhook.
+2. Copy its URL. It starts with `https://discord.com/api/webhooks/`.
+
+</Tab>
+</Tabs>
+
+Then open **Settings → Notifications**, paste the URL under **Webhook URL**, and click **Connect**. hearloop sends a test message straight away.
+
+<Callout type="warn">A webhook URL is a secret: anyone with it can post to your channel. hearloop only ever shows its last characters.</Callout>
+
+## Choose the events
+
+Under **Send when**, click an event to turn it on or off. A connected channel saves the change at once.
+
+| Event | Sent when |
+|---|---|
+| **New request** | Someone posts a request |
+| **New comment** | Someone comments publicly. Internal notes are never sent |
+| **Status change** | A request moves to another status |
+| **Kane CLI verdict** | Kane passes or fails a request |
+
+All four are on by default, and at least one stays on.
+
+## Check delivery
+
+The heading of each channel shows the last delivery, for example *Connected · …a1b2c3 · delivered 2m ago*. A red dot means the last message failed, with the reason. Use **Send test** to try again, **Replace** to paste a new URL, or **Disconnect** to stop.

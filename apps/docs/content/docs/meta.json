@@ -4,13 +4,16 @@
     "---Get started---",
     "index",
     "quickstart",
+    "---Concepts---",
+    "requests",
+    "agents",
+    "how-it-works",
     "---Guides---",
     "mcp",
     "kane",
+    "notifications",
     "self-host",
     "---Reference---",
-    "api",
-    "---Concepts---",
-    "how-it-works"
+    "api"
   ]
 }

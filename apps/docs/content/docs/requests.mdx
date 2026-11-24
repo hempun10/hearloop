@@ -1,0 +1,62 @@
+---
+title: Requests and statuses
+description: What a request is, how statuses move, and how boards, tags and comments organise them.
+---
+
+A **request** is one idea someone posted: a title, an optional description, votes, and comments. Approval, building, testing and the changelog all happen to requests.
+
+## Statuses
+
+Every request has one of four built-in statuses. They drive the loop, so they never change:
+
+| Status | Means | Who moves it there |
+|---|---|---|
+| **Open** | Posted, not reviewed yet | Anyone who posts |
+| **Planned** | Approved, ready to build | A member |
+| **In progress** | Someone is building it | An agent's claim, or a member |
+| **Shipped** | Done and on the changelog | A passing Kane run, or a member |
+
+### Your own statuses
+
+Need a step like *Under review* or *Needs design*? Add it under **Settings → Statuses**.
+
+1. Click **New status**.
+2. Give it a name and a colour.
+3. Pick its **kind**: the built-in status it counts as.
+
+The kind decides what the status means to hearloop. *Under review* with the kind **Open** is still unapproved, so agents can't claim it. Your statuses appear after their kind on the roadmap and in every status menu.
+
+<Callout>Coding agents and Kane CLI always use the four built-ins. When an agent claims a request, it moves to **In progress**, whatever custom status it had.</Callout>
+
+## Boards
+
+A **board** groups requests inside your product, such as *Feature requests*, *Bugs* or *Integrations*. Each request sits on one board, or on none.
+
+- Add boards under **Settings → Boards & tags**.
+- People pick a board when they post. On the public page, the side column filters by board.
+- Deleting a board keeps its requests. They just have no board.
+
+## Tags
+
+**Tags** cut across boards, such as *mobile* or *billing*. A request can have up to five.
+
+- Members tag a request from its **Properties**, or create tags under **Settings → Boards & tags**.
+- Visitors can only pick tags that already exist.
+
+## Comments, replies and internal notes
+
+Anyone signed in can comment on a request and reply to a comment. Replies go one level deep.
+
+Members can also write an **internal note**: a comment only the team sees. A reply to an internal note stays internal.
+
+## Find requests on the dashboard
+
+The **Posts** page lists every request. Use **Filter** to narrow it by **Status**, **Board** and **Tags**:
+
+- Tick several values in one filter to match any of them.
+- Add several filters to match all of them.
+- Each filter shows as a chip. Click its values to change them, or **×** to clear it.
+
+## Merge duplicates
+
+Two requests asking for the same thing? Open the one to remove and choose **Merge into…**. Its votes, comments and tags move to the request that stays.

@@ -1,21 +1,23 @@
 ---
-title: Build from your agent session (MCP)
-description: Connect Claude Code, Cursor, or another MCP client once, then build requests from inside your own session.
+title: Connect your agent (MCP)
+description: Connect Claude Code, Cursor, Codex or another MCP client once, then build requests from inside your own session.
 ---
 
-The MCP server lets your coding agent read your board and report Kane's results while you work in your own session. You watch and steer the work.
+The MCP server lets your coding agent read your board, claim requests and report Kane's results, while you watch and steer in your own session.
 
-The connection belongs to you, so it works for every board you're a member of.
+The connection belongs to you, so it works on every board you're a member of. Once connected, the agent appears on your board and can be [assigned work](/docs/agents).
+
+<Callout>The quickest way: open **Settings → Loop API token** on your board. The **Connect your AI agent** card has a ready-made prompt for each agent. Paste it, and the agent connects itself.</Callout>
 
 ## Connect your agent
 
-<Tabs items={['Claude Code', 'Cursor', 'Other clients']}>
+<Tabs items={['Claude Code', 'Cursor', 'Codex', 'Other clients']}>
 <Tab value="Claude Code">
 
 Run:
 
 ```bash
-claude mcp add --transport http --scope user hearloop https://hearloop-v2.hembdrpun10.workers.dev/mcp
+claude mcp add --transport http --scope user hearloop https://hearloop.app/mcp
 ```
 
 Then run `/mcp` in Claude Code and select **hearloop**.
@@ -26,36 +28,48 @@ Then run `/mcp` in Claude Code and select **hearloop**.
 Add hearloop to `~/.cursor/mcp.json`:
 
 ```json
-{ "mcpServers": { "hearloop": { "url": "https://hearloop-v2.hembdrpun10.workers.dev/mcp" } } }
+{ "mcpServers": { "hearloop": { "url": "https://hearloop.app/mcp" } } }
+```
+
+</Tab>
+<Tab value="Codex">
+
+Add hearloop to `~/.codex/config.toml`, then restart Codex:
+
+```toml
+[mcp_servers.hearloop]
+url = "https://hearloop.app/mcp"
 ```
 
 </Tab>
 <Tab value="Other clients">
 
-Add a remote MCP server with the URL `https://hearloop-v2.hembdrpun10.workers.dev/mcp`. The client must support OAuth sign-in.
+Add a remote MCP server with the URL `https://hearloop.app/mcp`. The client must support OAuth sign-in.
 
 </Tab>
 </Tabs>
 
 Your browser opens. Sign in to hearloop, check that the page names your agent, and click **Allow**. You don't copy any token.
 
+<Callout type="warn">On a self-hosted copy, use your own address instead of `https://hearloop.app`.</Callout>
+
 ## Point each repository at its board
 
 Add a `hearloop.json` to each repository. It tells your agent which board and which app URL belong to that repository, and it holds no secrets, so you can commit it:
 
 ```json title="hearloop.json"
-{ "board": "https://hearloop-v2.hembdrpun10.workers.dev/acme", "app": "http://localhost:5173" }
+{ "board": "https://hearloop.app/acme", "app": "http://localhost:5173" }
 ```
 
 Without the file, your agent calls `list_boards` and asks you which board and app URL to use. To work on another project, open that repository. You don't reconnect or sign in again.
 
 ## Build a request
 
-In Claude Code, run `/mcp__hearloop__build`. You can also ask in your own words, for example "build the top request on our board".
+In Claude Code, run `/mcp__hearloop__build`. You can also ask in your own words, for example *"build the request assigned to you"* or *"build the top request on our board"*.
 
 Your agent then:
 
-1. Takes the most voted **Planned** request and claims it. The board shows it as **In progress**, with your name and your agent's name.
+1. Finds the request (the one assigned to it, or the most voted **Planned** one) and claims it. The board shows it as **In progress**, assigned to your agent.
 2. Changes your code.
 3. Runs Kane CLI against your app.
 4. Reports the result. A pass ships the request. A fail sends it back to **Planned** with Kane's report.
@@ -64,6 +78,6 @@ Review the diff and commit it yourself.
 
 ## Disconnect an agent
 
-Open **Settings**, then **Loop API tokens**, on the board. Each MCP connection is listed with the note **Connected via MCP**. Click **Revoke** to stop that connection on that board.
+Open **Settings → Loop API token** on the board. Each MCP connection is listed with **Connected via MCP**. Click **Revoke** to stop it on that board.
 
 For the list of tools, see the [MCP tools reference](/docs/api#mcp-tools).
