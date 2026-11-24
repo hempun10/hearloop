@@ -1,7 +1,16 @@
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { Link, createFileRoute, notFound, useNavigate } from '@tanstack/react-router'
 import { ArrowLeft } from 'lucide-react'
+import { useState } from 'react'
 import { useHotkeys } from 'react-hotkeys-hook'
+import { Button } from '@hearloop/ui/components/button'
+import { EditPostForm } from '#/features/posts/components/edit-post-form'
+import { Comments } from '#/features/comments/components/comments'
+import { commentsQuery } from '#/features/comments/comment.queries'
+import { useSession } from '#/features/auth/use-session'
+import { orgQuery } from '#/features/orgs/org.queries'
+import { MergePostDialog } from '#/features/posts/components/merge-post-dialog'
+import { TagEditor, TagList } from '#/features/posts/components/post-tags'
 import { StatusBadge } from '#/features/posts/components/status-badge'
 import { StatusTimeline } from '#/features/posts/components/status-timeline'
 import { VoteButton } from '#/features/posts/components/vote-button'
@@ -13,6 +22,7 @@ export const Route = createFileRoute('/$org/_public/posts/$id')({
   loader: async ({ context, params }) => {
     const data = await context.queryClient.query(postQuery(params.org, Number(params.id)))
     if (!data) throw notFound()
+    await context.queryClient.query(commentsQuery(params.org, Number(params.id)))
   },
   component: PostPage,
 })
@@ -20,12 +30,17 @@ export const Route = createFileRoute('/$org/_public/posts/$id')({
 function PostPage() {
   const { org, id } = Route.useParams()
   const { data } = useSuspenseQuery(postQuery(org, Number(id)))
+  const { data: board } = useSuspenseQuery(orgQuery(org))
+  const session = useSession()
+  const isMember = !!board?.isMember
+  const [editing, setEditing] = useState(false)
   const navigate = useNavigate()
   const backToBoard = () => navigate({ to: '/$org', params: { org } })
   // Esc does what the Board link does (react-hotkeys-hook ignores it while typing in a field)
   useHotkeys('escape', backToBoard, [org])
   if (!data) return null
-  const { post, runs } = data
+  const { post, runs, tags, mergedInto } = data
+  const canEdit = !mergedInto && (isMember || (!!session && post.authorId === session.user.id && post.status === 'open'))
 
   return (
     <main className="mx-auto flex max-w-5xl flex-col gap-12 px-4 pt-10 md:flex-row md:px-0">
@@ -33,14 +48,25 @@ function PostPage() {
         <Link to="/$org" params={{ org }} onClick={(e) => { e.preventDefault(); backToBoard() }} className="inline-flex items-center gap-1 text-[13px] text-muted-foreground hover:text-foreground">
           <ArrowLeft className="size-3.5" /> Board
         </Link>
+        {mergedInto && (
+          <p role="status" className="mt-5 rounded-md border bg-card px-3 py-2 text-[13px] text-muted-foreground">
+            Merged into <Link to="/$org/posts/$id" params={{ org, id: String(mergedInto.id) }} className="font-medium text-foreground underline">{mergedInto.title}</Link>. Vote and comment there.
+          </p>
+        )}
+        {editing ? <EditPostForm org={org} post={post} onDone={() => setEditing(false)} /> : (
         <div className="mt-5 flex items-start gap-4">
           <div className="min-w-0 flex-1">
             <h1 className="text-2xl font-semibold">{post.title}</h1>
-            <p className="mt-2 text-xs text-faint">Posted {timeAgo(post.createdAt)}</p>
+            <p className="mt-2 flex items-center gap-3 text-xs text-faint">
+              Posted {timeAgo(post.createdAt)}
+              {canEdit && <Button variant="link" size="sm" className="h-auto p-0 text-xs" onClick={() => setEditing(true)}>Edit</Button>}
+            </p>
           </div>
-          <VoteButton org={org} post={post} />
+          {!mergedInto && <VoteButton org={org} post={post} />}
         </div>
-        {post.body && <p className="mt-5 text-[15px] leading-7 whitespace-pre-wrap text-muted-foreground">{post.body}</p>}
+        )}
+        {!isMember && tags.length > 0 && <div className="mt-3"><TagList tags={tags} /></div>}
+        {!editing && post.body && <p className="mt-5 text-[15px] leading-7 whitespace-pre-wrap text-muted-foreground">{post.body}</p>}
 
         <div className="mt-8"><StatusTimeline status={post.status} /></div>
 
@@ -60,6 +86,8 @@ function PostPage() {
             ))}
           </ol>
         )}
+
+        <Comments org={org} postId={post.id} signedIn={!!session} isMember={isMember} />
       </section>
 
       <aside className="w-full shrink-0 text-[13px] md:w-60">
@@ -69,6 +97,15 @@ function PostPage() {
           <dt className="text-faint">Votes</dt><dd className="tabular-nums">{post.votes}</dd>
           <dt className="text-faint">Kane runs</dt><dd className="tabular-nums">{runs.length}</dd>
         </dl>
+        {isMember && (
+          <div className="mt-6 grid gap-4">
+            <div>
+              <p className="mb-2 text-xs font-medium text-muted-foreground">Tags</p>
+              <TagEditor org={org} id={post.id} tags={tags} />
+            </div>
+            {!mergedInto && (post.status === 'open' || post.status === 'planned') && <MergePostDialog org={org} post={post} />}
+          </div>
+        )}
       </aside>
     </main>
   )

@@ -1,24 +1,25 @@
 {
+  "commit_id": "9d3a1ab7-2fe9-4bcc-adfd-dc98c37e5d0f",
   "test_id": "e59324cb-d299-464b-ba7e-f682fbac2780",
+  "testcase_id": "01M85MVZRK05ZCM5Q5NWKKWDE4",
   "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
   "folder_id": "01M8393CR4D77J69S18TRMM75V",
   "org_id": "3447606",
   "session_name": "unbroken-long-request-title-stays-inside-its-inbox-row",
-  "commit_id": "b52cdbc0-8b77-4de0-8838-8461bef3a3d9",
-  "testcase_id": "01M85MVZRK05ZCM5Q5NWKKWDE4",
   "executions": [
     {
-      "execution_id": "d8ad93e2-6ea7-484d-833e-1144c569bca6",
+      "execution_id": "dc008678-0df1-4593-a4a3-aed7babd2e5e",
       "run_kind": "author",
       "status": "passed",
       "valid": true,
-      "at": "2026-11-24T02:08:37.895Z"
+      "uploaded": false,
+      "at": "2026-11-24T04:49:05.014Z"
     },
     {
-      "execution_id": "d242f47b-f1f5-4ec3-8083-69da8b5b0423",
-      "run_kind": "author",
+      "execution_id": "25d2d64c-c8fd-4ef7-9057-dfeff3229b6c",
+      "run_kind": "replay",
       "status": "passed",
-      "at": "2026-11-24T02:08:52.002Z",
+      "at": "2026-11-24T05:00:29.941Z",
       "uploaded": true
     }
   ]

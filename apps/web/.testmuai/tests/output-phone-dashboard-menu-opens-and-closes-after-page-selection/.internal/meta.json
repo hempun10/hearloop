@@ -1,24 +1,25 @@
 {
+  "commit_id": "504a659d-96fb-4520-875e-5e88037e40c1",
   "test_id": "aabbd170-df2d-42fa-bae1-32f7c6f400a5",
+  "testcase_id": "01M85MPRD1XFTBC8XX4NW6QCYE",
   "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
   "folder_id": "01M8393CR4D77J69S18TRMM75V",
   "org_id": "3447606",
   "session_name": "phone-dashboard-menu-opens-and-closes-after-page-selection",
-  "commit_id": "d5295f4c-1157-43a3-8582-8bd6de489462",
-  "testcase_id": "01M85MPRD1XFTBC8XX4NW6QCYE",
   "executions": [
     {
-      "execution_id": "65e32771-916c-4c9f-8235-b8a23703e7f6",
+      "execution_id": "dc008678-0df1-4593-a4a3-aed7babd2e5e",
       "run_kind": "author",
       "status": "passed",
       "valid": true,
-      "at": "2026-11-24T02:06:07.342Z"
+      "uploaded": false,
+      "at": "2026-11-24T04:49:05.013Z"
     },
     {
-      "execution_id": "ade1fcbb-4a6e-4534-8b84-3a086da61ba0",
-      "run_kind": "author",
+      "execution_id": "25d2d64c-c8fd-4ef7-9057-dfeff3229b6c",
+      "run_kind": "replay",
       "status": "passed",
-      "at": "2026-11-24T02:06:22.778Z",
+      "at": "2026-11-24T05:00:29.938Z",
       "uploaded": true
     }
   ]

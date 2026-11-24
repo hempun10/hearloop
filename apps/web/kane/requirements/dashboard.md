@@ -43,6 +43,22 @@ A member reviews the board's roadmap on the dashboard's **Roadmap** page.
 - Each card also has a status dropdown, so keyboard and touch users can move it.
 - The same confirmation and changelog rules as in the post list apply.
 
+## Request page: comments, tags and merging
+
+Each request has its own page at `{{base_url}}/acme/posts/<id>`.
+
+- Anyone sees the request's public comments, oldest first, each with its author and age. A comment from a board member carries a **Team** label.
+- A signed-in person can write a comment and post it with **Comment**. A visitor who isn't signed in sees "Sign in to comment" instead of the form.
+- A member can turn on **Internal note (team only)** before posting. Internal notes show only to members, marked "Internal note". Visitors and signed-in non-members never see them.
+- A member can remove any comment with its remove button, after confirming.
+- A member adds a tag by typing it in **Add a tag** and pressing Enter, and removes one with its x. Tags show on the request page for everyone.
+- A member can merge an Open or Planned request into another with **Merge into…**: pick the request that stays, then **Merge**. Its votes (each voter once), comments and tags move to the request that stays, and the merged request leaves the board, the roadmap and the post list. Opening the merged request's address says "Merged into" with a link to the request that stays.
+
+## Editing a request
+
+- A member sees **Edit** next to "Posted" on any request's page. Editing shows the title and details in a form; **Save** updates the page, and **Cancel** leaves it as it was. A title shorter than 4 characters is refused with an error and nothing is saved.
+- The person who posted a request while signed in can edit it the same way, but only while it is Open. Other visitors and signed-in non-members see no **Edit**.
+
 ## Votes
 
 - A person can vote once per request: once per account when signed in, once per browser for visitors. Voting again does not raise the count, even after clearing the page's local storage.
@@ -66,6 +82,21 @@ A member reviews the board's roadmap on the dashboard's **Roadmap** page.
 - On both pages, invalid input shows an error next to the field and saves nothing. Saved changes show on the public board.
 - **Access**: show or hide the public roadmap and public changelog, and choose who can post: anyone, or signed-in people only. A hidden page says it isn't public, even when opened by its address. With "signed-in people only", a visitor who isn't signed in is asked to sign in before posting.
 - **Loop API tokens**: create a named token (shown once), see each token's last use, and revoke it. A revoked token stops working at once.
+
+## Members
+
+- **Settings → Members** lists the board's members by name and email, with "You" beside your own row.
+- **Create invite link** shows a link once, with a copy button. The link works once and expires after 7 days. Open links are listed under "Open invite links", each with **Cancel link**.
+- Someone who opens an invite link is asked to sign in or sign up first, then sees "Join Acme". **Join Acme** makes them a member and opens the dashboard.
+- A used, cancelled or expired link says "This invite link doesn't work".
+- **Remove** next to another member asks for confirmation, then removes them; they lose the dashboard at once. The last member can't be removed.
+
+## Notifications
+
+- **Settings → Notifications** has a Slack row and a Discord row. Each takes an incoming webhook URL and **Connect**.
+- A URL that isn't a Slack or Discord incoming webhook shows an error next to the field and isn't saved.
+- Connecting sends a test message. A connected row shows "Connected", the last characters of the webhook, whether the last message was delivered, **Send test** and **Disconnect** (after confirming).
+- The connected channel gets a message when someone posts a request, when a member moves a request, and when Kane CLI passes or fails a request.
 
 ## Small screens
 

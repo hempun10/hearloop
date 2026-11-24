@@ -1,0 +1,25 @@
+{
+  "test_id": "85ac4ee6-1fd8-4aa2-b3ac-a05d4e935bd7",
+  "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
+  "folder_id": "01M85R7PN3X539HEBVYDM52CZ0",
+  "org_id": "3447606",
+  "session_name": "member-publishes-team-labelled-public-comment-on-acme-2",
+  "commit_id": "ff1f4798-6691-4f26-9bc8-6a31e47ac708",
+  "testcase_id": "01M85W493V0X9DKMY8D8TCTEB2",
+  "executions": [
+    {
+      "execution_id": "6fb85415-b60b-4607-92b5-1775a75ae058",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-24T04:15:32.359Z"
+    },
+    {
+      "execution_id": "0cd968ce-c80e-45f7-afa1-a7bca7103ad2",
+      "run_kind": "author",
+      "status": "passed",
+      "at": "2026-11-24T04:22:10.321Z",
+      "uploaded": true
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "test_id": "c2256aae-15bf-4d44-b3ed-f70409e17624",
+  "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
+  "folder_id": "01M8393CR4D77J69S18TRMM75V",
+  "org_id": "3447606",
+  "session_name": "newest-and-matching-inbox-controls-persist-on-reload-and",
+  "commit_id": "07156e4b-420d-4661-bebc-3e5fa872e573",
+  "testcase_id": "01M85YCEKP79J9W5HWHDQVYPYG",
+  "executions": [
+    {
+      "execution_id": "eae747b0-ceb6-41d1-9ed2-5386d9043819",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-24T04:59:57.847Z"
+    },
+    {
+      "execution_id": "25d2d64c-c8fd-4ef7-9057-dfeff3229b6c",
+      "run_kind": "author",
+      "status": "passed",
+      "at": "2026-11-24T05:00:29.937Z",
+      "uploaded": true
+    }
+  ]
+}

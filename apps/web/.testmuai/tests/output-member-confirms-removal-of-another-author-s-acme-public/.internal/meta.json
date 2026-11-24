@@ -1,0 +1,25 @@
+{
+  "test_id": "8b0f364d-d76f-458e-9475-3b9a66d95685",
+  "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
+  "folder_id": "01M85R7PN3X539HEBVYDM52CZ0",
+  "org_id": "3447606",
+  "session_name": "member-confirms-removal-of-another-author-s-acme-public",
+  "commit_id": "83ab65b5-e157-4692-9fff-19126f730832",
+  "testcase_id": "01M85R80W8WPHTDDBQTENM08FV",
+  "executions": [
+    {
+      "execution_id": "637944c6-13e6-439f-86f0-401459d322bb",
+      "run_kind": "author",
+      "status": "failed",
+      "valid": true,
+      "at": "2026-11-24T03:09:31.386Z"
+    },
+    {
+      "execution_id": "4860537f-e114-4a84-a7c4-42fde7bb760d",
+      "run_kind": "author",
+      "status": "failed",
+      "at": "2026-11-24T03:17:53.467Z",
+      "uploaded": true
+    }
+  ]
+}

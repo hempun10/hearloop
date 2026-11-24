@@ -1,0 +1,25 @@
+{
+  "test_id": "1d29aec9-b736-414f-8f04-7b86d1e048f0",
+  "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
+  "folder_id": "01M85R7R1MPN4KE6YS5D7NPPZ3",
+  "org_id": "3447606",
+  "session_name": "reject-invalid-discord-incoming-webhook-without-saving",
+  "commit_id": "64c83f47-ab27-4ee3-beea-1c5ad29c8b1e",
+  "testcase_id": "01M85YTY8B00JW6GPPCQ9KXGCZ",
+  "executions": [
+    {
+      "execution_id": "10061004-14f7-4a91-9c4f-39dcda558c34",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-24T05:04:08.782Z"
+    },
+    {
+      "execution_id": "b430d162-69bb-4622-9fc1-8546b118f87f",
+      "run_kind": "author",
+      "status": "passed",
+      "at": "2026-11-24T05:04:37.372Z",
+      "uploaded": true
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "test_id": "f26bf9be-bc79-4985-9c26-f52d0f4d71ee",
+  "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
+  "folder_id": "01M85R7R1MPN4KE6YS5D7NPPZ3",
+  "org_id": "3447606",
+  "session_name": "sole-board-member-remains-after-removal-attempt",
+  "commit_id": "bfdbf8fb-ff5c-4e56-b163-06a4ca595379",
+  "testcase_id": "01M85TZKKKMY5Z3JNXWSA44C03",
+  "executions": [
+    {
+      "execution_id": "d4ec50a6-f0e5-4eed-80cb-559ad325d499",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-24T03:55:32.189Z"
+    },
+    {
+      "execution_id": "ed2d4930-9d6e-4d3a-a2d3-804a870736af",
+      "run_kind": "author",
+      "status": "passed",
+      "at": "2026-11-24T04:01:47.041Z",
+      "uploaded": true
+    }
+  ]
+}

@@ -1,8 +1,8 @@
 import type { QueryClient } from '@tanstack/react-query'
-import type { Post, Run } from '#/db/schema'
+import type { Post } from '#/db/schema'
 import { postKeys } from './post.queries'
 
-type Detail = { post: Post; runs: Run[] } | null
+type Detail = { post: Post } | null
 
 /** Applies a change to one post in every cached list and detail for the board. Returns an undo. */
 export function patchPostInCache(qc: QueryClient, org: string, id: number, patch: (p: Post) => Post) {

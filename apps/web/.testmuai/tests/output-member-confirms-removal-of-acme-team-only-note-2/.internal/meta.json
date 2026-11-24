@@ -1,0 +1,25 @@
+{
+  "test_id": "654a0598-2b82-4341-9c4f-e26ec7cf16cc",
+  "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
+  "folder_id": "01M85R7PN3X539HEBVYDM52CZ0",
+  "org_id": "3447606",
+  "session_name": "member-confirms-removal-of-acme-team-only-note-2",
+  "commit_id": "695538de-efe1-4df4-9a73-a5336ef47101",
+  "testcase_id": "01M85VT854FPW4WQAERZHEJ2PM",
+  "executions": [
+    {
+      "execution_id": "5e0494f8-b174-4f5a-ba20-6271d0fa554b",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-24T04:10:50.386Z"
+    },
+    {
+      "execution_id": "0cd968ce-c80e-45f7-afa1-a7bca7103ad2",
+      "run_kind": "author",
+      "status": "passed",
+      "at": "2026-11-24T04:22:10.317Z",
+      "uploaded": true
+    }
+  ]
+}

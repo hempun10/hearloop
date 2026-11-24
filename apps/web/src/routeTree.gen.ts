@@ -27,12 +27,15 @@ import { Route as OrgDashboardChangelogRouteImport } from './routes/$org/dashboa
 import { Route as OrgDashboardRoadmapRouteImport } from './routes/$org/dashboard/roadmap'
 import { Route as OrgDashboardRunsRouteImport } from './routes/$org/dashboard/runs'
 import { Route as OrgDashboardSettingsRouteImport } from './routes/$org/dashboard/settings'
+import { Route as SiteInviteTokenRouteImport } from './routes/_site/invite.$token'
 import { Route as ApiOrgChangelogRouteImport } from './routes/api/$org/changelog'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 import { Route as OrgPublicPostsIdRouteImport } from './routes/$org/_public/posts.$id'
 import { Route as OrgDashboardSettingsIndexRouteImport } from './routes/$org/dashboard/settings/index'
 import { Route as OrgDashboardSettingsAccessRouteImport } from './routes/$org/dashboard/settings/access'
 import { Route as OrgDashboardSettingsBrandingRouteImport } from './routes/$org/dashboard/settings/branding'
+import { Route as OrgDashboardSettingsNotificationsRouteImport } from './routes/$org/dashboard/settings/notifications'
+import { Route as OrgDashboardSettingsTeamRouteImport } from './routes/$org/dashboard/settings/team'
 import { Route as OrgDashboardSettingsTokenRouteImport } from './routes/$org/dashboard/settings/token'
 import { Route as ApiOrgPostsIndexRouteImport } from './routes/api/$org/posts.index'
 import { Route as ApiOrgPostsIdIndexRouteImport } from './routes/api/$org/posts.$id.index'
@@ -129,6 +132,11 @@ const OrgDashboardSettingsRoute = OrgDashboardSettingsRouteImport.update({
   path: '/settings',
   getParentRoute: () => OrgDashboardRoute,
 } as any)
+const SiteInviteTokenRoute = SiteInviteTokenRouteImport.update({
+  id: '/invite/$token',
+  path: '/invite/$token',
+  getParentRoute: () => SiteRoute,
+} as any)
 const ApiOrgChangelogRoute = ApiOrgChangelogRouteImport.update({
   id: '/api/$org/changelog',
   path: '/api/$org/changelog',
@@ -160,6 +168,18 @@ const OrgDashboardSettingsBrandingRoute =
   OrgDashboardSettingsBrandingRouteImport.update({
     id: '/branding',
     path: '/branding',
+    getParentRoute: () => OrgDashboardSettingsRoute,
+  } as any)
+const OrgDashboardSettingsNotificationsRoute =
+  OrgDashboardSettingsNotificationsRouteImport.update({
+    id: '/notifications',
+    path: '/notifications',
+    getParentRoute: () => OrgDashboardSettingsRoute,
+  } as any)
+const OrgDashboardSettingsTeamRoute =
+  OrgDashboardSettingsTeamRouteImport.update({
+    id: '/team',
+    path: '/team',
     getParentRoute: () => OrgDashboardSettingsRoute,
   } as any)
 const OrgDashboardSettingsTokenRoute =
@@ -214,6 +234,7 @@ export interface FileRoutesByFullPath {
   '/$org/dashboard/roadmap': typeof OrgDashboardRoadmapRoute
   '/$org/dashboard/runs': typeof OrgDashboardRunsRoute
   '/$org/dashboard/settings': typeof OrgDashboardSettingsRouteWithChildren
+  '/invite/$token': typeof SiteInviteTokenRoute
   '/api/$org/changelog': typeof ApiOrgChangelogRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/$org/': typeof OrgPublicIndexRoute
@@ -221,6 +242,8 @@ export interface FileRoutesByFullPath {
   '/$org/posts/$id': typeof OrgPublicPostsIdRoute
   '/$org/dashboard/settings/access': typeof OrgDashboardSettingsAccessRoute
   '/$org/dashboard/settings/branding': typeof OrgDashboardSettingsBrandingRoute
+  '/$org/dashboard/settings/notifications': typeof OrgDashboardSettingsNotificationsRoute
+  '/$org/dashboard/settings/team': typeof OrgDashboardSettingsTeamRoute
   '/$org/dashboard/settings/token': typeof OrgDashboardSettingsTokenRoute
   '/$org/dashboard/settings/': typeof OrgDashboardSettingsIndexRoute
   '/api/$org/posts/': typeof ApiOrgPostsIndexRoute
@@ -243,12 +266,15 @@ export interface FileRoutesByTo {
   '/$org/dashboard/changelog': typeof OrgDashboardChangelogRoute
   '/$org/dashboard/roadmap': typeof OrgDashboardRoadmapRoute
   '/$org/dashboard/runs': typeof OrgDashboardRunsRoute
+  '/invite/$token': typeof SiteInviteTokenRoute
   '/api/$org/changelog': typeof ApiOrgChangelogRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/$org/dashboard': typeof OrgDashboardIndexRoute
   '/$org/posts/$id': typeof OrgPublicPostsIdRoute
   '/$org/dashboard/settings/access': typeof OrgDashboardSettingsAccessRoute
   '/$org/dashboard/settings/branding': typeof OrgDashboardSettingsBrandingRoute
+  '/$org/dashboard/settings/notifications': typeof OrgDashboardSettingsNotificationsRoute
+  '/$org/dashboard/settings/team': typeof OrgDashboardSettingsTeamRoute
   '/$org/dashboard/settings/token': typeof OrgDashboardSettingsTokenRoute
   '/$org/dashboard/settings': typeof OrgDashboardSettingsIndexRoute
   '/api/$org/posts': typeof ApiOrgPostsIndexRoute
@@ -276,6 +302,7 @@ export interface FileRoutesById {
   '/$org/dashboard/roadmap': typeof OrgDashboardRoadmapRoute
   '/$org/dashboard/runs': typeof OrgDashboardRunsRoute
   '/$org/dashboard/settings': typeof OrgDashboardSettingsRouteWithChildren
+  '/_site/invite/$token': typeof SiteInviteTokenRoute
   '/api/$org/changelog': typeof ApiOrgChangelogRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/$org/_public/': typeof OrgPublicIndexRoute
@@ -283,6 +310,8 @@ export interface FileRoutesById {
   '/$org/_public/posts/$id': typeof OrgPublicPostsIdRoute
   '/$org/dashboard/settings/access': typeof OrgDashboardSettingsAccessRoute
   '/$org/dashboard/settings/branding': typeof OrgDashboardSettingsBrandingRoute
+  '/$org/dashboard/settings/notifications': typeof OrgDashboardSettingsNotificationsRoute
+  '/$org/dashboard/settings/team': typeof OrgDashboardSettingsTeamRoute
   '/$org/dashboard/settings/token': typeof OrgDashboardSettingsTokenRoute
   '/$org/dashboard/settings/': typeof OrgDashboardSettingsIndexRoute
   '/api/$org/posts/': typeof ApiOrgPostsIndexRoute
@@ -309,6 +338,7 @@ export interface FileRouteTypes {
     | '/$org/dashboard/roadmap'
     | '/$org/dashboard/runs'
     | '/$org/dashboard/settings'
+    | '/invite/$token'
     | '/api/$org/changelog'
     | '/api/auth/$'
     | '/$org/'
@@ -316,6 +346,8 @@ export interface FileRouteTypes {
     | '/$org/posts/$id'
     | '/$org/dashboard/settings/access'
     | '/$org/dashboard/settings/branding'
+    | '/$org/dashboard/settings/notifications'
+    | '/$org/dashboard/settings/team'
     | '/$org/dashboard/settings/token'
     | '/$org/dashboard/settings/'
     | '/api/$org/posts/'
@@ -338,12 +370,15 @@ export interface FileRouteTypes {
     | '/$org/dashboard/changelog'
     | '/$org/dashboard/roadmap'
     | '/$org/dashboard/runs'
+    | '/invite/$token'
     | '/api/$org/changelog'
     | '/api/auth/$'
     | '/$org/dashboard'
     | '/$org/posts/$id'
     | '/$org/dashboard/settings/access'
     | '/$org/dashboard/settings/branding'
+    | '/$org/dashboard/settings/notifications'
+    | '/$org/dashboard/settings/team'
     | '/$org/dashboard/settings/token'
     | '/$org/dashboard/settings'
     | '/api/$org/posts'
@@ -370,6 +405,7 @@ export interface FileRouteTypes {
     | '/$org/dashboard/roadmap'
     | '/$org/dashboard/runs'
     | '/$org/dashboard/settings'
+    | '/_site/invite/$token'
     | '/api/$org/changelog'
     | '/api/auth/$'
     | '/$org/_public/'
@@ -377,6 +413,8 @@ export interface FileRouteTypes {
     | '/$org/_public/posts/$id'
     | '/$org/dashboard/settings/access'
     | '/$org/dashboard/settings/branding'
+    | '/$org/dashboard/settings/notifications'
+    | '/$org/dashboard/settings/team'
     | '/$org/dashboard/settings/token'
     | '/$org/dashboard/settings/'
     | '/api/$org/posts/'
@@ -530,6 +568,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OrgDashboardSettingsRouteImport
       parentRoute: typeof OrgDashboardRoute
     }
+    '/_site/invite/$token': {
+      id: '/_site/invite/$token'
+      path: '/invite/$token'
+      fullPath: '/invite/$token'
+      preLoaderRoute: typeof SiteInviteTokenRouteImport
+      parentRoute: typeof SiteRoute
+    }
     '/api/$org/changelog': {
       id: '/api/$org/changelog'
       path: '/api/$org/changelog'
@@ -570,6 +615,20 @@ declare module '@tanstack/react-router' {
       path: '/branding'
       fullPath: '/$org/dashboard/settings/branding'
       preLoaderRoute: typeof OrgDashboardSettingsBrandingRouteImport
+      parentRoute: typeof OrgDashboardSettingsRoute
+    }
+    '/$org/dashboard/settings/notifications': {
+      id: '/$org/dashboard/settings/notifications'
+      path: '/notifications'
+      fullPath: '/$org/dashboard/settings/notifications'
+      preLoaderRoute: typeof OrgDashboardSettingsNotificationsRouteImport
+      parentRoute: typeof OrgDashboardSettingsRoute
+    }
+    '/$org/dashboard/settings/team': {
+      id: '/$org/dashboard/settings/team'
+      path: '/team'
+      fullPath: '/$org/dashboard/settings/team'
+      preLoaderRoute: typeof OrgDashboardSettingsTeamRouteImport
       parentRoute: typeof OrgDashboardSettingsRoute
     }
     '/$org/dashboard/settings/token': {
@@ -645,6 +704,8 @@ const OrgPublicRouteWithChildren = OrgPublicRoute._addFileChildren(
 interface OrgDashboardSettingsRouteChildren {
   OrgDashboardSettingsAccessRoute: typeof OrgDashboardSettingsAccessRoute
   OrgDashboardSettingsBrandingRoute: typeof OrgDashboardSettingsBrandingRoute
+  OrgDashboardSettingsNotificationsRoute: typeof OrgDashboardSettingsNotificationsRoute
+  OrgDashboardSettingsTeamRoute: typeof OrgDashboardSettingsTeamRoute
   OrgDashboardSettingsTokenRoute: typeof OrgDashboardSettingsTokenRoute
   OrgDashboardSettingsIndexRoute: typeof OrgDashboardSettingsIndexRoute
 }
@@ -652,6 +713,9 @@ interface OrgDashboardSettingsRouteChildren {
 const OrgDashboardSettingsRouteChildren: OrgDashboardSettingsRouteChildren = {
   OrgDashboardSettingsAccessRoute: OrgDashboardSettingsAccessRoute,
   OrgDashboardSettingsBrandingRoute: OrgDashboardSettingsBrandingRoute,
+  OrgDashboardSettingsNotificationsRoute:
+    OrgDashboardSettingsNotificationsRoute,
+  OrgDashboardSettingsTeamRoute: OrgDashboardSettingsTeamRoute,
   OrgDashboardSettingsTokenRoute: OrgDashboardSettingsTokenRoute,
   OrgDashboardSettingsIndexRoute: OrgDashboardSettingsIndexRoute,
 }
@@ -696,6 +760,7 @@ interface SiteRouteChildren {
   SiteLoginRoute: typeof SiteLoginRoute
   SiteNewRoute: typeof SiteNewRoute
   SiteIndexRoute: typeof SiteIndexRoute
+  SiteInviteTokenRoute: typeof SiteInviteTokenRoute
 }
 
 const SiteRouteChildren: SiteRouteChildren = {
@@ -703,6 +768,7 @@ const SiteRouteChildren: SiteRouteChildren = {
   SiteLoginRoute: SiteLoginRoute,
   SiteNewRoute: SiteNewRoute,
   SiteIndexRoute: SiteIndexRoute,
+  SiteInviteTokenRoute: SiteInviteTokenRoute,
 }
 
 const SiteRouteWithChildren = SiteRoute._addFileChildren(SiteRouteChildren)

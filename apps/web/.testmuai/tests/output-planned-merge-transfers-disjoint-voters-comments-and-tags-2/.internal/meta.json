@@ -1,0 +1,25 @@
+{
+  "test_id": "54294c0f-51db-4372-9928-389486d2a7e2",
+  "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
+  "folder_id": "01M85R7PN3X539HEBVYDM52CZ0",
+  "org_id": "3447606",
+  "session_name": "planned-merge-transfers-disjoint-voters-comments-and-tags-2",
+  "commit_id": "57c6cf23-81eb-4e2e-8d83-43e37db16b4b",
+  "testcase_id": "01M85WZBB8QD8W5FJEJSJYR2TQ",
+  "executions": [
+    {
+      "execution_id": "7b469367-478b-4625-8c95-8e4dbfc1c052",
+      "run_kind": "author",
+      "status": "failed",
+      "valid": true,
+      "at": "2026-11-24T04:31:18.708Z"
+    },
+    {
+      "execution_id": "a5cddf7f-d517-456b-97de-1c813cdaa8de",
+      "run_kind": "author",
+      "status": "failed",
+      "at": "2026-11-24T04:35:56.240Z",
+      "uploaded": true
+    }
+  ]
+}

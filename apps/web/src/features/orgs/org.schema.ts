@@ -1,7 +1,7 @@
 import { z } from 'zod'
 
 // slugs that would shadow app routes
-export const RESERVED_SLUGS = ['api', 'login', 'new', 'demo', 'settings', 'admin', 'assets', 'changelog', 'board', 'posts', 'docs', 'mcp', 'consent', 'oauth']
+export const RESERVED_SLUGS = ['api', 'login', 'new', 'demo', 'settings', 'admin', 'assets', 'changelog', 'board', 'posts', 'docs', 'mcp', 'consent', 'oauth', 'invite']
 
 export const toSlug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 32)
 

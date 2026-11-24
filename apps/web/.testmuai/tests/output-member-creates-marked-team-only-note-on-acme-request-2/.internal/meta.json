@@ -1,0 +1,25 @@
+{
+  "test_id": "5fcbd680-751e-4f8b-a01e-5029f145aeba",
+  "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
+  "folder_id": "01M85R7PN3X539HEBVYDM52CZ0",
+  "org_id": "3447606",
+  "session_name": "member-creates-marked-team-only-note-on-acme-request-2",
+  "commit_id": "007b865e-908b-4824-9cda-30f6e283f652",
+  "testcase_id": "01M85W06S8GA6M3B472R1CV23P",
+  "executions": [
+    {
+      "execution_id": "47444428-69af-4ffe-a42c-57f4b7b79ec5",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-24T04:13:06.054Z"
+    },
+    {
+      "execution_id": "0cd968ce-c80e-45f7-afa1-a7bca7103ad2",
+      "run_kind": "author",
+      "status": "passed",
+      "at": "2026-11-24T04:22:10.320Z",
+      "uploaded": true
+    }
+  ]
+}
