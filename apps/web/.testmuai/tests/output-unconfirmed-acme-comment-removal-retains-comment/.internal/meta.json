@@ -1,0 +1,25 @@
+{
+  "test_id": "5e8646f2-e6b5-4c99-b747-6713227ceb8b",
+  "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
+  "folder_id": "01M85R7PN3X539HEBVYDM52CZ0",
+  "org_id": "3447606",
+  "session_name": "unconfirmed-acme-comment-removal-retains-comment",
+  "commit_id": "6d03d11f-14f8-44ab-a48c-4fc5705520aa",
+  "testcase_id": "01M85RSGRZ6N3QC393TSHTZM5W",
+  "executions": [
+    {
+      "execution_id": "70f9417a-d7a6-4a01-b0eb-89d754eda165",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-24T03:17:29.089Z"
+    },
+    {
+      "execution_id": "4860537f-e114-4a84-a7c4-42fde7bb760d",
+      "run_kind": "author",
+      "status": "passed",
+      "at": "2026-11-24T03:17:53.477Z",
+      "uploaded": true
+    }
+  ]
+}

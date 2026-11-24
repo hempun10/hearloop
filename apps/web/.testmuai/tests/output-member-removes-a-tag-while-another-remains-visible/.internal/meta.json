@@ -1,0 +1,25 @@
+{
+  "test_id": "be4716d8-ed15-45b5-b4b8-e2c2a630994a",
+  "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
+  "folder_id": "01M85R7PN3X539HEBVYDM52CZ0",
+  "org_id": "3447606",
+  "session_name": "member-removes-a-tag-while-another-remains-visible",
+  "commit_id": "2a887ec5-7a36-414c-8976-7e4a23859567",
+  "testcase_id": "01M85SMPN42MXBHG9F5PJZSAPC",
+  "executions": [
+    {
+      "execution_id": "34bb23c1-c0bf-4977-9d8d-a0094d88b2ae",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-24T03:33:06.179Z"
+    },
+    {
+      "execution_id": "23864bc0-eb15-41ad-aeed-03cbdf07c47a",
+      "run_kind": "author",
+      "status": "passed",
+      "at": "2026-11-24T03:39:29.225Z",
+      "uploaded": true
+    }
+  ]
+}

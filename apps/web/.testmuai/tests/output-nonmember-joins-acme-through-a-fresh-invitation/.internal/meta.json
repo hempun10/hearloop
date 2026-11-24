@@ -1,0 +1,25 @@
+{
+  "test_id": "ba9c4be9-681e-497d-b103-1b74dd4bdef5",
+  "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
+  "folder_id": "01M85R7R1MPN4KE6YS5D7NPPZ3",
+  "org_id": "3447606",
+  "session_name": "nonmember-joins-acme-through-a-fresh-invitation",
+  "commit_id": "65955e65-55c4-43c5-8380-89d224f1048e",
+  "testcase_id": "01M85TS25NW1GSQBD80MJ7PV5F",
+  "executions": [
+    {
+      "execution_id": "e71b81f5-8892-475b-a97c-286bc9fa9534",
+      "run_kind": "author",
+      "status": "failed",
+      "valid": true,
+      "at": "2026-11-24T03:53:12.415Z"
+    },
+    {
+      "execution_id": "ed2d4930-9d6e-4d3a-a2d3-804a870736af",
+      "run_kind": "author",
+      "status": "failed",
+      "at": "2026-11-24T04:01:47.038Z",
+      "uploaded": true
+    }
+  ]
+}

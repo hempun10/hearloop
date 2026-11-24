@@ -1,0 +1,25 @@
+{
+  "test_id": "fafa03a4-b46d-4711-804a-78b0f040f482",
+  "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
+  "folder_id": "01M85R7R1MPN4KE6YS5D7NPPZ3",
+  "org_id": "3447606",
+  "session_name": "cancelling-an-open-acme-invitation-revokes-its-link",
+  "commit_id": "beaa6a9c-1e2d-4fd0-8f2a-893f53d7e94b",
+  "testcase_id": "01M85TDRGR2WJ41362CM40YDB4",
+  "executions": [
+    {
+      "execution_id": "52578022-0ff6-4116-93bf-9441146e1f2e",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-24T03:47:12.908Z"
+    },
+    {
+      "execution_id": "ed2d4930-9d6e-4d3a-a2d3-804a870736af",
+      "run_kind": "author",
+      "status": "passed",
+      "at": "2026-11-24T04:01:47.033Z",
+      "uploaded": true
+    }
+  ]
+}

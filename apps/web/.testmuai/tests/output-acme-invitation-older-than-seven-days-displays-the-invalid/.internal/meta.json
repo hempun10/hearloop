@@ -1,0 +1,25 @@
+{
+  "test_id": "db32759b-b1de-43e5-b746-182533d6f48b",
+  "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
+  "folder_id": "01M85R7R1MPN4KE6YS5D7NPPZ3",
+  "org_id": "3447606",
+  "session_name": "acme-invitation-older-than-seven-days-displays-the-invalid",
+  "commit_id": "6aeba50c-ea97-40b7-9906-5ca4e5931cae",
+  "testcase_id": "01M85TATAP1754WJTSA8HX0AFK",
+  "executions": [
+    {
+      "execution_id": "f4dcb97f-44ef-4d80-87e9-cc85e5ea8cad",
+      "run_kind": "author",
+      "status": "failed",
+      "valid": true,
+      "at": "2026-11-24T03:43:30.126Z"
+    },
+    {
+      "execution_id": "ed2d4930-9d6e-4d3a-a2d3-804a870736af",
+      "run_kind": "author",
+      "status": "failed",
+      "at": "2026-11-24T04:01:47.026Z",
+      "uploaded": true
+    }
+  ]
+}

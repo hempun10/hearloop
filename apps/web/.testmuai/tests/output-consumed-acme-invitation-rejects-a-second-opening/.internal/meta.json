@@ -1,0 +1,25 @@
+{
+  "test_id": "b0db554e-8a52-44b7-a45a-18656a883754",
+  "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
+  "folder_id": "01M85R7R1MPN4KE6YS5D7NPPZ3",
+  "org_id": "3447606",
+  "session_name": "consumed-acme-invitation-rejects-a-second-opening",
+  "commit_id": "c274a820-74c6-48a5-ac21-f761428765c2",
+  "testcase_id": "01M85TMS6V2SZSVECX2VRPMY0S",
+  "executions": [
+    {
+      "execution_id": "2f5a03a3-89a4-4e17-8915-f1f9b96c0e71",
+      "run_kind": "author",
+      "status": "failed",
+      "valid": true,
+      "at": "2026-11-24T03:49:40.129Z"
+    },
+    {
+      "execution_id": "ed2d4930-9d6e-4d3a-a2d3-804a870736af",
+      "run_kind": "author",
+      "status": "failed",
+      "at": "2026-11-24T04:01:47.036Z",
+      "uploaded": true
+    }
+  ]
+}

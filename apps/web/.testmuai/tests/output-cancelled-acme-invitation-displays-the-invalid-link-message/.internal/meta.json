@@ -1,0 +1,25 @@
+{
+  "test_id": "65308f3e-68f5-4842-bb13-2ddd67c5ddde",
+  "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
+  "folder_id": "01M85R7R1MPN4KE6YS5D7NPPZ3",
+  "org_id": "3447606",
+  "session_name": "cancelled-acme-invitation-displays-the-invalid-link-message",
+  "commit_id": "bf170f52-edd9-46d9-96f1-82473b42153a",
+  "testcase_id": "01M85TATQDMPTVGPBVPYMQT5MA",
+  "executions": [
+    {
+      "execution_id": "30a3913f-6cde-486f-94ee-c2168af0a242",
+      "run_kind": "author",
+      "status": "failed",
+      "valid": true,
+      "at": "2026-11-24T03:45:01.039Z"
+    },
+    {
+      "execution_id": "ed2d4930-9d6e-4d3a-a2d3-804a870736af",
+      "run_kind": "author",
+      "status": "failed",
+      "at": "2026-11-24T04:01:47.031Z",
+      "uploaded": true
+    }
+  ]
+}

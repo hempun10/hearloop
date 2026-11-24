@@ -1,0 +1,25 @@
+{
+  "test_id": "163fcd11-5957-4dc3-9bac-6d2c51aadab5",
+  "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
+  "folder_id": "01M85R7R1MPN4KE6YS5D7NPPZ3",
+  "org_id": "3447606",
+  "session_name": "confirmed-removal-immediately-denies-the-removed-member-s",
+  "commit_id": "4f108b19-fc84-4993-bb40-f010eb7079e4",
+  "testcase_id": "01M85VFDPMJTCNBENFY02BCNQ9",
+  "executions": [
+    {
+      "execution_id": "4573670c-9bb4-4ea1-9566-a38aead0776f",
+      "run_kind": "author",
+      "status": "failed",
+      "valid": true,
+      "at": "2026-11-24T04:05:08.519Z"
+    },
+    {
+      "execution_id": "b67a38dd-badb-4f97-bcaa-a3ced57796a7",
+      "run_kind": "author",
+      "status": "failed",
+      "at": "2026-11-24T04:05:20.373Z",
+      "uploaded": true
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "test_id": "200d1758-f7ec-42c0-864d-80a8e86d80ca",
+  "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
+  "folder_id": "01M85R7R1MPN4KE6YS5D7NPPZ3",
+  "org_id": "3447606",
+  "session_name": "member-creates-and-initially-copies-an-acme-invitation",
+  "commit_id": "bde65074-4a7d-429e-abbe-47c36599672d",
+  "testcase_id": "01M85TQ8D5PAC1KKMS5W2G2Z9A",
+  "executions": [
+    {
+      "execution_id": "4b9e3256-f8e3-40b8-866d-30c8557361fd",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-24T03:52:47.494Z"
+    },
+    {
+      "execution_id": "ed2d4930-9d6e-4d3a-a2d3-804a870736af",
+      "run_kind": "author",
+      "status": "passed",
+      "at": "2026-11-24T04:01:47.037Z",
+      "uploaded": true
+    }
+  ]
+}

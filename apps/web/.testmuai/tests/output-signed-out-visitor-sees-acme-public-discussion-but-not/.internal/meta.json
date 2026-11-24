@@ -1,0 +1,25 @@
+{
+  "test_id": "a9eea159-5f88-4553-a17d-fad3b725b6c2",
+  "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
+  "folder_id": "01M85R7PN3X539HEBVYDM52CZ0",
+  "org_id": "3447606",
+  "session_name": "signed-out-visitor-sees-acme-public-discussion-but-not",
+  "commit_id": "6ee5d474-adaa-4b62-8a01-d362deee1ece",
+  "testcase_id": "01M85RNZNXHGCPFH2V2C8GQEG4",
+  "executions": [
+    {
+      "execution_id": "8d3f50e3-85ab-4976-ac53-9391940bb89e",
+      "run_kind": "author",
+      "status": "failed",
+      "valid": true,
+      "at": "2026-11-24T03:14:57.097Z"
+    },
+    {
+      "execution_id": "4860537f-e114-4a84-a7c4-42fde7bb760d",
+      "run_kind": "author",
+      "status": "failed",
+      "at": "2026-11-24T03:17:53.476Z",
+      "uploaded": true
+    }
+  ]
+}
