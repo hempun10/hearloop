@@ -73,7 +73,7 @@ export function SectionHead({ title, right, className }: { title: string; right?
 }
 
 /** Settings row: label and help left, control right, hairline above. The control wraps under the label when it can't fit. */
-export function Row({ label, help, htmlFor, children }: { label: string; help?: ReactNode; htmlFor?: string; children: ReactNode }) {
+export function Row({ label, help, htmlFor, children }: { label: ReactNode; help?: ReactNode; htmlFor?: string; children: ReactNode }) {
   return (
     <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2.5 border-t py-3.5">
       <div className="flex min-w-[180px] flex-[1_1_200px] flex-col gap-0.5">

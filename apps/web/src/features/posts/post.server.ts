@@ -123,8 +123,9 @@ export async function setPostCategory(orgId: number, id: number, categoryId: num
   return row ?? null
 }
 
-export async function setPostAssignee(orgId: number, id: number, assigneeId: string | null) {
-  const [row] = await db.update(posts).set({ assigneeId }).where(and(eq(posts.id, id), eq(posts.orgId, orgId))).returning()
+/** One owner at a time: a member or an agent. */
+export async function setPostAssignee(orgId: number, id: number, to: { assigneeId: string | null; assigneeTokenId: number | null }) {
+  const [row] = await db.update(posts).set(to).where(and(eq(posts.id, id), eq(posts.orgId, orgId))).returning()
   return row ?? null
 }
 
@@ -175,7 +176,8 @@ export async function claimPost(orgId: number, id: number, actor: Actor) {
   const now = new Date()
   const [post] = await db
     .update(posts)
-    .set({ status: 'building', statusId: null, claimTokenId: actor.tokenId, claimedBy: actor.label, claimExpiresAt: new Date(now.getTime() + CLAIM_LEASE_MS) })
+    // claiming hands the request to the agent that claims it
+    .set({ status: 'building', statusId: null, claimTokenId: actor.tokenId, claimedBy: actor.label, claimExpiresAt: new Date(now.getTime() + CLAIM_LEASE_MS), assigneeTokenId: actor.tokenId, assigneeId: null })
     .where(and(
       eq(posts.id, id), eq(posts.orgId, orgId), inArray(posts.status, ['planned', 'building']), isNull(posts.mergedIntoId),
       or(isNull(posts.claimTokenId), eq(posts.claimTokenId, actor.tokenId), lt(posts.claimExpiresAt, now)),

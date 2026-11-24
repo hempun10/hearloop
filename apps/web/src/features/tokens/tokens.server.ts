@@ -11,7 +11,7 @@ export function listTokens(orgId: number) {
   return db
     .select({
       id: apiTokens.id, name: apiTokens.name, hint: apiTokens.hint, createdAt: apiTokens.createdAt,
-      lastUsedAt: apiTokens.lastUsedAt, revokedAt: apiTokens.revokedAt, createdBy: user.name,
+      lastUsedAt: apiTokens.lastUsedAt, revokedAt: apiTokens.revokedAt, createdBy: user.name, icon: apiTokens.icon,
     })
     .from(apiTokens)
     .leftJoin(user, eq(user.id, apiTokens.createdBy))
@@ -24,6 +24,10 @@ export async function createToken(orgId: number, userId: string, name: string) {
   const token = randomToken()
   await db.insert(apiTokens).values({ orgId, name, createdBy: userId, tokenHash: await sha256(token), hint: token.slice(-4) })
   return token
+}
+
+export async function setTokenIcon(orgId: number, id: number, icon: string | null) {
+  await db.update(apiTokens).set({ icon }).where(and(eq(apiTokens.id, id), eq(apiTokens.orgId, orgId)))
 }
 
 export async function revokeToken(orgId: number, id: number) {

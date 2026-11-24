@@ -2,7 +2,7 @@ import { createServerFn } from '@tanstack/react-start'
 import { z } from 'zod'
 import { orgSlugSchema } from '#/features/orgs/org.schema'
 import { authMiddleware } from '#/middleware/auth'
-import { createTokenSchema, revokeTokenSchema } from './tokens.schema'
+import { createTokenSchema, revokeTokenSchema, setTokenIconSchema } from './tokens.schema'
 
 export const getTokens = createServerFn()
   .middleware([authMiddleware])
@@ -29,4 +29,13 @@ export const revokeApiToken = createServerFn({ method: 'POST' })
     const { requireMembership } = await import('#/features/orgs/org.server')
     const { revokeToken } = await import('./tokens.server')
     await revokeToken((await requireMembership(data.org, user.id)).id, data.id)
+  })
+
+export const setAgentIcon = createServerFn({ method: 'POST' })
+  .middleware([authMiddleware])
+  .validator(setTokenIconSchema)
+  .handler(async ({ data, context: { user } }) => {
+    const { requireMembership } = await import('#/features/orgs/org.server')
+    const { setTokenIcon } = await import('./tokens.server')
+    await setTokenIcon((await requireMembership(data.org, user.id)).id, data.id, data.icon)
   })

@@ -1,17 +1,19 @@
 import { and, asc, eq, gt, isNull } from 'drizzle-orm'
 import { db } from '#/db/client.server'
-import { invites, members, orgs, user } from '#/db/schema'
+import { apiTokens, invites, members, orgs, user } from '#/db/schema'
 import { randomToken, sha256 } from '#/lib/crypto.server'
 
 const INVITE_DAYS = 7
 
 export async function listTeam(orgId: number) {
-  const [people, pending] = await Promise.all([
+  const [people, pending, agents] = await Promise.all([
     db.select({ id: user.id, name: user.name, email: user.email }).from(members).innerJoin(user, eq(user.id, members.userId)).where(eq(members.orgId, orgId)).orderBy(asc(user.name)),
     db.select({ id: invites.id, expiresAt: invites.expiresAt, createdAt: invites.createdAt, by: user.name }).from(invites).leftJoin(user, eq(user.id, invites.createdBy))
       .where(and(eq(invites.orgId, orgId), isNull(invites.acceptedAt), gt(invites.expiresAt, new Date()))).orderBy(asc(invites.id)),
+    // coding agents: every live token and MCP connection can be assigned work
+    db.select({ id: apiTokens.id, name: apiTokens.name, icon: apiTokens.icon }).from(apiTokens).where(and(eq(apiTokens.orgId, orgId), isNull(apiTokens.revokedAt))).orderBy(asc(apiTokens.name)),
   ])
-  return { members: people, invites: pending }
+  return { members: people, invites: pending, agents }
 }
 
 /** A single-use link, valid for a week. Only its hash is kept, so this is the one time it can be read. */
@@ -55,4 +57,15 @@ export async function removeMember(orgId: number, userId: string) {
   if (all.length === 1) return { error: 'A board needs at least one member.' }
   await db.delete(members).where(and(eq(members.orgId, orgId), eq(members.userId, userId)))
   return {}
+}
+
+/** An assignee key ("u:…" member, "a:…" agent) checked against this board; null key clears, null result means not allowed. */
+export async function resolveAssignee(orgId: number, key: string | null) {
+  if (!key) return { assigneeId: null, assigneeTokenId: null }
+  if (key.startsWith('u:')) {
+    const m = await db.query.members.findFirst({ where: and(eq(members.orgId, orgId), eq(members.userId, key.slice(2))) })
+    return m ? { assigneeId: m.userId, assigneeTokenId: null } : null
+  }
+  const t = await db.query.apiTokens.findFirst({ where: and(eq(apiTokens.orgId, orgId), eq(apiTokens.id, Number(key.slice(2))), isNull(apiTokens.revokedAt)) })
+  return t ? { assigneeId: null, assigneeTokenId: t.id } : null
 }

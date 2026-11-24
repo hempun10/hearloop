@@ -45,7 +45,9 @@ A member reviews the board's roadmap on the dashboard's **Roadmap** page.
 - Each card also has a status dropdown, so keyboard and touch users can move it.
 - The same confirmation and changelog rules as in the post list apply.
 - Clicking a roadmap card opens the request in a window over the board, and the address gains `?post=<id>` so the window reopens on reload. On the left: the title, the description, **Edit**, and the comments, where the member can comment or add an internal note. On the right, under **Properties**: **Status**, **Assignee**, **Board** (when the board has boards), **Tags**, the vote count, and **Open public page**. Escape or clicking outside closes it.
-- **Assignee** lists the board's members and **No assignee**. A card with an assignee shows that member's initials. Only members can be assigned.
+- **Assignee** lists **No assignee**, the board's members, then its coding agents. A card with an assignee shows the member's initials or the agent's icon. Only members and connected agents can be assigned.
+- Every Loop API token, and every coding agent connected over MCP, is an agent. It appears under **Settings → Loop API token** as soon as it connects. Each agent shows its logo by default (Claude, Copilot, Cursor, Gemini, Windsurf; π for Pi; a terminal for Codex; a robot otherwise). **Upload icon** replaces it with an image, and **Use default** brings the logo back.
+- When an agent claims a request, the request is assigned to that agent.
 - Each property is a quiet button showing its current value. Clicking it opens a menu with a search box ("Change status…", "Change assignee…", "Change board…", "Change tags…"), then the options, each with a tick on the current one and a number 1–9. Typing filters the options. With the search empty, a number key picks that option. The keys S, A, B and L open the status, assignee, board and tags menus.
 - The request page shows the same properties to members, under **Properties**.
 

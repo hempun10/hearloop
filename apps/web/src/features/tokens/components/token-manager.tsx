@@ -13,7 +13,8 @@ import { Input } from '@hearloop/ui/components/input'
 import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from '@hearloop/ui/components/input-group'
 import { Row, SectionHead, fieldClass } from '#/features/dashboard/components/panel'
 import { timeAgo } from '#/lib/format'
-import { createApiToken, revokeApiToken } from '../tokens.functions'
+import { AgentIcon } from '#/components/agent-icon'
+import { createApiToken, revokeApiToken, setAgentIcon } from '../tokens.functions'
 import { tokensQuery } from '../tokens.queries'
 import { type TokenNameInput, tokenNameSchema } from '../tokens.schema'
 
@@ -30,6 +31,11 @@ export function TokenManager({ org }: { org: string }) {
   const revoke = useMutation({
     mutationFn: (id: number) => revokeApiToken({ data: { org, id } }),
     onSuccess: () => { toast.success('Token revoked'); refresh() },
+    onError: (e) => toast.error(e.message),
+  })
+  const icon = useMutation({
+    mutationFn: (v: { id: number; icon: string | null }) => setAgentIcon({ data: { org, ...v } }),
+    onSuccess: (_, v) => { toast.success(v.icon ? 'Icon updated' : 'Default icon restored'); refresh(); qc.invalidateQueries({ queryKey: ['team', org] }) },
     onError: (e) => toast.error(e.message),
   })
   const token = create.data
@@ -73,9 +79,19 @@ export function TokenManager({ org }: { org: string }) {
       {live.map((t) => (
         <Row
           key={t.id}
-          label={t.name}
+          label={<span className="inline-flex items-center gap-2"><AgentIcon name={t.name} icon={t.icon} />{t.name}</span>}
           help={<>{t.hint === 'mcp' ? 'Connected via MCP' : t.hint ? <span className="font-mono">hl_…{t.hint}</span> : 'Older token'} · {t.createdBy ? `by ${t.createdBy} · ` : ''}{t.lastUsedAt ? `used ${timeAgo(t.lastUsedAt)}` : 'never used'}</>}
         >
+          <label className="inline-flex h-8 cursor-pointer items-center rounded-md px-3 text-[13px] font-medium hover:bg-accent focus-within:ring-1 focus-within:ring-ring">
+            Upload icon
+            <input type="file" accept="image/png,image/jpeg,image/webp" className="sr-only" aria-label={`Upload icon for ${t.name}`}
+              onChange={async (e) => {
+                const f = e.target.files?.[0]
+                e.target.value = ''
+                if (f) icon.mutate({ id: t.id, icon: await toIcon(f) })
+              }} />
+          </label>
+          {t.icon && <Button variant="ghost" size="sm" onClick={() => icon.mutate({ id: t.id, icon: null })}>Use default</Button>}
           <AlertDialog>
             <AlertDialogTrigger asChild>
               <Button variant="ghost" size="sm" aria-label={`Revoke ${t.name}`}>Revoke</Button>
@@ -103,4 +119,14 @@ export function TokenManager({ org }: { org: string }) {
       </div>
     </div>
   )
+}
+
+/** Shrinks an image to a 64px square (cover) as WebP, so it fits in the database. */
+async function toIcon(file: File) {
+  const img = await createImageBitmap(file)
+  const canvas = document.createElement('canvas')
+  canvas.width = canvas.height = 64
+  const s = Math.min(img.width, img.height)
+  canvas.getContext('2d')!.drawImage(img, (img.width - s) / 2, (img.height - s) / 2, s, s, 0, 0, 64, 64)
+  return canvas.toDataURL('image/webp', 0.9)
 }

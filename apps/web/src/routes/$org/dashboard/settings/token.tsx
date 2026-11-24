@@ -12,7 +12,7 @@ function Token() {
   const { org } = Route.useParams()
   return (
     <>
-      <PageHead title="Loop API tokens" sub="The loop uses a token to claim a request and record Kane's verdict. Each is shown once; only a hash is kept." />
+      <PageHead title="Loop API tokens" sub="Each token, and each coding agent connected over MCP, is an agent you can assign requests to. Upload an icon, or keep its default logo. A token is shown once; only a hash is kept." />
       <TokenManager org={org} />
     </>
   )

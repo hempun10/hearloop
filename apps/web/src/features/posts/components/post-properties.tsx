@@ -8,7 +8,7 @@ import { findStatus } from '../status'
 import { useMovePost } from '../use-move-post'
 import { useSetAssignee, useSetCategory, useSetTags } from '../use-post-mutations'
 import { useStatuses } from '../use-statuses'
-import { Initials } from './assignee-select'
+import { assigneeKeyOf, assigneeOptions } from './assignee-select'
 import { TagChip } from './post-tags'
 import { PropertyPicker } from './property-picker'
 import { StatusIconFor } from './status-icon'
@@ -27,7 +27,8 @@ export function PostProperties({ org, post, tags }: { org: string; post: Post; t
   const setBoard = useSetCategory(org, post.id)
   const setTags = useSetTags(org, post.id)
   const status = findStatus(statuses, post)
-  const assignee = team.members.find((m) => m.id === post.assigneeId)
+  const people = assigneeOptions(team, 'size-4')
+  const assignee = people.find((o) => o.value === assigneeKeyOf(post))
   const board = categories.find((c) => c.id === post.categoryId)
   const tagNames = [...new Set([...allTags.map((t) => t.name), ...tags])]
   const toggleTag = (t: string) => setTags.mutate(tags.includes(t) ? tags.filter((x) => x !== t) : [...tags, t])
@@ -41,9 +42,9 @@ export function PostProperties({ org, post, tags }: { org: string; post: Post; t
             trigger={<><StatusIconFor option={status} className="size-4" />{status.label}</>}
             options={statuses.map((s) => ({ value: s.key, label: s.label, icon: <StatusIconFor option={s} className="size-4" /> }))}
             onSelect={(k) => move(post, statuses.find((s) => s.key === k)!)} />
-          <PropertyPicker what="assignee" hint="A" selected={[post.assigneeId ?? 'none']}
-            trigger={assignee ? <><Initials name={assignee.name} />{assignee.name}</> : <><CircleUserRound className={`size-4 ${faint}`} /><span className={faint}>Assign</span></>}
-            options={[{ value: 'none', label: 'No assignee', icon: <CircleUserRound className={`size-4 ${faint}`} /> }, ...team.members.map((m) => ({ value: m.id, label: m.name, icon: <Initials name={m.name} /> }))]}
+          <PropertyPicker what="assignee" hint="A" selected={[assigneeKeyOf(post) ?? 'none']}
+            trigger={assignee ? <>{assignee.icon}{assignee.label}</> : <><CircleUserRound className={`size-4 ${faint}`} /><span className={faint}>Assign</span></>}
+            options={[{ value: 'none', label: 'No assignee', icon: <CircleUserRound className={`size-4 ${faint}`} /> }, ...people]}
             onSelect={(v) => assign.mutate(v === 'none' ? null : v)} />
         </div>
       </div>

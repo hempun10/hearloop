@@ -72,9 +72,9 @@ Every tool except `list_boards` takes `board`, the board's slug. Tools that act 
 | Tool | Does |
 |---|---|
 | `list_boards` | Lists the boards you're a member of |
-| `list_requests` | Lists requests by votes. `status` defaults to `planned`; `tag` and `category` filter |
+| `list_requests` | Lists requests by votes. `status` defaults to `planned`; `tag` and `category` filter. `assigned_to_me: true` lists only the requests assigned to the calling agent |
 | `get_request` | Returns one request with its tags, comments, internal notes and past Kane reports |
-| `claim_request` | Claims a Planned request for 15 minutes. Call again to renew |
+| `claim_request` | Claims a Planned request for 15 minutes and assigns it to the calling agent. Call again to renew |
 | `release_request` | Ends your claim and sets the request back to Planned |
 | `report_verification` | Records Kane's result. Takes `passed`, `summary`, and an optional `changelog` |
 
@@ -91,7 +91,7 @@ Members can also run the board through the agent:
 | `set_tags` | Replaces a request's tags. New names are created |
 | `delete_tag` | Deletes a tag from every request |
 | `create_request` | Posts a request, for example from a support email. Takes `title` and `body`, and optionally `category`, `tags` and `status` |
-| `update_request` | Edits a request's `title`, `body` or `category` (an empty string removes it). Only the fields you pass change |
+| `update_request` | Edits a request's `title`, `body`, `category` or `assignee` (a member's name or email, an agent's name, or `me`). An empty string removes the category or assignee. Only the fields you pass change |
 | `set_status` | Moves a request to `open`, `planned`, `building`, `shipped`, or one of the board's own statuses by name, with the same changelog rules as the dashboard |
 | `vote` | Votes as you. A second vote changes nothing |
 | `delete_request` | Deletes a request with its votes, runs and changelog entry |

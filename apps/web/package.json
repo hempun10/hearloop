@@ -14,7 +14,7 @@
 		"db:migrate": "wrangler d1 migrations apply hearloop-v2 --local",
 		"db:migrate:remote": "wrangler d1 migrations apply hearloop-v2 --remote",
 		"e2e:mcp": "bun scripts/mcp-e2e.ts",
-    "e2e:seed": "bun scripts/seed-e2e.ts",
+		"e2e:seed": "bun scripts/seed-e2e.ts",
 		"kane": "bun scripts/kane.ts",
 		"db:generate": "drizzle-kit generate",
 		"typecheck": "tsc --noEmit"
@@ -40,6 +40,7 @@
 		"react-dom": "^19.2.0",
 		"react-hook-form": "^7.92.0",
 		"react-hotkeys-hook": "^5.4.0",
+		"simple-icons": "^16.38.1",
 		"sonner": "^2.0.8",
 		"tailwindcss": "^4.1.18",
 		"zod": "^4.6.7"

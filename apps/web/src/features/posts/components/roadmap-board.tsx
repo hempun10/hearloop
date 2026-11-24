@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 import { useParams } from '@tanstack/react-router'
 import { ChevronUp, GripVertical } from 'lucide-react'
 import { teamQuery } from '#/features/team/team.queries'
-import { Initials } from './assignee-select'
+import { assigneeKeyOf, assigneeOptions } from './assignee-select'
 import type { Post } from '#/db/schema'
 import { cn } from '@hearloop/ui/lib/utils'
 import { type StatusOption, statusKey } from '../status'
@@ -62,7 +62,7 @@ function Column({ status, posts, onMove, onOpen }: { status: StatusOption; posts
 function Card({ post, onMove, onOpen }: { post: Post } & CardActions) {
   const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({ id: post.id })
   const { data: team } = useQuery(teamQuery(useParams({ strict: false }).org ?? ''))
-  const assignee = team?.members.find((m) => m.id === post.assigneeId)
+  const assignee = team && assigneeOptions(team).find((o) => o.value === assigneeKeyOf(post))
   return (
     <li ref={setNodeRef} style={transform ? { transform: `translate(${transform.x}px, ${transform.y}px)` } : undefined}
       onClick={() => onOpen(post.id)} data-testid="roadmap-card"
@@ -80,7 +80,7 @@ function Card({ post, onMove, onOpen }: { post: Post } & CardActions) {
           className="h-[22px] w-auto gap-1.5 rounded-md border-0 bg-secondary px-2 text-[12px] font-medium text-muted-foreground shadow-none" />
         <span className="flex-1" />
         <span className="inline-flex items-center gap-1 text-faint tabular-nums"><ChevronUp className="size-3" strokeWidth={2.5} />{post.votes}</span>
-        {assignee && <Initials name={assignee.name} />}
+        {assignee && <span title={assignee.label} className="inline-flex">{assignee.icon}</span>}
       </div>
     </li>
   )
