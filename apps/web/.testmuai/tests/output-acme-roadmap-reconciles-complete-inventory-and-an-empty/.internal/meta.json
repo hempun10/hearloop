@@ -1,0 +1,25 @@
+{
+  "test_id": "edd0592f-f146-433a-a037-b01728d339f6",
+  "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
+  "folder_id": "01M8393H0E7RN2CVV5HGBB8VSA",
+  "org_id": "3447606",
+  "session_name": "acme-roadmap-reconciles-complete-inventory-and-an-empty",
+  "commit_id": "7aa17dd4-1152-4a4a-9985-9798e7f69504",
+  "testcase_id": "01M84K2J7J4GR6Q0RRM14KQ5Y7",
+  "executions": [
+    {
+      "execution_id": "c904f2a2-f41d-4ea2-9067-92f32b4850f9",
+      "run_kind": "author",
+      "status": "failed",
+      "valid": true,
+      "at": "2026-11-23T16:18:59.643Z"
+    },
+    {
+      "execution_id": "10d21308-bffb-48aa-9b48-e1cdd22700ff",
+      "run_kind": "author",
+      "status": "failed",
+      "at": "2026-11-23T16:19:06.044Z",
+      "uploaded": true
+    }
+  ]
+}

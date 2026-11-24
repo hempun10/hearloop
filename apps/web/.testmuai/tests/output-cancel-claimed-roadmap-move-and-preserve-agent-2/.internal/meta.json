@@ -1,0 +1,25 @@
+{
+  "test_id": "2357f161-54cd-4531-9b4b-f05ac13a42ac",
+  "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
+  "folder_id": "01M8393DTHT287AEC1VC5S0M7S",
+  "org_id": "3447606",
+  "session_name": "cancel-claimed-roadmap-move-and-preserve-agent-2",
+  "commit_id": "590c5684-99db-4a1b-82fa-304896f070f3",
+  "testcase_id": "01M84PWZFS6FT7HA0H715ZJVTX",
+  "executions": [
+    {
+      "execution_id": "cd94a8c5-30bc-4bf4-9a8e-8b2167186026",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-23T17:27:49.478Z"
+    },
+    {
+      "execution_id": "2f7f960c-3ec4-47c1-8db3-5e277082d751",
+      "run_kind": "author",
+      "status": "passed",
+      "at": "2026-11-23T17:28:06.231Z",
+      "uploaded": true
+    }
+  ]
+}

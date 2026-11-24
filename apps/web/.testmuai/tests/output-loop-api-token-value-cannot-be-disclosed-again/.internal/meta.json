@@ -1,0 +1,25 @@
+{
+  "test_id": "5213411b-a0c1-4e65-ae50-102613fb4a51",
+  "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
+  "folder_id": "01M8393NGPPA44GMTB8Y57QMKA",
+  "org_id": "3447606",
+  "session_name": "loop-api-token-value-cannot-be-disclosed-again",
+  "commit_id": "3861247b-70a7-4657-80b7-acd057e82822",
+  "testcase_id": "01M839Y0RY7A7ACJ5JZEYSPFVW",
+  "executions": [
+    {
+      "execution_id": "d83e2fec-a5bd-461f-b0f1-9b46aa98d8a7",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-23T04:20:09.931Z"
+    },
+    {
+      "execution_id": "cb6cd2d6-8022-41db-bd82-e767ab23218b",
+      "run_kind": "author",
+      "status": "passed",
+      "at": "2026-11-23T04:20:27.558Z",
+      "uploaded": true
+    }
+  ]
+}

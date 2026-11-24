@@ -1,0 +1,25 @@
+{
+  "test_id": "2237bff9-29f8-4012-b031-0ac5002e0af8",
+  "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
+  "folder_id": "01M8393M1DE9MKY4Y3FJXYZCNR",
+  "org_id": "3447606",
+  "session_name": "open-post-from-acme-run-reaches-its-request",
+  "commit_id": "be00c4a0-cc4e-4595-b490-ffa718cb05bf",
+  "testcase_id": "01M83E89Z6930BFQM0G5DD4QT6",
+  "executions": [
+    {
+      "execution_id": "63fe594a-874f-49b4-ada8-e3f8a4b0952c",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-23T05:34:22.927Z"
+    },
+    {
+      "execution_id": "1d44b45e-4bb8-4e5a-95a6-04249653eabb",
+      "run_kind": "author",
+      "status": "passed",
+      "at": "2026-11-23T05:34:39.271Z",
+      "uploaded": true
+    }
+  ]
+}

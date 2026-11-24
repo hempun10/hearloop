@@ -1,0 +1,25 @@
+{
+  "test_id": "28d323c5-1637-4438-8061-f876667da625",
+  "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
+  "folder_id": "01M8393AYW5EC5KNQ55TXGYRKD",
+  "org_id": "3447606",
+  "session_name": "nonmember-is-redirected-away-from-acme-dashboard-2",
+  "commit_id": "5e70c23f-65da-4d18-b76d-6a1be0b108a0",
+  "testcase_id": "01M84QENJ0EHT7WF254BV77GKP",
+  "executions": [
+    {
+      "execution_id": "da42a5da-fa75-4cc3-a749-91e13af7672b",
+      "run_kind": "author",
+      "status": "failed",
+      "valid": true,
+      "at": "2026-11-23T17:34:48.717Z"
+    },
+    {
+      "execution_id": "204f784f-bcae-4b3d-b572-8fe995c827fc",
+      "run_kind": "author",
+      "status": "failed",
+      "at": "2026-11-23T17:34:54.282Z",
+      "uploaded": true
+    }
+  ]
+}

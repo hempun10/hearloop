@@ -1,0 +1,25 @@
+{
+  "test_id": "353ea8f3-8017-49f8-9885-4363eaebf01e",
+  "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
+  "folder_id": "01M8393JJYMDSX3QKTG3SCHZJ6",
+  "org_id": "3447606",
+  "session_name": "removing-changelog-entry-preserves-shipped-request",
+  "commit_id": "149278ca-48c6-42aa-b058-c8af64ce8dee",
+  "testcase_id": "01M83CQKQGBZP799WD6DDH3C6A",
+  "executions": [
+    {
+      "execution_id": "fde91483-406b-4cc4-bf36-98dc9137e865",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-23T05:09:20.529Z"
+    },
+    {
+      "execution_id": "35634e48-1836-45a5-8a2b-6197c4fa24de",
+      "run_kind": "author",
+      "status": "passed",
+      "at": "2026-11-23T05:09:35.696Z",
+      "uploaded": true
+    }
+  ]
+}

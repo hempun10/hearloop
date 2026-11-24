@@ -1,0 +1,25 @@
+{
+  "test_id": "4fd1c5fb-65dd-4d8f-9694-b07ae6977959",
+  "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
+  "folder_id": "01M8393NGPPA44GMTB8Y57QMKA",
+  "org_id": "3447606",
+  "session_name": "general-fields-enforce-60-and-160-character-input-caps",
+  "commit_id": "67c36225-7261-405a-9c52-74a32084af3f",
+  "testcase_id": "01M83C6WWG18SQG1HXKEC68420",
+  "executions": [
+    {
+      "execution_id": "ab68b5bc-fdeb-40ea-84ea-28b4ae48cdbd",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-23T04:59:20.383Z"
+    },
+    {
+      "execution_id": "422e85ae-f591-42a1-9c1a-c5a009085813",
+      "run_kind": "author",
+      "status": "passed",
+      "at": "2026-11-23T04:59:42.458Z",
+      "uploaded": true
+    }
+  ]
+}

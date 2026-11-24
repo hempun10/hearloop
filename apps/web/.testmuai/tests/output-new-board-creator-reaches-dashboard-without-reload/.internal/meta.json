@@ -1,0 +1,25 @@
+{
+  "test_id": "f986c383-d14f-439d-afe1-67f2176b9a12",
+  "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
+  "folder_id": "01M836WWFMTDM95NPTXNEA1YMM",
+  "org_id": "3447606",
+  "session_name": "new-board-creator-reaches-dashboard-without-reload",
+  "commit_id": "4338c4b7-519b-4b35-a40f-6e047c498ba5",
+  "testcase_id": "01M838SPFNCY1C9F55E0651C2W",
+  "executions": [
+    {
+      "execution_id": "9c50a070-8557-4a8d-9938-b2384af7ac88",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-23T03:59:44.195Z"
+    },
+    {
+      "execution_id": "4d34c151-f3aa-4d70-85fb-df7d4aa16b90",
+      "run_kind": "author",
+      "status": "passed",
+      "at": "2026-11-23T04:00:00.713Z",
+      "uploaded": true
+    }
+  ]
+}

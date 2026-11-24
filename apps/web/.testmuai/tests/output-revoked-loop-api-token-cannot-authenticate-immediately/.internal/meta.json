@@ -1,0 +1,25 @@
+{
+  "test_id": "023eb433-118d-4c63-971f-511f36c2b86f",
+  "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
+  "folder_id": "01M8393NGPPA44GMTB8Y57QMKA",
+  "org_id": "3447606",
+  "session_name": "revoked-loop-api-token-cannot-authenticate-immediately",
+  "commit_id": "edd037af-2cc8-442e-8181-cd6b9d9a37a7",
+  "testcase_id": "01M839QJY73KEWH9AJY9AZYPZ4",
+  "executions": [
+    {
+      "execution_id": "e1f5904c-323a-498a-86f2-6f3e3603a446",
+      "run_kind": "author",
+      "status": "failed",
+      "valid": true,
+      "at": "2026-11-23T04:16:36.511Z"
+    },
+    {
+      "execution_id": "a4cca4c1-b94a-4d19-ab84-25bcb60fc611",
+      "run_kind": "author",
+      "status": "failed",
+      "at": "2026-11-23T04:16:44.428Z",
+      "uploaded": true
+    }
+  ]
+}

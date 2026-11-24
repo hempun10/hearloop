@@ -1,0 +1,25 @@
+{
+  "test_id": "88915081-7a49-4f40-bdc7-3c00134625c9",
+  "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
+  "folder_id": "01M8393CR4D77J69S18TRMM75V",
+  "org_id": "3447606",
+  "session_name": "clearing-the-status-chip-restores-another-status-request",
+  "commit_id": "4c7eb6fe-a35f-41fc-98cd-8a782bcaf3d8",
+  "testcase_id": "01M85M22V4NT4WZZSQ2ED7RXAS",
+  "executions": [
+    {
+      "execution_id": "e3012177-e5e8-4d74-968a-69a447eec210",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-24T01:55:57.471Z"
+    },
+    {
+      "execution_id": "7b4c1def-1657-43bf-84a6-50fa0cd4cae6",
+      "run_kind": "author",
+      "status": "passed",
+      "at": "2026-11-24T01:56:13.735Z",
+      "uploaded": true
+    }
+  ]
+}

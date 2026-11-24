@@ -1,0 +1,25 @@
+{
+  "test_id": "3ca22408-be70-4e92-a17f-783458a1ce48",
+  "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
+  "folder_id": "01M8393NGPPA44GMTB8Y57QMKA",
+  "org_id": "3447606",
+  "session_name": "revoked-loop-api-token-leaves-dashboard-list",
+  "commit_id": "4045450c-fe58-49f5-9a05-7bc7979d3c8d",
+  "testcase_id": "01M84REYMD1YM0XXBB2F88SSC5",
+  "executions": [
+    {
+      "execution_id": "3ff32246-03ef-40f2-a091-966262bae5ec",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-23T17:52:59.507Z"
+    },
+    {
+      "execution_id": "048fdcac-e3bc-45a0-9ec3-98149f71c4ef",
+      "run_kind": "author",
+      "status": "passed",
+      "at": "2026-11-23T17:53:14.964Z",
+      "uploaded": true
+    }
+  ]
+}

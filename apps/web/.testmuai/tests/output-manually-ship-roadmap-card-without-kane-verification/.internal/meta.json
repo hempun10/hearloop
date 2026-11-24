@@ -1,0 +1,25 @@
+{
+  "test_id": "7e73f0e1-c54d-4529-b3fc-9ee2b7b278af",
+  "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
+  "folder_id": "01M8393DTHT287AEC1VC5S0M7S",
+  "org_id": "3447606",
+  "session_name": "manually-ship-roadmap-card-without-kane-verification",
+  "commit_id": "7f2c9d11-97c3-485c-96cf-64a7de35c1ac",
+  "testcase_id": "01M84MRW0SRP02RF5D3EQZGW7Y",
+  "executions": [
+    {
+      "execution_id": "adf02c2b-9f5d-4c0c-be63-ed85b5fea8cc",
+      "run_kind": "author",
+      "status": "failed",
+      "valid": true,
+      "at": "2026-11-23T16:47:11.092Z"
+    },
+    {
+      "execution_id": "4742378a-81e3-46b1-9ca5-df224139119d",
+      "run_kind": "author",
+      "status": "failed",
+      "at": "2026-11-23T16:47:17.831Z",
+      "uploaded": true
+    }
+  ]
+}

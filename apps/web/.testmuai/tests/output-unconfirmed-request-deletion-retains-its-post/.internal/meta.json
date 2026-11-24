@@ -1,0 +1,25 @@
+{
+  "test_id": "895d7c5b-02f7-40ef-b0e8-9b46c9c0e3a9",
+  "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
+  "folder_id": "01M8393EW3M09RE5KN4FGCV9KQ",
+  "org_id": "3447606",
+  "session_name": "unconfirmed-request-deletion-retains-its-post",
+  "commit_id": "9888496d-5990-41f7-a11c-05054e397ca4",
+  "testcase_id": "01M83ARXSXFWPXSKF5D3ZVSHVV",
+  "executions": [
+    {
+      "execution_id": "29038b93-57d8-498e-a77c-9929f8a08504",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-23T04:33:32.457Z"
+    },
+    {
+      "execution_id": "f26b756c-a629-4740-a7e3-b466e41dfea8",
+      "run_kind": "author",
+      "status": "passed",
+      "at": "2026-11-23T04:33:48.176Z",
+      "uploaded": true
+    }
+  ]
+}

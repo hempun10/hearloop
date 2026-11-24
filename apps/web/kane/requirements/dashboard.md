@@ -35,7 +35,10 @@ Members can move any request to any status. Nothing blocks the team. The public 
 
 ## Roadmap
 
-- One column per status, each with its count.
+A member reviews the board's roadmap on the dashboard's **Roadmap** page.
+
+- Four columns, one per status: Open, Planned, In progress and Shipped. Each shows its count, including a column with 0 requests.
+- Each request appears in exactly one column: the column for its status.
 - Dragging a card to another column changes its status. Dropping it on its own column or outside any column changes nothing.
 - Each card also has a status dropdown, so keyboard and touch users can move it.
 - The same confirmation and changelog rules as in the post list apply.

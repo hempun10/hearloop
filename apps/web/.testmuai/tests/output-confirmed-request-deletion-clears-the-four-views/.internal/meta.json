@@ -1,0 +1,25 @@
+{
+  "test_id": "53fbdb20-b719-4f47-90df-fd4d4460a18c",
+  "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
+  "folder_id": "01M8393EW3M09RE5KN4FGCV9KQ",
+  "org_id": "3447606",
+  "session_name": "confirmed-request-deletion-clears-the-four-views",
+  "commit_id": "597f08f1-d952-4958-b9c5-4dcaee335850",
+  "testcase_id": "01M83AE7ESPHANPZ8NQ736K5WZ",
+  "executions": [
+    {
+      "execution_id": "bfc38604-3609-443b-a383-214f30e14d8c",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-23T04:31:07.897Z"
+    },
+    {
+      "execution_id": "f0d8a2ea-6912-4473-b38e-15918e679673",
+      "run_kind": "author",
+      "status": "passed",
+      "at": "2026-11-23T04:31:26.812Z",
+      "uploaded": true
+    }
+  ]
+}

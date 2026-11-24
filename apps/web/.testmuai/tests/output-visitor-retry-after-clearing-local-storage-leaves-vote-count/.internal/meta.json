@@ -1,0 +1,25 @@
+{
+  "test_id": "f63d004e-fad7-4141-90f0-a2d89b8ab165",
+  "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
+  "folder_id": "01M8393FWTSMVM6V9J1YBMEB8S",
+  "org_id": "3447606",
+  "session_name": "visitor-retry-after-clearing-local-storage-leaves-vote-count",
+  "commit_id": "2bf7e6ba-8623-45ca-923f-53bc81ab2c2b",
+  "testcase_id": "01M83AX7XJ6K1DNP1B5G61F4MB",
+  "executions": [
+    {
+      "execution_id": "24248bdf-9bfd-415a-9880-f4286fc66f70",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-23T04:38:53.345Z"
+    },
+    {
+      "execution_id": "7ef91dcb-4b7f-48ed-8332-12c6ba456682",
+      "run_kind": "author",
+      "status": "passed",
+      "at": "2026-11-23T04:39:18.263Z",
+      "uploaded": true
+    }
+  ]
+}

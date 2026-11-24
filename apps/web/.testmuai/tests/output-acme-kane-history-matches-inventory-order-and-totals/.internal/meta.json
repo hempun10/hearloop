@@ -1,0 +1,19 @@
+{
+  "commit_id": "0aa9f95b-6a34-4214-acf8-c8b0721e7c3e",
+  "test_id": "bf7ae77f-6f02-43f8-9d9d-12301878bb76",
+  "testcase_id": "01M83DZK5DXSMSYM8P9T2S8MRK",
+  "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
+  "folder_id": "01M8393M1DE9MKY4Y3FJXYZCNR",
+  "org_id": "3447606",
+  "session_name": "acme-kane-history-matches-inventory-order-and-totals",
+  "executions": [
+    {
+      "execution_id": "d0e16232-fa21-4005-992c-017f5a486446",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "uploaded": true,
+      "at": "2026-11-23T17:05:01.421Z"
+    }
+  ]
+}

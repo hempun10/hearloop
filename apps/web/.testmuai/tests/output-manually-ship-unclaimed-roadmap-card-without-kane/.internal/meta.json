@@ -1,0 +1,19 @@
+{
+  "commit_id": "6b223a6f-9b93-4f1f-8050-a32875f8f2b1",
+  "test_id": "f38f464f-3f37-4e4c-8ff0-81a8cf7bcba7",
+  "testcase_id": "01M84Q70TPZRBQXSMM0B4SH8W8",
+  "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
+  "folder_id": "01M8393DTHT287AEC1VC5S0M7S",
+  "org_id": "3447606",
+  "session_name": "manually-ship-unclaimed-roadmap-card-without-kane",
+  "executions": [
+    {
+      "execution_id": "7b57589c-2bd1-43a6-9977-f7905f839d3d",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "uploaded": true,
+      "at": "2026-11-23T18:00:20.607Z"
+    }
+  ]
+}

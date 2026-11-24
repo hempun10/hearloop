@@ -1,0 +1,25 @@
+{
+  "test_id": "927948e8-9cb9-42af-9838-0d75cff786a3",
+  "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
+  "folder_id": "01M8393AYW5EC5KNQ55TXGYRKD",
+  "org_id": "3447606",
+  "session_name": "shown-acme-changelog-is-visible-at-its-public-address",
+  "commit_id": "e5daf95a-f6a7-4f93-a2d1-4853eb95ae22",
+  "testcase_id": "01M85KQRRYPACY0PGDJC61DP6J",
+  "executions": [
+    {
+      "execution_id": "4a9ace14-1957-46ae-be4d-49960038c4df",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-24T01:48:28.299Z"
+    },
+    {
+      "execution_id": "2d9b5eaf-92f5-40aa-9bbf-db213e3a38e9",
+      "run_kind": "author",
+      "status": "passed",
+      "at": "2026-11-24T01:48:45.524Z",
+      "uploaded": true
+    }
+  ]
+}

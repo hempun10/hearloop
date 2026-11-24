@@ -1,0 +1,25 @@
+{
+  "test_id": "d4d7de11-d28e-4bda-a283-f3a3deb8c2fd",
+  "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
+  "folder_id": "01M8393NGPPA44GMTB8Y57QMKA",
+  "org_id": "3447606",
+  "session_name": "valid-branding-save-appears-on-public-acme-board",
+  "commit_id": "250961a2-ecb7-448f-991d-8d629fc2ba6c",
+  "testcase_id": "01M83CCNND983QKBANXGJW90HM",
+  "executions": [
+    {
+      "execution_id": "144ff0cb-9af2-46e1-ab5e-be99567b4473",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-23T05:05:12.980Z"
+    },
+    {
+      "execution_id": "6aa41c3e-52d1-4f13-9613-05c311a7cb68",
+      "run_kind": "author",
+      "status": "passed",
+      "at": "2026-11-23T05:05:35.379Z",
+      "uploaded": true
+    }
+  ]
+}
