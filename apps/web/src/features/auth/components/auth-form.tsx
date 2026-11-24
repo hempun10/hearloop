@@ -29,8 +29,11 @@ export function AuthForm({ mode, next }: { mode: 'signin' | 'signup'; next?: str
     if (new URLSearchParams(location.search).has('sig')) return
     const session = await refreshSession()
     const home = session?.orgs[0] ? `/${session.orgs[0].slug}` : '/new'
+    // a dashboard you're not a member of would bounce you to its public board: go home instead (a new account lands on /new)
+    const dash = safeRedirect(next)?.match(/^\/([^/]+)\/dashboard/)?.[1]
+    const to = dash && !session?.orgs.some((o) => o.slug === dash) ? home : (safeRedirect(next) ?? home)
     // replace /login in history, so Back from the next page skips the sign-in form
-    await navigate({ to: safeRedirect(next) ?? home, replace: true })
+    await navigate({ to, replace: true })
   }
 
   return (
