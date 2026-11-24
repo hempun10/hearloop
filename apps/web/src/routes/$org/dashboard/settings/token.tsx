@@ -12,7 +12,7 @@ function Token() {
   const { org } = Route.useParams()
   return (
     <>
-      <PageHead title="Loop API tokens" sub="Each token, and each coding agent connected over MCP, is an agent you can assign requests to. Upload an icon, or keep its default logo. A token is shown once; only a hash is kept." />
+      <PageHead title="Loop API tokens" sub="Connect coding agents over MCP, or create a token for the HTTP API. Every agent and token here can be assigned requests." />
       <TokenManager org={org} />
     </>
   )

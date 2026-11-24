@@ -1,6 +1,6 @@
 import { and, desc, eq, isNull } from 'drizzle-orm'
 import { db } from '#/db/client.server'
-import { apiTokens, oauthClient, user } from '#/db/schema'
+import { apiTokens, oauthClient, posts, user } from '#/db/schema'
 import { randomToken, sha256 } from '#/lib/crypto.server'
 import { agentName } from '#/lib/oauth-client-name'
 
@@ -32,6 +32,7 @@ export async function setTokenIcon(orgId: number, id: number, icon: string | nul
 
 export async function revokeToken(orgId: number, id: number) {
   await db.update(apiTokens).set({ revokedAt: new Date() }).where(and(eq(apiTokens.id, id), eq(apiTokens.orgId, orgId), isNull(apiTokens.revokedAt)))
+  await db.update(posts).set({ assigneeTokenId: null }).where(and(eq(posts.orgId, orgId), eq(posts.assigneeTokenId, id)))
 }
 
 /** Marks rows that stand for an MCP connection; never a valid bearer token (those are hashed to hex). */
