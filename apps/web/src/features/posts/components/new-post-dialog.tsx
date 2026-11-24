@@ -1,23 +1,38 @@
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useQuery } from '@tanstack/react-query'
 import { Link, useNavigate } from '@tanstack/react-router'
-import { useForm, useWatch } from 'react-hook-form'
+import { LayoutGrid, Tag } from 'lucide-react'
+import { Controller, useForm, useWatch } from 'react-hook-form'
+import { useOrg } from '#/features/orgs/use-org'
+import { tagsQuery } from '../post.queries'
+import { useStatuses } from '../use-statuses'
+import { PropertyPicker } from './property-picker'
+import { StatusIconFor } from './status-icon'
 import { Button } from '@hearloop/ui/components/button'
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@hearloop/ui/components/dialog'
 import { FieldError } from '@hearloop/ui/components/field'
 import { Kbd, KbdGroup } from '@hearloop/ui/components/kbd'
 import { Textarea } from '@hearloop/ui/components/textarea'
 import type { Post } from '#/db/schema'
-import { type NewPostInput, newPostSchema } from '../post.schema'
+import { type ComposeInput, composeSchema } from '../post.schema'
 import { findSimilarPosts } from '../similar-posts'
 import { useCreatePost } from '../use-post-mutations'
 
-type Props = { org: string; posts: Post[]; open: boolean; onOpenChange: (open: boolean) => void; mustSignIn: boolean }
+type Props = {
+  org: string
+  posts: Post[]
+  open: boolean
+  onOpenChange: (open: boolean) => void
+  mustSignIn: boolean
+  isMember?: boolean
+  defaultCategory?: number | null
+}
 
-export function NewPostDialog({ org, posts, open, onOpenChange, mustSignIn }: Props) {
+export function NewPostDialog({ org, posts, open, onOpenChange, mustSignIn, isMember = false, defaultCategory = null }: Props) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="gap-0 p-0 sm:max-w-[560px]">
-        {mustSignIn ? <SignInToPost org={org} onCancel={() => onOpenChange(false)} /> : <NewPostForm org={org} posts={posts} onDone={() => onOpenChange(false)} />}
+        {mustSignIn ? <SignInToPost org={org} onCancel={() => onOpenChange(false)} /> : <NewPostForm org={org} posts={posts} isMember={isMember} defaultCategory={defaultCategory} onDone={() => onOpenChange(false)} />}
       </DialogContent>
     </Dialog>
   )
@@ -40,10 +55,15 @@ function SignInToPost({ org, onCancel }: { org: string; onCancel: () => void }) 
   )
 }
 
-function NewPostForm({ org, posts, onDone }: { org: string; posts: Post[]; onDone: () => void }) {
+function NewPostForm({ org, posts, isMember, defaultCategory, onDone }: { org: string; posts: Post[]; isMember: boolean; defaultCategory: number | null; onDone: () => void }) {
   const navigate = useNavigate()
   const create = useCreatePost(org)
-  const form = useForm<NewPostInput>({ resolver: zodResolver(newPostSchema), defaultValues: { title: '', body: '' } })
+  const { categories } = useOrg()
+  const statuses = useStatuses()
+  const form = useForm<ComposeInput>({
+    resolver: zodResolver(composeSchema),
+    defaultValues: { title: '', body: '', categoryId: defaultCategory, status: 'open', tags: [] },
+  })
   const title = useWatch({ control: form.control, name: 'title' })
   const similar = findSimilarPosts(title, posts)
   const error = form.formState.errors.title?.message ?? form.formState.errors.root?.message
@@ -87,6 +107,30 @@ function NewPostForm({ org, posts, onDone }: { org: string; posts: Post[]; onDon
           </ul>
         </div>
       )}
+      <div className="flex flex-wrap items-center gap-2 border-t bg-background px-5 py-3">
+        {categories.length > 0 && (
+          <Controller name="categoryId" control={form.control} render={({ field }) => (
+            <PropertyPicker what="board" className={pill} selected={[String(field.value ?? 'none')]}
+              trigger={<><LayoutGrid className="size-3.5 text-muted-foreground" />{categories.find((c) => c.id === field.value)?.name ?? 'No board'}</>}
+              options={[{ value: 'none', label: 'No board', icon: <LayoutGrid className="size-4 text-muted-foreground" /> }, ...categories.map((c) => ({ value: String(c.id), label: c.name, icon: <LayoutGrid className="size-4 text-muted-foreground" /> }))]}
+              onSelect={(v) => field.onChange(v === 'none' ? null : Number(v))} />
+          )} />
+        )}
+        {isMember && (
+          <Controller name="status" control={form.control} render={({ field }) => {
+            const current = statuses.find((s) => s.key === field.value) ?? statuses[0]
+            return (
+              <PropertyPicker what="status" className={pill} selected={[current.key]}
+                trigger={<><StatusIconFor option={current} className="size-3.5" />{current.label}</>}
+                options={statuses.map((s) => ({ value: s.key, label: s.label, icon: <StatusIconFor option={s} className="size-4" /> }))}
+                onSelect={field.onChange} />
+            )
+          }} />
+        )}
+        <Controller name="tags" control={form.control} render={({ field }) => (
+          <TagsPicker org={org} value={field.value} onChange={field.onChange} canCreate={isMember} />
+        )} />
+      </div>
       <DialogFooter className="flex-row items-center gap-3 border-t px-5 py-3 sm:justify-start">
         {error ? (
           <FieldError role="alert" className="text-xs">{error}</FieldError>
@@ -97,5 +141,21 @@ function NewPostForm({ org, posts, onDone }: { org: string; posts: Post[]; onDon
         <Button type="submit" disabled={form.formState.isSubmitting}>{form.formState.isSubmitting ? 'Posting' : 'Post'}</Button>
       </DialogFooter>
     </form>
+  )
+}
+const pill = 'h-7 gap-1.5 rounded-md border border-input bg-secondary px-2.5 text-[13px] font-normal hover:bg-accent'
+
+/** The board's tags to tick, up to five; members can also create one. */
+function TagsPicker({ org, value, onChange, canCreate }: { org: string; value: string[]; onChange: (tags: string[]) => void; canCreate: boolean }) {
+  const { data: tags = [] } = useQuery(tagsQuery(org))
+  if (!tags.length && !canCreate) return null
+  const names = [...new Set([...tags.map((t) => t.name), ...value])]
+  const add = (t: string) => value.length < 5 && onChange([...value, t])
+  return (
+    <PropertyPicker what="tags" multi className={pill} selected={value}
+      trigger={<><Tag className="size-3.5 text-muted-foreground" />{value.length ? value.join(', ') : 'Tags'}</>}
+      options={names.map((t) => ({ value: t, label: t, icon: <span className="size-2 rounded-full bg-muted-foreground/60" /> }))}
+      onSelect={(t) => (value.includes(t) ? onChange(value.filter((x) => x !== t)) : add(t))}
+      onCreate={canCreate ? (t) => add(t.toLowerCase().replace(/\s+/g, '-')) : undefined} />
   )
 }

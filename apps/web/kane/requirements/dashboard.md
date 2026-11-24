@@ -18,7 +18,9 @@ Members can move any request to any status. Nothing blocks the team. The public 
 
 - Lists every request with its status, vote count and age. The count beside the toolbar matches the rows shown.
 - Sort by **Most votes** (default) or **Newest**.
-- Filter by one status from the **Filter** menu or the status column on the left. The filter can be cleared with the x on its chip.
+- **Filter** opens Status, Board and Tags; each lists its values to tick, and several can be ticked at once. Filters combine: a request shows when it matches every active filter, and any one of the values ticked within a filter.
+- Each active filter shows as a chip: its name, "is" (one value) or "is any of" (several), the values, and an x that clears it. Clicking the values reopens them to change. With two or more chips, **Clear all** removes every filter.
+- The status column on the left, and **Quick filters → Boards** and **Tags**, set a single filter in one click.
 - Search narrows the list by title. With no match it says "Nothing matches" and the search text.
 - Sort, filter and search survive a page reload and the browser's back button.
 - Changing a request's status from its dropdown updates the row at once and stays after a reload.
@@ -42,6 +44,10 @@ A member reviews the board's roadmap on the dashboard's **Roadmap** page.
 - Dragging a card to another column changes its status. Dropping it on its own column or outside any column changes nothing.
 - Each card also has a status dropdown, so keyboard and touch users can move it.
 - The same confirmation and changelog rules as in the post list apply.
+- Clicking a roadmap card opens the request in a window over the board, and the address gains `?post=<id>` so the window reopens on reload. On the left: the title, the description, **Edit**, and the comments, where the member can comment or add an internal note. On the right, under **Properties**: **Status**, **Assignee**, **Board** (when the board has boards), **Tags**, the vote count, and **Open public page**. Escape or clicking outside closes it.
+- **Assignee** lists the board's members and **No assignee**. A card with an assignee shows that member's initials. Only members can be assigned.
+- Each property is a quiet button showing its current value. Clicking it opens a menu with a search box ("Change status…", "Change assignee…", "Change board…", "Change tags…"), then the options, each with a tick on the current one and a number 1–9. Typing filters the options. With the search empty, a number key picks that option. The keys S, A, B and L open the status, assignee, board and tags menus.
+- The request page shows the same properties to members, under **Properties**.
 
 ## Request page: comments, tags and merging
 
@@ -51,7 +57,7 @@ Each request has its own page at `{{base_url}}/acme/posts/<id>`.
 - A signed-in person can write a comment and post it with **Comment**. A visitor who isn't signed in sees "Sign in to comment" instead of the form.
 - A member can turn on **Internal note (team only)** before posting. Internal notes show only to members, marked "Internal note". Visitors and signed-in non-members never see them.
 - A member can remove any comment with its remove button, after confirming.
-- A member adds a tag by typing it in **Add a tag** and pressing Enter, and removes one with its x. Tags show on the request page for everyone.
+- A member ticks tags in **Add tag** (or **Edit tags**); the menu stays open for several. Typing a new name offers **Create "<name>"**. Ticking a tag again takes it off. Tags show on the request page for everyone.
 - A member can merge an Open or Planned request into another with **Merge into…**: pick the request that stays, then **Merge**. Its votes (each voter once), comments and tags move to the request that stays, and the merged request leaves the board, the roadmap and the post list. Opening the merged request's address says "Merged into" with a link to the request that stays.
 
 ## Editing a request
@@ -97,6 +103,28 @@ Each request has its own page at `{{base_url}}/acme/posts/<id>`.
 - A URL that isn't a Slack or Discord incoming webhook shows an error next to the field and isn't saved.
 - Connecting sends a test message. A connected row shows "Connected", the last characters of the webhook, whether the last message was delivered, **Send test** and **Disconnect** (after confirming).
 - The connected channel gets a message when someone posts a request, when a member moves a request, and when Kane CLI passes or fails a request.
+
+## Boards and tags
+
+- Settings groups its board pages under **Product**. **Settings → Boards & tags** lists the board's boards, like "Feature requests" and "Bugs", each with a one-line description. **New board** adds one; a name the board already uses shows an error and saves nothing. Each board can be edited, or deleted after confirming; its requests stay on the board without a board.
+- The same page lists the board's tags with how many requests have each. **Add tag** adds one; deleting one (after confirming) takes it off every request.
+- When a board has boards, the public board shows them in its sidebar with a count each, and choosing one shows only its requests. Each request row shows its board.
+- The dashboard post list shows each request's board and can be filtered by board from the column on the left.
+- On a request page, the details show its board, and members can change it with the **Board** menu.
+- Only members see a request's **Kane CLI verifications** section and its Kane runs count. Visitors and other signed-in people don't: those are the team's build checks.
+
+## Statuses
+
+- **Settings → Statuses** lists the four built-in statuses (Open, Planned, In progress, Shipped), marked "Built in", and the board's own statuses under the built-in they are a kind of, like "Under review" as a kind of Open.
+- **New status** takes a name, a kind (a built-in) and a colour. A name the board already uses shows an error. A status of the board's own can be renamed, recoloured, moved up or down among its kind, or deleted after confirming; its requests keep the built-in status.
+- The board's own statuses appear everywhere a status is chosen or shown: the dashboard post list, the roadmap (as their own column after their built-in), the public roadmap, and the request page.
+- A status of the board's own behaves like its kind: moving a request to a kind of Shipped publishes it on the changelog.
+
+## Posting with a board, tags and a status
+
+- The new-post form has a **Board** menu when the board has boards. On a public board filtered by a board, that board is chosen already.
+- The form lists the board's tags; choosing one adds it to the new request, up to five. Members can also type a new tag and press Enter.
+- Members also choose the new request's **Status**; it starts as Open otherwise. Visitors and other signed-in people don't see the status menu.
 
 ## Small screens
 

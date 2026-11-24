@@ -16,15 +16,18 @@ import { cn } from '@hearloop/ui/lib/utils'
 const SORTS = { top: 'Top', new: 'New' } as const
 
 export const Route = createFileRoute('/$org/_public/')({
-  validateSearch: z.object({ sort: z.enum(['top', 'new']).optional().catch(undefined) }),
+  validateSearch: z.object({
+    sort: z.enum(['top', 'new']).optional().catch(undefined),
+    category: z.number().int().positive().optional().catch(undefined),
+  }),
   loader: ({ context, params }) => context.queryClient.query(postListQuery(params.org)),
   component: BoardPage,
 })
 
 function BoardPage() {
-  const { org } = useOrg()
+  const { org, categories, isMember } = useOrg()
   const session = useSession()
-  const { sort = 'top' } = Route.useSearch()
+  const { sort = 'top', category } = Route.useSearch()
   const { data: all } = useSuspenseQuery(postListQuery(org.slug))
   const [search, setSearch] = useState('')
   const [composing, setComposing] = useState(false)
@@ -32,9 +35,10 @@ function BoardPage() {
 
   const needle = search.trim().toLowerCase()
   const posts = useMemo(() => {
-    const sorted = sort === 'new' ? [...all].sort((a, b) => b.id - a.id) : all
+    const inCategory = category ? all.filter((p) => p.categoryId === category) : all
+    const sorted = sort === 'new' ? [...inCategory].sort((a, b) => b.id - a.id) : inCategory
     return needle ? sorted.filter((p) => p.title.toLowerCase().includes(needle)) : sorted
-  }, [all, sort, needle])
+  }, [all, sort, needle, category])
   const { selected, resetSelection, rowRef } = useBoardShortcuts({ org: org.slug, posts, onCompose: compose, enabled: !composing })
 
   return (
@@ -47,12 +51,12 @@ function BoardPage() {
         <section className="min-w-0 flex-1 md:max-w-[720px]">
           <div className="mb-4 flex items-center gap-5 text-sm">
             {Object.entries(SORTS).map(([key, label]) => (
-              <Link key={key} to="/$org" params={{ org: org.slug }} search={key === 'top' ? {} : { sort: 'new' }}
+              <Link key={key} to="/$org" params={{ org: org.slug }} search={{ sort: key === 'top' ? undefined : 'new', category }}
                 className={cn(sort === key ? 'font-semibold text-foreground' : 'text-muted-foreground hover:text-foreground')}>
                 {label}
               </Link>
             ))}
-            <span className="ml-auto text-xs text-muted-foreground tabular-nums">{all.length} posts</span>
+            <span className="ml-auto text-xs text-muted-foreground tabular-nums">{posts.length} posts</span>
           </div>
 
           <InputGroup className="mb-4">
@@ -72,11 +76,11 @@ function BoardPage() {
             </ol>
           )}
         </section>
-        <BoardSidebar org={org.slug} posts={all} showRoadmap={org.showRoadmap} onCompose={compose} />
+        <BoardSidebar org={org.slug} posts={all} showRoadmap={org.showRoadmap} onCompose={compose} categories={categories} category={category} sort={sort} />
       </div>
 
       <NewPostDialog org={org.slug} posts={all} open={composing} onOpenChange={setComposing}
-        mustSignIn={org.whoCanPost === 'signed_in' && !session} />
+        mustSignIn={org.whoCanPost === 'signed_in' && !session} isMember={isMember} defaultCategory={category ?? null} />
     </main>
   )
 }

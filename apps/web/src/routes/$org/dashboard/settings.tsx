@@ -10,7 +10,7 @@ export const Route = createFileRoute('/$org/dashboard/settings')({
 })
 
 const NAV = [
-  { group: 'Board', items: [['/$org/dashboard/settings', 'General'], ['/$org/dashboard/settings/branding', 'Branding'], ['/$org/dashboard/settings/access', 'Access']] },
+  { group: 'Product', items: [['/$org/dashboard/settings', 'General'], ['/$org/dashboard/settings/branding', 'Branding'], ['/$org/dashboard/settings/access', 'Access'], ['/$org/dashboard/settings/boards', 'Boards & tags'], ['/$org/dashboard/settings/statuses', 'Statuses']] },
   { group: 'Team', items: [['/$org/dashboard/settings/team', 'Members'], ['/$org/dashboard/settings/notifications', 'Notifications']] },
   { group: 'Developers', items: [['/$org/dashboard/settings/token', 'Loop API token']] },
 ] as const

@@ -62,8 +62,14 @@ export function PageHead({ title, sub }: { title: string; sub: string }) {
   )
 }
 
-export function SectionHead({ title, className }: { title: string; className?: string }) {
-  return <h3 className={cn('pb-2 text-sm font-semibold', className)}>{title}</h3>
+export function SectionHead({ title, right, className }: { title: string; right?: ReactNode; className?: string }) {
+  if (!right) return <h3 className={cn('pb-2 text-sm font-semibold', className)}>{title}</h3>
+  return (
+    <div className={cn('flex items-center justify-between pb-2', className)}>
+      <h3 className="text-sm font-semibold">{title}</h3>
+      {right}
+    </div>
+  )
 }
 
 /** Settings row: label and help left, control right, hairline above. The control wraps under the label when it can't fit. */

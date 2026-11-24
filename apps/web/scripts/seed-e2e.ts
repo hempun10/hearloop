@@ -58,6 +58,8 @@ DELETE FROM api_tokens WHERE org_id IN (SELECT id FROM orgs WHERE slug = 'acme')
 DELETE FROM invites WHERE org_id IN (SELECT id FROM orgs WHERE slug = 'acme' OR slug LIKE 'kane-board-%');
 DELETE FROM integrations WHERE org_id IN (SELECT id FROM orgs WHERE slug = 'acme');
 DELETE FROM tags WHERE org_id IN (SELECT id FROM orgs WHERE slug = 'acme');
+DELETE FROM statuses WHERE org_id IN (SELECT id FROM orgs WHERE slug = 'acme');
+DELETE FROM categories WHERE org_id IN (SELECT id FROM orgs WHERE slug = 'acme');
 DELETE FROM orgs WHERE slug = 'acme';
 DELETE FROM runs WHERE post_id IN (SELECT p.id FROM posts p JOIN orgs o ON o.id = p.org_id WHERE o.slug = 'globex' OR o.slug LIKE 'kane-board-%');
 DELETE FROM changelog WHERE post_id IN (SELECT p.id FROM posts p JOIN orgs o ON o.id = p.org_id WHERE o.slug = 'globex' OR o.slug LIKE 'kane-board-%');

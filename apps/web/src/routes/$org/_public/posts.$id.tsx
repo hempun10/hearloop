@@ -1,7 +1,7 @@
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { Link, createFileRoute, notFound, useNavigate } from '@tanstack/react-router'
 import { ArrowLeft } from 'lucide-react'
-import { useState } from 'react'
+import { Suspense, useState } from 'react'
 import { useHotkeys } from 'react-hotkeys-hook'
 import { Button } from '@hearloop/ui/components/button'
 import { EditPostForm } from '#/features/posts/components/edit-post-form'
@@ -10,7 +10,8 @@ import { commentsQuery } from '#/features/comments/comment.queries'
 import { useSession } from '#/features/auth/use-session'
 import { orgQuery } from '#/features/orgs/org.queries'
 import { MergePostDialog } from '#/features/posts/components/merge-post-dialog'
-import { TagEditor, TagList } from '#/features/posts/components/post-tags'
+import { TagList } from '#/features/posts/components/post-tags'
+import { PostProperties } from '#/features/posts/components/post-properties'
 import { StatusBadge } from '#/features/posts/components/status-badge'
 import { StatusTimeline } from '#/features/posts/components/status-timeline'
 import { VoteButton } from '#/features/posts/components/vote-button'
@@ -40,6 +41,7 @@ function PostPage() {
   useHotkeys('escape', backToBoard, [org])
   if (!data) return null
   const { post, runs, tags, mergedInto } = data
+  const category = board?.categories.find((c) => c.id === post.categoryId)
   const canEdit = !mergedInto && (isMember || (!!session && post.authorId === session.user.id && post.status === 'open'))
 
   return (
@@ -70,6 +72,8 @@ function PostPage() {
 
         <div className="mt-8"><StatusTimeline status={post.status} /></div>
 
+        {/* verifications are the team's build loop, not something customers act on */}
+        {isMember && <>
         <h2 className="mt-12 mb-3 text-[15px] font-semibold">Kane CLI verifications</h2>
         {runs.length === 0 ? (
           <p className="border-t pt-4 text-sm text-muted-foreground">Not verified yet. It ships once a Kane run passes.</p>
@@ -86,6 +90,7 @@ function PostPage() {
             ))}
           </ol>
         )}
+        </>}
 
         <Comments org={org} postId={post.id} signedIn={!!session} isMember={isMember} />
       </section>
@@ -93,19 +98,17 @@ function PostPage() {
       <aside className="w-full shrink-0 text-[13px] md:w-60">
         <p className="mb-2 text-xs font-medium text-muted-foreground">Details</p>
         <dl className="grid grid-cols-[auto_1fr] items-center gap-x-4 gap-y-2">
-          <dt className="text-faint">Status</dt><dd><StatusBadge status={post.status} />{post.status === 'building' && post.claimedBy ? <span className="ml-2 text-muted-foreground">by {post.claimedBy}</span> : null}</dd>
+          <dt className="text-faint">Status</dt><dd><StatusBadge post={post} />{post.status === 'building' && post.claimedBy ? <span className="ml-2 text-muted-foreground">by {post.claimedBy}</span> : null}</dd>
+          {category && <><dt className="text-faint">Board</dt><dd data-testid="category">{category.name}</dd></>}
           <dt className="text-faint">Votes</dt><dd className="tabular-nums">{post.votes}</dd>
-          <dt className="text-faint">Kane runs</dt><dd className="tabular-nums">{runs.length}</dd>
+          {isMember && <><dt className="text-faint">Kane runs</dt><dd className="tabular-nums">{runs.length}</dd></>}
         </dl>
-        {isMember && (
-          <div className="mt-6 grid gap-4">
-            <div>
-              <p className="mb-2 text-xs font-medium text-muted-foreground">Tags</p>
-              <TagEditor org={org} id={post.id} tags={tags} />
-            </div>
-            {!mergedInto && (post.status === 'open' || post.status === 'planned') && <MergePostDialog org={org} post={post} />}
+        {isMember && !mergedInto && (
+          <div className="mt-6 -mx-2">
+            <Suspense fallback={null}><PostProperties org={org} post={post} tags={tags} /></Suspense>
           </div>
         )}
+        {isMember && !mergedInto && (post.status === 'open' || post.status === 'planned') && <div className="mt-4"><MergePostDialog org={org} post={post} /></div>}
       </aside>
     </main>
   )
