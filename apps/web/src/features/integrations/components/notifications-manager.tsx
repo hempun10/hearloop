@@ -8,11 +8,12 @@ import {
 import { Button } from '@hearloop/ui/components/button'
 import { FieldError } from '@hearloop/ui/components/field'
 import { Input } from '@hearloop/ui/components/input'
-import { Row, fieldClass } from '#/features/dashboard/components/panel'
+import { cn } from '@hearloop/ui/lib/utils'
+import { SectionHead } from '#/features/dashboard/components/panel'
 import { timeAgo } from '#/lib/format'
-import { connect, disconnect, testIntegration } from '../integration.functions'
+import { connect, disconnect, setEvents, testIntegration } from '../integration.functions'
 import { integrationsQuery } from '../integration.queries'
-import { INTEGRATIONS, type IntegrationKind, webhookUrlSchema } from '../integration.schema'
+import { EVENTS, EVENT_KEYS, type EventKey, INTEGRATIONS, type IntegrationKind, webhookUrlSchema } from '../integration.schema'
 
 const reportTest = (status: string | null) => status === 'ok' ? toast.success('Test message sent') : toast.error(status ?? 'Not connected')
 
@@ -24,6 +25,11 @@ export function NotificationsManager({ org }: { org: string }) {
   )
 }
 
+const HELP: Record<IntegrationKind, string> = {
+  slack: 'Create an incoming webhook for the channel in Slack, then paste it here.',
+  discord: 'In the channel settings, open Integrations, create a webhook and copy its URL.',
+}
+
 function Destination({ org, kind }: { org: string; kind: IntegrationKind }) {
   const qc = useQueryClient()
   const { data } = useSuspenseQuery(integrationsQuery(org))
@@ -31,48 +37,89 @@ function Destination({ org, kind }: { org: string; kind: IntegrationKind }) {
   const { label, example } = INTEGRATIONS[kind]
   const [url, setUrl] = useState('')
   const [error, setError] = useState('')
+  const [picked, setPicked] = useState<EventKey[]>(EVENT_KEYS)
+  const events = row?.events ?? picked
   const refresh = () => qc.invalidateQueries({ queryKey: integrationsQuery(org).queryKey })
-  const save = useMutation({ mutationFn: () => connect({ data: { org, kind, url } }), onSuccess: (s) => { setUrl(''); refresh(); reportTest(s) }, onError: (e) => setError(e.message) })
+  const saveEvents = useMutation({ mutationFn: (next: EventKey[]) => setEvents({ data: { org, kind, events: next } }), onSuccess: refresh, onError: (e) => toast.error(e.message) })
+  const toggle = (k: EventKey) => {
+    const next = events.includes(k) ? events.filter((x) => x !== k) : EVENT_KEYS.filter((x) => x === k || events.includes(x))
+    if (!next.length) return toast.error('Keep at least one event.')
+    if (row) saveEvents.mutate(next)
+    else setPicked(next)
+  }
+  const save = useMutation({ mutationFn: () => connect({ data: { org, kind, url, events: row ? undefined : picked } }), onSuccess: (s) => { setUrl(''); refresh(); reportTest(s) }, onError: (e) => setError(e.message) })
   const test = useMutation({ mutationFn: () => testIntegration({ data: { org, kind } }), onSuccess: (s) => { refresh(); reportTest(s) } })
   const drop = useMutation({ mutationFn: () => disconnect({ data: { org, kind } }), onSuccess: () => { toast.success(`${label} disconnected`); refresh() } })
-
-  if (row) {
-    return (
-      <Row label={label} help={<>Connected · webhook …{row.hint}{row.lastSentAt ? ` · last message ${timeAgo(row.lastSentAt)}: ${row.lastStatus === 'ok' ? 'delivered' : row.lastStatus}` : ''}</>}>
-        <div className="flex gap-2">
-          <Button variant="soft" size="sm" disabled={test.isPending} onClick={() => test.mutate()}>{test.isPending ? 'Sending' : 'Send test'}</Button>
-          <AlertDialog>
-            <AlertDialogTrigger asChild><Button variant="ghost" size="sm">Disconnect</Button></AlertDialogTrigger>
-            <AlertDialogContent>
-              <AlertDialogHeader>
-                <AlertDialogTitle>Disconnect {label}?</AlertDialogTitle>
-                <AlertDialogDescription>The board stops posting to that channel. You can connect it again with the webhook URL.</AlertDialogDescription>
-              </AlertDialogHeader>
-              <AlertDialogFooter>
-                <AlertDialogCancel>Cancel</AlertDialogCancel>
-                <AlertDialogAction onClick={() => drop.mutate()}>Disconnect</AlertDialogAction>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialog>
-        </div>
-      </Row>
-    )
+  const submit = (e: { preventDefault: () => void }) => {
+    e.preventDefault()
+    const r = webhookUrlSchema(kind).safeParse(url)
+    if (!r.success) return setError(r.error.issues[0].message)
+    setError('')
+    save.mutate()
   }
+
   return (
-    <Row label={label} help={`Paste an incoming webhook URL (${example}). New requests, status changes and Kane CLI verdicts post to that channel.`} htmlFor={`${kind}-url`}>
-      <form className="flex flex-wrap items-start gap-2" aria-label={`Connect ${label}`} noValidate onSubmit={(e) => {
-        e.preventDefault()
-        const r = webhookUrlSchema(kind).safeParse(url)
-        if (!r.success) return setError(r.error.issues[0].message)
-        setError('')
-        save.mutate()
-      }}>
-        <div>
-          <Input id={`${kind}-url`} value={url} onChange={(e) => setUrl(e.target.value)} placeholder={example} aria-invalid={!!error} className={fieldClass} />
+    <section className="pb-9" aria-labelledby={`int-${kind}`}>
+      <SectionHead title={label} right={<DeliveryStatus row={row} />} />
+      <form onSubmit={submit} noValidate aria-label={row ? `Replace ${label} webhook` : `Connect ${label}`} className="flex flex-col gap-4 border-t pt-4">
+        <p id={`int-${kind}`} className="text-[13px] text-muted-foreground">{HELP[kind]}</p>
+        <label className="flex flex-col gap-1.5">
+          <span className="text-xs font-semibold text-muted-foreground">Webhook URL</span>
+          <Input id={`${kind}-url`} value={url} onChange={(e) => setUrl(e.target.value)} spellCheck={false} autoComplete="off" aria-invalid={!!error}
+            placeholder={row ? `Connected, ending in …${row.hint}. Paste a new URL to replace it.` : example}
+            className="h-8 rounded-lg bg-card px-2.5 text-[13px] shadow-none placeholder:text-faint" />
           {error && <FieldError>{error}</FieldError>}
+        </label>
+        <fieldset className="flex flex-col gap-1.5">
+          <legend className="pb-1.5 text-xs font-semibold text-muted-foreground">Send when</legend>
+          <div className="flex flex-wrap gap-1.5">
+            {EVENTS.map((e) => <Chip key={e.key} on={events.includes(e.key)} onClick={() => toggle(e.key)}>{e.label}</Chip>)}
+          </div>
+          {row && <span className="text-xs text-faint">Changes save as you click.</span>}
+        </fieldset>
+        <div className="flex items-center gap-2">
+          <span className="mr-auto" />
+          {row && (
+            <AlertDialog>
+              <AlertDialogTrigger asChild><Button type="button" variant="ghost" size="sm">Disconnect</Button></AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Disconnect {label}?</AlertDialogTitle>
+                  <AlertDialogDescription>The board stops posting to that channel. You can connect it again with the webhook URL.</AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                  <AlertDialogAction onClick={() => drop.mutate()}>Disconnect</AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
+          )}
+          {row && <Button type="button" variant="secondary" size="sm" disabled={test.isPending} onClick={() => test.mutate()}>{test.isPending ? 'Sending' : 'Send test'}</Button>}
+          <Button type="submit" size="sm" disabled={save.isPending || !url.trim()}>{save.isPending ? 'Connecting' : row ? 'Replace' : 'Connect'}</Button>
         </div>
-        <Button type="submit" variant="soft" size="sm" disabled={save.isPending}>{save.isPending ? 'Connecting' : 'Connect'}</Button>
       </form>
-    </Row>
+    </section>
+  )
+}
+
+function DeliveryStatus({ row }: { row?: { hint: string; lastSentAt: Date | null; lastStatus: string | null } }) {
+  if (!row) return <span className="text-xs text-faint">Not connected</span>
+  if (!row.lastSentAt) return <span className="text-xs text-faint">Connected, nothing sent yet</span>
+  const ok = row.lastStatus === 'ok'
+  return (
+    <span className="flex max-w-[60%] items-center gap-1.5 text-xs text-faint" title={ok ? undefined : (row.lastStatus ?? undefined)}>
+      <span aria-hidden className={cn('size-1.5 shrink-0 rounded-full', ok ? 'bg-status-shipped' : 'bg-destructive')} />
+      <span className="truncate tabular-nums">Connected · …{row.hint} · {ok ? `delivered ${timeAgo(row.lastSentAt)}` : `failed ${timeAgo(row.lastSentAt)}: ${row.lastStatus}`}</span>
+    </span>
+  )
+}
+
+function Chip({ on, onClick, children }: { on: boolean; onClick: () => void; children: React.ReactNode }) {
+  return (
+    <button type="button" aria-pressed={on} onClick={onClick}
+      className={cn('inline-flex h-7 items-center gap-1.5 rounded-md border px-2.5 text-[12px] transition-colors duration-150', on ? 'border-input bg-secondary text-foreground' : 'text-muted-foreground hover:bg-accent/60 hover:text-foreground')}>
+      <span aria-hidden className={cn('size-[5px] rounded-full', on ? 'bg-brand' : 'bg-faint/60')} />
+      {children}
+    </button>
   )
 }

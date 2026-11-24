@@ -29,7 +29,9 @@ export const editPostSchema = postRefSchema.extend(newPostSchema.shape)
 export const setStatusSchema = postRefSchema.extend({ status: postStatusSchema })
 export const setStatusKeySchema = postRefSchema.extend({ status: statusKeySchema })
 export const setCategorySchema = postRefSchema.extend({ categoryId: z.number().int().positive().nullable() })
-export const setAssigneeSchema = postRefSchema.extend({ assigneeId: z.string().min(1).nullable() })
+/** "u:<user id>" for a member, "a:<token id>" for an agent, null for nobody */
+export const assigneeKeySchema = z.string().regex(/^(u:.+|a:\d+)$/)
+export const setAssigneeSchema = postRefSchema.extend({ assignee: assigneeKeySchema.nullable() })
 
 // what the loop reports after a Kane run (POST /api/:org/posts/:id/runs)
 export const recordRunSchema = z.object({

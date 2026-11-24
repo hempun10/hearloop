@@ -26,6 +26,12 @@ export const postComment = createServerFn({ method: 'POST' })
     if (data.internal && !team) throw new Error('Only board members can write internal notes.')
     const row = await addComment(org.id, data.id, { userId: user.id, author: user.name || user.email, team, internal: data.internal, body: data.body, parentId: data.parentId })
     if (!row) throw new Error('That request is gone.')
+    if (!row.internal) {
+      const { notify } = await import('#/features/integrations/integration.server')
+      const { db } = await import('#/db/client.server')
+      const post = await db.query.posts.findFirst({ where: (p, { eq }) => eq(p.id, row.postId), columns: { title: true } })
+      notify(org.id, { type: 'commented', id: row.postId, title: post?.title ?? '', author: row.author, body: row.body })
+    }
     return row
   })
 

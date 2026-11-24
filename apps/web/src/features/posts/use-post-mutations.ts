@@ -62,7 +62,7 @@ export function useSetCategory(org: string, id: number) {
 export function useSetAssignee(org: string, id: number) {
   const qc = useQueryClient()
   return useMutation({
-    mutationFn: (assigneeId: string | null) => setAssignee({ data: { org, id, assigneeId } }),
+    mutationFn: (assignee: string | null) => setAssignee({ data: { org, id, assignee } }),
     onSuccess: () => qc.invalidateQueries({ queryKey: postKeys.all(org) }),
     onError: errorToast,
   })

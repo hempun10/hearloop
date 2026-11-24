@@ -225,6 +225,7 @@ export const posts = sqliteTable('posts', {
   statusId: integer().references(() => statuses.id, { onDelete: 'set null' }),
   categoryId: integer().references(() => categories.id, { onDelete: 'set null' }),
   assigneeId: text().references(() => user.id, { onDelete: 'set null' }), // the member who owns it
+  assigneeTokenId: integer().references(() => apiTokens.id, { onDelete: 'set null' }), // or the agent (a token or MCP connection) it's handed to
   createdAt: createdAt(),
 }, (t) => [index('posts_org').on(t.orgId, t.votes)])
 
@@ -259,6 +260,7 @@ export const apiTokens = sqliteTable('api_tokens', {
   createdAt: createdAt(),
   lastUsedAt: integer({ mode: 'timestamp' }),
   revokedAt: integer({ mode: 'timestamp' }),
+  icon: text(), // an uploaded 64px image as a data URL; none = the agent's default logo
 }, (t) => [index('api_tokens_org').on(t.orgId)])
 
 // one row per Kane CLI verification of a post
@@ -319,6 +321,7 @@ export const integrations = sqliteTable('integrations', {
   url: text().notNull(),
   lastStatus: text(), // 'ok' or the last error
   lastSentAt: integer({ mode: 'timestamp' }),
+  events: text({ mode: 'json' }).$type<string[]>(), // which board events to send; null = all of them
   createdAt: createdAt(),
 }, (t) => [uniqueIndex('integrations_org_kind').on(t.orgId, t.kind)])
 

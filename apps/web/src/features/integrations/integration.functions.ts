@@ -2,7 +2,7 @@ import { createServerFn } from '@tanstack/react-start'
 import { z } from 'zod'
 import { orgSlugSchema } from '#/features/orgs/org.schema'
 import { authMiddleware } from '#/middleware/auth'
-import { connectSchema, kindRefSchema } from './integration.schema'
+import { connectSchema, kindRefSchema, setEventsSchema } from './integration.schema'
 
 export const getIntegrations = createServerFn()
   .middleware([authMiddleware])
@@ -20,7 +20,7 @@ export const connect = createServerFn({ method: 'POST' })
     const { requireMembership } = await import('#/features/orgs/org.server')
     const { connectIntegration, sendTest } = await import('./integration.server')
     const org = await requireMembership(data.org, user.id)
-    await connectIntegration(org.id, data.kind, data.url)
+    await connectIntegration(org.id, data.kind, data.url, data.events)
     return sendTest(org.id, data.kind)
   })
 
@@ -40,4 +40,13 @@ export const testIntegration = createServerFn({ method: 'POST' })
     const { requireMembership } = await import('#/features/orgs/org.server')
     const { sendTest } = await import('./integration.server')
     return sendTest((await requireMembership(data.org, user.id)).id, data.kind)
+  })
+
+export const setEvents = createServerFn({ method: 'POST' })
+  .middleware([authMiddleware])
+  .validator(setEventsSchema)
+  .handler(async ({ data, context: { user } }) => {
+    const { requireMembership } = await import('#/features/orgs/org.server')
+    const { setIntegrationEvents } = await import('./integration.server')
+    if (!(await setIntegrationEvents((await requireMembership(data.org, user.id)).id, data.kind, data.events))) throw new Error('Connect it first.')
   })
