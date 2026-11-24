@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'sonner'
 import type { Post, PostStatus } from '#/db/schema'
 import { patchPostInCache } from './post.cache'
-import { createPost, deletePost, setPostStatus, votePost } from './post.functions'
+import { createPost, deletePost, mergePost, setPostStatus, setTags, votePost } from './post.functions'
 import { postKeys } from './post.queries'
 import type { NewPostInput } from './post.schema'
 
@@ -42,6 +42,31 @@ export function useSetPostStatus(org: string) {
       qc.invalidateQueries({ queryKey: postKeys.all(org) })
       qc.invalidateQueries({ queryKey: ['changelog', org] }) // shipping or un-shipping adds or removes an entry
     },
+  })
+}
+
+export function useSetTags(org: string, id: number) {
+  const qc = useQueryClient()
+  return useMutation({
+    mutationFn: (tags: string[]) => setTags({ data: { org, id, tags } }),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: postKeys.detail(org, id) })
+      qc.invalidateQueries({ queryKey: ['tags', org] })
+    },
+    onError: errorToast,
+  })
+}
+
+export function useMergePost(org: string) {
+  const qc = useQueryClient()
+  return useMutation({
+    mutationFn: ({ id, into }: { id: number; into: number }) => mergePost({ data: { org, id, into } }),
+    onSuccess: (r) => {
+      toast.success(r.already ? 'Already merged.' : `Merged. ${r.votesAdded} vote${r.votesAdded === 1 ? '' : 's'} moved over.`)
+      qc.invalidateQueries({ queryKey: postKeys.all(org) })
+      qc.invalidateQueries({ queryKey: ['comments', org] })
+    },
+    onError: errorToast,
   })
 }
 

@@ -46,7 +46,35 @@ export const votePost = createServerFn({ method: 'POST' })
     return addVote(data.id, user ? `u:${user.id}` : `v:${visitor}`)
   })
 
+export const getTags = createServerFn()
+  .validator(z.object({ org: orgSlugSchema }))
+  .handler(async ({ data }) => {
+    const { findOrgOrThrow } = await import('#/features/orgs/org.server')
+    const { listTags } = await import('./post.server')
+    return listTags((await findOrgOrThrow(data.org)).id)
+  })
+
 // ---- members only
+export const setTags = createServerFn({ method: 'POST' })
+  .middleware([authMiddleware])
+  .validator(postRefSchema.extend({ tags: z.array(z.string().max(32)).max(10) }))
+  .handler(async ({ data, context: { user } }) => {
+    const { requireMembership } = await import('#/features/orgs/org.server')
+    const { setPostTags } = await import('./post.server')
+    return setPostTags((await requireMembership(data.org, user.id)).id, data.id, data.tags)
+  })
+
+export const mergePost = createServerFn({ method: 'POST' })
+  .middleware([authMiddleware])
+  .validator(postRefSchema.extend({ into: postIdSchema }))
+  .handler(async ({ data, context: { user } }) => {
+    const { requireMembership } = await import('#/features/orgs/org.server')
+    const { mergePosts } = await import('./post.server')
+    const r = await mergePosts((await requireMembership(data.org, user.id)).id, data.id, data.into)
+    if ('error' in r) throw new Error(r.error)
+    return r
+  })
+
 export const setPostStatus = createServerFn({ method: 'POST' })
   .middleware([authMiddleware])
   .validator(setStatusSchema)

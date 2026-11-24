@@ -1,5 +1,5 @@
 import { sql } from 'drizzle-orm'
-import { index, integer, primaryKey, sqliteTable, text } from 'drizzle-orm/sqlite-core'
+import { index, integer, primaryKey, sqliteTable, text, uniqueIndex } from 'drizzle-orm/sqlite-core'
 
 export const POST_STATUSES = ['open', 'planned', 'building', 'shipped'] as const
 export type PostStatus = (typeof POST_STATUSES)[number]
@@ -218,6 +218,8 @@ export const posts = sqliteTable('posts', {
   claimTokenId: integer(),
   claimedBy: text(),
   claimExpiresAt: integer({ mode: 'timestamp' }),
+  // set when a member merged this duplicate into another request; merged posts leave every list
+  mergedIntoId: integer(),
   createdAt: createdAt(),
 }, (t) => [index('posts_org').on(t.orgId, t.votes)])
 
@@ -261,8 +263,32 @@ export const postVotes = sqliteTable('post_votes', {
   createdAt: createdAt(),
 }, (t) => [primaryKey({ columns: [t.postId, t.voter] })])
 
+// replies on a request; internal ones are team notes that only members see
+export const comments = sqliteTable('comments', {
+  id: integer().primaryKey({ autoIncrement: true }),
+  postId: integer().notNull().references(() => posts.id),
+  userId: text().references(() => user.id, { onDelete: 'set null' }),
+  author: text().notNull(),
+  team: integer({ mode: 'boolean' }).notNull().default(false), // written by a board member
+  internal: integer({ mode: 'boolean' }).notNull().default(false),
+  body: text().notNull(),
+  createdAt: createdAt(),
+}, (t) => [index('comments_post').on(t.postId)])
+
+export const tags = sqliteTable('tags', {
+  id: integer().primaryKey({ autoIncrement: true }),
+  orgId: integer().notNull().references(() => orgs.id, { onDelete: 'cascade' }),
+  name: text().notNull(),
+}, (t) => [uniqueIndex('tags_org_name').on(t.orgId, t.name)])
+
+export const postTags = sqliteTable('post_tags', {
+  postId: integer().notNull().references(() => posts.id),
+  tagId: integer().notNull().references(() => tags.id, { onDelete: 'cascade' }),
+}, (t) => [primaryKey({ columns: [t.postId, t.tagId] })])
+
 export type Org = typeof orgs.$inferSelect
 export type Post = typeof posts.$inferSelect
+export type Comment = typeof comments.$inferSelect
 export type Run = typeof runs.$inferSelect
 export type ApiToken = typeof apiTokens.$inferSelect
 export type ChangelogEntry = typeof changelog.$inferSelect

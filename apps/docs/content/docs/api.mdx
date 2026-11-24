@@ -72,8 +72,8 @@ Every tool except `list_boards` takes `board`, the board's slug. Tools that act 
 | Tool | Does |
 |---|---|
 | `list_boards` | Lists the boards you're a member of |
-| `list_requests` | Lists requests by votes. `status` defaults to `planned` |
-| `get_request` | Returns one request and its past Kane reports |
+| `list_requests` | Lists requests by votes. `status` defaults to `planned`; `tag` filters by tag |
+| `get_request` | Returns one request with its tags, comments, internal notes and past Kane reports |
 | `claim_request` | Claims a Planned request for 15 minutes. Call again to renew |
 | `release_request` | Ends your claim and sets the request back to Planned |
 | `report_verification` | Records Kane's result. Takes `passed`, `summary`, and an optional `changelog` |
@@ -84,6 +84,12 @@ Members can also run the board through the agent:
 |---|---|
 | `summarize_feedback` | Counts by status, new requests this week, top Open and Planned requests, what agents are building, and recent failed Kane runs |
 | `find_duplicates` | Lists requests that share title words with a request `id` or with `text` |
+| `merge_requests` | Merges a duplicate (`from`) into the request that stays (`into`). Votes, comments and tags move over |
+| `add_comment` | Replies on a request as you. `internal: true` writes a note only members see |
+| `delete_comment` | Removes a comment. `get_request` lists comment ids |
+| `list_tags` | Lists tags and how many requests use each |
+| `set_tags` | Replaces a request's tags. New names are created |
+| `delete_tag` | Deletes a tag from every request |
 | `create_request` | Posts an Open request, for example from a support email. Takes `title` and `body` |
 | `set_status` | Moves a request to `open`, `planned`, `building` or `shipped`, with the same changelog rules as the dashboard |
 | `vote` | Votes as you. A second vote changes nothing |
@@ -94,7 +100,7 @@ Members can also run the board through the agent:
 | `get_board_settings` | Returns the name, tagline, branding, access and posting settings |
 | `update_board_settings` | Changes only the settings you pass, with the dashboard's validation |
 
-`delete_request` and `remove_changelog_entry` refuse to run until the call includes `confirm: true`. So does `set_status` on a request an agent is building. The agent is told to ask you first. Each tool also tells the client whether it only reads or deletes something, so clients can approve reads without asking.
+`delete_request`, `merge_requests`, `delete_comment`, `delete_tag` and `remove_changelog_entry` refuse to run until the call includes `confirm: true`. So does `set_status` on a request an agent is building. The agent is told to ask you first. Each tool also tells the client whether it only reads or deletes something, so clients can approve reads without asking.
 
 The server offers two prompts:
 
