@@ -31,6 +31,8 @@ await signUp(EMAIL, password, 'E2E Tester')
 await signUp(NONMEMBER, password, 'Not A Member')
 
 const sql = `
+DELETE FROM comments WHERE post_id IN (SELECT p.id FROM posts p JOIN orgs o ON o.id = p.org_id WHERE o.slug IN ('acme', 'globex') OR o.slug LIKE 'kane-board-%');
+DELETE FROM post_tags WHERE post_id IN (SELECT p.id FROM posts p JOIN orgs o ON o.id = p.org_id WHERE o.slug IN ('acme', 'globex') OR o.slug LIKE 'kane-board-%');
 DELETE FROM runs WHERE post_id IN (SELECT p.id FROM posts p JOIN orgs o ON o.id = p.org_id WHERE o.slug = 'acme');
 DELETE FROM changelog WHERE post_id IN (SELECT p.id FROM posts p JOIN orgs o ON o.id = p.org_id WHERE o.slug = 'acme');
 DELETE FROM post_votes WHERE post_id IN (SELECT p.id FROM posts p JOIN orgs o ON o.id = p.org_id WHERE o.slug IN ('acme', 'globex') OR o.slug LIKE 'kane-board-%');

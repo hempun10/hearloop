@@ -91,6 +91,7 @@ Members can also run the board through the agent:
 | `set_tags` | Replaces a request's tags. New names are created |
 | `delete_tag` | Deletes a tag from every request |
 | `create_request` | Posts an Open request, for example from a support email. Takes `title` and `body` |
+| `update_request` | Edits a request's `title` or `body`. Only the fields you pass change |
 | `set_status` | Moves a request to `open`, `planned`, `building` or `shipped`, with the same changelog rules as the dashboard |
 | `vote` | Votes as you. A second vote changes nothing |
 | `delete_request` | Deletes a request with its votes, runs and changelog entry |
@@ -99,8 +100,14 @@ Members can also run the board through the agent:
 | `list_runs` | Lists Kane verifications, newest first |
 | `get_board_settings` | Returns the name, tagline, branding, access and posting settings |
 | `update_board_settings` | Changes only the settings you pass, with the dashboard's validation |
+| `list_members` | Lists members and how many invite links are still open |
+| `create_invite` | Makes a single-use invite link that expires in 7 days |
+| `list_notifications` | Shows the connected Slack and Discord channels and whether the last message arrived |
+| `connect_notifications` | Connects a Slack or Discord incoming webhook (`kind`, `url`) and sends a test message |
+| `send_test_notification` | Sends a test message to a connected channel |
+| `disconnect_notifications` | Stops posting to that channel |
 
-`delete_request`, `merge_requests`, `delete_comment`, `delete_tag` and `remove_changelog_entry` refuse to run until the call includes `confirm: true`. So does `set_status` on a request an agent is building. The agent is told to ask you first. Each tool also tells the client whether it only reads or deletes something, so clients can approve reads without asking.
+`delete_request`, `merge_requests`, `delete_comment`, `delete_tag`, `disconnect_notifications` and `remove_changelog_entry` refuse to run until the call includes `confirm: true`. So does `set_status` on a request an agent is building. The agent is told to ask you first. Each tool also tells the client whether it only reads or deletes something, so clients can approve reads without asking.
 
 The server offers two prompts:
 

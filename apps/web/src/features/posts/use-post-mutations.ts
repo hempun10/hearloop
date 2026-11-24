@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'sonner'
 import type { Post, PostStatus } from '#/db/schema'
 import { patchPostInCache } from './post.cache'
-import { createPost, deletePost, mergePost, setPostStatus, setTags, votePost } from './post.functions'
+import { createPost, deletePost, mergePost, setPostStatus, setTags, updatePost, votePost } from './post.functions'
 import { postKeys } from './post.queries'
 import type { NewPostInput } from './post.schema'
 
@@ -42,6 +42,14 @@ export function useSetPostStatus(org: string) {
       qc.invalidateQueries({ queryKey: postKeys.all(org) })
       qc.invalidateQueries({ queryKey: ['changelog', org] }) // shipping or un-shipping adds or removes an entry
     },
+  })
+}
+
+export function useEditPost(org: string, id: number) {
+  const qc = useQueryClient()
+  return useMutation({
+    mutationFn: (input: NewPostInput) => updatePost({ data: { org, id, ...input } }),
+    onSuccess: () => { toast.success('Saved'); qc.invalidateQueries({ queryKey: postKeys.all(org) }) },
   })
 }
 

@@ -13,6 +13,7 @@ export const newPostSchema = z.object({
 })
 export type NewPostInput = z.infer<typeof newPostSchema>
 export const createPostSchema = newPostSchema.extend({ org: orgSlugSchema })
+export const editPostSchema = postRefSchema.extend(newPostSchema.shape)
 
 export const setStatusSchema = postRefSchema.extend({ status: postStatusSchema })
 

@@ -1,6 +1,7 @@
 import { and, asc, desc, eq, inArray, isNull, lt, or, sql } from 'drizzle-orm'
 import { db } from '#/db/client.server'
 import { changelog, comments, postTags, postVotes, posts, runs, tags, type PostStatus } from '#/db/schema'
+import { notify } from '#/features/integrations/integration.server'
 import type { Actor } from '#/features/tokens/tokens.server'
 
 /** How long a claim lasts without a renewal; claiming the same request again renews it. */
@@ -90,9 +91,20 @@ export async function mergePosts(orgId: number, from: number, into: number) {
   return { votesAdded, already: false }
 }
 
-export async function insertPost(orgId: number, title: string, body: string) {
-  const [post] = await db.insert(posts).values({ orgId, title, body }).returning()
+export async function insertPost(orgId: number, title: string, body: string, authorId?: string) {
+  const [post] = await db.insert(posts).values({ orgId, title, body, authorId }).returning()
+  notify(orgId, { type: 'posted', id: post.id, title: post.title })
   return post
+}
+
+/** Edits a request's title and body. Members may edit any request; its author only while it's Open. */
+export async function editPost(orgId: number, id: number, text: { title: string; body: string }, by: { userId?: string; member: boolean }) {
+  const post = await db.query.posts.findFirst({ where: and(eq(posts.id, id), eq(posts.orgId, orgId)) })
+  if (!post) return { error: 'That request is gone.' }
+  const mayEdit = by.member || (!!by.userId && post.authorId === by.userId && post.status === 'open')
+  if (!mayEdit) return { error: post.authorId === by.userId ? 'A request can be edited by its author only while it is Open.' : 'Only board members and the author can edit this request.' }
+  const [row] = await db.update(posts).set(text).where(eq(posts.id, id)).returning()
+  return { post: row }
 }
 
 /** Counts one vote per voter; a repeat returns the current count unchanged. */
@@ -115,6 +127,7 @@ export async function updateStatus(orgId: number, id: number, status: PostStatus
   const before = await db.query.posts.findFirst({ where: and(eq(posts.id, id), eq(posts.orgId, orgId)) })
   if (!before) return null
   const move = db.update(posts).set({ status, ...noClaim }).where(eq(posts.id, id)).returning()
+  if (before.status !== status) notify(orgId, { type: 'moved', id, title: before.title, status })
   const [[post]] = before.status === status ? await db.batch([move])
     : status === 'shipped' ? await db.batch([move, db.insert(changelog).values({ postId: id, title: before.title, body: before.body, verified: false })])
     : before.status === 'shipped' ? await db.batch([move, db.delete(changelog).where(eq(changelog.postId, id))])
@@ -180,6 +193,7 @@ export async function recordRun(orgId: number, id: number, run: { passed: boolea
   if (post.claimTokenId !== actor.tokenId) return { conflict: 'Claim this request before reporting on it.' }
   const insertRun = db.insert(runs).values({ postId: id, passed: run.passed, summary: run.summary })
   const setStatus = db.update(posts).set({ status: run.passed ? 'shipped' : 'planned', ...noClaim }).where(eq(posts.id, id))
+  notify(orgId, { type: 'verified', id, title: post.title, passed: run.passed, summary: run.summary })
   if (run.passed) {
     await db.batch([insertRun, setStatus, db.insert(changelog).values({ postId: id, title: post.title, body: run.changelog ?? run.summary })])
   } else {

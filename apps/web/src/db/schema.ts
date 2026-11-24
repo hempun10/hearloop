@@ -220,6 +220,7 @@ export const posts = sqliteTable('posts', {
   claimExpiresAt: integer({ mode: 'timestamp' }),
   // set when a member merged this duplicate into another request; merged posts leave every list
   mergedIntoId: integer(),
+  authorId: text().references(() => user.id, { onDelete: 'set null' }), // signed-in poster; may edit while Open
   createdAt: createdAt(),
 }, (t) => [index('posts_org').on(t.orgId, t.votes)])
 
@@ -285,6 +286,29 @@ export const postTags = sqliteTable('post_tags', {
   postId: integer().notNull().references(() => posts.id),
   tagId: integer().notNull().references(() => tags.id, { onDelete: 'cascade' }),
 }, (t) => [primaryKey({ columns: [t.postId, t.tagId] })])
+
+// where the board posts its news: one Slack and one Discord incoming webhook per board
+export const integrations = sqliteTable('integrations', {
+  id: integer().primaryKey({ autoIncrement: true }),
+  orgId: integer().notNull().references(() => orgs.id, { onDelete: 'cascade' }),
+  kind: text({ enum: ['slack', 'discord'] }).notNull(),
+  url: text().notNull(),
+  lastStatus: text(), // 'ok' or the last error
+  lastSentAt: integer({ mode: 'timestamp' }),
+  createdAt: createdAt(),
+}, (t) => [uniqueIndex('integrations_org_kind').on(t.orgId, t.kind)])
+
+// single-use links that make the person who opens them a member; only the hash is kept
+export const invites = sqliteTable('invites', {
+  id: integer().primaryKey({ autoIncrement: true }),
+  orgId: integer().notNull().references(() => orgs.id, { onDelete: 'cascade' }),
+  tokenHash: text().notNull().unique(),
+  createdBy: text().references(() => user.id, { onDelete: 'set null' }),
+  expiresAt: integer({ mode: 'timestamp' }).notNull(),
+  acceptedBy: text().references(() => user.id, { onDelete: 'set null' }),
+  acceptedAt: integer({ mode: 'timestamp' }),
+  createdAt: createdAt(),
+}, (t) => [index('invites_org').on(t.orgId)])
 
 export type Org = typeof orgs.$inferSelect
 export type Post = typeof posts.$inferSelect
