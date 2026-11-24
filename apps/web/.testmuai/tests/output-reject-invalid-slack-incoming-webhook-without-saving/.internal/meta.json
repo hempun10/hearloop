@@ -1,0 +1,25 @@
+{
+  "test_id": "34264cf7-d7c6-4d14-aad6-79f755accbbd",
+  "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
+  "folder_id": "01M85R7R1MPN4KE6YS5D7NPPZ3",
+  "org_id": "3447606",
+  "session_name": "reject-invalid-slack-incoming-webhook-without-saving",
+  "commit_id": "5d499c83-e4aa-472e-9537-2b1d3a55a818",
+  "testcase_id": "01M85YTYJNZAAGPKQVC3NMDX6V",
+  "executions": [
+    {
+      "execution_id": "0d571399-5963-436a-8406-632fd8b2c68c",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-24T05:04:16.848Z"
+    },
+    {
+      "execution_id": "b430d162-69bb-4622-9fc1-8546b118f87f",
+      "run_kind": "author",
+      "status": "passed",
+      "at": "2026-11-24T05:04:37.374Z",
+      "uploaded": true
+    }
+  ]
+}

@@ -8,12 +8,19 @@
   "session_name": "newest-sorting-and-active-search-filter-persist-through",
   "executions": [
     {
-      "execution_id": "93e37c02-5fdd-4c88-b8f8-4fde587a2369",
+      "execution_id": "dc008678-0df1-4593-a4a3-aed7babd2e5e",
       "run_kind": "author",
-      "status": "passed",
+      "status": "failed",
       "valid": true,
-      "uploaded": true,
-      "at": "2026-11-24T01:39:22.227Z"
+      "uploaded": false,
+      "at": "2026-11-24T04:49:05.012Z"
+    },
+    {
+      "execution_id": "25d2d64c-c8fd-4ef7-9057-dfeff3229b6c",
+      "run_kind": "replay",
+      "status": "failed",
+      "at": "2026-11-24T05:00:29.938Z",
+      "uploaded": true
     }
   ]
 }
