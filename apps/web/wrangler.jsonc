@@ -14,8 +14,11 @@
 		"enabled": true
 	},
 	"upload_source_maps": true,
+	// hearloop.app points here for the hackathon demo; workers.dev stays on as a backup address
+	"routes": [{ "pattern": "hearloop.app", "custom_domain": true }],
+	"workers_dev": true,
 	"vars": {
-		"BETTER_AUTH_URL": "https://hearloop-v2.hembdrpun10.workers.dev"
+		"BETTER_AUTH_URL": "https://hearloop.app"
 	},
 	"d1_databases": [
 		{
