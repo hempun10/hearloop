@@ -59,6 +59,14 @@ export async function setPostTags(orgId: number, id: number, names: string[]) {
   return clean.sort()
 }
 
+/** Adds a tag to the board ahead of use; returns its clean name, or null when nothing is left of it. */
+export async function addTag(orgId: number, name: string) {
+  const clean = cleanTag(name)
+  if (!clean) return null
+  await db.insert(tags).values({ orgId, name: clean }).onConflictDoNothing()
+  return clean
+}
+
 export async function deleteTag(orgId: number, name: string) {
   const tag = await db.query.tags.findFirst({ where: and(eq(tags.orgId, orgId), eq(tags.name, cleanTag(name))) })
   if (!tag) return false
@@ -91,10 +99,33 @@ export async function mergePosts(orgId: number, from: number, into: number) {
   return { votesAdded, already: false }
 }
 
-export async function insertPost(orgId: number, title: string, body: string, authorId?: string) {
-  const [post] = await db.insert(posts).values({ orgId, title, body, authorId }).returning()
+export type NewPost = {
+  title: string
+  body: string
+  authorId?: string
+  categoryId?: number | null
+  status?: PostStatus
+  statusId?: number | null
+  tags?: string[]
+}
+
+/** Callers check the category, status and tag names belong to the board, and who may set them. */
+export async function insertPost(orgId: number, { tags: names = [], ...p }: NewPost) {
+  const [post] = await db.insert(posts).values({ orgId, ...p }).returning()
+  if (names.length) await setPostTags(orgId, post.id, names)
   notify(orgId, { type: 'posted', id: post.id, title: post.title })
   return post
+}
+
+/** Moves a request into a category, or out of one with null. */
+export async function setPostCategory(orgId: number, id: number, categoryId: number | null) {
+  const [row] = await db.update(posts).set({ categoryId }).where(and(eq(posts.id, id), eq(posts.orgId, orgId))).returning()
+  return row ?? null
+}
+
+export async function setPostAssignee(orgId: number, id: number, assigneeId: string | null) {
+  const [row] = await db.update(posts).set({ assigneeId }).where(and(eq(posts.id, id), eq(posts.orgId, orgId))).returning()
+  return row ?? null
 }
 
 /** Edits a request's title and body. Members may edit any request; its author only while it's Open. */
@@ -123,11 +154,12 @@ export async function addVote(id: number, voter: string) {
  * A member moving a post by hand. It drops any loop's claim, and keeps the public changelog honest:
  * shipping by hand publishes an entry without the Kane label; leaving Shipped takes the entry down.
  */
-export async function updateStatus(orgId: number, id: number, status: PostStatus) {
+export async function updateStatus(orgId: number, id: number, status: PostStatus, custom: { id: number; name: string } | null = null) {
   const before = await db.query.posts.findFirst({ where: and(eq(posts.id, id), eq(posts.orgId, orgId)) })
   if (!before) return null
-  const move = db.update(posts).set({ status, ...noClaim }).where(eq(posts.id, id)).returning()
-  if (before.status !== status) notify(orgId, { type: 'moved', id, title: before.title, status })
+  const statusId = custom?.id ?? null
+  const move = db.update(posts).set({ status, statusId, ...noClaim }).where(eq(posts.id, id)).returning()
+  if (before.status !== status || before.statusId !== statusId) notify(orgId, { type: 'moved', id, title: before.title, status: custom?.name ?? status })
   const [[post]] = before.status === status ? await db.batch([move])
     : status === 'shipped' ? await db.batch([move, db.insert(changelog).values({ postId: id, title: before.title, body: before.body, verified: false })])
     : before.status === 'shipped' ? await db.batch([move, db.delete(changelog).where(eq(changelog.postId, id))])
@@ -143,7 +175,7 @@ export async function claimPost(orgId: number, id: number, actor: Actor) {
   const now = new Date()
   const [post] = await db
     .update(posts)
-    .set({ status: 'building', claimTokenId: actor.tokenId, claimedBy: actor.label, claimExpiresAt: new Date(now.getTime() + CLAIM_LEASE_MS) })
+    .set({ status: 'building', statusId: null, claimTokenId: actor.tokenId, claimedBy: actor.label, claimExpiresAt: new Date(now.getTime() + CLAIM_LEASE_MS) })
     .where(and(
       eq(posts.id, id), eq(posts.orgId, orgId), inArray(posts.status, ['planned', 'building']), isNull(posts.mergedIntoId),
       or(isNull(posts.claimTokenId), eq(posts.claimTokenId, actor.tokenId), lt(posts.claimExpiresAt, now)),
@@ -163,7 +195,7 @@ export async function claimPost(orgId: number, id: number, actor: Actor) {
 export async function releasePost(orgId: number, id: number, actor: Actor) {
   const [post] = await db
     .update(posts)
-    .set({ status: 'planned', ...noClaim })
+    .set({ status: 'planned', statusId: null, ...noClaim })
     .where(and(eq(posts.id, id), eq(posts.orgId, orgId), eq(posts.claimTokenId, actor.tokenId), eq(posts.status, 'building')))
     .returning()
   return post ?? null
@@ -192,7 +224,7 @@ export async function recordRun(orgId: number, id: number, run: { passed: boolea
   // a report ships the post, so it must come from whoever claimed it (and so it was approved)
   if (post.claimTokenId !== actor.tokenId) return { conflict: 'Claim this request before reporting on it.' }
   const insertRun = db.insert(runs).values({ postId: id, passed: run.passed, summary: run.summary })
-  const setStatus = db.update(posts).set({ status: run.passed ? 'shipped' : 'planned', ...noClaim }).where(eq(posts.id, id))
+  const setStatus = db.update(posts).set({ status: run.passed ? 'shipped' : 'planned', statusId: null, ...noClaim }).where(eq(posts.id, id))
   notify(orgId, { type: 'verified', id, title: post.title, passed: run.passed, summary: run.summary })
   if (run.passed) {
     await db.batch([insertRun, setStatus, db.insert(changelog).values({ postId: id, title: post.title, body: run.changelog ?? run.summary })])

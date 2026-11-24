@@ -53,7 +53,7 @@ function DashboardLayout() {
       <div className="flex min-w-0 flex-1 flex-col">
         <Outlet />
       </div>
-      <NewPostDialog org={org} posts={posts} open={composing} onOpenChange={setComposing} mustSignIn={false} />
+      <NewPostDialog org={org} posts={posts} open={composing} onOpenChange={setComposing} mustSignIn={false} isMember />
     </div>
   )
 }

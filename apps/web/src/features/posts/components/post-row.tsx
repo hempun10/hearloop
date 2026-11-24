@@ -2,8 +2,8 @@ import { Link } from '@tanstack/react-router'
 import type { Post } from '#/db/schema'
 import { timeAgo } from '#/lib/format'
 import { cn } from '@hearloop/ui/lib/utils'
-import { STATUS_LABEL } from '../status'
-import { StatusIcon } from './status-icon'
+import { useOrg } from '#/features/orgs/use-org'
+import { StatusLabel } from './status-badge'
 import { VoteButton } from './vote-button'
 
 export function PostRow({ org, post, rank, selected, ref }: {
@@ -13,6 +13,8 @@ export function PostRow({ org, post, rank, selected, ref }: {
   selected?: boolean
   ref?: React.Ref<HTMLLIElement>
 }) {
+  const { categories } = useOrg()
+  const category = categories.find((c) => c.id === post.categoryId)?.name
   return (
     <li ref={ref} data-testid="post" aria-current={selected || undefined}
       className={cn('flex gap-4 border-t py-4 transition-colors first:border-t-0', selected && 'bg-card')}>
@@ -23,12 +25,8 @@ export function PostRow({ org, post, rank, selected, ref }: {
         </Link>
         {post.body && <p className="mt-1.5 line-clamp-2 text-sm leading-6 text-muted-foreground">{post.body}</p>}
         <div className="mt-2 flex items-center gap-3 text-xs text-faint">
-          {post.status !== 'open' && (
-            <span data-testid="status" className="inline-flex items-center gap-1.5 font-medium text-foreground">
-              <StatusIcon status={post.status} className="size-3.5" />
-              {STATUS_LABEL[post.status]}
-            </span>
-          )}
+          {(post.status !== 'open' || post.statusId) && <StatusLabel post={post} />}
+          {category && <span data-testid="category">{category}</span>}
           <span className="tabular-nums">{timeAgo(post.createdAt)}</span>
         </div>
       </div>

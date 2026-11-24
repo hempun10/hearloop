@@ -1,18 +1,23 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'sonner'
-import type { Post, PostStatus } from '#/db/schema'
+import type { Post } from '#/db/schema'
 import { patchPostInCache } from './post.cache'
-import { createPost, deletePost, mergePost, setPostStatus, setTags, updatePost, votePost } from './post.functions'
+import { createPost, deletePost, mergePost, setAssignee, setCategory, setPostStatus, setTags, updatePost, votePost } from './post.functions'
 import { postKeys } from './post.queries'
-import type { NewPostInput } from './post.schema'
+import type { ComposeInput, NewPostInput } from './post.schema'
+import type { StatusOption } from './status'
 
 const errorToast = (e: Error) => toast.error(e.message || 'Something went wrong.')
 
 export function useCreatePost(org: string) {
   const qc = useQueryClient()
   return useMutation({
-    mutationFn: (input: NewPostInput) => createPost({ data: { org, ...input } }),
-    onSuccess: () => qc.invalidateQueries({ queryKey: postKeys.all(org) }),
+    mutationFn: (input: ComposeInput) => createPost({ data: { org, ...input } }),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: postKeys.all(org) })
+      qc.invalidateQueries({ queryKey: ['tags', org] })
+      qc.invalidateQueries({ queryKey: ['changelog', org] })
+    },
   })
 }
 
@@ -32,16 +37,34 @@ export function useVotePost(org: string) {
 export function useSetPostStatus(org: string) {
   const qc = useQueryClient()
   return useMutation({
-    mutationFn: ({ id, status }: { id: number; status: PostStatus }) => setPostStatus({ data: { org, id, status } }),
-    onMutate: async ({ id, status }) => {
+    mutationFn: ({ id, to }: { id: number; to: StatusOption }) => setPostStatus({ data: { org, id, status: to.key } }),
+    onMutate: async ({ id, to }) => {
       await qc.cancelQueries({ queryKey: postKeys.all(org) })
-      return { undo: patchPostInCache(qc, org, id, (p) => ({ ...p, status })) }
+      return { undo: patchPostInCache(qc, org, id, (p) => ({ ...p, status: to.kind, statusId: to.id })) }
     },
     onError: (e, _v, ctx) => { ctx?.undo(); errorToast(e) },
     onSettled: () => {
       qc.invalidateQueries({ queryKey: postKeys.all(org) })
       qc.invalidateQueries({ queryKey: ['changelog', org] }) // shipping or un-shipping adds or removes an entry
     },
+  })
+}
+
+export function useSetCategory(org: string, id: number) {
+  const qc = useQueryClient()
+  return useMutation({
+    mutationFn: (categoryId: number | null) => setCategory({ data: { org, id, categoryId } }),
+    onSuccess: () => qc.invalidateQueries({ queryKey: postKeys.all(org) }),
+    onError: errorToast,
+  })
+}
+
+export function useSetAssignee(org: string, id: number) {
+  const qc = useQueryClient()
+  return useMutation({
+    mutationFn: (assigneeId: string | null) => setAssignee({ data: { org, id, assigneeId } }),
+    onSuccess: () => qc.invalidateQueries({ queryKey: postKeys.all(org) }),
+    onError: errorToast,
   })
 }
 

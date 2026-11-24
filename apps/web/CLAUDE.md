@@ -61,7 +61,7 @@ Any change to how the app behaves goes through this loop. The `kane-cli` skill h
    - Never weaken a test's expected result to get a pass.
    - A replayed recording doesn't prove a fix: it can pass before and after. After a fix, run a fresh check.
 10. **Before a commit:** `bun run check`, then replay the suites for the areas you touched.
-11. **CI** (`.github/workflows/ci.yml`) runs `check` and `build` on every PR, then replays every designed test against a fresh local app. It needs the repository secrets `LT_USERNAME` and `LT_ACCESS_KEY`.
+11. **CI** (`.github/workflows/ci.yml`) runs `check` and `build` on every PR. Kane tests run locally, not in CI.
 
 The older objectives in `kane/suite.ts` (`bun run kane run|record <area>`) are regression replays. New behaviour goes through steps 1–9.
 

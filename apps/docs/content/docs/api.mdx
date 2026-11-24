@@ -72,7 +72,7 @@ Every tool except `list_boards` takes `board`, the board's slug. Tools that act 
 | Tool | Does |
 |---|---|
 | `list_boards` | Lists the boards you're a member of |
-| `list_requests` | Lists requests by votes. `status` defaults to `planned`; `tag` filters by tag |
+| `list_requests` | Lists requests by votes. `status` defaults to `planned`; `tag` and `category` filter |
 | `get_request` | Returns one request with its tags, comments, internal notes and past Kane reports |
 | `claim_request` | Claims a Planned request for 15 minutes. Call again to renew |
 | `release_request` | Ends your claim and sets the request back to Planned |
@@ -90,15 +90,15 @@ Members can also run the board through the agent:
 | `list_tags` | Lists tags and how many requests use each |
 | `set_tags` | Replaces a request's tags. New names are created |
 | `delete_tag` | Deletes a tag from every request |
-| `create_request` | Posts an Open request, for example from a support email. Takes `title` and `body` |
-| `update_request` | Edits a request's `title` or `body`. Only the fields you pass change |
-| `set_status` | Moves a request to `open`, `planned`, `building` or `shipped`, with the same changelog rules as the dashboard |
+| `create_request` | Posts a request, for example from a support email. Takes `title` and `body`, and optionally `category`, `tags` and `status` |
+| `update_request` | Edits a request's `title`, `body` or `category` (an empty string removes it). Only the fields you pass change |
+| `set_status` | Moves a request to `open`, `planned`, `building`, `shipped`, or one of the board's own statuses by name, with the same changelog rules as the dashboard |
 | `vote` | Votes as you. A second vote changes nothing |
 | `delete_request` | Deletes a request with its votes, runs and changelog entry |
 | `list_changelog` | Lists changelog entries and whether Kane verified each one |
 | `remove_changelog_entry` | Takes an entry off the changelog. The request stays shipped |
 | `list_runs` | Lists Kane verifications, newest first |
-| `get_board_settings` | Returns the name, tagline, branding, access and posting settings |
+| `get_board_settings` | Returns the name, tagline, branding, access and posting settings, the categories, and the board's own statuses with their kind |
 | `update_board_settings` | Changes only the settings you pass, with the dashboard's validation |
 | `list_members` | Lists members and how many invite links are still open |
 | `create_invite` | Makes a single-use invite link that expires in 7 days |

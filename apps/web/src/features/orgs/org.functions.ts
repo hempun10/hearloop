@@ -17,9 +17,12 @@ export const getOrg = createServerFn()
   .validator(z.object({ org: orgSlugSchema }))
   .handler(async ({ data, context: { user } }) => {
     const { findOrg, isMember } = await import('./org.server')
+    const { listStatuses } = await import('#/features/statuses/status.server')
+    const { listCategories } = await import('#/features/categories/category.server')
     const org = await findOrg(data.org)
     if (!org) return null
-    return { org, isMember: !!user && (await isMember(org.id, user.id)) }
+    const [member, statuses, categories] = await Promise.all([!!user && isMember(org.id, user.id), listStatuses(org.id), listCategories(org.id)])
+    return { org, isMember: member, statuses, categories }
   })
 
 export const createOrg = createServerFn({ method: 'POST' })

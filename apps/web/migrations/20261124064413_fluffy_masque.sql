@@ -1,0 +1,1 @@
+ALTER TABLE `posts` ADD `assignee_id` text REFERENCES user(id);

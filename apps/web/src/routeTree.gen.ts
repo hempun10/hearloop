@@ -33,8 +33,10 @@ import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 import { Route as OrgPublicPostsIdRouteImport } from './routes/$org/_public/posts.$id'
 import { Route as OrgDashboardSettingsIndexRouteImport } from './routes/$org/dashboard/settings/index'
 import { Route as OrgDashboardSettingsAccessRouteImport } from './routes/$org/dashboard/settings/access'
+import { Route as OrgDashboardSettingsBoardsRouteImport } from './routes/$org/dashboard/settings/boards'
 import { Route as OrgDashboardSettingsBrandingRouteImport } from './routes/$org/dashboard/settings/branding'
 import { Route as OrgDashboardSettingsNotificationsRouteImport } from './routes/$org/dashboard/settings/notifications'
+import { Route as OrgDashboardSettingsStatusesRouteImport } from './routes/$org/dashboard/settings/statuses'
 import { Route as OrgDashboardSettingsTeamRouteImport } from './routes/$org/dashboard/settings/team'
 import { Route as OrgDashboardSettingsTokenRouteImport } from './routes/$org/dashboard/settings/token'
 import { Route as ApiOrgPostsIndexRouteImport } from './routes/api/$org/posts.index'
@@ -164,6 +166,12 @@ const OrgDashboardSettingsAccessRoute =
     path: '/access',
     getParentRoute: () => OrgDashboardSettingsRoute,
   } as any)
+const OrgDashboardSettingsBoardsRoute =
+  OrgDashboardSettingsBoardsRouteImport.update({
+    id: '/boards',
+    path: '/boards',
+    getParentRoute: () => OrgDashboardSettingsRoute,
+  } as any)
 const OrgDashboardSettingsBrandingRoute =
   OrgDashboardSettingsBrandingRouteImport.update({
     id: '/branding',
@@ -174,6 +182,12 @@ const OrgDashboardSettingsNotificationsRoute =
   OrgDashboardSettingsNotificationsRouteImport.update({
     id: '/notifications',
     path: '/notifications',
+    getParentRoute: () => OrgDashboardSettingsRoute,
+  } as any)
+const OrgDashboardSettingsStatusesRoute =
+  OrgDashboardSettingsStatusesRouteImport.update({
+    id: '/statuses',
+    path: '/statuses',
     getParentRoute: () => OrgDashboardSettingsRoute,
   } as any)
 const OrgDashboardSettingsTeamRoute =
@@ -241,8 +255,10 @@ export interface FileRoutesByFullPath {
   '/$org/dashboard/': typeof OrgDashboardIndexRoute
   '/$org/posts/$id': typeof OrgPublicPostsIdRoute
   '/$org/dashboard/settings/access': typeof OrgDashboardSettingsAccessRoute
+  '/$org/dashboard/settings/boards': typeof OrgDashboardSettingsBoardsRoute
   '/$org/dashboard/settings/branding': typeof OrgDashboardSettingsBrandingRoute
   '/$org/dashboard/settings/notifications': typeof OrgDashboardSettingsNotificationsRoute
+  '/$org/dashboard/settings/statuses': typeof OrgDashboardSettingsStatusesRoute
   '/$org/dashboard/settings/team': typeof OrgDashboardSettingsTeamRoute
   '/$org/dashboard/settings/token': typeof OrgDashboardSettingsTokenRoute
   '/$org/dashboard/settings/': typeof OrgDashboardSettingsIndexRoute
@@ -272,8 +288,10 @@ export interface FileRoutesByTo {
   '/$org/dashboard': typeof OrgDashboardIndexRoute
   '/$org/posts/$id': typeof OrgPublicPostsIdRoute
   '/$org/dashboard/settings/access': typeof OrgDashboardSettingsAccessRoute
+  '/$org/dashboard/settings/boards': typeof OrgDashboardSettingsBoardsRoute
   '/$org/dashboard/settings/branding': typeof OrgDashboardSettingsBrandingRoute
   '/$org/dashboard/settings/notifications': typeof OrgDashboardSettingsNotificationsRoute
+  '/$org/dashboard/settings/statuses': typeof OrgDashboardSettingsStatusesRoute
   '/$org/dashboard/settings/team': typeof OrgDashboardSettingsTeamRoute
   '/$org/dashboard/settings/token': typeof OrgDashboardSettingsTokenRoute
   '/$org/dashboard/settings': typeof OrgDashboardSettingsIndexRoute
@@ -309,8 +327,10 @@ export interface FileRoutesById {
   '/$org/dashboard/': typeof OrgDashboardIndexRoute
   '/$org/_public/posts/$id': typeof OrgPublicPostsIdRoute
   '/$org/dashboard/settings/access': typeof OrgDashboardSettingsAccessRoute
+  '/$org/dashboard/settings/boards': typeof OrgDashboardSettingsBoardsRoute
   '/$org/dashboard/settings/branding': typeof OrgDashboardSettingsBrandingRoute
   '/$org/dashboard/settings/notifications': typeof OrgDashboardSettingsNotificationsRoute
+  '/$org/dashboard/settings/statuses': typeof OrgDashboardSettingsStatusesRoute
   '/$org/dashboard/settings/team': typeof OrgDashboardSettingsTeamRoute
   '/$org/dashboard/settings/token': typeof OrgDashboardSettingsTokenRoute
   '/$org/dashboard/settings/': typeof OrgDashboardSettingsIndexRoute
@@ -345,8 +365,10 @@ export interface FileRouteTypes {
     | '/$org/dashboard/'
     | '/$org/posts/$id'
     | '/$org/dashboard/settings/access'
+    | '/$org/dashboard/settings/boards'
     | '/$org/dashboard/settings/branding'
     | '/$org/dashboard/settings/notifications'
+    | '/$org/dashboard/settings/statuses'
     | '/$org/dashboard/settings/team'
     | '/$org/dashboard/settings/token'
     | '/$org/dashboard/settings/'
@@ -376,8 +398,10 @@ export interface FileRouteTypes {
     | '/$org/dashboard'
     | '/$org/posts/$id'
     | '/$org/dashboard/settings/access'
+    | '/$org/dashboard/settings/boards'
     | '/$org/dashboard/settings/branding'
     | '/$org/dashboard/settings/notifications'
+    | '/$org/dashboard/settings/statuses'
     | '/$org/dashboard/settings/team'
     | '/$org/dashboard/settings/token'
     | '/$org/dashboard/settings'
@@ -412,8 +436,10 @@ export interface FileRouteTypes {
     | '/$org/dashboard/'
     | '/$org/_public/posts/$id'
     | '/$org/dashboard/settings/access'
+    | '/$org/dashboard/settings/boards'
     | '/$org/dashboard/settings/branding'
     | '/$org/dashboard/settings/notifications'
+    | '/$org/dashboard/settings/statuses'
     | '/$org/dashboard/settings/team'
     | '/$org/dashboard/settings/token'
     | '/$org/dashboard/settings/'
@@ -610,6 +636,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OrgDashboardSettingsAccessRouteImport
       parentRoute: typeof OrgDashboardSettingsRoute
     }
+    '/$org/dashboard/settings/boards': {
+      id: '/$org/dashboard/settings/boards'
+      path: '/boards'
+      fullPath: '/$org/dashboard/settings/boards'
+      preLoaderRoute: typeof OrgDashboardSettingsBoardsRouteImport
+      parentRoute: typeof OrgDashboardSettingsRoute
+    }
     '/$org/dashboard/settings/branding': {
       id: '/$org/dashboard/settings/branding'
       path: '/branding'
@@ -622,6 +655,13 @@ declare module '@tanstack/react-router' {
       path: '/notifications'
       fullPath: '/$org/dashboard/settings/notifications'
       preLoaderRoute: typeof OrgDashboardSettingsNotificationsRouteImport
+      parentRoute: typeof OrgDashboardSettingsRoute
+    }
+    '/$org/dashboard/settings/statuses': {
+      id: '/$org/dashboard/settings/statuses'
+      path: '/statuses'
+      fullPath: '/$org/dashboard/settings/statuses'
+      preLoaderRoute: typeof OrgDashboardSettingsStatusesRouteImport
       parentRoute: typeof OrgDashboardSettingsRoute
     }
     '/$org/dashboard/settings/team': {
@@ -703,8 +743,10 @@ const OrgPublicRouteWithChildren = OrgPublicRoute._addFileChildren(
 
 interface OrgDashboardSettingsRouteChildren {
   OrgDashboardSettingsAccessRoute: typeof OrgDashboardSettingsAccessRoute
+  OrgDashboardSettingsBoardsRoute: typeof OrgDashboardSettingsBoardsRoute
   OrgDashboardSettingsBrandingRoute: typeof OrgDashboardSettingsBrandingRoute
   OrgDashboardSettingsNotificationsRoute: typeof OrgDashboardSettingsNotificationsRoute
+  OrgDashboardSettingsStatusesRoute: typeof OrgDashboardSettingsStatusesRoute
   OrgDashboardSettingsTeamRoute: typeof OrgDashboardSettingsTeamRoute
   OrgDashboardSettingsTokenRoute: typeof OrgDashboardSettingsTokenRoute
   OrgDashboardSettingsIndexRoute: typeof OrgDashboardSettingsIndexRoute
@@ -712,9 +754,11 @@ interface OrgDashboardSettingsRouteChildren {
 
 const OrgDashboardSettingsRouteChildren: OrgDashboardSettingsRouteChildren = {
   OrgDashboardSettingsAccessRoute: OrgDashboardSettingsAccessRoute,
+  OrgDashboardSettingsBoardsRoute: OrgDashboardSettingsBoardsRoute,
   OrgDashboardSettingsBrandingRoute: OrgDashboardSettingsBrandingRoute,
   OrgDashboardSettingsNotificationsRoute:
     OrgDashboardSettingsNotificationsRoute,
+  OrgDashboardSettingsStatusesRoute: OrgDashboardSettingsStatusesRoute,
   OrgDashboardSettingsTeamRoute: OrgDashboardSettingsTeamRoute,
   OrgDashboardSettingsTokenRoute: OrgDashboardSettingsTokenRoute,
   OrgDashboardSettingsIndexRoute: OrgDashboardSettingsIndexRoute,

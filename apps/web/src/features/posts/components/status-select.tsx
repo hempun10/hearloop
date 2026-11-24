@@ -1,24 +1,27 @@
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@hearloop/ui/components/select'
 import { cn } from '@hearloop/ui/lib/utils'
-import { POST_STATUSES, STATUS_LABEL, type PostStatus } from '../status'
-import { StatusIcon } from './status-icon'
+import type { StatusOption } from '../status'
+import { useStatuses } from '../use-statuses'
+import { StatusIconFor } from './status-icon'
 
+/** value is a status key: a built-in kind, or c<id> for the board's own. */
 export function StatusSelect({ value, onChange, label, className }: {
-  value: PostStatus
-  onChange: (s: PostStatus) => void
+  value: string
+  onChange: (s: StatusOption) => void
   label: string
   className?: string
 }) {
+  const options = useStatuses()
   return (
-    <Select value={value} onValueChange={(v) => onChange(v as PostStatus)}>
+    <Select value={value} onValueChange={(v) => onChange(options.find((o) => o.key === v)!)}>
       <SelectTrigger size="sm" aria-label={label} className={cn('h-7 w-[132px] text-xs', className)}>
         <SelectValue />
       </SelectTrigger>
       <SelectContent>
-        {POST_STATUSES.map((s) => (
-          <SelectItem key={s} value={s} className="text-xs">
-            <StatusIcon status={s} className="size-3.5" />
-            {STATUS_LABEL[s]}
+        {options.map((s) => (
+          <SelectItem key={s.key} value={s.key} className="text-xs">
+            <StatusIconFor option={s} className="size-3.5" />
+            {s.label}
           </SelectItem>
         ))}
       </SelectContent>

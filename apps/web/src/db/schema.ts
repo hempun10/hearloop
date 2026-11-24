@@ -221,8 +221,31 @@ export const posts = sqliteTable('posts', {
   // set when a member merged this duplicate into another request; merged posts leave every list
   mergedIntoId: integer(),
   authorId: text().references(() => user.id, { onDelete: 'set null' }), // signed-in poster; may edit while Open
+  // a board's own status (e.g. "Under review"); status above is its kind, which the roadmap, changelog and loop use
+  statusId: integer().references(() => statuses.id, { onDelete: 'set null' }),
+  categoryId: integer().references(() => categories.id, { onDelete: 'set null' }),
+  assigneeId: text().references(() => user.id, { onDelete: 'set null' }), // the member who owns it
   createdAt: createdAt(),
 }, (t) => [index('posts_org').on(t.orgId, t.votes)])
+
+// a board's own statuses; each one is a kind of the four built-ins, shown after it
+export const statuses = sqliteTable('statuses', {
+  id: integer().primaryKey({ autoIncrement: true }),
+  orgId: integer().notNull().references(() => orgs.id, { onDelete: 'cascade' }),
+  name: text().notNull(),
+  color: text().notNull(),
+  kind: text({ enum: POST_STATUSES }).notNull(),
+  position: integer().notNull().default(0),
+}, (t) => [uniqueIndex('statuses_org_name').on(t.orgId, t.name)])
+
+// groups of requests on one board, like "Feature requests" and "Bugs"
+export const categories = sqliteTable('categories', {
+  id: integer().primaryKey({ autoIncrement: true }),
+  orgId: integer().notNull().references(() => orgs.id, { onDelete: 'cascade' }),
+  name: text().notNull(),
+  description: text().notNull().default(''),
+  position: integer().notNull().default(0),
+}, (t) => [uniqueIndex('categories_org_name').on(t.orgId, t.name)])
 
 // API tokens: one per person or machine, so every write has an author and can be revoked alone.
 // Only the sha256 is stored; the token is shown once.
@@ -273,6 +296,7 @@ export const comments = sqliteTable('comments', {
   team: integer({ mode: 'boolean' }).notNull().default(false), // written by a board member
   internal: integer({ mode: 'boolean' }).notNull().default(false),
   body: text().notNull(),
+  parentId: integer(), // a reply's top-level comment; replies are one level deep
   createdAt: createdAt(),
 }, (t) => [index('comments_post').on(t.postId)])
 
@@ -313,6 +337,8 @@ export const invites = sqliteTable('invites', {
 export type Org = typeof orgs.$inferSelect
 export type Post = typeof posts.$inferSelect
 export type Comment = typeof comments.$inferSelect
+export type CustomStatus = typeof statuses.$inferSelect
+export type Category = typeof categories.$inferSelect
 export type Run = typeof runs.$inferSelect
 export type ApiToken = typeof apiTokens.$inferSelect
 export type ChangelogEntry = typeof changelog.$inferSelect
