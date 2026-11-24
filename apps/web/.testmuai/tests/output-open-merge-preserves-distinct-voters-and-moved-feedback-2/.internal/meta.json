@@ -1,0 +1,25 @@
+{
+  "test_id": "96e77f66-949c-400a-98aa-b602b31be9c2",
+  "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
+  "folder_id": "01M85R7PN3X539HEBVYDM52CZ0",
+  "org_id": "3447606",
+  "session_name": "open-merge-preserves-distinct-voters-and-moved-feedback-2",
+  "commit_id": "8923b636-2349-4f64-a976-115baf6cd271",
+  "testcase_id": "01M85WZ94D5EKV04G7HA370YEC",
+  "executions": [
+    {
+      "execution_id": "0a321f3c-7b4a-47fb-b490-7502d80502d8",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-24T04:35:32.614Z"
+    },
+    {
+      "execution_id": "a5cddf7f-d517-456b-97de-1c813cdaa8de",
+      "run_kind": "author",
+      "status": "passed",
+      "at": "2026-11-24T04:35:56.239Z",
+      "uploaded": true
+    }
+  ]
+}

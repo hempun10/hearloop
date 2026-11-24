@@ -1,0 +1,25 @@
+{
+  "test_id": "d14ec537-562e-43f7-8e2a-9ed7ffcf0d24",
+  "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
+  "folder_id": "01M85R7PN3X539HEBVYDM52CZ0",
+  "org_id": "3447606",
+  "session_name": "nonmember-posts-publicly-without-seeing-acme-internal-note-2",
+  "commit_id": "f6209dd4-7b46-4c26-bad1-b3be3cbf0d8f",
+  "testcase_id": "01M85WBA8BSK55NRC6BW9M6TPN",
+  "executions": [
+    {
+      "execution_id": "9ac0190f-5b63-4ea2-8e45-f529ba740607",
+      "run_kind": "author",
+      "status": "failed",
+      "valid": true,
+      "at": "2026-11-24T04:19:41.371Z"
+    },
+    {
+      "execution_id": "0cd968ce-c80e-45f7-afa1-a7bca7103ad2",
+      "run_kind": "author",
+      "status": "failed",
+      "at": "2026-11-24T04:22:10.324Z",
+      "uploaded": true
+    }
+  ]
+}
