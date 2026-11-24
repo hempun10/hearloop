@@ -58,7 +58,7 @@ It returns `409` in these cases:
 - Your token must hold the claim. Otherwise the endpoint returns `409`.
 
 ```bash
-curl -X POST https://hearloop-v2.hembdrpun10.workers.dev/api/acme/posts/12/runs \
+curl -X POST https://hearloop.app/api/acme/posts/12/runs \
   -H "Authorization: Bearer $HEARLOOP_TOKEN" -H "content-type: application/json" \
   -d '{"passed": true, "summary": "Kane: passed", "changelog": "Search is here."}'
 ```

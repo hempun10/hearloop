@@ -28,13 +28,15 @@ You land in **Settings**.
 
 ### Set up the board
 
-Settings has three pages:
+Everything lives under **Settings → Product**:
 
-- **General** sets the board name and tagline.
-- **Branding** sets the accent colour, logo, theme, and the "Powered by hearloop" credit.
-- **Access** sets who can post and whether the roadmap and changelog are public.
+- **General**: the board name and tagline.
+- **Branding**: the accent colour, logo, theme, and the "Powered by hearloop" credit.
+- **Access**: who can post, and whether the roadmap and changelog are public.
+- **Boards & tags**: groups for your requests, such as *Feature requests* and *Bugs*. See [Requests and statuses](/docs/requests).
+- **Statuses**: your own statuses on top of the built-in four.
 
-The defaults work. You can change them later.
+<Callout>The defaults work. You can skip this step and come back later.</Callout>
 
 </Step>
 <Step>
@@ -48,16 +50,16 @@ Send people the link to `/acme-inc`. Anyone can read and vote. Who can post depe
 
 ### Approve a request
 
-Open your dashboard. In the **Inbox**, change a request's status from **Open** to **Planned**.
+Open your dashboard. In **Posts**, change a request's status from **Open** to **Planned**. Then open it on the **Roadmap** and pick someone under **Assignee**.
 
-The MCP server only builds **Planned** requests. Open requests are unreviewed public input, so agents can't claim them.
+<Callout type="warn">Agents only build **Planned** requests. Open requests are unreviewed public input, so no agent can claim them.</Callout>
 
 </Step>
 <Step>
 
 ### Connect your agent
 
-Connect Claude Code, Cursor or another MCP client to hearloop. Your browser opens once to sign in and approve it, and you don't copy any token. See [Build from your agent session](/docs/mcp).
+Connect Claude Code, Cursor, Codex or another MCP client. Your browser opens once to sign in, and you don't copy any token. The agent then appears on your board and can be assigned work. See [Connect your agent](/docs/mcp).
 
 </Step>
 </Steps>

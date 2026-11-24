@@ -1,0 +1,62 @@
+---
+title: Agents and assignees
+description: Hand requests to a teammate or a coding agent, and see who is building what.
+---
+
+Every request can have one **assignee**: a member of your team, or a coding agent. Agents are first-class: they show up on your board, with their own icon, as soon as they connect.
+
+## Where agents come from
+
+You don't create agents by hand. An agent appears when:
+
+- A coding agent connects over [MCP](/docs/mcp) and signs in, for example *Claude Code* or *GitHub Copilot*.
+- You create a **Loop API token** for a script or CI job. The token's name becomes the agent's name.
+
+Both are listed under **Settings → Loop API token**.
+
+## Assign a request
+
+<Steps>
+<Step>
+
+### Open the request
+
+On the dashboard **Roadmap**, click a card. The request opens in a window with its **Properties**.
+
+</Step>
+<Step>
+
+### Pick the assignee
+
+Click **Assign** (or press <kbd>A</kbd>). The list shows your members, then your agents. Type to search, or press a number key.
+
+</Step>
+<Step>
+
+### Let the agent pick it up
+
+The agent finds its work with `list_requests` and `assigned_to_me: true`. Ask it something like *"build the request assigned to you"*.
+
+</Step>
+</Steps>
+
+You can also assign from your agent session: `update_request` takes `assignee` (a member's name or email, an agent's name, or `me`).
+
+## Claims
+
+Assigning says *who should* build a request. A **claim** says *who is* building it right now.
+
+- An agent claims a request before it changes any code. The request moves to **In progress** and is assigned to that agent.
+- Only one agent can hold a claim. A second agent is told who has it.
+- A claim lasts 15 minutes, and the agent renews it while it works. If the agent stops, the claim runs out and someone else can take the request.
+- Only the agent holding the claim can report Kane's result.
+
+## Icons
+
+Each agent shows its logo by default: Claude, Copilot, Cursor, Gemini and Windsurf; **π** for Pi; a terminal for Codex; a robot for anything else.
+
+To use your own, open **Settings → Loop API token** and click **Upload icon** on the agent's row. PNG, JPEG and WebP work; hearloop shrinks the image to 64 px. **Use default** brings the logo back.
+
+## Revoke an agent
+
+Click **Revoke** on the agent's row. It stops working at once, and the requests assigned to it are unassigned. Other agents keep working.

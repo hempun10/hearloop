@@ -1,30 +1,30 @@
 ---
-title: What hearloop does
-description: A public feedback board where a coding agent builds the top request and Kane CLI tests it before it ships.
+title: Introduction
+description: hearloop is a feedback board where your team approves requests, a coding agent builds them, and Kane CLI proves them before they ship.
 ---
 
-Your users post requests and vote on them. When you approve a request, a coding agent builds it in your repository. Kane CLI then opens your app in a real browser and checks that the feature works.
+hearloop is a public feedback board with a build loop attached. Your users post requests and vote. Your team approves the ones worth building and hands each one to a teammate or a coding agent. The agent builds it in your repository, Kane CLI tests it in a real browser, and only a passing test moves it to **Shipped**.
 
-A request ships only if that check passes. The board moves it to **Shipped** and publishes a changelog entry. If the check fails, the request goes back to **Planned** with Kane's report attached, and the agent can try again.
+## Features
 
-## The path of one request
+- **A public board.** People post requests, vote once each, and comment. Each board has a roadmap and a changelog.
+- **Approval first.** New requests stay **Open** until a member moves them to **Planned**. Agents can't touch anything you haven't approved.
+- **Agents as teammates.** Claude Code, GitHub Copilot, Codex, Cursor and Pi connect over MCP. Each one shows up on your board, so you can assign it work.
+- **Proof before shipping.** Kane CLI runs a plain-English test against your app. A pass ships the request and publishes the changelog entry. A fail sends it back with the report.
+- **Your own workflow.** Add boards to group requests, your own statuses, and tags.
+- **Your team stays in the loop.** Slack and Discord get the events you pick.
 
-1. A user posts a request on your board, and other users vote on it.
-2. You move the request from **Open** to **Planned**. Agents never see a request you haven't approved.
-3. A coding agent claims the request and changes your code. The board shows the request as **In progress** and names who is building it.
-4. Kane CLI tests the change in a browser against your app.
-5. The verdict goes back to the board. A pass ships the request. A fail sends it back to **Planned**.
+## How one request moves
 
-The [MCP server](/docs/mcp) lets you work from your own Claude Code or Cursor session.
+1. A user posts a request, and other users vote on it.
+2. A member moves it from **Open** to **Planned** and assigns it.
+3. The agent claims it. The board shows it **In progress**, with the agent's name.
+4. The agent changes your code, and Kane CLI tests the change in a browser.
+5. A pass ships the request. A fail sends it back to **Planned** with Kane's report.
 
-## Pages on your board
-
-| Path | Shows |
-|---|---|
-| `/your-board` | Requests, votes, and statuses |
-| `/your-board/posts/:id` | One request, its status history, and every Kane run |
-| `/your-board/roadmap` | Requests in **Planned**, **In progress**, and **Shipped** |
-| `/your-board/changelog` | Releases that passed Kane |
-| `/your-board/dashboard` | Your inbox, roadmap, Kane runs, changelog, and settings |
-
-To set up a board, start with the [Quickstart](/docs/quickstart).
+<Cards>
+  <Card title="Quickstart" href="/docs/quickstart" description="Create a board and approve your first request." />
+  <Card title="Connect your agent" href="/docs/mcp" description="Add hearloop to Claude Code, Cursor or Codex." />
+  <Card title="Agents and assignees" href="/docs/agents" description="Hand requests to a teammate or a coding agent." />
+  <Card title="Kane CLI" href="/docs/kane" description="How a request is proven before it ships." />
+</Cards>

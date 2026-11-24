@@ -1,9 +1,9 @@
 ---
-title: Set up Kane CLI and write good tests
+title: Kane CLI
 description: Install Kane CLI and write the plain-English test that decides whether a request ships.
 ---
 
-Kane CLI opens your app in a real browser and follows a plain-English test, called an objective.
+Kane CLI opens your app in a real browser and follows a plain-English test, called an **objective**. Its verdict decides whether a request ships: a pass moves it to **Shipped**, a fail sends it back to **Planned** with the report.
 
 ## Install Kane CLI
 
@@ -22,7 +22,7 @@ export KANE_CLI_CHROME_PATH=/Applications/Helium.app/Contents/MacOS/Helium
 
 ## Write an objective that proves the feature
 
-Usually the agent writes the objective. A good objective:
+Usually the agent writes the objective for you. A good one:
 
 - Names each thing to click or type by its visible label.
 - Says exactly what must be visible afterwards.
@@ -35,8 +35,12 @@ Go to the board. Type 'export' in the 'Search requests' box. Verify 'Export post
 is listed and 'Dark mode toggle' is not. Clear the box and verify all requests are back.
 ```
 
+<Callout type="warn">A page that loads proves nothing. If the objective would pass before the change, it isn't testing the change.</Callout>
+
 ## Find the results
 
-- The request's page, `/your-board/posts/:id`, lists every Kane run under **Kane CLI verifications**.
+Kane's reports are for your team, so visitors never see them.
+
+- The request's page, `/your-board/posts/:id`, lists every Kane run under **Kane CLI verifications** when you're signed in as a member.
 - The dashboard page `/your-board/dashboard/runs` lists all runs. Click a run to read its report.
 - Each changelog entry links to its request and says **Verified with Kane CLI**.
