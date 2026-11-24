@@ -22,7 +22,7 @@ export function Bento({ top, lastPass, shipped }: { top: Post[]; lastPass: { tit
     <Framed>
       <SectionHeader title="Small tool. Whole loop." sub="Four things the loop has to get right. Nothing else." />
       <div className="grid grid-cols-1 overflow-hidden md:grid-cols-2">
-        <Cell title="Votes rank the queue" desc="One vote per person. The most wanted request rises to the top, and the loop takes it from there.">
+        <Cell title="Votes rank the queue" desc="One vote per person. The most wanted requests rise to the top, and your team decides which ones get built.">
           <div className="relative w-full max-w-[440px]">
             <AnimatedList delay={1600} className="w-full">
               {top.slice(0, 4).map((p, i) => <QueueRow key={p.id} post={p} hot={i === 0} />)}
@@ -30,14 +30,14 @@ export function Bento({ top, lastPass, shipped }: { top: Post[]; lastPass: { tit
             <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-linear-to-t from-background to-transparent" />
           </div>
         </Cell>
-        <Cell title="Kane proves it" desc="Kane CLI runs the agent's test in a real browser. Its report is attached to the post for anyone to read.">
+        <Cell title="Kane proves it" desc="Kane CLI runs the agent's test in a real browser. Its step-by-step report is attached to the post for your team.">
           <Terminal title="kane-cli" className="max-w-[440px]">
             <TypingAnimation delay={200}>{`› Verify: ${lastPass?.title ?? 'the new feature'}`}</TypingAnimation>
             {(lastPass?.steps ?? []).slice(0, 3).map((s) => <AnimatedSpan key={s} className="text-muted-foreground">✓ {s}</AnimatedSpan>)}
             <AnimatedSpan className="text-status-shipped">● Kane: passed</AnimatedSpan>
           </Terminal>
         </Cell>
-        <Cell title="A roadmap that stays honest" desc="Statuses move with the loop. The board, the roadmap and the changelog always agree.">
+        <Cell title="A roadmap that stays honest" desc="Statuses move with the loop. Add your own statuses, boards and tags; the board, the roadmap and the changelog always agree.">
           <div className="grid w-full max-w-[480px] grid-cols-3 gap-2 md:gap-3">
             {columns.map(([name, dot, cards]) => (
               <div key={name} className="flex flex-col gap-2">
@@ -51,7 +51,7 @@ export function Bento({ top, lastPass, shipped }: { top: Post[]; lastPass: { tit
             ))}
           </div>
         </Cell>
-        <Cell title="Everyone hears" desc="The agent writes the changelog entry and it goes live the moment Kane passes. Voters see their idea land.">
+        <Cell title="Everyone hears" desc="The agent writes the changelog entry and it goes live the moment Kane passes. Voters see their idea land, and Slack or Discord hear too.">
           <div className="w-full max-w-[440px] rounded-xl border bg-card p-5">
             <div className="flex items-center gap-2.5">
               <span className="grid size-5 place-items-center rounded-full bg-status-shipped text-background"><CircleCheck className="size-3.5" /></span>

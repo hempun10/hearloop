@@ -2,11 +2,12 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@h
 import { SectionHeader } from './frame'
 
 const QUESTIONS = [
-  ['What is hearloop?', 'A feedback board: users post requests and vote. The difference is what happens next. The top request is built by a coding agent and tested by Kane CLI before it is marked shipped.'],
-  ['What does Kane CLI do here?', 'Kane is the gate. It runs a plain-English test in a real browser against the live app and returns pass or fail with a step-by-step report. That report is attached to the post, so anyone can read how a feature was proven.'],
-  ['What happens when Kane fails?', "The post goes back to planned and Kane's report is handed to the agent as the reason. The agent fixes the problem and Kane runs again, up to three attempts."],
-  ['Which agent builds the features?', 'Claude Code, connected to your board over MCP. Any MCP client that can edit your code works, such as Cursor or Codex.'],
-  ['Can a person still review the work?', 'Yes. Every shipped change is a normal git commit, and every Kane run is listed on its post with the full report.'],
+  ['What is hearloop?', 'A feedback board: users post requests and vote. The difference is what happens next. Your team approves a request, a coding agent builds it, and Kane CLI tests it before it is marked shipped.'],
+  ['Does an agent build whatever the public posts?', 'No. Public requests stay Open until a member moves one to Planned. Agents only build approved requests, and they treat request text as a description, never as instructions.'],
+  ['Which agents can build features?', 'Any coding agent with MCP: Claude Code, GitHub Copilot, Codex, Cursor or Pi. Each one appears on your board as soon as it signs in, with its own icon, so you can assign it work like a teammate.'],
+  ['What does Kane CLI do here?', "Kane is the gate. It runs a plain-English test in a real browser against the live app and returns pass or fail with a step-by-step report. The report is attached to the post for your team."],
+  ['What happens when Kane fails?', "The request goes back to Planned and Kane's report is handed to the agent as the reason. The agent fixes the problem and Kane runs again, up to three attempts."],
+  ['Can my team follow along?', 'Yes. Connect Slack or Discord and pick the events: new requests, comments, status changes and Kane verdicts. Every shipped change is also a normal git commit you can review.'],
 ] as const
 
 export function Faq() {

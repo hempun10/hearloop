@@ -2,10 +2,10 @@ import { cn } from '@hearloop/ui/lib/utils'
 import { Eyebrow, Framed } from './frame'
 
 const MOMENTS = [
-  ['01', 'Post', 'Anyone posts an idea. Votes push the most wanted one to the top.'],
-  ['02', 'Build', 'Claude Code takes the top request over MCP, builds it and writes the test.'],
-  ['03', 'Prove', 'Kane CLI runs that test in a real browser against the live app.'],
-  ['04', 'Ship', "Pass: shipped, with Kane's report on the post. Fail: back to the agent."],
+  ['1', 'Post', 'Anyone posts an idea. Votes push the most wanted one to the top.'],
+  ['2', 'Approve', 'A member moves it to Planned and assigns it to a teammate or a coding agent.'],
+  ['3', 'Build', 'The agent claims it over MCP, builds it and writes the test.'],
+  ['4', 'Prove', "Kane CLI runs that test in a real browser. Pass: shipped, with Kane's report on the post. Fail: back to the agent."],
 ] as const
 
 type Stats = { posts: number; votes: number; runs: number; shipped: number }
@@ -34,7 +34,7 @@ export function LoopStory({ stats }: { stats: Stats }) {
         <ol className="flex flex-col p-6">
           {MOMENTS.map(([n, t, d], i) => (
             <li key={n} className={cn('flex gap-5 py-5 first:pt-0 last:pb-0', i < MOMENTS.length - 1 && 'border-b')}>
-              <span className="pt-0.5 text-[13px] text-brand tabular-nums">{n}</span>
+              <span className="w-3 shrink-0 pt-0.5 text-[13px] text-brand tabular-nums">{n}</span>
               <div>
                 <p className="text-base font-medium">{t}</p>
                 <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{d}</p>
