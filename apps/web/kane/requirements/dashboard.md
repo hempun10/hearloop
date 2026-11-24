@@ -102,7 +102,8 @@ Each request has its own page at `{{base_url}}/acme/posts/<id>`.
 
 ## Notifications
 
-- **Settings → Notifications** has a Slack row and a Discord row. Each takes an incoming webhook URL and **Connect**.
+- **Settings → Notifications** has a Slack section and a Discord section. Each takes an incoming webhook URL and **Connect**; once connected, its heading says "Connected" with the URL's last characters and the last delivery, and it offers **Send test**, **Disconnect** and **Replace**.
+- **Send when** lists **New request**, **New comment**, **Status change** and **Kane CLI verdict**, all on by default. Clicking one turns it on or off, and a connected channel saves the change at once. At least one stays on. A channel only gets the events that are on. Internal notes are never sent.
 - A URL that isn't a Slack or Discord incoming webhook shows an error next to the field and isn't saved.
 - Connecting sends a test message. A connected row shows "Connected", the last characters of the webhook, whether the last message was delivered, **Send test** and **Disconnect** (after confirming).
 - The connected channel gets a message when someone posts a request, when a member moves a request, and when Kane CLI passes or fails a request.

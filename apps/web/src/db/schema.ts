@@ -321,6 +321,7 @@ export const integrations = sqliteTable('integrations', {
   url: text().notNull(),
   lastStatus: text(), // 'ok' or the last error
   lastSentAt: integer({ mode: 'timestamp' }),
+  events: text({ mode: 'json' }).$type<string[]>(), // which board events to send; null = all of them
   createdAt: createdAt(),
 }, (t) => [uniqueIndex('integrations_org_kind').on(t.orgId, t.kind)])
 
