@@ -19,6 +19,8 @@ export const auth = betterAuth({
   },
   // the JWT plugin only signs MCP access tokens; its session-JWT route and header stay off
   disabledPaths: ['/token'],
+  // the old app's sign-in cookies (same default name, set for all of .hearloop.app) shadowed ours: use our own name
+  advanced: { cookiePrefix: 'hearloop' },
   plugins: [
     jwt({ disableSettingJwtHeader: true }),
     // OAuth 2.1 for MCP clients (Claude Code, Cursor, …): sign in once, approve the client, done.
