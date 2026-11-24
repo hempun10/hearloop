@@ -1,0 +1,25 @@
+{
+  "test_id": "e59324cb-d299-464b-ba7e-f682fbac2780",
+  "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
+  "folder_id": "01M8393CR4D77J69S18TRMM75V",
+  "org_id": "3447606",
+  "session_name": "unbroken-long-request-title-stays-inside-its-inbox-row",
+  "commit_id": "b52cdbc0-8b77-4de0-8838-8461bef3a3d9",
+  "testcase_id": "01M85MVZRK05ZCM5Q5NWKKWDE4",
+  "executions": [
+    {
+      "execution_id": "d8ad93e2-6ea7-484d-833e-1144c569bca6",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-24T02:08:37.895Z"
+    },
+    {
+      "execution_id": "d242f47b-f1f5-4ec3-8083-69da8b5b0423",
+      "run_kind": "author",
+      "status": "passed",
+      "at": "2026-11-24T02:08:52.002Z",
+      "uploaded": true
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "test_id": "3acbfb4d-5274-41af-aa1f-a39ec35b8f94",
+  "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
+  "folder_id": "01M8393AYW5EC5KNQ55TXGYRKD",
+  "org_id": "3447606",
+  "session_name": "shown-acme-roadmap-is-visible-at-its-public-address",
+  "commit_id": "8a790cf7-598f-4ec0-8f59-60dafc3efd94",
+  "testcase_id": "01M85KKYDNG1MKKD3WV27CJJES",
+  "executions": [
+    {
+      "execution_id": "758d7308-6168-46f2-9e1a-fc87bd9e7542",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-24T01:46:19.810Z"
+    },
+    {
+      "execution_id": "a5822e18-223c-4bc9-b448-e06b83065edb",
+      "run_kind": "author",
+      "status": "passed",
+      "at": "2026-11-24T01:46:35.571Z",
+      "uploaded": true
+    }
+  ]
+}

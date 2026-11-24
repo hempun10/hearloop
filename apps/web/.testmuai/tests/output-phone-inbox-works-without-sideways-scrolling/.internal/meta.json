@@ -1,0 +1,25 @@
+{
+  "test_id": "8e8a7b32-662f-4740-af54-3ad503e5f078",
+  "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
+  "folder_id": "01M8393CR4D77J69S18TRMM75V",
+  "org_id": "3447606",
+  "session_name": "phone-inbox-works-without-sideways-scrolling",
+  "commit_id": "5ac358fd-7624-4823-82c9-8f921fe5b157",
+  "testcase_id": "01M85MFH0MYNCZP8DQ45F845ZY",
+  "executions": [
+    {
+      "execution_id": "6a690a07-1aec-49e0-a9cf-caa749208881",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-24T02:02:47.333Z"
+    },
+    {
+      "execution_id": "ba4673ce-713c-424a-ba2b-f4500eb34084",
+      "run_kind": "author",
+      "status": "passed",
+      "at": "2026-11-24T02:03:31.082Z",
+      "uploaded": true
+    }
+  ]
+}

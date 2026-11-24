@@ -1,0 +1,25 @@
+{
+  "test_id": "c273dfa2-b06e-455e-9486-ee6c66fff8c5",
+  "project_id": "01M836WVAV7Z9B1BRRMXCAG6P1",
+  "folder_id": "01M8393CR4D77J69S18TRMM75V",
+  "org_id": "3447606",
+  "session_name": "phone-request-status-dropdown-works-without-sideways",
+  "commit_id": "2e20a6ca-0bfc-43c0-b150-2eaa8ff657a9",
+  "testcase_id": "01M85M9DWZ3D1ZVKBAP5ZM1M6E",
+  "executions": [
+    {
+      "execution_id": "e0daef68-7a50-4fa4-998a-093118621917",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-24T01:59:18.564Z"
+    },
+    {
+      "execution_id": "6d542289-8bbe-4bb8-8e50-27d9d3fa384e",
+      "run_kind": "author",
+      "status": "passed",
+      "at": "2026-11-24T01:59:34.096Z",
+      "uploaded": true
+    }
+  ]
+}
