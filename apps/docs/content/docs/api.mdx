@@ -78,6 +78,27 @@ Every tool except `list_boards` takes `board`, the board's slug. Tools that act 
 | `release_request` | Ends your claim and sets the request back to Planned |
 | `report_verification` | Records Kane's result. Takes `passed`, `summary`, and an optional `changelog` |
 
-The server also offers one prompt, `build`. It tells the agent to claim the top request, build it, test it with Kane CLI, and report the result.
+Members can also run the board through the agent:
+
+| Tool | Does |
+|---|---|
+| `summarize_feedback` | Counts by status, new requests this week, top Open and Planned requests, what agents are building, and recent failed Kane runs |
+| `find_duplicates` | Lists requests that share title words with a request `id` or with `text` |
+| `create_request` | Posts an Open request, for example from a support email. Takes `title` and `body` |
+| `set_status` | Moves a request to `open`, `planned`, `building` or `shipped`, with the same changelog rules as the dashboard |
+| `vote` | Votes as you. A second vote changes nothing |
+| `delete_request` | Deletes a request with its votes, runs and changelog entry |
+| `list_changelog` | Lists changelog entries and whether Kane verified each one |
+| `remove_changelog_entry` | Takes an entry off the changelog. The request stays shipped |
+| `list_runs` | Lists Kane verifications, newest first |
+| `get_board_settings` | Returns the name, tagline, branding, access and posting settings |
+| `update_board_settings` | Changes only the settings you pass, with the dashboard's validation |
+
+`delete_request` and `remove_changelog_entry` refuse to run until the call includes `confirm: true`. So does `set_status` on a request an agent is building. The agent is told to ask you first. Each tool also tells the client whether it only reads or deletes something, so clients can approve reads without asking.
+
+The server offers two prompts:
+
+- `build` tells the agent to claim the top request, build it, test it with Kane CLI, and report the result.
+- `triage` summarizes the board, checks new requests for duplicates, and proposes what to approve or delete. It changes nothing until you answer.
 
 The tools return request text inside `<user-request>` tags. The server removes those tags from the text itself, so a request can't close the tag early.
