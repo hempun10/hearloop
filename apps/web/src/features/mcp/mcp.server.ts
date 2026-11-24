@@ -476,8 +476,11 @@ function server(userId: string, clientId: string) {
   return s
 }
 
-export function handleMcp(request: Request, claims: { sub?: string; azp?: unknown; client_id?: unknown }) {
+export async function handleMcp(request: Request, claims: { sub?: string; azp?: unknown; client_id?: unknown }) {
   const clientId = String(claims.azp ?? claims.client_id ?? '')
   if (!claims.sub || !clientId) return new Response('token has no subject or client', { status: 403 })
+  // a new connection shows on each board's token page as soon as the client connects, not at its first tool call
+  if (request.method === 'POST' && ((await request.clone().json().catch(() => null)) as { method?: string } | null)?.method === 'initialize')
+    await Promise.all((await orgsForUser(claims.sub)).map((o) => resolveMcpActor(o.id, claims.sub!, clientId)))
   return createMcpHandler(() => server(claims.sub!, clientId)).fetch(request)
 }

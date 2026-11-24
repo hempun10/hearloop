@@ -27,7 +27,7 @@ export async function requireMembership(slug: string, userId: string) {
 
 export async function orgsForUser(userId: string) {
   return db
-    .select({ slug: orgs.slug, name: orgs.name, role: members.role })
+    .select({ id: orgs.id, slug: orgs.slug, name: orgs.name, role: members.role })
     .from(members)
     .innerJoin(orgs, eq(orgs.id, members.orgId))
     .where(eq(members.userId, userId))
