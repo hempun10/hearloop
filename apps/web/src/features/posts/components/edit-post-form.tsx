@@ -10,7 +10,10 @@ import { useEditPost } from '../use-post-mutations'
 
 export function EditPostForm({ org, post, onDone }: { org: string; post: Post; onDone: () => void }) {
   const save = useEditPost(org, post.id)
-  const form = useForm<NewPostInput>({ resolver: zodResolver(newPostSchema), defaultValues: { title: post.title, body: post.body } })
+  const form = useForm<NewPostInput>({
+    resolver: zodResolver(newPostSchema),
+    defaultValues: { title: post.title, body: post.body },
+  })
   const onSubmit = form.handleSubmit(async (input) => {
     try {
       await save.mutateAsync(input)
@@ -33,8 +36,12 @@ export function EditPostForm({ org, post, onDone }: { org: string; post: Post; o
       </Field>
       {errors.root && <FieldError role="alert">{errors.root.message}</FieldError>}
       <div className="flex gap-2">
-        <Button type="submit" size="sm" disabled={form.formState.isSubmitting}>{form.formState.isSubmitting ? 'Saving' : 'Save'}</Button>
-        <Button type="button" size="sm" variant="ghost" onClick={onDone}>Cancel</Button>
+        <Button type="submit" size="sm" disabled={form.formState.isSubmitting}>
+          {form.formState.isSubmitting ? 'Saving' : 'Save'}
+        </Button>
+        <Button type="button" size="sm" variant="ghost" onClick={onDone}>
+          Cancel
+        </Button>
       </div>
     </form>
   )

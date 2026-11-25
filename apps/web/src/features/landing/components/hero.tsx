@@ -9,7 +9,10 @@ export function Hero() {
   return (
     <section id="hero" className="relative w-full">
       <div className="relative flex w-full flex-col items-center px-6">
-        <div aria-hidden className="absolute inset-0 -z-10 h-[600px] w-full rounded-b-xl [background:radial-gradient(125%_125%_at_50%_10%,var(--background)_40%,color-mix(in_oklch,var(--brand)_28%,transparent)_100%)] md:h-[800px]" />
+        <div
+          aria-hidden
+          className="absolute inset-0 -z-10 h-[600px] w-full rounded-b-xl [background:radial-gradient(125%_125%_at_50%_10%,var(--background)_40%,color-mix(in_oklch,var(--brand)_28%,transparent)_100%)] md:h-[800px]"
+        />
         <div className="relative z-10 mx-auto flex w-full max-w-3xl flex-col items-center gap-8 pt-24 md:gap-10 md:pt-32">
           <div className="flex flex-col items-center gap-5">
             <BlurFade>
@@ -19,7 +22,8 @@ export function Hero() {
             </BlurFade>
             <BlurFade delay={0.08}>
               <p className="max-w-[54ch] text-center text-base leading-relaxed font-medium tracking-tight text-balance text-muted-foreground md:text-lg">
-                Users post and vote. Your team approves a request and hands it to a coding agent. The agent builds it, Kane CLI tests it in a real browser, and only a passing run reaches the changelog.
+                Users post and vote. Your team approves a request and hands it to a coding agent. The agent builds it,
+                Kane CLI tests it in a real browser, and only a passing run reaches the changelog.
               </p>
             </BlurFade>
           </div>
@@ -27,7 +31,9 @@ export function Hero() {
             <div className="flex flex-wrap items-center justify-center gap-3">
               <PrimaryCta />
               <Button variant="soft" size="lg" asChild>
-                <Link to="/$org" params={{ org: DEMO_ORG }}>Try the live demo</Link>
+                <Link to="/$org" params={{ org: DEMO_ORG }}>
+                  Try the live demo
+                </Link>
               </Button>
             </div>
           </BlurFade>
@@ -36,13 +42,23 @@ export function Hero() {
       <BlurFade delay={0.28} className="relative mt-10 px-6">
         <div className="relative overflow-hidden rounded-2xl border border-input bg-card shadow-xl">
           <div className="flex items-center gap-2 border-b px-4 py-2.5">
-            {[0, 1, 2].map((i) => <span key={i} className="size-2.5 rounded-full bg-input" />)}
-            <span className="mx-auto rounded-md bg-background px-3 py-0.5 text-[11px] text-faint">hearloop.app/{DEMO_ORG}</span>
+            {[0, 1, 2].map((i) => (
+              <span key={i} className="size-2.5 rounded-full bg-input" />
+            ))}
+            <span className="mx-auto rounded-md bg-background px-3 py-0.5 text-[11px] text-faint">
+              hearloop.app/{DEMO_ORG}
+            </span>
           </div>
           <picture>
             <source srcSet="/landing/board.webp" type="image/webp" />
-            <img src="/landing/board.png" alt="The hearloop public board: feature requests ranked by votes, with boards and roadmap counts" width={1920} height={1080}
-              className="block aspect-[4/3] w-full object-cover object-top sm:aspect-[1920/1000]" fetchPriority="high" />
+            <img
+              src="/landing/board.png"
+              alt="The hearloop public board: feature requests ranked by votes, with boards and roadmap counts"
+              width={1920}
+              height={1080}
+              className="block aspect-[4/3] w-full object-cover object-top sm:aspect-[1920/1000]"
+              fetchPriority="high"
+            />
           </picture>
           <BorderBeam size={260} duration={10} colorFrom="var(--brand)" colorTo="transparent" />
         </div>

@@ -14,7 +14,15 @@ import { Button, buttonVariants } from '@hearloop/ui/components/button'
 import type { Post } from '#/db/schema'
 import { useDeletePost } from '../use-post-mutations'
 
-export function DeletePostButton({ org, post, className }: { org: string; post: Pick<Post, 'id' | 'title'>; className?: string }) {
+export function DeletePostButton({
+  org,
+  post,
+  className,
+}: {
+  org: string
+  post: Pick<Post, 'id' | 'title'>
+  className?: string
+}) {
   const remove = useDeletePost(org)
   return (
     <AlertDialog>
@@ -26,11 +34,15 @@ export function DeletePostButton({ org, post, className }: { org: string; post: 
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Delete “{post.title}”?</AlertDialogTitle>
-          <AlertDialogDescription>Its votes, Kane runs and changelog entry go too. This can’t be undone.</AlertDialogDescription>
+          <AlertDialogDescription>
+            Its votes, Kane runs and changelog entry go too. This can’t be undone.
+          </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction className={buttonVariants({ variant: 'destructive' })} onClick={() => remove.mutate(post)}>Delete</AlertDialogAction>
+          <AlertDialogAction className={buttonVariants({ variant: 'destructive' })} onClick={() => remove.mutate(post)}>
+            Delete
+          </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

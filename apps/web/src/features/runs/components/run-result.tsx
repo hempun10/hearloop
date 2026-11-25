@@ -13,7 +13,12 @@ export function RunResult({ passed, className }: { passed: boolean; className?: 
 /** Kane's step-by-step report, as the loop recorded it. */
 export function RunReport({ summary, className }: { summary: string; className?: string }) {
   return (
-    <pre className={cn('overflow-x-auto rounded-lg bg-card p-3 font-mono text-xs leading-5 whitespace-pre-wrap text-muted-foreground', className)}>
+    <pre
+      className={cn(
+        'overflow-x-auto rounded-lg bg-card p-3 font-mono text-xs leading-5 whitespace-pre-wrap text-muted-foreground',
+        className,
+      )}
+    >
       {summary}
     </pre>
   )

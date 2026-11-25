@@ -8,7 +8,10 @@ export function OrgFooter() {
       <KeyboardHints />
       {org.poweredBy && (
         <p className="mt-4 text-center text-xs text-faint">
-          <a href="/" className="hover:text-muted-foreground">Powered by hearloop</a> · every shipped item verified with Kane CLI
+          <a href="/" className="hover:text-muted-foreground">
+            Powered by hearloop
+          </a>{' '}
+          · every shipped item verified with Kane CLI
         </p>
       )}
     </footer>

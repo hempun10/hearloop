@@ -5,22 +5,39 @@ const MOMENTS = [
   ['1', 'Post', 'Anyone posts an idea. Votes push the most wanted one to the top.'],
   ['2', 'Approve', 'A member moves it to Planned and assigns it to a teammate or a coding agent.'],
   ['3', 'Build', 'The agent claims it over MCP, builds it and writes the test.'],
-  ['4', 'Prove', "Kane CLI runs that test in a real browser. Pass: shipped, with Kane's report on the post. Fail: back to the agent."],
+  [
+    '4',
+    'Prove',
+    "Kane CLI runs that test in a real browser. Pass: shipped, with Kane's report on the post. Fail: back to the agent.",
+  ],
 ] as const
 
 type Stats = { posts: number; votes: number; runs: number; shipped: number }
 
 export function LoopStory({ stats }: { stats: Stats }) {
-  const numbers = [['Requests', stats.posts], ['Votes', stats.votes], ['Kane runs', stats.runs], ['Shipped', stats.shipped]] as const
+  const numbers = [
+    ['Requests', stats.posts],
+    ['Votes', stats.votes],
+    ['Kane runs', stats.runs],
+    ['Shipped', stats.shipped],
+  ] as const
   return (
     <Framed id="loop">
       <div className="grid divide-y md:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] md:divide-x md:divide-y-0">
         <div className="flex flex-col gap-4 p-6">
           <Eyebrow>The loop</Eyebrow>
-          <h2 className="max-w-[20ch] text-3xl font-medium tracking-tighter text-balance md:text-4xl">Feedback tools go quiet after collection.</h2>
+          <h2 className="max-w-[20ch] text-3xl font-medium tracking-tighter text-balance md:text-4xl">
+            Feedback tools go quiet after collection.
+          </h2>
           <div className="flex max-w-[60ch] flex-col gap-4 leading-relaxed text-pretty text-muted-foreground">
-            <p>A user writes an idea, it lands in a backlog, and that is the last they hear. hearloop treats every post as the start of a loop, not the end of one.</p>
-            <p>Nothing reaches the changelog without a passing Kane run, so "shipped" always means someone, or something, clicked through it in a browser first.</p>
+            <p>
+              A user writes an idea, it lands in a backlog, and that is the last they hear. hearloop treats every post
+              as the start of a loop, not the end of one.
+            </p>
+            <p>
+              Nothing reaches the changelog without a passing Kane run, so "shipped" always means someone, or something,
+              clicked through it in a browser first.
+            </p>
           </div>
           <dl className="mt-4 grid grid-cols-2 gap-px overflow-hidden rounded-xl border bg-border sm:grid-cols-4">
             {numbers.map(([label, n]) => (

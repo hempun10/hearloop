@@ -8,7 +8,10 @@ const read = () => (typeof localStorage === 'undefined' ? '[]' : (localStorage.g
 function subscribe(cb: () => void) {
   listeners.add(cb)
   window.addEventListener('storage', cb)
-  return () => { listeners.delete(cb); window.removeEventListener('storage', cb) }
+  return () => {
+    listeners.delete(cb)
+    window.removeEventListener('storage', cb)
+  }
 }
 
 /** Whether this browser already voted for a post, and a way to record it. */
@@ -17,11 +20,11 @@ export function useVoted(id: number) {
   const voted = (JSON.parse(raw) as number[]).includes(id)
   const markVoted = useCallback(() => {
     localStorage.setItem(KEY, JSON.stringify([...new Set([...(JSON.parse(read()) as number[]), id])]))
-    listeners.forEach((l) => l())
+    for (const l of listeners) l()
   }, [id])
   const unmark = useCallback(() => {
     localStorage.setItem(KEY, JSON.stringify((JSON.parse(read()) as number[]).filter((x) => x !== id)))
-    listeners.forEach((l) => l())
+    for (const l of listeners) l()
   }, [id])
   return { voted, markVoted, unmark }
 }

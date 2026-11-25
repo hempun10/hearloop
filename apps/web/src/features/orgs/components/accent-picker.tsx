@@ -12,17 +12,32 @@ export function AccentPicker({ value, onChange }: { value: string; onChange: (he
         {ACCENT_SWATCHES.map((s) => {
           const selected = current === s.value
           return (
-            <button key={s.value} type="button" role="radio" aria-checked={selected} aria-label={`${s.name} accent`} title={s.name}
+            <button
+              key={s.value}
+              type="button"
+              role="radio"
+              aria-checked={selected}
+              aria-label={`${s.name} accent`}
+              title={s.name}
               onClick={() => onChange(s.value)}
-              className={cn('inline-flex size-[22px] items-center justify-center rounded-full', selected && 'ring-2 ring-foreground ring-offset-2 ring-offset-background')}
-              style={{ background: s.value }}>
+              className={cn(
+                'inline-flex size-[22px] items-center justify-center rounded-full',
+                selected && 'ring-2 ring-foreground ring-offset-2 ring-offset-background',
+              )}
+              style={{ background: s.value }}
+            >
               {selected && <Check className="size-3 text-black/80" strokeWidth={3} />}
             </button>
           )
         })}
       </span>
-      <Input value={value} onChange={(e) => onChange(e.target.value)} placeholder={DEFAULT_ACCENT} aria-label="Accent hex"
-        className="h-8 w-24 rounded-lg border-input bg-card px-2.5 text-[12px] tabular-nums shadow-none" />
+      <Input
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={DEFAULT_ACCENT}
+        aria-label="Accent hex"
+        className="h-8 w-24 rounded-lg border-input bg-card px-2.5 text-[12px] tabular-nums shadow-none"
+      />
     </div>
   )
 }

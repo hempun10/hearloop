@@ -9,7 +9,10 @@ export const Route = createFileRoute('/$org/dashboard/settings/team')({
     const { org } = Route.useParams()
     return (
       <>
-        <PageHead title="Members" sub="Members run the dashboard: they approve requests, move them, and see internal notes." />
+        <PageHead
+          title="Members"
+          sub="Members run the dashboard: they approve requests, move them, and see internal notes."
+        />
         <TeamManager org={org} />
       </>
     )

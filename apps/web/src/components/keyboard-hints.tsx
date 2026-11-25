@@ -13,7 +13,10 @@ export function KeyboardHints() {
     <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-center gap-x-5 gap-y-2 px-4 text-xs text-faint">
       {HINTS.map(([keys, label]) => (
         <span key={label} className="inline-flex items-center gap-1">
-          {keys.map((k) => <Kbd key={k}>{k}</Kbd>)} {label}
+          {keys.map((k) => (
+            <Kbd key={k}>{k}</Kbd>
+          ))}{' '}
+          {label}
         </span>
       ))}
     </div>

@@ -2,8 +2,15 @@ import { useMutation, useQueryClient, useSuspenseQuery } from '@tanstack/react-q
 import { useState } from 'react'
 import { toast } from 'sonner'
 import {
-  AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription,
-  AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
 } from '@hearloop/ui/components/alert-dialog'
 import { Button } from '@hearloop/ui/components/button'
 import { FieldError } from '@hearloop/ui/components/field'
@@ -13,14 +20,24 @@ import { SectionHead } from '#/features/dashboard/components/panel'
 import { timeAgo } from '#/lib/format'
 import { connect, disconnect, setEvents, testIntegration } from '../integration.functions'
 import { integrationsQuery } from '../integration.queries'
-import { EVENTS, EVENT_KEYS, type EventKey, INTEGRATIONS, type IntegrationKind, webhookUrlSchema } from '../integration.schema'
+import {
+  EVENTS,
+  EVENT_KEYS,
+  type EventKey,
+  INTEGRATIONS,
+  type IntegrationKind,
+  webhookUrlSchema,
+} from '../integration.schema'
 
-const reportTest = (status: string | null) => status === 'ok' ? toast.success('Test message sent') : toast.error(status ?? 'Not connected')
+const reportTest = (status: string | null) =>
+  status === 'ok' ? toast.success('Test message sent') : toast.error(status ?? 'Not connected')
 
 export function NotificationsManager({ org }: { org: string }) {
   return (
     <div>
-      {(Object.keys(INTEGRATIONS) as IntegrationKind[]).map((k) => <Destination key={k} org={org} kind={k} />)}
+      {(Object.keys(INTEGRATIONS) as IntegrationKind[]).map((k) => (
+        <Destination key={k} org={org} kind={k} />
+      ))}
     </div>
   )
 }
@@ -40,16 +57,42 @@ function Destination({ org, kind }: { org: string; kind: IntegrationKind }) {
   const [picked, setPicked] = useState<EventKey[]>(EVENT_KEYS)
   const events = row?.events ?? picked
   const refresh = () => qc.invalidateQueries({ queryKey: integrationsQuery(org).queryKey })
-  const saveEvents = useMutation({ mutationFn: (next: EventKey[]) => setEvents({ data: { org, kind, events: next } }), onSuccess: refresh, onError: (e) => toast.error(e.message) })
+  const saveEvents = useMutation({
+    mutationFn: (next: EventKey[]) => setEvents({ data: { org, kind, events: next } }),
+    onSuccess: refresh,
+    onError: (e) => toast.error(e.message),
+  })
   const toggle = (k: EventKey) => {
-    const next = events.includes(k) ? events.filter((x) => x !== k) : EVENT_KEYS.filter((x) => x === k || events.includes(x))
+    const next = events.includes(k)
+      ? events.filter((x) => x !== k)
+      : EVENT_KEYS.filter((x) => x === k || events.includes(x))
     if (!next.length) return toast.error('Keep at least one event.')
     if (row) saveEvents.mutate(next)
     else setPicked(next)
   }
-  const save = useMutation({ mutationFn: () => connect({ data: { org, kind, url, events: row ? undefined : picked } }), onSuccess: (s) => { setUrl(''); refresh(); reportTest(s) }, onError: (e) => setError(e.message) })
-  const test = useMutation({ mutationFn: () => testIntegration({ data: { org, kind } }), onSuccess: (s) => { refresh(); reportTest(s) } })
-  const drop = useMutation({ mutationFn: () => disconnect({ data: { org, kind } }), onSuccess: () => { toast.success(`${label} disconnected`); refresh() } })
+  const save = useMutation({
+    mutationFn: () => connect({ data: { org, kind, url, events: row ? undefined : picked } }),
+    onSuccess: (s) => {
+      setUrl('')
+      refresh()
+      reportTest(s)
+    },
+    onError: (e) => setError(e.message),
+  })
+  const test = useMutation({
+    mutationFn: () => testIntegration({ data: { org, kind } }),
+    onSuccess: (s) => {
+      refresh()
+      reportTest(s)
+    },
+  })
+  const drop = useMutation({
+    mutationFn: () => disconnect({ data: { org, kind } }),
+    onSuccess: () => {
+      toast.success(`${label} disconnected`)
+      refresh()
+    },
+  })
   const submit = (e: { preventDefault: () => void }) => {
     e.preventDefault()
     const r = webhookUrlSchema(kind).safeParse(url)
@@ -61,19 +104,37 @@ function Destination({ org, kind }: { org: string; kind: IntegrationKind }) {
   return (
     <section className="pb-9" aria-labelledby={`int-${kind}`}>
       <SectionHead title={label} right={<DeliveryStatus row={row} />} />
-      <form onSubmit={submit} noValidate aria-label={row ? `Replace ${label} webhook` : `Connect ${label}`} className="flex flex-col gap-4 border-t pt-4">
-        <p id={`int-${kind}`} className="text-[13px] text-muted-foreground">{HELP[kind]}</p>
+      <form
+        onSubmit={submit}
+        noValidate
+        aria-label={row ? `Replace ${label} webhook` : `Connect ${label}`}
+        className="flex flex-col gap-4 border-t pt-4"
+      >
+        <p id={`int-${kind}`} className="text-[13px] text-muted-foreground">
+          {HELP[kind]}
+        </p>
         <label className="flex flex-col gap-1.5">
           <span className="text-xs font-semibold text-muted-foreground">Webhook URL</span>
-          <Input id={`${kind}-url`} value={url} onChange={(e) => setUrl(e.target.value)} spellCheck={false} autoComplete="off" aria-invalid={!!error}
+          <Input
+            id={`${kind}-url`}
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
+            spellCheck={false}
+            autoComplete="off"
+            aria-invalid={!!error}
             placeholder={row ? `Connected, ending in …${row.hint}. Paste a new URL to replace it.` : example}
-            className="h-8 rounded-lg bg-card px-2.5 text-[13px] shadow-none placeholder:text-faint" />
+            className="h-8 rounded-lg bg-card px-2.5 text-[13px] shadow-none placeholder:text-faint"
+          />
           {error && <FieldError>{error}</FieldError>}
         </label>
         <fieldset className="flex flex-col gap-1.5">
           <legend className="pb-1.5 text-xs font-semibold text-muted-foreground">Send when</legend>
           <div className="flex flex-wrap gap-1.5">
-            {EVENTS.map((e) => <Chip key={e.key} on={events.includes(e.key)} onClick={() => toggle(e.key)}>{e.label}</Chip>)}
+            {EVENTS.map((e) => (
+              <Chip key={e.key} on={events.includes(e.key)} onClick={() => toggle(e.key)}>
+                {e.label}
+              </Chip>
+            ))}
           </div>
           {row && <span className="text-xs text-faint">Changes save as you click.</span>}
         </fieldset>
@@ -81,11 +142,17 @@ function Destination({ org, kind }: { org: string; kind: IntegrationKind }) {
           <span className="mr-auto" />
           {row && (
             <AlertDialog>
-              <AlertDialogTrigger asChild><Button type="button" variant="ghost" size="sm">Disconnect</Button></AlertDialogTrigger>
+              <AlertDialogTrigger asChild>
+                <Button type="button" variant="ghost" size="sm">
+                  Disconnect
+                </Button>
+              </AlertDialogTrigger>
               <AlertDialogContent>
                 <AlertDialogHeader>
                   <AlertDialogTitle>Disconnect {label}?</AlertDialogTitle>
-                  <AlertDialogDescription>The board stops posting to that channel. You can connect it again with the webhook URL.</AlertDialogDescription>
+                  <AlertDialogDescription>
+                    The board stops posting to that channel. You can connect it again with the webhook URL.
+                  </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                   <AlertDialogCancel>Cancel</AlertDialogCancel>
@@ -94,8 +161,14 @@ function Destination({ org, kind }: { org: string; kind: IntegrationKind }) {
               </AlertDialogContent>
             </AlertDialog>
           )}
-          {row && <Button type="button" variant="secondary" size="sm" disabled={test.isPending} onClick={() => test.mutate()}>{test.isPending ? 'Sending' : 'Send test'}</Button>}
-          <Button type="submit" size="sm" disabled={save.isPending || !url.trim()}>{save.isPending ? 'Connecting' : row ? 'Replace' : 'Connect'}</Button>
+          {row && (
+            <Button type="button" variant="secondary" size="sm" disabled={test.isPending} onClick={() => test.mutate()}>
+              {test.isPending ? 'Sending' : 'Send test'}
+            </Button>
+          )}
+          <Button type="submit" size="sm" disabled={save.isPending || !url.trim()}>
+            {save.isPending ? 'Connecting' : row ? 'Replace' : 'Connect'}
+          </Button>
         </div>
       </form>
     </section>
@@ -107,17 +180,32 @@ function DeliveryStatus({ row }: { row?: { hint: string; lastSentAt: Date | null
   if (!row.lastSentAt) return <span className="text-xs text-faint">Connected, nothing sent yet</span>
   const ok = row.lastStatus === 'ok'
   return (
-    <span className="flex max-w-[60%] items-center gap-1.5 text-xs text-faint" title={ok ? undefined : (row.lastStatus ?? undefined)}>
+    <span
+      className="flex max-w-[60%] items-center gap-1.5 text-xs text-faint"
+      title={ok ? undefined : (row.lastStatus ?? undefined)}
+    >
       <span aria-hidden className={cn('size-1.5 shrink-0 rounded-full', ok ? 'bg-status-shipped' : 'bg-destructive')} />
-      <span className="truncate tabular-nums">Connected · …{row.hint} · {ok ? `delivered ${timeAgo(row.lastSentAt)}` : `failed ${timeAgo(row.lastSentAt)}: ${row.lastStatus}`}</span>
+      <span className="truncate tabular-nums">
+        Connected · …{row.hint} ·{' '}
+        {ok ? `delivered ${timeAgo(row.lastSentAt)}` : `failed ${timeAgo(row.lastSentAt)}: ${row.lastStatus}`}
+      </span>
     </span>
   )
 }
 
 function Chip({ on, onClick, children }: { on: boolean; onClick: () => void; children: React.ReactNode }) {
   return (
-    <button type="button" aria-pressed={on} onClick={onClick}
-      className={cn('inline-flex h-7 items-center gap-1.5 rounded-md border px-2.5 text-[12px] transition-colors duration-150', on ? 'border-input bg-secondary text-foreground' : 'text-muted-foreground hover:bg-accent/60 hover:text-foreground')}>
+    <button
+      type="button"
+      aria-pressed={on}
+      onClick={onClick}
+      className={cn(
+        'inline-flex h-7 items-center gap-1.5 rounded-md border px-2.5 text-[12px] transition-colors duration-150',
+        on
+          ? 'border-input bg-secondary text-foreground'
+          : 'text-muted-foreground hover:bg-accent/60 hover:text-foreground',
+      )}
+    >
       <span aria-hidden className={cn('size-[5px] rounded-full', on ? 'bg-brand' : 'bg-faint/60')} />
       {children}
     </button>

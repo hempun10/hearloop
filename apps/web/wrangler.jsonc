@@ -14,7 +14,8 @@
 		"enabled": true
 	},
 	"upload_source_maps": true,
-	// hearloop.app points here for the hackathon demo; workers.dev stays on as a backup address
+	// hearloop.app points here; workers.dev stays on as a backup address.
+	// Deploying your own copy? Remove "routes" (or use your domain) and set database_id to your D1 database.
 	"routes": [{ "pattern": "hearloop.app", "custom_domain": true }],
 	"workers_dev": true,
 	"vars": {

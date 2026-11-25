@@ -38,10 +38,16 @@ function RoadmapPage() {
                 <ul className="mt-3 grid gap-2">
                   {items.map((p) => (
                     <li key={p.id}>
-                      <Link to="/$org/posts/$id" params={{ org: org.slug, id: String(p.id) }}
-                        className="flex items-start gap-3 rounded-lg border bg-card p-3 transition-colors hover:border-input">
+                      <Link
+                        to="/$org/posts/$id"
+                        params={{ org: org.slug, id: String(p.id) }}
+                        className="flex items-start gap-3 rounded-lg border bg-card p-3 transition-colors hover:border-input"
+                      >
                         <span className="min-w-0 flex-1 text-sm font-medium">{p.title}</span>
-                        <span className="inline-flex items-center text-xs text-faint tabular-nums"><ChevronUp className="size-3" />{p.votes}</span>
+                        <span className="inline-flex items-center text-xs text-faint tabular-nums">
+                          <ChevronUp className="size-3" />
+                          {p.votes}
+                        </span>
                       </Link>
                     </li>
                   ))}

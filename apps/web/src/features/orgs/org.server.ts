@@ -48,4 +48,3 @@ export async function updateOrgSettings(orgId: number, s: OrgSettings) {
     .set({ ...s, accent: s.accent || null, logoUrl: s.logoUrl || null })
     .where(eq(orgs.id, orgId))
 }
-

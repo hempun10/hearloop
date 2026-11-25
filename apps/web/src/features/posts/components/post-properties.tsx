@@ -38,32 +38,103 @@ export function PostProperties({ org, post, tags }: { org: string; post: Post; t
       <div>
         <p className={heading}>Properties</p>
         <div className="flex flex-col items-start">
-          <PropertyPicker what="status" hint="S" selected={[status.key]}
-            trigger={<><StatusIconFor option={status} className="size-4" />{status.label}</>}
-            options={statuses.map((s) => ({ value: s.key, label: s.label, icon: <StatusIconFor option={s} className="size-4" /> }))}
-            onSelect={(k) => move(post, statuses.find((s) => s.key === k)!)} />
-          <PropertyPicker what="assignee" hint="A" selected={[assigneeKeyOf(post) ?? 'none']}
-            trigger={assignee ? <>{assignee.icon}{assignee.label}</> : <><CircleUserRound className={`size-4 ${faint}`} /><span className={faint}>Assign</span></>}
-            options={[{ value: 'none', label: 'No assignee', icon: <CircleUserRound className={`size-4 ${faint}`} /> }, ...people]}
-            onSelect={(v) => assign.mutate(v === 'none' ? null : v)} />
+          <PropertyPicker
+            what="status"
+            hint="S"
+            selected={[status.key]}
+            trigger={
+              <>
+                <StatusIconFor option={status} className="size-4" />
+                {status.label}
+              </>
+            }
+            options={statuses.map((s) => ({
+              value: s.key,
+              label: s.label,
+              icon: <StatusIconFor option={s} className="size-4" />,
+            }))}
+            onSelect={(k) => move(post, statuses.find((s) => s.key === k)!)}
+          />
+          <PropertyPicker
+            what="assignee"
+            hint="A"
+            selected={[assigneeKeyOf(post) ?? 'none']}
+            trigger={
+              assignee ? (
+                <>
+                  {assignee.icon}
+                  {assignee.label}
+                </>
+              ) : (
+                <>
+                  <CircleUserRound className={`size-4 ${faint}`} />
+                  <span className={faint}>Assign</span>
+                </>
+              )
+            }
+            options={[
+              { value: 'none', label: 'No assignee', icon: <CircleUserRound className={`size-4 ${faint}`} /> },
+              ...people,
+            ]}
+            onSelect={(v) => assign.mutate(v === 'none' ? null : v)}
+          />
         </div>
       </div>
       {categories.length > 0 && (
         <div>
           <p className={heading}>Board</p>
-          <PropertyPicker what="board" hint="B" selected={[String(post.categoryId ?? 'none')]}
-            trigger={<><LayoutGrid className={`size-4 ${faint}`} />{board ? board.name : <span className={faint}>Add to board</span>}</>}
-            options={[{ value: 'none', label: 'No board', icon: <LayoutGrid className={`size-4 ${faint}`} /> }, ...categories.map((c) => ({ value: String(c.id), label: c.name, icon: <LayoutGrid className={`size-4 ${faint}`} /> }))]}
-            onSelect={(v) => setBoard.mutate(v === 'none' ? null : Number(v))} />
+          <PropertyPicker
+            what="board"
+            hint="B"
+            selected={[String(post.categoryId ?? 'none')]}
+            trigger={
+              <>
+                <LayoutGrid className={`size-4 ${faint}`} />
+                {board ? board.name : <span className={faint}>Add to board</span>}
+              </>
+            }
+            options={[
+              { value: 'none', label: 'No board', icon: <LayoutGrid className={`size-4 ${faint}`} /> },
+              ...categories.map((c) => ({
+                value: String(c.id),
+                label: c.name,
+                icon: <LayoutGrid className={`size-4 ${faint}`} />,
+              })),
+            ]}
+            onSelect={(v) => setBoard.mutate(v === 'none' ? null : Number(v))}
+          />
         </div>
       )}
       <div>
         <p className={heading}>Tags</p>
-        {tags.length > 0 && <ul aria-label="Tags" className="flex flex-wrap gap-1.5 px-2 pb-1">{tags.map((t) => <li key={t}><TagChip>{t}</TagChip></li>)}</ul>}
-        <PropertyPicker what="tags" hint="L" multi selected={tags}
-          trigger={<><Tag className={`size-4 ${faint}`} /><span className={faint}>{tags.length ? 'Edit tags' : 'Add tag'}</span></>}
-          options={tagNames.map((t) => ({ value: t, label: t, icon: <span className="size-2 rounded-full bg-muted-foreground/60" /> }))}
-          onSelect={toggleTag} onCreate={(t) => setTags.mutate([...tags, t])} />
+        {tags.length > 0 && (
+          <ul aria-label="Tags" className="flex flex-wrap gap-1.5 px-2 pb-1">
+            {tags.map((t) => (
+              <li key={t}>
+                <TagChip>{t}</TagChip>
+              </li>
+            ))}
+          </ul>
+        )}
+        <PropertyPicker
+          what="tags"
+          hint="L"
+          multi
+          selected={tags}
+          trigger={
+            <>
+              <Tag className={`size-4 ${faint}`} />
+              <span className={faint}>{tags.length ? 'Edit tags' : 'Add tag'}</span>
+            </>
+          }
+          options={tagNames.map((t) => ({
+            value: t,
+            label: t,
+            icon: <span className="size-2 rounded-full bg-muted-foreground/60" />,
+          }))}
+          onSelect={toggleTag}
+          onCreate={(t) => setTags.mutate([...tags, t])}
+        />
       </div>
       {dialog}
     </div>

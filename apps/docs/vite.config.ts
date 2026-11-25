@@ -7,5 +7,11 @@ import { defineConfig } from 'vite'
 
 export default defineConfig({
   resolve: { tsconfigPaths: true },
-  plugins: [fumadocsMdx(), cloudflare({ viteEnvironment: { name: 'ssr' }, inspectorPort: 9230 /* web uses 9229 */ }), tailwindcss(), tanstackStart(), viteReact()],
+  plugins: [
+    fumadocsMdx(),
+    cloudflare({ viteEnvironment: { name: 'ssr' }, inspectorPort: 9230 /* web uses 9229 */ }),
+    tailwindcss(),
+    tanstackStart(),
+    viteReact(),
+  ],
 })

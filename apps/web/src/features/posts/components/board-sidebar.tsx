@@ -7,7 +7,15 @@ import { statusKey } from '../status'
 import { useStatuses } from '../use-statuses'
 import { StatusIconFor } from './status-icon'
 
-export function BoardSidebar({ org, posts, showRoadmap, onCompose, categories, category, sort }: {
+export function BoardSidebar({
+  org,
+  posts,
+  showRoadmap,
+  onCompose,
+  categories,
+  category,
+  sort,
+}: {
   org: string
   posts: Post[]
   showRoadmap: boolean
@@ -18,10 +26,14 @@ export function BoardSidebar({ org, posts, showRoadmap, onCompose, categories, c
 }) {
   const statuses = useStatuses().filter((s) => s.kind !== 'open')
   const sortSearch = sort === 'new' ? ('new' as const) : undefined
-  const item = (on: boolean) => cn('w-full justify-start gap-2.5 px-2.5 font-normal', on ? 'bg-secondary text-foreground' : 'text-muted-foreground')
+  const item = (on: boolean) =>
+    cn('w-full justify-start gap-2.5 px-2.5 font-normal', on ? 'bg-secondary text-foreground' : 'text-muted-foreground')
   return (
     <aside className="w-full shrink-0 md:w-60">
-      <Button size="lg" className="w-full" onClick={onCompose}><Plus />Post idea</Button>
+      <Button size="lg" className="w-full" onClick={onCompose}>
+        <Plus />
+        Post idea
+      </Button>
       {categories.length > 0 && (
         <nav aria-label="Boards">
           <p className="mt-8 mb-2 px-2.5 text-xs font-medium text-muted-foreground">Boards</p>
@@ -37,9 +49,16 @@ export function BoardSidebar({ org, posts, showRoadmap, onCompose, categories, c
             {categories.map((c) => (
               <li key={c.id}>
                 <Button variant="ghost" className={item(category === c.id)} asChild>
-                  <Link to="/$org" params={{ org }} search={{ sort: sortSearch, category: c.id }} title={c.description || undefined}>
+                  <Link
+                    to="/$org"
+                    params={{ org }}
+                    search={{ sort: sortSearch, category: c.id }}
+                    title={c.description || undefined}
+                  >
                     <span className="truncate">{c.name}</span>
-                    <span className="ml-auto text-xs tabular-nums">{posts.filter((p) => p.categoryId === c.id).length}</span>
+                    <span className="ml-auto text-xs tabular-nums">
+                      {posts.filter((p) => p.categoryId === c.id).length}
+                    </span>
                   </Link>
                 </Button>
               </li>
@@ -53,11 +72,17 @@ export function BoardSidebar({ org, posts, showRoadmap, onCompose, categories, c
           <ul>
             {statuses.map((s) => (
               <li key={s.key}>
-                <Button variant="ghost" className="w-full justify-start gap-2.5 px-2.5 font-normal text-muted-foreground" asChild>
+                <Button
+                  variant="ghost"
+                  className="w-full justify-start gap-2.5 px-2.5 font-normal text-muted-foreground"
+                  asChild
+                >
                   <Link to="/$org/roadmap" params={{ org }}>
                     <StatusIconFor option={s} className="size-3.5" />
                     {s.label}
-                    <span className="ml-auto text-xs tabular-nums">{posts.filter((p) => statusKey(p) === s.key).length}</span>
+                    <span className="ml-auto text-xs tabular-nums">
+                      {posts.filter((p) => statusKey(p) === s.key).length}
+                    </span>
                   </Link>
                 </Button>
               </li>

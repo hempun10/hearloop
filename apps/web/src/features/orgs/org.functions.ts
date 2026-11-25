@@ -21,7 +21,11 @@ export const getOrg = createServerFn()
     const { listCategories } = await import('#/features/categories/category.server')
     const org = await findOrg(data.org)
     if (!org) return null
-    const [member, statuses, categories] = await Promise.all([!!user && isMember(org.id, user.id), listStatuses(org.id), listCategories(org.id)])
+    const [member, statuses, categories] = await Promise.all([
+      !!user && isMember(org.id, user.id),
+      listStatuses(org.id),
+      listCategories(org.id),
+    ])
     return { org, isMember: member, statuses, categories }
   })
 

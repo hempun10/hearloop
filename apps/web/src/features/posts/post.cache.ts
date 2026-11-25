@@ -12,5 +12,7 @@ export function patchPostInCache(qc: QueryClient, org: string, id: number, patch
     if (Array.isArray(data)) return data.map((p) => (p.id === id ? patch(p) : p))
     return data.post.id === id ? { ...data, post: patch(data.post) } : data
   })
-  return () => snapshot.forEach(([key, data]) => qc.setQueryData(key, data))
+  return () => {
+    for (const [key, data] of snapshot) qc.setQueryData(key, data)
+  }
 }

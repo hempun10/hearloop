@@ -39,7 +39,12 @@ function BoardPage() {
     const sorted = sort === 'new' ? [...inCategory].sort((a, b) => b.id - a.id) : inCategory
     return needle ? sorted.filter((p) => p.title.toLowerCase().includes(needle)) : sorted
   }, [all, sort, needle, category])
-  const { selected, resetSelection, rowRef } = useBoardShortcuts({ org: org.slug, posts, onCompose: compose, enabled: !composing })
+  const { selected, resetSelection, rowRef } = useBoardShortcuts({
+    org: org.slug,
+    posts,
+    onCompose: compose,
+    enabled: !composing,
+  })
 
   return (
     <main className="mx-auto max-w-5xl px-4 pt-10 md:px-0">
@@ -51,8 +56,15 @@ function BoardPage() {
         <section className="min-w-0 flex-1 md:max-w-[720px]">
           <div className="mb-4 flex items-center gap-5 text-sm">
             {Object.entries(SORTS).map(([key, label]) => (
-              <Link key={key} to="/$org" params={{ org: org.slug }} search={{ sort: key === 'top' ? undefined : 'new', category }}
-                className={cn(sort === key ? 'font-semibold text-foreground' : 'text-muted-foreground hover:text-foreground')}>
+              <Link
+                key={key}
+                to="/$org"
+                params={{ org: org.slug }}
+                search={{ sort: key === 'top' ? undefined : 'new', category }}
+                className={cn(
+                  sort === key ? 'font-semibold text-foreground' : 'text-muted-foreground hover:text-foreground',
+                )}
+              >
                 {label}
               </Link>
             ))}
@@ -60,10 +72,22 @@ function BoardPage() {
           </div>
 
           <InputGroup className="mb-4">
-            <InputGroupAddon><Search /></InputGroupAddon>
-            <InputGroupInput type="search" value={search} placeholder="Search requests" aria-label="Search requests"
-              onChange={(e) => { setSearch(e.target.value); resetSelection() }}
-              onKeyDown={(e) => { if (e.key === 'Escape') setSearch('') }} />
+            <InputGroupAddon>
+              <Search />
+            </InputGroupAddon>
+            <InputGroupInput
+              type="search"
+              value={search}
+              placeholder="Search requests"
+              aria-label="Search requests"
+              onChange={(e) => {
+                setSearch(e.target.value)
+                resetSelection()
+              }}
+              onKeyDown={(e) => {
+                if (e.key === 'Escape') setSearch('')
+              }}
+            />
           </InputGroup>
 
           {posts.length === 0 ? (
@@ -72,15 +96,32 @@ function BoardPage() {
             </p>
           ) : (
             <ol aria-label="Requests">
-              {posts.map((p, i) => <PostRow key={p.id} ref={rowRef(i)} org={org.slug} post={p} rank={i + 1} selected={selected === i} />)}
+              {posts.map((p, i) => (
+                <PostRow key={p.id} ref={rowRef(i)} org={org.slug} post={p} rank={i + 1} selected={selected === i} />
+              ))}
             </ol>
           )}
         </section>
-        <BoardSidebar org={org.slug} posts={all} showRoadmap={org.showRoadmap} onCompose={compose} categories={categories} category={category} sort={sort} />
+        <BoardSidebar
+          org={org.slug}
+          posts={all}
+          showRoadmap={org.showRoadmap}
+          onCompose={compose}
+          categories={categories}
+          category={category}
+          sort={sort}
+        />
       </div>
 
-      <NewPostDialog org={org.slug} posts={all} open={composing} onOpenChange={setComposing}
-        mustSignIn={org.whoCanPost === 'signed_in' && !session} isMember={isMember} defaultCategory={category ?? null} />
+      <NewPostDialog
+        org={org.slug}
+        posts={all}
+        open={composing}
+        onOpenChange={setComposing}
+        mustSignIn={org.whoCanPost === 'signed_in' && !session}
+        isMember={isMember}
+        defaultCategory={category ?? null}
+      />
     </main>
   )
 }

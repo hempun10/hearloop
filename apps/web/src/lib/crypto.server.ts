@@ -3,7 +3,7 @@ const b64 = (b: ArrayBuffer | Uint8Array) => btoa(String.fromCharCode(...new Uin
 const unb64 = (s: string) => Uint8Array.from(atob(s), (c) => c.charCodeAt(0))
 
 // constant-time string compare
-export function same(a: string, b: string) {
+function same(a: string, b: string) {
   if (a.length !== b.length) return false
   let d = 0
   for (let i = 0; i < a.length; i++) d |= a.charCodeAt(i) ^ b.charCodeAt(i)
@@ -11,7 +11,9 @@ export function same(a: string, b: string) {
 }
 
 export async function sha256(s: string) {
-  return [...new Uint8Array(await crypto.subtle.digest('SHA-256', enc.encode(s)))].map((b) => b.toString(16).padStart(2, '0')).join('')
+  return [...new Uint8Array(await crypto.subtle.digest('SHA-256', enc.encode(s)))]
+    .map((b) => b.toString(16).padStart(2, '0'))
+    .join('')
 }
 
 export function randomToken() {

@@ -11,9 +11,14 @@ export function BackButton() {
   const router = useRouter()
   const canGoBack = useCanGoBack()
   return (
-    <Button variant="ghost" size="sm" className="-ml-2.5 mb-8 text-muted-foreground"
-      onClick={() => (canGoBack ? router.history.back() : router.navigate({ to: '/' }))}>
-      <ArrowLeft />Back
+    <Button
+      variant="ghost"
+      size="sm"
+      className="-ml-2.5 mb-8 text-muted-foreground"
+      onClick={() => (canGoBack ? router.history.back() : router.navigate({ to: '/' }))}
+    >
+      <ArrowLeft />
+      Back
     </Button>
   )
 }

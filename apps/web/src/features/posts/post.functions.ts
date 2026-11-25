@@ -2,7 +2,15 @@ import { createServerFn } from '@tanstack/react-start'
 import { z } from 'zod'
 import { orgSlugSchema } from '#/features/orgs/org.schema'
 import { authMiddleware, sessionMiddleware } from '#/middleware/auth'
-import { createPostSchema, editPostSchema, postIdSchema, postRefSchema, setAssigneeSchema, setCategorySchema, setStatusKeySchema } from './post.schema'
+import {
+  createPostSchema,
+  editPostSchema,
+  postIdSchema,
+  postRefSchema,
+  setAssigneeSchema,
+  setCategorySchema,
+  setStatusKeySchema,
+} from './post.schema'
 
 export const listPosts = createServerFn()
   .validator(z.object({ org: orgSlugSchema }))
@@ -37,7 +45,8 @@ export const createPost = createServerFn({ method: 'POST' })
     const org = await findOrgOrThrow(data.org)
     if (org.whoCanPost === 'signed_in' && !user) throw new Error('Sign in to post.')
     const member = !!user && (await isMember(org.id, user.id))
-    if (data.categoryId && !(await findCategory(org.id, data.categoryId))) throw new Error('That category is not on this board.')
+    if (data.categoryId && !(await findCategory(org.id, data.categoryId)))
+      throw new Error('That category is not on this board.')
     if (data.status !== 'open' && !member) throw new Error('Only board members can set a status.')
     const status = data.status === 'open' ? null : await resolveStatus(org.id, data.status)
     // members may add new tags; everyone else picks from the board's
@@ -46,9 +55,15 @@ export const createPost = createServerFn({ method: 'POST' })
       const known = new Set((await listTags(org.id)).map((t) => t.name))
       tags = tags.map(cleanTag).filter((t) => known.has(t))
     }
-    const post = await insertPost(org.id, { title: data.title, body: data.body, authorId: user?.id, categoryId: data.categoryId, tags })
+    const post = await insertPost(org.id, {
+      title: data.title,
+      body: data.body,
+      authorId: user?.id,
+      categoryId: data.categoryId,
+      tags,
+    })
     // through updateStatus, so shipping on create still writes the changelog and notifies
-    return status ? (await updateStatus(org.id, post.id, status.status, status.custom)) ?? post : post
+    return status ? ((await updateStatus(org.id, post.id, status.status, status.custom)) ?? post) : post
   })
 
 export const votePost = createServerFn({ method: 'POST' })
@@ -61,7 +76,13 @@ export const votePost = createServerFn({ method: 'POST' })
     let visitor = getCookie('hl_voter')
     if (!user && !visitor) {
       visitor = crypto.randomUUID()
-      setCookie('hl_voter', visitor, { httpOnly: true, sameSite: 'lax', secure: true, path: '/', maxAge: 60 * 60 * 24 * 365 })
+      setCookie('hl_voter', visitor, {
+        httpOnly: true,
+        sameSite: 'lax',
+        secure: true,
+        path: '/',
+        maxAge: 60 * 60 * 24 * 365,
+      })
     }
     return addVote(data.id, user ? `u:${user.id}` : `v:${visitor}`)
   })
@@ -82,7 +103,12 @@ export const updatePost = createServerFn({ method: 'POST' })
     const { findOrgOrThrow, isMember } = await import('#/features/orgs/org.server')
     const { editPost } = await import('./post.server')
     const org = await findOrgOrThrow(data.org)
-    const r = await editPost(org.id, data.id, { title: data.title, body: data.body }, { userId: user.id, member: await isMember(org.id, user.id) })
+    const r = await editPost(
+      org.id,
+      data.id,
+      { title: data.title, body: data.body },
+      { userId: user.id, member: await isMember(org.id, user.id) },
+    )
     if ('error' in r) throw new Error(r.error)
     return r.post
   })
@@ -128,7 +154,8 @@ export const setCategory = createServerFn({ method: 'POST' })
     const { setPostCategory } = await import('./post.server')
     const { findCategory } = await import('#/features/categories/category.server')
     const org = await requireMembership(data.org, user.id)
-    if (data.categoryId && !(await findCategory(org.id, data.categoryId))) throw new Error('That category is not on this board.')
+    if (data.categoryId && !(await findCategory(org.id, data.categoryId)))
+      throw new Error('That category is not on this board.')
     return setPostCategory(org.id, data.id, data.categoryId)
   })
 

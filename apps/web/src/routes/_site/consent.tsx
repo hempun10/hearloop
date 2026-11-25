@@ -36,11 +36,16 @@ function Consent() {
         It acts as you on your boards. It can read requests, claim Planned ones, and report Kane's verdict.
       </p>
       <p className="mt-4 rounded-lg border bg-card p-3 text-xs text-muted-foreground">
-        Approval is sent to <span className="font-mono text-foreground">{req.redirectHost}</span>. Only allow it if you just connected this agent yourself.
+        Approval is sent to <span className="font-mono text-foreground">{req.redirectHost}</span>. Only allow it if you
+        just connected this agent yourself.
       </p>
       <div className="mt-6 flex gap-2">
-        <Button onClick={() => decide.mutate(true)} disabled={decide.isPending}>Allow</Button>
-        <Button variant="ghost" onClick={() => decide.mutate(false)} disabled={decide.isPending}>Deny</Button>
+        <Button onClick={() => decide.mutate(true)} disabled={decide.isPending}>
+          Allow
+        </Button>
+        <Button variant="ghost" onClick={() => decide.mutate(false)} disabled={decide.isPending}>
+          Deny
+        </Button>
       </div>
       <p className="mt-6 text-xs text-faint">Disconnect it any time in Settings → Loop API tokens.</p>
     </main>

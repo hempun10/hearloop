@@ -2,7 +2,17 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'sonner'
 import type { Post } from '#/db/schema'
 import { patchPostInCache } from './post.cache'
-import { createPost, deletePost, mergePost, setAssignee, setCategory, setPostStatus, setTags, updatePost, votePost } from './post.functions'
+import {
+  createPost,
+  deletePost,
+  mergePost,
+  setAssignee,
+  setCategory,
+  setPostStatus,
+  setTags,
+  updatePost,
+  votePost,
+} from './post.functions'
 import { postKeys } from './post.queries'
 import type { ComposeInput, NewPostInput } from './post.schema'
 import type { StatusOption } from './status'
@@ -29,7 +39,10 @@ export function useVotePost(org: string) {
       await qc.cancelQueries({ queryKey: postKeys.all(org) })
       return { undo: patchPostInCache(qc, org, id, (p) => ({ ...p, votes: p.votes + 1 })) }
     },
-    onError: (e, _id, ctx) => { ctx?.undo(); errorToast(e) },
+    onError: (e, _id, ctx) => {
+      ctx?.undo()
+      errorToast(e)
+    },
     onSettled: () => qc.invalidateQueries({ queryKey: postKeys.all(org) }),
   })
 }
@@ -42,7 +55,10 @@ export function useSetPostStatus(org: string) {
       await qc.cancelQueries({ queryKey: postKeys.all(org) })
       return { undo: patchPostInCache(qc, org, id, (p) => ({ ...p, status: to.kind, statusId: to.id })) }
     },
-    onError: (e, _v, ctx) => { ctx?.undo(); errorToast(e) },
+    onError: (e, _v, ctx) => {
+      ctx?.undo()
+      errorToast(e)
+    },
     onSettled: () => {
       qc.invalidateQueries({ queryKey: postKeys.all(org) })
       qc.invalidateQueries({ queryKey: ['changelog', org] }) // shipping or un-shipping adds or removes an entry
@@ -72,7 +88,10 @@ export function useEditPost(org: string, id: number) {
   const qc = useQueryClient()
   return useMutation({
     mutationFn: (input: NewPostInput) => updatePost({ data: { org, id, ...input } }),
-    onSuccess: () => { toast.success('Saved'); qc.invalidateQueries({ queryKey: postKeys.all(org) }) },
+    onSuccess: () => {
+      toast.success('Saved')
+      qc.invalidateQueries({ queryKey: postKeys.all(org) })
+    },
   })
 }
 
@@ -93,7 +112,9 @@ export function useMergePost(org: string) {
   return useMutation({
     mutationFn: ({ id, into }: { id: number; into: number }) => mergePost({ data: { org, id, into } }),
     onSuccess: (r) => {
-      toast.success(r.already ? 'Already merged.' : `Merged. ${r.votesAdded} vote${r.votesAdded === 1 ? '' : 's'} moved over.`)
+      toast.success(
+        r.already ? 'Already merged.' : `Merged. ${r.votesAdded} vote${r.votesAdded === 1 ? '' : 's'} moved over.`,
+      )
       qc.invalidateQueries({ queryKey: postKeys.all(org) })
       qc.invalidateQueries({ queryKey: ['comments', org] })
     },

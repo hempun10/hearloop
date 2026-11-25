@@ -1,5 +1,5 @@
 {
-  "projectName": "hearloop-v2",
+  "projectName": "hearloop",
   "mode": "file-router",
   "bundler": "vite",
   "typescript": true,

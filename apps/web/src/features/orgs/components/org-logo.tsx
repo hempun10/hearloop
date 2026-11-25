@@ -6,7 +6,9 @@ export function OrgLogo({ name, logoUrl, className }: { name: string; logoUrl?: 
   return (
     <Avatar className={cn('size-7 rounded-md', className)}>
       {logoUrl && <AvatarImage src={logoUrl} alt="" className="object-cover" />}
-      <AvatarFallback className="rounded-md bg-brand text-[13px] font-semibold text-white">{initial(name)}</AvatarFallback>
+      <AvatarFallback className="rounded-md bg-brand text-[13px] font-semibold text-white">
+        {initial(name)}
+      </AvatarFallback>
     </Avatar>
   )
 }

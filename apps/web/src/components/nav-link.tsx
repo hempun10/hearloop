@@ -12,7 +12,10 @@ export function NavLink({ children, className, ...props }: LinkProps & { childre
         className,
       )}
     >
-      <span className="size-[5px] rounded-full bg-transparent group-hover:bg-input group-data-[status=active]:bg-brand" aria-hidden />
+      <span
+        className="size-[5px] rounded-full bg-transparent group-hover:bg-input group-data-[status=active]:bg-brand"
+        aria-hidden
+      />
       {children}
     </Link>
   )

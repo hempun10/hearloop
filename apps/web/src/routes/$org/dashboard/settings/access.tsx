@@ -14,7 +14,9 @@ function Access() {
   return (
     <>
       <PageHead title="Access" sub="Who can do what on the public board." />
-      <SettingsForm key={org.slug} org={org} label="Access settings"><Fields /></SettingsForm>
+      <SettingsForm key={org.slug} org={org} label="Access settings">
+        <Fields />
+      </SettingsForm>
     </>
   )
 }
@@ -29,24 +31,44 @@ function Fields() {
   return (
     <>
       <SectionHead title="Posting" />
-      <Controller name="whoCanPost" control={control} render={({ field }) => (
-        <Row label="Who can post" help="Anyone can vote. Choose who can add new requests." htmlFor="who-can-post">
-          <Select value={field.value} onValueChange={field.onChange}>
-            <SelectTrigger id="who-can-post" size="sm" className="h-[30px] rounded-md border-input bg-card text-[13px] shadow-none"><SelectValue /></SelectTrigger>
-            <SelectContent align="end">
-              <SelectItem value="anyone">Anyone, no account needed</SelectItem>
-              <SelectItem value="signed_in">Only signed-in people</SelectItem>
-            </SelectContent>
-          </Select>
-        </Row>
-      )} />
+      <Controller
+        name="whoCanPost"
+        control={control}
+        render={({ field }) => (
+          <Row label="Who can post" help="Anyone can vote. Choose who can add new requests." htmlFor="who-can-post">
+            <Select value={field.value} onValueChange={field.onChange}>
+              <SelectTrigger
+                id="who-can-post"
+                size="sm"
+                className="h-[30px] rounded-md border-input bg-card text-[13px] shadow-none"
+              >
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent align="end">
+                <SelectItem value="anyone">Anyone, no account needed</SelectItem>
+                <SelectItem value="signed_in">Only signed-in people</SelectItem>
+              </SelectContent>
+            </Select>
+          </Row>
+        )}
+      />
       <SectionHead title="Public tabs" className="pt-7" />
       {TOGGLES.map(([name, label, help]) => (
-        <Controller key={name} name={name} control={control} render={({ field }) => (
-          <Row label={label} help={help} htmlFor={name}>
-            <Switch id={name} checked={field.value} onCheckedChange={field.onChange} className="data-[state=checked]:bg-brand" />
-          </Row>
-        )} />
+        <Controller
+          key={name}
+          name={name}
+          control={control}
+          render={({ field }) => (
+            <Row label={label} help={help} htmlFor={name}>
+              <Switch
+                id={name}
+                checked={field.value}
+                onCheckedChange={field.onChange}
+                className="data-[state=checked]:bg-brand"
+              />
+            </Row>
+          )}
+        />
       ))}
     </>
   )
