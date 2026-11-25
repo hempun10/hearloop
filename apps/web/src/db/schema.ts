@@ -198,6 +198,8 @@ export const orgs = sqliteTable('orgs', {
   showRoadmap: integer({ mode: 'boolean' }).notNull().default(true),
   showChangelog: integer({ mode: 'boolean' }).notNull().default(true),
   whoCanPost: text({ enum: ['anyone', 'signed_in'] }).notNull().default('anyone'),
+  // the embeddable widget's look and tabs (features/widget/widget.schema.ts); null = defaults
+  widget: text({ mode: 'json' }).$type<unknown>(),
   createdAt: createdAt(),
 })
 
