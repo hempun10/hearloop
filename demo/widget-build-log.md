@@ -208,3 +208,11 @@ gh pr checks 14 → bun run check --force
 ```text
 CI's typecheck failed with 43 errors (every loader's data typed as {}). Locally, `bun run check` had passed only because Turborepo replayed a cached result. Cause: the new orgs.widget column was typed `unknown`, which TanStack Start can't prove serializable, so the org server function's return type, and every route that loads it, collapsed. Fix: type the column as Partial<WidgetSettings>. Rechecked with --force: check and build pass, widget unchanged.
 ```
+
+## 2026-11-25 04:21:12 UTC · Live: merged, migrated and deployed
+```
+gh pr merge 14 · wrangler d1 migrations apply --remote · bun run deploy:web
+```
+```text
+PR #14 merged (99db086). Migration 20261125022105_sharp_wind_dancer applied to prod. Deployed version 780d23e5. https://hearloop.app/widget.js 200; /api/hear-loop-demo/widget returns the saved look; widget opens on https://hearloop.app/widget-demo.html?board=hear-loop-demo.
+```
