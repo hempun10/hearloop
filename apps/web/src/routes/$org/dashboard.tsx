@@ -27,21 +27,34 @@ function DashboardLayout() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [composing, setComposing] = useState(false)
   useEffect(() => setFull(localStorage.getItem(SIDEBAR_KEY) !== 'rail'), [])
+  // biome-ignore lint/correctness/useExhaustiveDependencies: close the mobile menu on every navigation
   useEffect(() => setMobileOpen(false), [pathname])
-  const toggle = () => setFull((f) => {
-    localStorage.setItem(SIDEBAR_KEY, f ? 'rail' : 'full')
-    return !f
-  })
-  const compose = () => { setMobileOpen(false); setComposing(true) }
+  const toggle = () =>
+    setFull((f) => {
+      localStorage.setItem(SIDEBAR_KEY, f ? 'rail' : 'full')
+      return !f
+    })
+  const compose = () => {
+    setMobileOpen(false)
+    setComposing(true)
+  }
 
   return (
     <div className="flex h-dvh overflow-hidden bg-sidebar text-foreground">
       <aside data-admin-sidebar className="hidden h-full shrink-0 md:flex">
-        {full ? <AdminSidebar onNewPost={compose} onToggle={toggle} /> : <AdminRail onNewPost={compose} onToggle={toggle} />}
+        {full ? (
+          <AdminSidebar onNewPost={compose} onToggle={toggle} />
+        ) : (
+          <AdminRail onNewPost={compose} onToggle={toggle} />
+        )}
       </aside>
       <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
         <SheetTrigger asChild>
-          <button type="button" aria-label="Open menu" className="fixed top-[22px] left-6 z-40 inline-flex size-8 items-center justify-center rounded-lg text-muted-foreground md:hidden">
+          <button
+            type="button"
+            aria-label="Open menu"
+            className="fixed top-[22px] left-6 z-40 inline-flex size-8 items-center justify-center rounded-lg text-muted-foreground md:hidden"
+          >
             <Menu className="size-5" />
           </button>
         </SheetTrigger>

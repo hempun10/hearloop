@@ -16,9 +16,15 @@ export const getConsentRequest = createServerFn()
     const signed = new URLSearchParams([...params].filter(([k]) => signedKeys.has(k)))
     if (!(await verifyOAuthQueryParams(signed.toString(), (await auth.$context).secret))) return null
     const client = await auth.api
-      .getOAuthClientPublic({ query: { client_id: signed.get('client_id') ?? '' }, headers: getRequestHeaders() as unknown as Headers })
+      .getOAuthClientPublic({
+        query: { client_id: signed.get('client_id') ?? '' },
+        headers: getRequestHeaders() as unknown as Headers,
+      })
       .catch(() => null)
     if (!client) return null
     // whoever registered the client chose its name, so also show where approval sends the code
-    return { name: agentName(client.client_name), redirectHost: new URL(signed.get('redirect_uri') ?? 'about:blank').host || 'unknown' }
+    return {
+      name: agentName(client.client_name),
+      redirectHost: new URL(signed.get('redirect_uri') ?? 'about:blank').host || 'unknown',
+    }
   })

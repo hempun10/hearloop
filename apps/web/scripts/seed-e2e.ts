@@ -16,33 +16,46 @@ const e2eVars = (await file.exists()) ? await file.json() : {}
 if (await file.exists()) password = e2eVars.e2e_password.value
 else {
   password = 'e2e-' + crypto.randomUUID().slice(0, 13)
-  await Bun.write(VARS, JSON.stringify({
-    base_url: { value: APP, secret: false },
-    e2e_email: { value: EMAIL, secret: false },
-    e2e_password: { value: password, secret: true }, // secret: kept out of the recorded _test.md
-  }, null, 2))
+  await Bun.write(
+    VARS,
+    JSON.stringify(
+      {
+        base_url: { value: APP, secret: false },
+        e2e_email: { value: EMAIL, secret: false },
+        e2e_password: { value: password, secret: true }, // secret: kept out of the recorded _test.md
+      },
+      null,
+      2,
+    ),
+  )
 }
 
 // sign up (a 422 for an existing user is fine)
-const signUp = (email: string, pw: string, name: string) => fetch(`${APP}/api/auth/sign-up/email`, {
-  method: 'POST',
-  headers: { 'content-type': 'application/json', origin: APP },
-  body: JSON.stringify({ email, password: pw, name }),
-})
+const signUp = (email: string, pw: string, name: string) =>
+  fetch(`${APP}/api/auth/sign-up/email`, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json', origin: APP },
+    body: JSON.stringify({ email, password: pw, name }),
+  })
 await signUp(EMAIL, password, 'E2E Tester')
 await signUp(NONMEMBER, password, 'Not A Member')
 await signUp(TEAMMATE, password, 'Team Mate')
 
 // an invite link that expired a day ago; only its hash goes in the database
-const expiredInvite = 'inv_' + [...crypto.getRandomValues(new Uint8Array(24))].map((b) => b.toString(16).padStart(2, '0')).join('')
-const expiredHash = [...new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(expiredInvite)))].map((b) => b.toString(16).padStart(2, '0')).join('')
+const expiredInvite =
+  'inv_' + [...crypto.getRandomValues(new Uint8Array(24))].map((b) => b.toString(16).padStart(2, '0')).join('')
+const expiredHash = [...new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(expiredInvite)))]
+  .map((b) => b.toString(16).padStart(2, '0'))
+  .join('')
 const nm = `(SELECT id FROM user WHERE email = '${NONMEMBER}')`
 const acme = "(SELECT id FROM orgs WHERE slug = 'acme')"
 const post = (title: string, body: string, status: string, votes: number, author = 'NULL') =>
   `INSERT INTO posts (org_id, title, body, status, votes, author_id) SELECT id, '${title}', '${body}', '${status}', ${votes}, ${author} FROM orgs WHERE slug = 'acme';`
 const pid = (title: string) => `(SELECT id FROM posts WHERE title = '${title}' AND org_id = ${acme})`
-const votes = (title: string, ...voters: string[]) => voters.map((v) => `INSERT INTO post_votes (post_id, voter) VALUES (${pid(title)}, '${v}');`).join('\n')
-const comment = (title: string, author: string, body: string) => `INSERT INTO comments (post_id, author, body) VALUES (${pid(title)}, '${author}', '${body}');`
+const votes = (title: string, ...voters: string[]) =>
+  voters.map((v) => `INSERT INTO post_votes (post_id, voter) VALUES (${pid(title)}, '${v}');`).join('\n')
+const comment = (title: string, author: string, body: string) =>
+  `INSERT INTO comments (post_id, author, body) VALUES (${pid(title)}, '${author}', '${body}');`
 const tag = (title: string, name: string) => `INSERT OR IGNORE INTO tags (org_id, name) VALUES (${acme}, '${name}');
 INSERT INTO post_tags (post_id, tag_id) VALUES (${pid(title)}, (SELECT id FROM tags WHERE org_id = ${acme} AND name = '${name}'));`
 
@@ -144,7 +157,9 @@ const values: Record<string, string> = {
   account_first_vote_request_title: 'Dark mode toggle',
   account_retry_vote_request_title: 'Weekly digest email',
   removable_changelog_title: 'Saved filters',
-  board_request_inventory: ((await (await fetch(`${APP}/api/acme/posts`)).json()) as { title: string }[]).map((p) => p.title).join('; '),
+  board_request_inventory: ((await (await fetch(`${APP}/api/acme/posts`)).json()) as { title: string }[])
+    .map((p) => p.title)
+    .join('; '),
   author_open_request_title: 'Offline mode',
   discussion_request_title: 'Comment thread check',
   author_nonopen_request_title: 'Mobile app',
@@ -152,7 +167,8 @@ const values: Record<string, string> = {
   sole_member_board_slug: 'kane-board-solo',
   merge_open_source_title: 'Bulk export to Excel',
   merge_open_survivor_title: 'Spreadsheet export',
-  merge_shared_voters: 'Bulk export to Excel has 2 votes (a shared voter and voter A); Spreadsheet export has 2 votes (the same shared voter and voter B). After the merge Spreadsheet export has 3 votes: the shared voter counts once.',
+  merge_shared_voters:
+    'Bulk export to Excel has 2 votes (a shared voter and voter A); Spreadsheet export has 2 votes (the same shared voter and voter B). After the merge Spreadsheet export has 3 votes: the shared voter counts once.',
   merge_nonmember_source_title: 'Calendar sync',
   merge_nonmember_survivor_title: 'Google Calendar integration',
   merge_in_progress_source_title: 'Merge check in progress',
@@ -160,12 +176,18 @@ const values: Record<string, string> = {
   merge_invalid_survivor_title: 'Merge check survivor',
   merge_planned_source_title: 'Two-factor login',
   merge_planned_survivor_title: 'Passkey sign-in',
-  merge_disjoint_voters: 'Two-factor login has 1 vote (voter C); Passkey sign-in has 1 vote (voter D). No voter is on both, so after the merge Passkey sign-in has 2 votes.',
+  merge_disjoint_voters:
+    'Two-factor login has 1 vote (voter C); Passkey sign-in has 1 vote (voter D). No voter is on both, so after the merge Passkey sign-in has 2 votes.',
   // real, throwaway webhooks for the notification tests; add them to .testmuai/variables/e2e.json yourself (never commit them)
   slack_webhook_url: e2eVars.slack_webhook_url?.value ?? '',
   discord_webhook_url: e2eVars.discord_webhook_url?.value ?? '',
 }
-for (const [k, value] of Object.entries(values)) decl[k] = { ...decl[k], value, secret: k.endsWith('password') || k.endsWith('webhook_url') || k.endsWith('invite_url') }
+for (const [k, value] of Object.entries(values))
+  decl[k] = {
+    ...decl[k],
+    value,
+    secret: k.endsWith('password') || k.endsWith('webhook_url') || k.endsWith('invite_url'),
+  }
 await Bun.write(ASSURANCE, JSON.stringify(decl, null, 2))
 
 console.log(`e2e fixture ready: ${EMAIL} on ${APP}/acme`)

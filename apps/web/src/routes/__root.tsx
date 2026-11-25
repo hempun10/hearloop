@@ -10,7 +10,11 @@ import appCss from '../styles.css?url'
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   beforeLoad: async ({ context }) => ({ session: await context.queryClient.query(sessionQuery()) }),
   head: () => ({
-    meta: [{ charSet: 'utf-8' }, { name: 'viewport', content: 'width=device-width, initial-scale=1' }, { title: 'hearloop' }],
+    meta: [
+      { charSet: 'utf-8' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { title: 'hearloop' },
+    ],
     links: [{ rel: 'stylesheet', href: appCss }],
   }),
   shellComponent: RootDocument,
@@ -29,9 +33,13 @@ function RootDocument({ children }: { children: ReactNode }) {
   const look = useMatch({ from: '/$org/widget', shouldThrow: false })?.search
   const theme = look?.theme ?? board?.theme
   const accent = look?.accent ?? board?.accent
-  const style = accent || look?.radius
-    ? ({ ...(accent && { '--brand': accent }), ...(look?.radius && { '--radius': RADIUS_CSS[look.radius] }) } as CSSProperties)
-    : undefined
+  const style =
+    accent || look?.radius
+      ? ({
+          ...(accent && { '--brand': accent }),
+          ...(look?.radius && { '--radius': RADIUS_CSS[look.radius] }),
+        } as CSSProperties)
+      : undefined
   return (
     <html lang="en" className={theme === 'light' ? 'light' : 'dark'} style={style}>
       <head>

@@ -20,7 +20,10 @@ function General() {
         <Alert className="mb-7">
           <PartyPopper />
           <AlertTitle>{org.name} is live.</AlertTitle>
-          <AlertDescription>Make it look like yours, share the board link, then give the loop a token so an agent can build and Kane can verify.</AlertDescription>
+          <AlertDescription>
+            Make it look like yours, share the board link, then give the loop a token so an agent can build and Kane can
+            verify.
+          </AlertDescription>
         </Alert>
       )}
       <PageHead title="General" sub="What visitors see at the top of your public board." />
@@ -36,17 +39,31 @@ function Fields() {
   const { control } = useFormContext<OrgSettings>()
   return (
     <>
-      <Controller name="name" control={control} render={({ field, fieldState }) => (
-        <Row label="Board name" help="Shown next to the logo and in the page title." htmlFor="org-name">
-          <Input {...field} id="org-name" maxLength={60} aria-invalid={fieldState.invalid} className={fieldClass} />
-          <FieldError errors={[fieldState.error]} />
-        </Row>
-      )} />
-      <Controller name="tagline" control={control} render={({ field }) => (
-        <Row label="Tagline" help="One line under the board name. Leave empty to hide." htmlFor="org-tagline">
-          <Input {...field} id="org-tagline" maxLength={160} placeholder="Tell us what to build next." className={fieldClass} />
-        </Row>
-      )} />
+      <Controller
+        name="name"
+        control={control}
+        render={({ field, fieldState }) => (
+          <Row label="Board name" help="Shown next to the logo and in the page title." htmlFor="org-name">
+            <Input {...field} id="org-name" maxLength={60} aria-invalid={fieldState.invalid} className={fieldClass} />
+            <FieldError errors={[fieldState.error]} />
+          </Row>
+        )}
+      />
+      <Controller
+        name="tagline"
+        control={control}
+        render={({ field }) => (
+          <Row label="Tagline" help="One line under the board name. Leave empty to hide." htmlFor="org-tagline">
+            <Input
+              {...field}
+              id="org-tagline"
+              maxLength={160}
+              placeholder="Tell us what to build next."
+              className={fieldClass}
+            />
+          </Row>
+        )}
+      />
     </>
   )
 }

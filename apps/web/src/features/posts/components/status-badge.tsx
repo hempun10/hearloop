@@ -12,8 +12,14 @@ export function StatusBadge({ post, className }: { post: Pick<Post, 'status' | '
   const s = useStatusOf(post)
   const c = statusColor(s)
   return (
-    <span data-status={post.status} className={cn('inline-flex h-[22px] items-center gap-1.5 rounded-full px-2.5 pl-2 text-xs font-semibold', className)}
-      style={{ background: `color-mix(in oklab, ${c} 15%, transparent)`, color: c }}>
+    <span
+      data-status={post.status}
+      className={cn(
+        'inline-flex h-[22px] items-center gap-1.5 rounded-full px-2.5 pl-2 text-xs font-semibold',
+        className,
+      )}
+      style={{ background: `color-mix(in oklab, ${c} 15%, transparent)`, color: c }}
+    >
       <span className="size-[7px] rounded-full" style={{ background: c }} />
       {s.label}
     </span>
@@ -24,8 +30,12 @@ export function StatusBadge({ post, className }: { post: Pick<Post, 'status' | '
 export function StatusLabel({ post, className }: { post: Pick<Post, 'status' | 'statusId'>; className?: string }) {
   const s = useStatusOf(post)
   return (
-    <span data-testid="status" className={cn('inline-flex items-center gap-1.5 font-medium text-foreground', className)}>
-      <StatusIconFor option={s} className="size-3.5" />{s.label}
+    <span
+      data-testid="status"
+      className={cn('inline-flex items-center gap-1.5 font-medium text-foreground', className)}
+    >
+      <StatusIconFor option={s} className="size-3.5" />
+      {s.label}
     </span>
   )
 }

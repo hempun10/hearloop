@@ -5,7 +5,12 @@ import { useStatuses } from '../use-statuses'
 import { StatusIconFor } from './status-icon'
 
 /** value is a status key: a built-in kind, or c<id> for the board's own. */
-export function StatusSelect({ value, onChange, label, className }: {
+export function StatusSelect({
+  value,
+  onChange,
+  label,
+  className,
+}: {
   value: string
   onChange: (s: StatusOption) => void
   label: string

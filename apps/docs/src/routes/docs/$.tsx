@@ -38,7 +38,9 @@ export const Route = createFileRoute('/docs/$')({
   notFoundComponent: () => (
     <main className="mx-auto max-w-md px-6 py-24 text-center">
       <h1 className="text-xl font-semibold">No such docs page</h1>
-      <a href="/docs" className="mt-3 inline-block text-sm font-medium text-brand hover:underline">Back to the docs</a>
+      <a href="/docs" className="mt-3 inline-block text-sm font-medium text-brand hover:underline">
+        Back to the docs
+      </a>
     </main>
   ),
 })

@@ -18,14 +18,20 @@ function ChangelogPage() {
   return (
     <main className="mx-auto max-w-5xl px-4 pt-10 md:px-0">
       <h1 className="text-2xl font-semibold">Changelog</h1>
-      <p className="mt-2 mb-10 text-sm text-muted-foreground">What shipped, newest first. Entries marked Verified with Kane CLI passed a Kane run before they were published.</p>
+      <p className="mt-2 mb-10 text-sm text-muted-foreground">
+        What shipped, newest first. Entries marked Verified with Kane CLI passed a Kane run before they were published.
+      </p>
       {entries.length === 0 ? (
-        <p className="border-t pt-6 text-sm text-muted-foreground">Nothing shipped yet. The first passing Kane run lands here.</p>
+        <p className="border-t pt-6 text-sm text-muted-foreground">
+          Nothing shipped yet. The first passing Kane run lands here.
+        </p>
       ) : (
         <ol>
           {entries.map((e) => (
             <li key={e.id} data-testid="entry" className="flex flex-col gap-2 border-t py-8 md:flex-row md:gap-12">
-              <time className="w-40 shrink-0 text-[13px] text-muted-foreground tabular-nums">{longDate(e.createdAt)}</time>
+              <time className="w-40 shrink-0 text-[13px] text-muted-foreground tabular-nums">
+                {longDate(e.createdAt)}
+              </time>
               <div className="min-w-0 flex-1 md:max-w-[720px]">
                 <h2 className="text-lg font-semibold">{e.title}</h2>
                 <p className="mt-2 text-[15px] leading-7 whitespace-pre-wrap text-muted-foreground">{e.body}</p>

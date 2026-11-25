@@ -10,7 +10,9 @@ export const Route = createFileRoute('/_site/new')({
     <main className="mx-auto max-w-md px-4 pt-20">
       <BackButton />
       <h1 className="text-2xl font-semibold">Name your board</h1>
-      <p className="mt-2 text-sm text-muted-foreground">Your users post and vote here. You can change the name later.</p>
+      <p className="mt-2 text-sm text-muted-foreground">
+        Your users post and vote here. You can change the name later.
+      </p>
       <CreateOrgForm />
     </main>
   ),

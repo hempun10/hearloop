@@ -14,7 +14,8 @@ process.env.KANE_CLI_USER_AGENT = 'claude-code'
 process.env.KANE_CLI_CHROME_PATH ||= '/Applications/Helium.app/Contents/MacOS/Helium'
 
 const areas = (which === 'all' ? Object.keys(FOLDERS) : [which]) as Area[]
-if (!areas.every((a) => a in FOLDERS)) throw new Error(`unknown area; use one of: ${Object.keys(FOLDERS).join(', ')}, all`)
+if (!areas.every((a) => a in FOLDERS))
+  throw new Error(`unknown area; use one of: ${Object.keys(FOLDERS).join(', ')}, all`)
 
 // kane copies secret values into the recorded frontmatter; drop those entries so the value
 // comes only from the gitignored .testmuai/variables file
@@ -24,7 +25,15 @@ async function stripSecrets(path: string) {
   await Bun.write(path, md.replace(/^ {2}secrets\.[^\n]*\n(?: {4}[^\n]*\n)+/gm, ''))
 }
 
-const events = (out: string) => out.split('\n').flatMap((l): any[] => { try { return [JSON.parse(l)] } catch { return [] } })
+const events = (out: string) =>
+  // biome-ignore lint/suspicious/noExplicitAny: kane-cli NDJSON events, read loosely
+  out.split('\n').flatMap((l): any[] => {
+    try {
+      return [JSON.parse(l)]
+    } catch {
+      return []
+    }
+  })
 
 // Kane files runs into the profile's active folder; restore it when we're done
 const prev = JSON.parse(await $`kane-cli config show --agent`.text()).folder_id as string
@@ -41,12 +50,20 @@ try {
 
     if (cmd === 'record') {
       for (const t of tests) {
-        if (existsSync(`${dir}/${t.slug}_test.md`)) { console.log(`  · ${t.slug} already recorded`); continue }
-        const out = await $`kane-cli run ${t.objective} --agent --headless --name ${t.slug} --timeout 480 --max-steps 40 ${VARS}`.nothrow().text()
+        if (existsSync(`${dir}/${t.slug}_test.md`)) {
+          console.log(`  · ${t.slug} already recorded`)
+          continue
+        }
+        const out =
+          await $`kane-cli run ${t.objective} --agent --headless --name ${t.slug} --timeout 480 --max-steps 40 ${VARS}`
+            .nothrow()
+            .text()
         const end = events(out).find((e) => e.type === 'run_end')
         const ok = end?.status === 'passed'
         if (!ok) failed++
-        console.log(`  ${ok ? '✓' : '✗'} ${t.slug}  ${Math.round(end?.credits_consumed ?? 0)} credits${ok ? '' : `  — ${end?.verdict?.root_cause ?? end?.summary ?? 'no result'}`}`)
+        console.log(
+          `  ${ok ? '✓' : '✗'} ${t.slug}  ${Math.round(end?.credits_consumed ?? 0)} credits${ok ? '' : `  — ${end?.verdict?.root_cause ?? end?.summary ?? 'no result'}`}`,
+        )
         // kane writes .testmuai/tests/<slug>_test.md + output-<slug>/; keep them beside their area
         for (const p of [`${t.slug}_test.md`, `output-${t.slug}`]) {
           if (!existsSync(`.testmuai/tests/${p}`)) continue
@@ -57,15 +74,24 @@ try {
       }
     } else {
       const files = tests.map((t) => `${dir}/${t.slug}_test.md`).filter(existsSync)
-      if (!files.length) { console.log('  nothing recorded yet'); continue }
-      const run = async (paths: string[]) => events(await $`kane-cli testrun run ${paths} --agent --headless < /dev/null`.nothrow().text())
+      if (!files.length) {
+        console.log('  nothing recorded yet')
+        continue
+      }
+      const run = async (paths: string[]) =>
+        events(await $`kane-cli testrun run ${paths} --agent --headless < /dev/null`.nothrow().text())
       let ev = await run(files)
       // a batch may hold only one Test Manager project's tests; runs recorded later can land in another, so run each group
       const mismatch = ev.find((e) => e.code === 'PROJECT_MISMATCH')
-      if (mismatch) { ev = []; for (const p of mismatch.projects) ev.push(...await run(p.tests)) }
+      if (mismatch) {
+        ev = []
+        for (const p of mismatch.projects) ev.push(...(await run(p.tests)))
+      }
       const dones = ev.filter((e) => e.type === 'testrun_done')
       for (const m of ev.filter((e) => e.type === 'testrun_member_end')) {
-        console.log(`  ${m.status === 'passed' ? '✓' : '✗'} ${String(m.path).split('/').pop()}  ${m.duration_s}s${m.failure ? `  — ${m.failure.message}` : ''}`)
+        console.log(
+          `  ${m.status === 'passed' ? '✓' : '✗'} ${String(m.path).split('/').pop()}  ${m.duration_s}s${m.failure ? `  — ${m.failure.message}` : ''}`,
+        )
       }
       const ok = dones.length > 0 && dones.every((d) => d.overall_status === 'passed')
       console.log(`  ${dones.length ? (ok ? 'passed' : 'failed') : 'no result'}`)

@@ -16,16 +16,22 @@ export function Page({ children, className }: { children: ReactNode; className?:
 
 function Stripes({ side }: { side: 'left' | 'right' }) {
   return (
-    <div aria-hidden className={cn(
-      'absolute top-0 hidden h-full w-14 bg-[size:10px_10px] text-foreground/5 [background-image:repeating-linear-gradient(315deg,currentColor_0_1px,#0000_0_50%)] md:block',
-      side === 'left' ? '-left-14' : '-right-14',
-    )} />
+    <div
+      aria-hidden
+      className={cn(
+        'absolute top-0 hidden h-full w-14 bg-[size:10px_10px] text-foreground/5 [background-image:repeating-linear-gradient(315deg,currentColor_0_1px,#0000_0_50%)] md:block',
+        side === 'left' ? '-left-14' : '-right-14',
+      )}
+    />
   )
 }
 
 export function Framed({ id, children, className }: { id?: string; children: ReactNode; className?: string }) {
   return (
-    <section id={id} className={cn('relative flex w-full scroll-mt-20 flex-col items-center justify-center px-0 md:px-10', className)}>
+    <section
+      id={id}
+      className={cn('relative flex w-full scroll-mt-20 flex-col items-center justify-center px-0 md:px-10', className)}
+    >
       <div className="relative w-full border-x md:mx-10">
         <Stripes side="left" />
         <Stripes side="right" />

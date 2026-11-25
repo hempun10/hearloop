@@ -1,9 +1,30 @@
 import { z } from 'zod'
 
 // slugs that would shadow app routes
-export const RESERVED_SLUGS = ['api', 'login', 'new', 'demo', 'settings', 'admin', 'assets', 'changelog', 'board', 'posts', 'docs', 'mcp', 'consent', 'oauth', 'invite']
+const RESERVED_SLUGS = [
+  'api',
+  'login',
+  'new',
+  'demo',
+  'settings',
+  'admin',
+  'assets',
+  'changelog',
+  'board',
+  'posts',
+  'docs',
+  'mcp',
+  'consent',
+  'oauth',
+  'invite',
+]
 
-export const toSlug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 32)
+export const toSlug = (s: string) =>
+  s
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .slice(0, 32)
 
 export const orgSlugSchema = z.string().trim().toLowerCase().min(1).max(64)
 
@@ -27,7 +48,10 @@ const optionalUrl = z
 export const orgSettingsSchema = z.object({
   name: z.string().trim().min(1, 'Name can’t be empty.').max(60),
   tagline: z.string().trim().max(160),
-  accent: z.string().trim().refine((c) => c === '' || /^#[0-9a-f]{6}$/i.test(c), 'Use a hex colour like #6e8bff.'),
+  accent: z
+    .string()
+    .trim()
+    .refine((c) => c === '' || /^#[0-9a-f]{6}$/i.test(c), 'Use a hex colour like #6e8bff.'),
   logoUrl: optionalUrl,
   theme: z.enum(['dark', 'light']),
   poweredBy: z.boolean(),

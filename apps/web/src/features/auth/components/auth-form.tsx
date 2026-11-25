@@ -41,9 +41,16 @@ export function AuthForm({ mode, next }: { mode: 'signin' | 'signup'; next?: str
       <BackButton />
       <BrandMark className="size-9" />
       <h1 className="mt-6 text-2xl font-semibold">{signup ? 'Create your account' : 'Sign in'}</h1>
-      <p className="mt-2 text-sm text-muted-foreground">{signup ? 'Then name your board. It takes a minute.' : 'Welcome back.'}</p>
+      <p className="mt-2 text-sm text-muted-foreground">
+        {signup ? 'Then name your board. It takes a minute.' : 'Welcome back.'}
+      </p>
 
-      <form onSubmit={form.handleSubmit(onSubmit)} className="mt-8" aria-label={signup ? 'Sign up' : 'Sign in'} noValidate>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="mt-8"
+        aria-label={signup ? 'Sign up' : 'Sign in'}
+        noValidate
+      >
         <FieldGroup>
           {signup && (
             <Controller
@@ -64,7 +71,14 @@ export function AuthForm({ mode, next }: { mode: 'signin' | 'signup'; next?: str
             render={({ field, fieldState }) => (
               <Field data-invalid={fieldState.invalid}>
                 <FieldLabel htmlFor="email">Email</FieldLabel>
-                <Input {...field} id="email" type="email" autoComplete="email" placeholder="you@company.com" aria-invalid={fieldState.invalid} />
+                <Input
+                  {...field}
+                  id="email"
+                  type="email"
+                  autoComplete="email"
+                  placeholder="you@company.com"
+                  aria-invalid={fieldState.invalid}
+                />
                 <FieldError errors={[fieldState.error]} />
               </Field>
             )}
@@ -96,7 +110,11 @@ export function AuthForm({ mode, next }: { mode: 'signin' | 'signup'; next?: str
 
       <p className="mt-6 text-sm text-muted-foreground">
         {signup ? 'Already have an account? ' : 'New to hearloop? '}
-        <Link to="/login" search={{ mode: signup ? undefined : 'signup', next }} className="font-medium text-foreground hover:underline">
+        <Link
+          to="/login"
+          search={{ mode: signup ? undefined : 'signup', next }}
+          className="font-medium text-foreground hover:underline"
+        >
           {signup ? 'Sign in' : 'Create an account'}
         </Link>
       </p>

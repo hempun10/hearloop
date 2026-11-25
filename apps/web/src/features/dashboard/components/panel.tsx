@@ -5,7 +5,15 @@ import { Kbd } from '@hearloop/ui/components/kbd'
 import { cn } from '@hearloop/ui/lib/utils'
 
 /** The rounded panel every dashboard page lives in, with its 52px top bar. */
-export function Panel({ title, actions, aside, onSearch, search, className, children }: {
+export function Panel({
+  title,
+  actions,
+  aside,
+  onSearch,
+  search,
+  className,
+  children,
+}: {
   title: ReactNode
   actions?: ReactNode
   aside?: ReactNode
@@ -26,8 +34,13 @@ export function Panel({ title, actions, aside, onSearch, search, className, chil
               {onSearch && <PanelSearch onSearch={onSearch} initial={search} />}
             </div>
           </div>
-          <div key={typeof title === 'string' ? title : undefined}
-            className={cn('scrollbar-thin min-h-0 flex-1 overflow-auto animate-in fade-in-0 duration-150 motion-reduce:animate-none', className)}>
+          <div
+            key={typeof title === 'string' ? title : undefined}
+            className={cn(
+              'scrollbar-thin min-h-0 flex-1 overflow-auto animate-in fade-in-0 duration-150 motion-reduce:animate-none',
+              className,
+            )}
+          >
             {children}
           </div>
         </div>
@@ -39,15 +52,32 @@ export function Panel({ title, actions, aside, onSearch, search, className, chil
 function PanelSearch({ onSearch, initial = '' }: { onSearch: (q: string) => void; initial?: string }) {
   const [q, setQ] = useState(initial)
   const ref = useRef<HTMLInputElement>(null)
-  useHotkeys('mod+k', (e) => { e.preventDefault(); ref.current?.focus() })
-  const set = (v: string) => { setQ(v); onSearch(v) }
+  useHotkeys('mod+k', (e) => {
+    e.preventDefault()
+    ref.current?.focus()
+  })
+  const set = (v: string) => {
+    setQ(v)
+    onSearch(v)
+  }
   return (
     <div className="relative hidden md:block">
       <Search className="pointer-events-none absolute top-1/2 left-2.5 size-[13px] -translate-y-1/2 text-faint" />
-      <input ref={ref} type="search" value={q} onChange={(e) => set(e.target.value)}
-        onKeyDown={(e) => { if (e.key === 'Escape') { set(''); e.currentTarget.blur() } }}
-        placeholder="Search posts" aria-label="Search posts"
-        className="h-[30px] w-[220px] rounded-lg border bg-card pr-10 pl-7 text-[13px] outline-none placeholder:text-faint focus:border-ring/60 [&::-webkit-search-cancel-button]:hidden" />
+      <input
+        ref={ref}
+        type="search"
+        value={q}
+        onChange={(e) => set(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === 'Escape') {
+            set('')
+            e.currentTarget.blur()
+          }
+        }}
+        placeholder="Search posts"
+        aria-label="Search posts"
+        className="h-[30px] w-[220px] rounded-lg border bg-card pr-10 pl-7 text-[13px] outline-none placeholder:text-faint focus:border-ring/60 [&::-webkit-search-cancel-button]:hidden"
+      />
       <Kbd className="pointer-events-none absolute top-1/2 right-2 -translate-y-1/2">⌘K</Kbd>
     </div>
   )
@@ -73,11 +103,23 @@ export function SectionHead({ title, right, className }: { title: string; right?
 }
 
 /** Settings row: label and help left, control right, hairline above. The control wraps under the label when it can't fit. */
-export function Row({ label, help, htmlFor, children }: { label: ReactNode; help?: ReactNode; htmlFor?: string; children: ReactNode }) {
+export function Row({
+  label,
+  help,
+  htmlFor,
+  children,
+}: {
+  label: ReactNode
+  help?: ReactNode
+  htmlFor?: string
+  children: ReactNode
+}) {
   return (
     <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2.5 border-t py-3.5">
       <div className="flex min-w-[180px] flex-[1_1_200px] flex-col gap-0.5">
-        <label htmlFor={htmlFor} className="text-[13px] font-semibold">{label}</label>
+        <label htmlFor={htmlFor} className="text-[13px] font-semibold">
+          {label}
+        </label>
         {help && <div className="text-xs text-faint">{help}</div>}
       </div>
       <div className="max-w-full min-w-0">{children}</div>

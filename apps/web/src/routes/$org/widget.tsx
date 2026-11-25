@@ -35,10 +35,11 @@ type Look = z.infer<typeof lookSchema>
 /** The panel inside the embeddable widget: public/widget.js loads it in an iframe on the customer's site. */
 export const Route = createFileRoute('/$org/widget')({
   validateSearch: lookSchema.extend({ tab: z.enum(WIDGET_TABS).optional().catch(undefined) }),
-  loader: ({ context, params }) => Promise.all([
-    context.queryClient.query(postListQuery(params.org)),
-    context.queryClient.query(changelogQuery(params.org)),
-  ]),
+  loader: ({ context, params }) =>
+    Promise.all([
+      context.queryClient.query(postListQuery(params.org)),
+      context.queryClient.query(changelogQuery(params.org)),
+    ]),
   component: WidgetPanel,
 })
 
@@ -56,15 +57,21 @@ function WidgetPanel() {
   const navigate = useNavigate()
   const setLook = (look: Look) => navigate({ to: '.', search: (s) => ({ ...s, ...look }), replace: true })
   const tabs = useMemo(() => {
-    const override = search.tabs?.split(',').filter((t): t is WidgetTab => (WIDGET_TABS as readonly string[]).includes(t))
+    const override = search.tabs
+      ?.split(',')
+      .filter((t): t is WidgetTab => (WIDGET_TABS as readonly string[]).includes(t))
     const saved = readWidget(org.widget)
-    return widgetTabs(org, override?.length ? { ...saved, tabs: WIDGET_TABS.filter((t) => override.includes(t)) } : saved)
+    return widgetTabs(
+      org,
+      override?.length ? { ...saved, tabs: WIDGET_TABS.filter((t) => override.includes(t)) } : saved,
+    )
   }, [org, search.tabs])
   const [tab, setTab] = useState<WidgetTab>(search.tab && tabs.includes(search.tab) ? search.tab : tabs[0])
   const [composing, setComposing] = useState(false)
   const current = tabs.includes(tab) ? tab : tabs[0]
 
   // talk to the loader: ready once, config and open from it, close and busy to it
+  // biome-ignore lint/correctness/useExhaustiveDependencies: setLook only navigates
   useEffect(() => {
     const onMessage = (e: MessageEvent) => {
       if (e.source !== window.parent) return
@@ -74,55 +81,91 @@ function WidgetPanel() {
         else if (e.data.home) setTab(tabs[0])
       }
     }
-    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape' && !composing) send({ type: 'hearloop:close' }) }
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && !composing) send({ type: 'hearloop:close' })
+    }
     addEventListener('message', onMessage)
     addEventListener('keydown', onKey)
-    return () => { removeEventListener('message', onMessage); removeEventListener('keydown', onKey) }
-  // eslint-disable-next-line react-hooks/exhaustive-deps -- setLook only navigates
+    return () => {
+      removeEventListener('message', onMessage)
+      removeEventListener('keydown', onKey)
+    }
   }, [tabs, composing])
-  useEffect(() => { send({ type: 'hearloop:ready' }) }, [])
-  useEffect(() => { send({ type: 'hearloop:busy', busy: composing }) }, [composing])
   useEffect(() => {
-    if (current === 'changelog') send({ type: 'hearloop:changelog-seen', at: entries[0] ? new Date(entries[0].createdAt).getTime() : 0 })
+    send({ type: 'hearloop:ready' })
+  }, [])
+  useEffect(() => {
+    send({ type: 'hearloop:busy', busy: composing })
+  }, [composing])
+  useEffect(() => {
+    if (current === 'changelog')
+      send({ type: 'hearloop:changelog-seen', at: entries[0] ? new Date(entries[0].createdAt).getTime() : 0 })
   }, [current, entries])
-
 
   return (
     <div className="flex h-screen flex-col bg-background">
       <header className="flex items-center gap-2 border-b px-4 py-3">
         <h1 className="min-w-0 flex-1 truncate text-sm font-semibold">{org.name}</h1>
-        <Button variant="ghost" size="icon-sm" aria-label="Close" onClick={() => send({ type: 'hearloop:close' })}><X /></Button>
+        <Button variant="ghost" size="icon-sm" aria-label="Close" onClick={() => send({ type: 'hearloop:close' })}>
+          <X />
+        </Button>
       </header>
       <Tabs value={current} onValueChange={(v) => setTab(v as WidgetTab)} className="min-h-0 flex-1 gap-0">
         {tabs.length > 1 && (
           <TabsList className="mx-4 mt-3">
-            {tabs.map((t) => <TabsTrigger key={t} value={t}>{NAMES[t]}</TabsTrigger>)}
+            {tabs.map((t) => (
+              <TabsTrigger key={t} value={t}>
+                {NAMES[t]}
+              </TabsTrigger>
+            ))}
           </TabsList>
         )}
         <TabsContent value="feedback" className="min-h-0 overflow-y-auto px-4 pt-3 pb-4">
-          <Button className="w-full bg-brand text-white hover:bg-brand/90" onClick={() => setComposing(true)}>Post idea</Button>
-          {posts.length === 0
-            ? <p className="py-8 text-center text-sm text-muted-foreground">No requests yet. Post the first idea.</p>
-            : (
-              <ol aria-label="Requests" className="mt-3">
-                {posts.map((p) => (
-                  <li key={p.id} className="flex items-center gap-3 border-t py-3 first:border-t-0">
-                    <div className="min-w-0 flex-1">
-                      <a href={`/${org.slug}/posts/${p.id}`} {...external} className="line-clamp-2 text-sm font-medium hover:underline">{p.title}</a>
-                      {(p.status !== 'open' || p.statusId) && <div className="mt-1 text-xs text-faint"><StatusLabel post={p} /></div>}
-                    </div>
-                    <VoteButton org={org.slug} post={p} className="h-11 w-10" />
-                  </li>
-                ))}
-              </ol>
-            )}
+          <Button className="w-full bg-brand text-white hover:bg-brand/90" onClick={() => setComposing(true)}>
+            Post idea
+          </Button>
+          {posts.length === 0 ? (
+            <p className="py-8 text-center text-sm text-muted-foreground">No requests yet. Post the first idea.</p>
+          ) : (
+            <ol aria-label="Requests" className="mt-3">
+              {posts.map((p) => (
+                <li key={p.id} className="flex items-center gap-3 border-t py-3 first:border-t-0">
+                  <div className="min-w-0 flex-1">
+                    <a
+                      href={`/${org.slug}/posts/${p.id}`}
+                      {...external}
+                      className="line-clamp-2 text-sm font-medium hover:underline"
+                    >
+                      {p.title}
+                    </a>
+                    {(p.status !== 'open' || p.statusId) && (
+                      <div className="mt-1 text-xs text-faint">
+                        <StatusLabel post={p} />
+                      </div>
+                    )}
+                  </div>
+                  <VoteButton org={org.slug} post={p} className="h-11 w-10" />
+                </li>
+              ))}
+            </ol>
+          )}
         </TabsContent>
-        <TabsContent value="roadmap" className="min-h-0 overflow-y-auto px-4 pt-3 pb-4"><Roadmap /></TabsContent>
-        <TabsContent value="changelog" className="min-h-0 overflow-y-auto px-4 pt-3 pb-4"><Changelog /></TabsContent>
+        <TabsContent value="roadmap" className="min-h-0 overflow-y-auto px-4 pt-3 pb-4">
+          <Roadmap />
+        </TabsContent>
+        <TabsContent value="changelog" className="min-h-0 overflow-y-auto px-4 pt-3 pb-4">
+          <Changelog />
+        </TabsContent>
       </Tabs>
-      <NewPostDialog org={org.slug} posts={posts} open={composing} onOpenChange={setComposing}
-        mustSignIn={org.whoCanPost === 'signed_in' && !session} isMember={isMember}
-        onPosted={(p) => toast.success(`Posted "${p.title}". Thanks!`)} />
+      <NewPostDialog
+        org={org.slug}
+        posts={posts}
+        open={composing}
+        onOpenChange={setComposing}
+        mustSignIn={org.whoCanPost === 'signed_in' && !session}
+        isMember={isMember}
+        onPosted={(p) => toast.success(`Posted "${p.title}". Thanks!`)}
+      />
     </div>
   )
 }
@@ -136,15 +179,24 @@ function Roadmap() {
     return (
       <section key={status.key} aria-label={status.label} className="mb-4">
         <h2 className="flex items-center gap-2 pb-2 text-xs font-semibold">
-          <StatusIconFor option={status} className="size-3.5" />{status.label}
+          <StatusIconFor option={status} className="size-3.5" />
+          {status.label}
           <span className="ml-auto font-normal text-faint tabular-nums">{items.length}</span>
         </h2>
-        {items.length === 0
-          ? <p className="text-xs text-faint">Nothing here yet.</p>
-          : items.map((p) => (
-            <a key={p.id} href={`/${org.slug}/posts/${p.id}`} {...external}
-              className="mb-1.5 block rounded-lg border bg-card px-3 py-2 text-sm hover:border-input">{p.title}</a>
-          ))}
+        {items.length === 0 ? (
+          <p className="text-xs text-faint">Nothing here yet.</p>
+        ) : (
+          items.map((p) => (
+            <a
+              key={p.id}
+              href={`/${org.slug}/posts/${p.id}`}
+              {...external}
+              className="mb-1.5 block rounded-lg border bg-card px-3 py-2 text-sm hover:border-input"
+            >
+              {p.title}
+            </a>
+          ))
+        )}
       </section>
     )
   })
@@ -153,7 +205,8 @@ function Roadmap() {
 function Changelog() {
   const { org } = useOrg()
   const { data: entries } = useSuspenseQuery(changelogQuery(org.slug))
-  if (entries.length === 0) return <p className="py-8 text-center text-sm text-muted-foreground">Nothing shipped yet.</p>
+  if (entries.length === 0)
+    return <p className="py-8 text-center text-sm text-muted-foreground">Nothing shipped yet.</p>
   return (
     <ol aria-label="Changelog">
       {entries.map((e) => (

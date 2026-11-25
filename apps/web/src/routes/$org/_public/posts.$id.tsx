@@ -42,55 +42,90 @@ function PostPage() {
   if (!data) return null
   const { post, runs, tags, mergedInto } = data
   const category = board?.categories.find((c) => c.id === post.categoryId)
-  const canEdit = !mergedInto && (isMember || (!!session && post.authorId === session.user.id && post.status === 'open'))
+  const canEdit =
+    !mergedInto && (isMember || (!!session && post.authorId === session.user.id && post.status === 'open'))
 
   return (
     <main className="mx-auto flex max-w-5xl flex-col gap-12 px-4 pt-10 md:flex-row md:px-0">
       <section className="min-w-0 flex-1 md:max-w-[720px]">
-        <Link to="/$org" params={{ org }} onClick={(e) => { e.preventDefault(); backToBoard() }} className="inline-flex items-center gap-1 text-[13px] text-muted-foreground hover:text-foreground">
+        <Link
+          to="/$org"
+          params={{ org }}
+          onClick={(e) => {
+            e.preventDefault()
+            backToBoard()
+          }}
+          className="inline-flex items-center gap-1 text-[13px] text-muted-foreground hover:text-foreground"
+        >
           <ArrowLeft className="size-3.5" /> Board
         </Link>
         {mergedInto && (
           <p role="status" className="mt-5 rounded-md border bg-card px-3 py-2 text-[13px] text-muted-foreground">
-            Merged into <Link to="/$org/posts/$id" params={{ org, id: String(mergedInto.id) }} className="font-medium text-foreground underline">{mergedInto.title}</Link>. Vote and comment there.
+            Merged into{' '}
+            <Link
+              to="/$org/posts/$id"
+              params={{ org, id: String(mergedInto.id) }}
+              className="font-medium text-foreground underline"
+            >
+              {mergedInto.title}
+            </Link>
+            . Vote and comment there.
           </p>
         )}
-        {editing ? <EditPostForm org={org} post={post} onDone={() => setEditing(false)} /> : (
-        <div className="mt-5 flex items-start gap-4">
-          <div className="min-w-0 flex-1">
-            <h1 className="text-2xl font-semibold">{post.title}</h1>
-            <p className="mt-2 flex items-center gap-3 text-xs text-faint">
-              Posted {timeAgo(post.createdAt)}
-              {canEdit && <Button variant="link" size="sm" className="h-auto p-0 text-xs" onClick={() => setEditing(true)}>Edit</Button>}
-            </p>
+        {editing ? (
+          <EditPostForm org={org} post={post} onDone={() => setEditing(false)} />
+        ) : (
+          <div className="mt-5 flex items-start gap-4">
+            <div className="min-w-0 flex-1">
+              <h1 className="text-2xl font-semibold">{post.title}</h1>
+              <p className="mt-2 flex items-center gap-3 text-xs text-faint">
+                Posted {timeAgo(post.createdAt)}
+                {canEdit && (
+                  <Button variant="link" size="sm" className="h-auto p-0 text-xs" onClick={() => setEditing(true)}>
+                    Edit
+                  </Button>
+                )}
+              </p>
+            </div>
+            {!mergedInto && <VoteButton org={org} post={post} />}
           </div>
-          {!mergedInto && <VoteButton org={org} post={post} />}
-        </div>
         )}
-        {!isMember && tags.length > 0 && <div className="mt-3"><TagList tags={tags} /></div>}
-        {!editing && post.body && <p className="mt-5 text-[15px] leading-7 whitespace-pre-wrap text-muted-foreground">{post.body}</p>}
+        {!isMember && tags.length > 0 && (
+          <div className="mt-3">
+            <TagList tags={tags} />
+          </div>
+        )}
+        {!editing && post.body && (
+          <p className="mt-5 text-[15px] leading-7 whitespace-pre-wrap text-muted-foreground">{post.body}</p>
+        )}
 
-        <div className="mt-8"><StatusTimeline status={post.status} /></div>
+        <div className="mt-8">
+          <StatusTimeline status={post.status} />
+        </div>
 
         {/* verifications are the team's build loop, not something customers act on */}
-        {isMember && <>
-        <h2 className="mt-12 mb-3 text-[15px] font-semibold">Kane CLI verifications</h2>
-        {runs.length === 0 ? (
-          <p className="border-t pt-4 text-sm text-muted-foreground">Not verified yet. It ships once a Kane run passes.</p>
-        ) : (
-          <ol aria-label="Verifications">
-            {runs.map((r) => (
-              <li key={r.id} data-testid="run" className="border-t py-4">
-                <p className="flex items-center gap-2">
-                  <RunResult passed={r.passed} />
-                  <span className="text-[13px] text-faint">{timeAgo(r.createdAt)}</span>
-                </p>
-                {r.summary && <RunReport summary={r.summary} className="mt-2" />}
-              </li>
-            ))}
-          </ol>
+        {isMember && (
+          <>
+            <h2 className="mt-12 mb-3 text-[15px] font-semibold">Kane CLI verifications</h2>
+            {runs.length === 0 ? (
+              <p className="border-t pt-4 text-sm text-muted-foreground">
+                Not verified yet. It ships once a Kane run passes.
+              </p>
+            ) : (
+              <ol aria-label="Verifications">
+                {runs.map((r) => (
+                  <li key={r.id} data-testid="run" className="border-t py-4">
+                    <p className="flex items-center gap-2">
+                      <RunResult passed={r.passed} />
+                      <span className="text-[13px] text-faint">{timeAgo(r.createdAt)}</span>
+                    </p>
+                    {r.summary && <RunReport summary={r.summary} className="mt-2" />}
+                  </li>
+                ))}
+              </ol>
+            )}
+          </>
         )}
-        </>}
 
         <Comments org={org} postId={post.id} signedIn={!!session} isMember={isMember} />
       </section>
@@ -98,17 +133,40 @@ function PostPage() {
       <aside className="w-full shrink-0 text-[13px] md:w-60">
         <p className="mb-2 text-xs font-medium text-muted-foreground">Details</p>
         <dl className="grid grid-cols-[auto_1fr] items-center gap-x-4 gap-y-2">
-          <dt className="text-faint">Status</dt><dd><StatusBadge post={post} />{post.status === 'building' && post.claimedBy ? <span className="ml-2 text-muted-foreground">by {post.claimedBy}</span> : null}</dd>
-          {category && <><dt className="text-faint">Board</dt><dd data-testid="category">{category.name}</dd></>}
-          <dt className="text-faint">Votes</dt><dd className="tabular-nums">{post.votes}</dd>
-          {isMember && <><dt className="text-faint">Kane runs</dt><dd className="tabular-nums">{runs.length}</dd></>}
+          <dt className="text-faint">Status</dt>
+          <dd>
+            <StatusBadge post={post} />
+            {post.status === 'building' && post.claimedBy ? (
+              <span className="ml-2 text-muted-foreground">by {post.claimedBy}</span>
+            ) : null}
+          </dd>
+          {category && (
+            <>
+              <dt className="text-faint">Board</dt>
+              <dd data-testid="category">{category.name}</dd>
+            </>
+          )}
+          <dt className="text-faint">Votes</dt>
+          <dd className="tabular-nums">{post.votes}</dd>
+          {isMember && (
+            <>
+              <dt className="text-faint">Kane runs</dt>
+              <dd className="tabular-nums">{runs.length}</dd>
+            </>
+          )}
         </dl>
         {isMember && !mergedInto && (
           <div className="mt-6 -mx-2">
-            <Suspense fallback={null}><PostProperties org={org} post={post} tags={tags} /></Suspense>
+            <Suspense fallback={null}>
+              <PostProperties org={org} post={post} tags={tags} />
+            </Suspense>
           </div>
         )}
-        {isMember && !mergedInto && (post.status === 'open' || post.status === 'planned') && <div className="mt-4"><MergePostDialog org={org} post={post} /></div>}
+        {isMember && !mergedInto && (post.status === 'open' || post.status === 'planned') && (
+          <div className="mt-4">
+            <MergePostDialog org={org} post={post} />
+          </div>
+        )}
       </aside>
     </main>
   )

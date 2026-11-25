@@ -48,5 +48,6 @@ export const setEvents = createServerFn({ method: 'POST' })
   .handler(async ({ data, context: { user } }) => {
     const { requireMembership } = await import('#/features/orgs/org.server')
     const { setIntegrationEvents } = await import('./integration.server')
-    if (!(await setIntegrationEvents((await requireMembership(data.org, user.id)).id, data.kind, data.events))) throw new Error('Connect it first.')
+    if (!(await setIntegrationEvents((await requireMembership(data.org, user.id)).id, data.kind, data.events)))
+      throw new Error('Connect it first.')
   })

@@ -9,7 +9,10 @@ export const Route = createFileRoute('/$org/dashboard/settings/notifications')({
     const { org } = Route.useParams()
     return (
       <>
-        <PageHead title="Notifications" sub="Post the board's news to a Slack or Discord channel, and pick which events each one gets." />
+        <PageHead
+          title="Notifications"
+          sub="Post the board's news to a Slack or Discord channel, and pick which events each one gets."
+        />
         <NotificationsManager org={org} />
       </>
     )

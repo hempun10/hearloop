@@ -24,13 +24,29 @@ export const postComment = createServerFn({ method: 'POST' })
     const org = await findOrgOrThrow(data.org)
     const team = await isMember(org.id, user.id)
     if (data.internal && !team) throw new Error('Only board members can write internal notes.')
-    const row = await addComment(org.id, data.id, { userId: user.id, author: user.name || user.email, team, internal: data.internal, body: data.body, parentId: data.parentId })
+    const row = await addComment(org.id, data.id, {
+      userId: user.id,
+      author: user.name || user.email,
+      team,
+      internal: data.internal,
+      body: data.body,
+      parentId: data.parentId,
+    })
     if (!row) throw new Error('That request is gone.')
     if (!row.internal) {
       const { notify } = await import('#/features/integrations/integration.server')
       const { db } = await import('#/db/client.server')
-      const post = await db.query.posts.findFirst({ where: (p, { eq }) => eq(p.id, row.postId), columns: { title: true } })
-      notify(org.id, { type: 'commented', id: row.postId, title: post?.title ?? '', author: row.author, body: row.body })
+      const post = await db.query.posts.findFirst({
+        where: (p, { eq }) => eq(p.id, row.postId),
+        columns: { title: true },
+      })
+      notify(org.id, {
+        type: 'commented',
+        id: row.postId,
+        title: post?.title ?? '',
+        author: row.author,
+        body: row.body,
+      })
     }
     return row
   })
@@ -41,5 +57,6 @@ export const removeComment = createServerFn({ method: 'POST' })
   .handler(async ({ data, context: { user } }) => {
     const { requireMembership } = await import('#/features/orgs/org.server')
     const { deleteComment } = await import('./comment.server')
-    if (!(await deleteComment((await requireMembership(data.org, user.id)).id, data.id))) throw new Error('That comment was already removed.')
+    if (!(await deleteComment((await requireMembership(data.org, user.id)).id, data.id)))
+      throw new Error('That comment was already removed.')
   })

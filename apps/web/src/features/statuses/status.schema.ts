@@ -4,7 +4,7 @@ import { orgSlugSchema } from '#/features/orgs/org.schema'
 
 export const STATUS_SWATCHES = ['#f2b53d', '#b08cff', '#7170ff', '#3ecf8e', '#e0705f', '#5fc8e0', '#ff8fab', '#8a8a93']
 
-export const statusFieldsSchema = z.object({
+const statusFieldsSchema = z.object({
   name: z.string().trim().min(1, 'Name it.').max(32),
   color: z.string().regex(/^#[0-9a-f]{6}$/i, 'Pick a colour.'),
 })

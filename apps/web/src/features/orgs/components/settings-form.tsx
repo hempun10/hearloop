@@ -46,10 +46,15 @@ export function SettingsForm({ org, label, children }: { org: PublicOrg; label: 
       <form onSubmit={form.handleSubmit((s) => save.mutate(s))} aria-label={label} noValidate>
         {children}
         <div className="flex items-center justify-end gap-3 border-t pt-4">
-          {errors.root && <FieldError role="alert" className="mr-auto">{errors.root.message}</FieldError>}
+          {errors.root && (
+            <FieldError role="alert" className="mr-auto">
+              {errors.root.message}
+            </FieldError>
+          )}
           <span className="text-xs text-faint">{isDirty ? 'Unsaved changes' : 'Saved'}</span>
           <Button type="submit" variant="cta" size="sm" className="pr-[38px]" disabled={!isDirty || save.isPending}>
-            {save.isPending ? 'Saving' : 'Save changes'}<ArrowBox />
+            {save.isPending ? 'Saving' : 'Save changes'}
+            <ArrowBox />
           </Button>
         </div>
       </form>

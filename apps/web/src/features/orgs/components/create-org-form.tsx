@@ -13,7 +13,10 @@ import { type CreateOrgInput, createOrgSchema, toSlug } from '../org.schema'
 export function CreateOrgForm() {
   const navigate = useNavigate()
   const refreshSession = useRefreshSession()
-  const form = useForm<CreateOrgInput>({ resolver: zodResolver(createOrgSchema), defaultValues: { name: '', slug: '' } })
+  const form = useForm<CreateOrgInput>({
+    resolver: zodResolver(createOrgSchema),
+    defaultValues: { name: '', slug: '' },
+  })
   // true once someone types their own address; clearing the address hands it back to the name
   const customSlug = useRef(false)
 
@@ -44,7 +47,8 @@ export function CreateOrgForm() {
                 placeholder="Acme"
                 onChange={(e) => {
                   field.onChange(e)
-                  if (!customSlug.current) form.setValue('slug', toSlug(e.target.value), { shouldValidate: form.formState.isSubmitted })
+                  if (!customSlug.current)
+                    form.setValue('slug', toSlug(e.target.value), { shouldValidate: form.formState.isSubmitted })
                 }}
               />
               <FieldError errors={[fieldState.error]} />
@@ -58,7 +62,9 @@ export function CreateOrgForm() {
             <Field data-invalid={fieldState.invalid}>
               <FieldLabel htmlFor="board-address">Address</FieldLabel>
               <InputGroup>
-                <InputGroupAddon><InputGroupText>hearloop/</InputGroupText></InputGroupAddon>
+                <InputGroupAddon>
+                  <InputGroupText>hearloop/</InputGroupText>
+                </InputGroupAddon>
                 <InputGroupInput
                   {...field}
                   id="board-address"
@@ -71,7 +77,11 @@ export function CreateOrgForm() {
                   }}
                 />
               </InputGroup>
-              {fieldState.error ? <FieldError role="alert" errors={[fieldState.error]} /> : <FieldDescription>Your board lives at this address.</FieldDescription>}
+              {fieldState.error ? (
+                <FieldError role="alert" errors={[fieldState.error]} />
+              ) : (
+                <FieldDescription>Your board lives at this address.</FieldDescription>
+              )}
             </Field>
           )}
         />

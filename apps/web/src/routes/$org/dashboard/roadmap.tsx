@@ -10,14 +10,23 @@ import { teamQuery } from '#/features/team/team.queries'
 export const Route = createFileRoute('/$org/dashboard/roadmap')({
   // ?post=12 opens that request over the board, so the link can be shared and survives a reload
   validateSearch: z.object({ post: z.number().int().positive().optional().catch(undefined) }),
-  loader: ({ context, params }) => Promise.all([context.queryClient.query(postListQuery(params.org)), context.queryClient.query(teamQuery(params.org))]),
+  loader: ({ context, params }) =>
+    Promise.all([
+      context.queryClient.query(postListQuery(params.org)),
+      context.queryClient.query(teamQuery(params.org)),
+    ]),
   component: function DashboardRoadmap() {
     const { org } = Route.useParams()
     const { post } = Route.useSearch()
     const navigate = Route.useNavigate()
     const { data: posts } = useSuspenseQuery(postListQuery(org))
     return (
-      <Panel title="Roadmap" actions={<span className="hidden text-[13px] text-faint lg:inline">Drag cards between columns to change status</span>}>
+      <Panel
+        title="Roadmap"
+        actions={
+          <span className="hidden text-[13px] text-faint lg:inline">Drag cards between columns to change status</span>
+        }
+      >
         <RoadmapBoard org={org} posts={posts} onOpen={(id) => navigate({ search: { post: id } })} />
         <PostDialog org={org} id={post} onClose={() => navigate({ search: {} })} />
       </Panel>

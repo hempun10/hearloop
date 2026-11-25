@@ -1,4 +1,3 @@
-
 import {
   Children,
   createContext,
@@ -9,16 +8,10 @@ import {
   useState,
   type ComponentType,
   type RefAttributes,
-} from "react"
-import {
-  motion,
-  useInView,
-  type DOMMotionComponents,
-  type HTMLMotionProps,
-  type MotionProps,
-} from "motion/react"
+} from 'react'
+import { motion, useInView, type DOMMotionComponents, type HTMLMotionProps, type MotionProps } from 'motion/react'
 
-import { cn } from "@hearloop/ui/lib/utils"
+import { cn } from '@hearloop/ui/lib/utils'
 
 interface SequenceContextValue {
   completeItem: (index: number) => void
@@ -48,13 +41,8 @@ const motionElements = {
   span: motion.span,
 } as const
 
-type MotionElementType = Extract<
-  keyof DOMMotionComponents,
-  keyof typeof motionElements
->
-type TerminalTypingMotionComponent = ComponentType<
-  Omit<HTMLMotionProps<"span">, "ref"> & RefAttributes<HTMLElement>
->
+type MotionElementType = Extract<keyof DOMMotionComponents, keyof typeof motionElements>
+type TerminalTypingMotionComponent = ComponentType<Omit<HTMLMotionProps<'span'>, 'ref'> & RefAttributes<HTMLElement>>
 
 interface AnimatedSpanProps extends MotionProps {
   children: React.ReactNode
@@ -63,13 +51,7 @@ interface AnimatedSpanProps extends MotionProps {
   startOnView?: boolean
 }
 
-export const AnimatedSpan = ({
-  children,
-  delay = 0,
-  className,
-  startOnView = false,
-  ...props
-}: AnimatedSpanProps) => {
+export const AnimatedSpan = ({ children, delay = 0, className, startOnView = false, ...props }: AnimatedSpanProps) => {
   const elementRef = useRef<HTMLDivElement | null>(null)
   const isInView = useInView(elementRef as React.RefObject<Element>, {
     amount: 0.3,
@@ -103,7 +85,7 @@ export const AnimatedSpan = ({
       initial={prefersReduced ? { opacity: 1, y: 0 } : { opacity: 0, y: -5 }}
       animate={prefersReduced || shouldAnimate ? { opacity: 1, y: 0 } : { opacity: 0, y: -5 }}
       transition={prefersReduced ? { duration: 0 } : { duration: 0.3, delay: sequence ? 0 : delay / 1000 }}
-      className={cn("grid text-sm font-normal tracking-tight", className)}
+      className={cn('grid text-sm font-normal tracking-tight', className)}
       onAnimationComplete={() => {
         if (!sequence) return
         if (itemIndex === null) return
@@ -116,7 +98,7 @@ export const AnimatedSpan = ({
   )
 }
 
-interface TypingAnimationProps extends Omit<MotionProps, "children"> {
+interface TypingAnimationProps extends Omit<MotionProps, 'children'> {
   children: string
   className?: string
   duration?: number
@@ -128,11 +110,11 @@ interface TypingAnimationProps extends Omit<MotionProps, "children"> {
 function usePrefersReducedMotion() {
   const [reduced, setReduced] = useState(false)
   useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)")
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
     setReduced(mq.matches)
     const h = (e: MediaQueryListEvent) => setReduced(e.matches)
-    mq.addEventListener("change", h)
-    return () => mq.removeEventListener("change", h)
+    mq.addEventListener('change', h)
+    return () => mq.removeEventListener('change', h)
   }, [])
   return reduced
 }
@@ -142,20 +124,18 @@ export const TypingAnimation = ({
   className,
   duration = 60,
   delay = 0,
-  as: Component = "span",
+  as: Component = 'span',
   startOnView = true,
   ...props
 }: TypingAnimationProps) => {
-  if (typeof children !== "string") {
-    throw new Error("TypingAnimation: children must be a string.")
+  if (typeof children !== 'string') {
+    throw new Error('TypingAnimation: children must be a string.')
   }
 
-  const MotionComponent = motionElements[
-    Component
-  ] as TerminalTypingMotionComponent
+  const MotionComponent = motionElements[Component] as TerminalTypingMotionComponent
 
   const prefersReduced = usePrefersReducedMotion()
-  const [displayedText, setDisplayedText] = useState<string>("")
+  const [displayedText, setDisplayedText] = useState<string>('')
   const [started, setStarted] = useState(false)
   const elementRef = useRef<HTMLElement | null>(null)
   const isInView = useInView(elementRef as React.RefObject<Element>, {
@@ -168,9 +148,7 @@ export const TypingAnimation = ({
   const hasSequence = sequence !== null
   const sequenceStarted = sequence?.sequenceStarted ?? false
   const sequenceActiveIndex = sequence?.activeIndex ?? null
-  const sequenceCompleteItemRef = useRef<
-    SequenceContextValue["completeItem"] | null
-  >(null)
+  const sequenceCompleteItemRef = useRef<SequenceContextValue['completeItem'] | null>(null)
   const sequenceItemIndexRef = useRef<number | null>(null)
 
   useEffect(() => {
@@ -194,16 +172,7 @@ export const TypingAnimation = ({
         clearTimeout(startTimeout)
       }
     }
-  }, [
-    delay,
-    startOnView,
-    isInView,
-    started,
-    hasSequence,
-    sequenceActiveIndex,
-    sequenceStarted,
-    itemIndex,
-  ])
+  }, [delay, startOnView, isInView, started, hasSequence, sequenceActiveIndex, sequenceStarted, itemIndex])
 
   useEffect(() => {
     if (started && prefersReduced) {
@@ -245,11 +214,7 @@ export const TypingAnimation = ({
   }, [children, duration, started, prefersReduced])
 
   return (
-    <MotionComponent
-      ref={elementRef}
-      className={cn("text-sm font-normal tracking-tight", className)}
-      {...props}
-    >
+    <MotionComponent ref={elementRef} className={cn('text-sm font-normal tracking-tight', className)} {...props}>
       {displayedText}
     </MotionComponent>
   )
@@ -263,13 +228,7 @@ interface TerminalProps {
   title?: string
 }
 
-export const Terminal = ({
-  children,
-  className,
-  sequence = true,
-  startOnView = true,
-  title,
-}: TerminalProps) => {
+export const Terminal = ({ children, className, sequence = true, startOnView = true, title }: TerminalProps) => {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const isInView = useInView(containerRef as React.RefObject<Element>, {
     amount: 0.3,
@@ -301,13 +260,7 @@ export const Terminal = ({
   }, [children, sequence])
 
   const content = (
-    <div
-      ref={containerRef}
-      className={cn(
-        "z-0 h-full w-full rounded-xl border border-input bg-[#0a0a0b]",
-        className
-      )}
-    >
+    <div ref={containerRef} className={cn('z-0 h-full w-full rounded-xl border border-input bg-[#0a0a0b]', className)}>
       <div className="flex items-center gap-2 border-b border-border px-3.5 py-2.5">
         <span className="size-2.5 rounded-full bg-[#3a3a40]" />
         <span className="size-2.5 rounded-full bg-[#3a3a40]" />
@@ -322,9 +275,5 @@ export const Terminal = ({
 
   if (!sequence) return content
 
-  return (
-    <SequenceContext.Provider value={contextValue}>
-      {content}
-    </SequenceContext.Provider>
-  )
+  return <SequenceContext.Provider value={contextValue}>{content}</SequenceContext.Provider>
 }

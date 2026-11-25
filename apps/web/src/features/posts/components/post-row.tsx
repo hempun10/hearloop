@@ -6,7 +6,13 @@ import { useOrg } from '#/features/orgs/use-org'
 import { StatusLabel } from './status-badge'
 import { VoteButton } from './vote-button'
 
-export function PostRow({ org, post, rank, selected, ref }: {
+export function PostRow({
+  org,
+  post,
+  rank,
+  selected,
+  ref,
+}: {
   org: string
   post: Post
   rank: number
@@ -16,11 +22,19 @@ export function PostRow({ org, post, rank, selected, ref }: {
   const { categories } = useOrg()
   const category = categories.find((c) => c.id === post.categoryId)?.name
   return (
-    <li ref={ref} data-testid="post" aria-current={selected || undefined}
-      className={cn('flex gap-4 border-t py-4 transition-colors first:border-t-0', selected && 'bg-card')}>
+    <li
+      ref={ref}
+      data-testid="post"
+      aria-current={selected || undefined}
+      className={cn('flex gap-4 border-t py-4 transition-colors first:border-t-0', selected && 'bg-card')}
+    >
       <span className="w-8 shrink-0 pt-0.5 text-xs text-faint tabular-nums">{String(rank).padStart(2, '0')}</span>
       <div className="min-w-0 flex-1">
-        <Link to="/$org/posts/$id" params={{ org, id: String(post.id) }} className="text-[15px] font-semibold hover:underline">
+        <Link
+          to="/$org/posts/$id"
+          params={{ org, id: String(post.id) }}
+          className="text-[15px] font-semibold hover:underline"
+        >
           {post.title}
         </Link>
         {post.body && <p className="mt-1.5 line-clamp-2 text-sm leading-6 text-muted-foreground">{post.body}</p>}

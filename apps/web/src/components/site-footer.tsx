@@ -22,24 +22,43 @@ export function SiteFooter() {
         <div className="md:w-1/2">
           <div className="flex flex-col gap-y-6 md:flex-row md:justify-between lg:pl-10">
             <Column title="Product">
-              <Link to="/$org" params={{ org: DEMO_ORG }} className={item}>Live demo</Link>
-              <a href="/#how" className={item}>How it works</a>
-              <a href="/#faq" className={item}>FAQ</a>
-              <a href={DOCS_URL} className={item}>Docs</a>
+              <Link to="/$org" params={{ org: DEMO_ORG }} className={item}>
+                Live demo
+              </Link>
+              <a href="/#how" className={item}>
+                How it works
+              </a>
+              <a href="/#faq" className={item}>
+                FAQ
+              </a>
+              <a href={DOCS_URL} className={item}>
+                Docs
+              </a>
             </Column>
             <Column title="Account">
-              <Link to="/login" className={item}>Sign in</Link>
-              <Link to="/login" search={{ mode: 'signup' }} className={item}>Create your board</Link>
+              <Link to="/login" className={item}>
+                Sign in
+              </Link>
+              <Link to="/login" search={{ mode: 'signup' }} className={item}>
+                Create your board
+              </Link>
             </Column>
             <Column title="Built with">
-              {['Claude Code', 'Kane CLI', 'Cloudflare Workers'].map((t) => <span key={t} className={item}>{t}</span>)}
+              {['Claude Code', 'Kane CLI', 'Cloudflare Workers'].map((t) => (
+                <span key={t} className={item}>
+                  {t}
+                </span>
+              ))}
             </Column>
           </div>
         </div>
       </div>
       <div className="relative z-0 mt-16 h-40 w-full md:h-56">
         <div className="absolute inset-0 z-10 bg-linear-to-t from-transparent from-40% to-background" />
-        <div aria-hidden className="absolute inset-0 mx-6 bg-[size:14px_14px] text-foreground/10 [background-image:radial-gradient(currentColor_1px,transparent_1px)]" />
+        <div
+          aria-hidden
+          className="absolute inset-0 mx-6 bg-[size:14px_14px] text-foreground/10 [background-image:radial-gradient(currentColor_1px,transparent_1px)]"
+        />
       </div>
     </footer>
   )

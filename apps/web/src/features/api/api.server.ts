@@ -21,7 +21,10 @@ export function withOrgToken(request: Request, slug: string, fn: (org: PublicOrg
 }
 
 /** Parses a JSON body with a zod schema; a bad body answers 400 with the first issue. */
-export async function parseBody<T extends z.ZodType>(request: Request, schema: T): Promise<{ data: z.infer<T> } | { error: Response }> {
+export async function parseBody<T extends z.ZodType>(
+  request: Request,
+  schema: T,
+): Promise<{ data: z.infer<T> } | { error: Response }> {
   const result = schema.safeParse(await request.json().catch(() => undefined))
   if (result.success) return { data: result.data }
   return { error: json({ error: result.error.issues[0]?.message ?? 'bad request' }, 400) }

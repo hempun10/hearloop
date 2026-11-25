@@ -14,7 +14,7 @@ export const newPostSchema = z.object({
 export type NewPostInput = z.infer<typeof newPostSchema>
 
 /** A status key: a built-in kind, or c<id> for one of the board's own. */
-export const statusKeySchema = z.string().regex(/^(open|planned|building|shipped|c\d+)$/, 'Pick a status.')
+const statusKeySchema = z.string().regex(/^(open|planned|building|shipped|c\d+)$/, 'Pick a status.')
 
 // the new-post form: members also pick the status; anyone picks a category and the board's tags
 export const composeSchema = newPostSchema.extend({
@@ -26,11 +26,10 @@ export type ComposeInput = z.infer<typeof composeSchema>
 export const createPostSchema = composeSchema.extend({ org: orgSlugSchema })
 export const editPostSchema = postRefSchema.extend(newPostSchema.shape)
 
-export const setStatusSchema = postRefSchema.extend({ status: postStatusSchema })
 export const setStatusKeySchema = postRefSchema.extend({ status: statusKeySchema })
 export const setCategorySchema = postRefSchema.extend({ categoryId: z.number().int().positive().nullable() })
 /** "u:<user id>" for a member, "a:<token id>" for an agent, null for nobody */
-export const assigneeKeySchema = z.string().regex(/^(u:.+|a:\d+)$/)
+const assigneeKeySchema = z.string().regex(/^(u:.+|a:\d+)$/)
 export const setAssigneeSchema = postRefSchema.extend({ assignee: assigneeKeySchema.nullable() })
 
 // what the loop reports after a Kane run (POST /api/:org/posts/:id/runs)

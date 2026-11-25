@@ -10,7 +10,8 @@ export const postKeys = {
 export const postListQuery = (org: string) =>
   queryOptions({ queryKey: postKeys.list(org), queryFn: () => listPosts({ data: { org } }) })
 
-export const tagsQuery = (org: string) => queryOptions({ queryKey: ['tags', org], queryFn: () => getTags({ data: { org } }) })
+export const tagsQuery = (org: string) =>
+  queryOptions({ queryKey: ['tags', org], queryFn: () => getTags({ data: { org } }) })
 
 export const postQuery = (org: string, id: number) =>
   queryOptions({ queryKey: postKeys.detail(org, id), queryFn: () => getPost({ data: { org, id } }) })

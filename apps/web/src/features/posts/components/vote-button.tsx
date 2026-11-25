@@ -4,7 +4,15 @@ import { cn } from '@hearloop/ui/lib/utils'
 import { useVotePost } from '../use-post-mutations'
 import { useVoted } from '../use-voted-posts'
 
-export function VoteButton({ org, post, className }: { org: string; post: Pick<Post, 'id' | 'votes'>; className?: string }) {
+export function VoteButton({
+  org,
+  post,
+  className,
+}: {
+  org: string
+  post: Pick<Post, 'id' | 'votes'>
+  className?: string
+}) {
   const { voted, markVoted, unmark } = useVoted(post.id)
   const vote = useVotePost(org)
 
@@ -32,7 +40,13 @@ export function VoteButton({ org, post, className }: { org: string; post: Pick<P
       )}
     >
       <ChevronUp className="size-3.5" strokeWidth={2.5} aria-hidden />
-      <span data-testid="votes" className={cn('text-[13px] leading-none font-semibold tabular-nums', voted ? 'text-background' : 'text-foreground')}>
+      <span
+        data-testid="votes"
+        className={cn(
+          'text-[13px] leading-none font-semibold tabular-nums',
+          voted ? 'text-background' : 'text-foreground',
+        )}
+      >
         {post.votes}
       </span>
     </button>
