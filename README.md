@@ -6,7 +6,9 @@
 
 ## Demo
 
-▶ **[Watch the 2-minute demo](demo/hearloop-demo.mp4)**: a real feature, the embeddable widget, going from a customer's request to a verified release.
+[![Watch the hearloop demo on Vimeo](https://i.vimeocdn.com/video/2230651788-bd50a96073bb85ce3e5f0ee7c2bce6496c1573734dfa325ba9ae563185ff8ac4-d_1280?region=us)](https://vimeo.com/1250102295)
+
+▶ **[Watch the demo on Vimeo](https://vimeo.com/1250102295)** (2:25): a real feature, the embeddable widget, going from a customer's request to a verified release.
 
 ## How it works
 
