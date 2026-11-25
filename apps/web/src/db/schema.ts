@@ -1,3 +1,4 @@
+import type { WidgetSettings } from '#/features/widget/widget.schema'
 import { sql } from 'drizzle-orm'
 import { index, integer, primaryKey, sqliteTable, text, uniqueIndex } from 'drizzle-orm/sqlite-core'
 
@@ -199,7 +200,8 @@ export const orgs = sqliteTable('orgs', {
   showChangelog: integer({ mode: 'boolean' }).notNull().default(true),
   whoCanPost: text({ enum: ['anyone', 'signed_in'] }).notNull().default('anyone'),
   // the embeddable widget's look and tabs (features/widget/widget.schema.ts); null = defaults
-  widget: text({ mode: 'json' }).$type<unknown>(),
+  // stored as saved; readWidget() validates it field by field on the way out
+  widget: text({ mode: 'json' }).$type<Partial<WidgetSettings>>(),
   createdAt: createdAt(),
 })
 
