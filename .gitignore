@@ -20,8 +20,7 @@ todos.json
 **/.testmuai/evidence
 **/.testmuai/sessions
 .turbo
-# demo video source and notes stay local; only the rendered video is public
+# demo video source and notes stay local; the video is on Vimeo
 apps/video/
-demo/*
-!demo/hearloop-demo.mp4
+demo/
 .source
