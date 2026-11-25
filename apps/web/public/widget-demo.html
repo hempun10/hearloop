@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Northwind Coffee</title>
+<style>
+  body{margin:0;font:16px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif;background:#f6f3ee;color:#2b2118}
+  header{display:flex;align-items:center;justify-content:space-between;padding:20px 40px;border-bottom:1px solid #e4ddd2}
+  main{max-width:720px;margin:0 auto;padding:64px 24px}
+  h1{font-size:44px;line-height:1.1;margin:0 0 16px}
+  a{color:inherit}
+</style>
+</head>
+<body>
+<header><strong>Northwind Coffee</strong><nav>Shop · Subscriptions · About</nav></header>
+<main>
+  <h1>Fresh roasts, every week.</h1>
+  <p>A sample customer site. The Feedback button in the corner is the hearloop widget, added with one script tag.</p>
+</main>
+<script>
+  // The board comes from ?board=..., so this one page can show any board's widget.
+  var s = document.createElement('script')
+  s.src = '/widget.js'
+  s.async = true
+  s.setAttribute('data-board', new URLSearchParams(location.search).get('board') || 'demo')
+  document.body.appendChild(s)
+</script>
+</body>
+</html>

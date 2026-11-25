@@ -14,6 +14,7 @@ import { Route as SiteRouteImport } from './routes/_site'
 import { Route as McpRouteImport } from './routes/mcp'
 import { Route as OrgPublicRouteImport } from './routes/$org/_public'
 import { Route as OrgDashboardRouteImport } from './routes/$org/dashboard'
+import { Route as OrgWidgetRouteImport } from './routes/$org/widget'
 import { Route as DotwellKnownSplatRouteImport } from './routes/[.]well-known/$'
 import { Route as SiteIndexRouteImport } from './routes/_site/index'
 import { Route as SiteConsentRouteImport } from './routes/_site/consent'
@@ -29,6 +30,7 @@ import { Route as OrgDashboardRunsRouteImport } from './routes/$org/dashboard/ru
 import { Route as OrgDashboardSettingsRouteImport } from './routes/$org/dashboard/settings'
 import { Route as SiteInviteTokenRouteImport } from './routes/_site/invite.$token'
 import { Route as ApiOrgChangelogRouteImport } from './routes/api/$org/changelog'
+import { Route as ApiOrgWidgetRouteImport } from './routes/api/$org/widget'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 import { Route as OrgPublicPostsIdRouteImport } from './routes/$org/_public/posts.$id'
 import { Route as OrgDashboardSettingsIndexRouteImport } from './routes/$org/dashboard/settings/index'
@@ -39,6 +41,7 @@ import { Route as OrgDashboardSettingsNotificationsRouteImport } from './routes/
 import { Route as OrgDashboardSettingsStatusesRouteImport } from './routes/$org/dashboard/settings/statuses'
 import { Route as OrgDashboardSettingsTeamRouteImport } from './routes/$org/dashboard/settings/team'
 import { Route as OrgDashboardSettingsTokenRouteImport } from './routes/$org/dashboard/settings/token'
+import { Route as OrgDashboardSettingsWidgetRouteImport } from './routes/$org/dashboard/settings/widget'
 import { Route as ApiOrgPostsIndexRouteImport } from './routes/api/$org/posts.index'
 import { Route as ApiOrgPostsIdIndexRouteImport } from './routes/api/$org/posts.$id.index'
 import { Route as ApiOrgPostsIdClaimRouteImport } from './routes/api/$org/posts.$id.claim'
@@ -67,6 +70,11 @@ const OrgPublicRoute = OrgPublicRouteImport.update({
 const OrgDashboardRoute = OrgDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
+  getParentRoute: () => OrgRoute,
+} as any)
+const OrgWidgetRoute = OrgWidgetRouteImport.update({
+  id: '/widget',
+  path: '/widget',
   getParentRoute: () => OrgRoute,
 } as any)
 const DotwellKnownSplatRoute = DotwellKnownSplatRouteImport.update({
@@ -144,6 +152,11 @@ const ApiOrgChangelogRoute = ApiOrgChangelogRouteImport.update({
   path: '/api/$org/changelog',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiOrgWidgetRoute = ApiOrgWidgetRouteImport.update({
+  id: '/api/$org/widget',
+  path: '/api/$org/widget',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   id: '/api/auth/$',
   path: '/api/auth/$',
@@ -202,6 +215,12 @@ const OrgDashboardSettingsTokenRoute =
     path: '/token',
     getParentRoute: () => OrgDashboardSettingsRoute,
   } as any)
+const OrgDashboardSettingsWidgetRoute =
+  OrgDashboardSettingsWidgetRouteImport.update({
+    id: '/widget',
+    path: '/widget',
+    getParentRoute: () => OrgDashboardSettingsRoute,
+  } as any)
 const ApiOrgPostsIndexRoute = ApiOrgPostsIndexRouteImport.update({
   id: '/api/$org/posts/',
   path: '/api/$org/posts/',
@@ -238,6 +257,7 @@ export interface FileRoutesByFullPath {
   '/': typeof SiteIndexRoute
   '/mcp': typeof McpRoute
   '/$org/dashboard': typeof OrgDashboardRouteWithChildren
+  '/$org/widget': typeof OrgWidgetRoute
   '/.well-known/$': typeof DotwellKnownSplatRoute
   '/consent': typeof SiteConsentRoute
   '/login': typeof SiteLoginRoute
@@ -250,6 +270,7 @@ export interface FileRoutesByFullPath {
   '/$org/dashboard/settings': typeof OrgDashboardSettingsRouteWithChildren
   '/invite/$token': typeof SiteInviteTokenRoute
   '/api/$org/changelog': typeof ApiOrgChangelogRoute
+  '/api/$org/widget': typeof ApiOrgWidgetRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/$org/': typeof OrgPublicIndexRoute
   '/$org/dashboard/': typeof OrgDashboardIndexRoute
@@ -261,6 +282,7 @@ export interface FileRoutesByFullPath {
   '/$org/dashboard/settings/statuses': typeof OrgDashboardSettingsStatusesRoute
   '/$org/dashboard/settings/team': typeof OrgDashboardSettingsTeamRoute
   '/$org/dashboard/settings/token': typeof OrgDashboardSettingsTokenRoute
+  '/$org/dashboard/settings/widget': typeof OrgDashboardSettingsWidgetRoute
   '/$org/dashboard/settings/': typeof OrgDashboardSettingsIndexRoute
   '/api/$org/posts/': typeof ApiOrgPostsIndexRoute
   '/api/$org/posts/$id/claim': typeof ApiOrgPostsIdClaimRoute
@@ -272,6 +294,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/$org': typeof OrgPublicIndexRoute
   '/mcp': typeof McpRoute
+  '/$org/widget': typeof OrgWidgetRoute
   '/.well-known/$': typeof DotwellKnownSplatRoute
   '/consent': typeof SiteConsentRoute
   '/login': typeof SiteLoginRoute
@@ -284,6 +307,7 @@ export interface FileRoutesByTo {
   '/$org/dashboard/runs': typeof OrgDashboardRunsRoute
   '/invite/$token': typeof SiteInviteTokenRoute
   '/api/$org/changelog': typeof ApiOrgChangelogRoute
+  '/api/$org/widget': typeof ApiOrgWidgetRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/$org/dashboard': typeof OrgDashboardIndexRoute
   '/$org/posts/$id': typeof OrgPublicPostsIdRoute
@@ -294,6 +318,7 @@ export interface FileRoutesByTo {
   '/$org/dashboard/settings/statuses': typeof OrgDashboardSettingsStatusesRoute
   '/$org/dashboard/settings/team': typeof OrgDashboardSettingsTeamRoute
   '/$org/dashboard/settings/token': typeof OrgDashboardSettingsTokenRoute
+  '/$org/dashboard/settings/widget': typeof OrgDashboardSettingsWidgetRoute
   '/$org/dashboard/settings': typeof OrgDashboardSettingsIndexRoute
   '/api/$org/posts': typeof ApiOrgPostsIndexRoute
   '/api/$org/posts/$id/claim': typeof ApiOrgPostsIdClaimRoute
@@ -309,6 +334,7 @@ export interface FileRoutesById {
   '/mcp': typeof McpRoute
   '/$org/_public': typeof OrgPublicRouteWithChildren
   '/$org/dashboard': typeof OrgDashboardRouteWithChildren
+  '/$org/widget': typeof OrgWidgetRoute
   '/.well-known/$': typeof DotwellKnownSplatRoute
   '/_site/consent': typeof SiteConsentRoute
   '/_site/login': typeof SiteLoginRoute
@@ -322,6 +348,7 @@ export interface FileRoutesById {
   '/$org/dashboard/settings': typeof OrgDashboardSettingsRouteWithChildren
   '/_site/invite/$token': typeof SiteInviteTokenRoute
   '/api/$org/changelog': typeof ApiOrgChangelogRoute
+  '/api/$org/widget': typeof ApiOrgWidgetRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/$org/_public/': typeof OrgPublicIndexRoute
   '/$org/dashboard/': typeof OrgDashboardIndexRoute
@@ -333,6 +360,7 @@ export interface FileRoutesById {
   '/$org/dashboard/settings/statuses': typeof OrgDashboardSettingsStatusesRoute
   '/$org/dashboard/settings/team': typeof OrgDashboardSettingsTeamRoute
   '/$org/dashboard/settings/token': typeof OrgDashboardSettingsTokenRoute
+  '/$org/dashboard/settings/widget': typeof OrgDashboardSettingsWidgetRoute
   '/$org/dashboard/settings/': typeof OrgDashboardSettingsIndexRoute
   '/api/$org/posts/': typeof ApiOrgPostsIndexRoute
   '/api/$org/posts/$id/claim': typeof ApiOrgPostsIdClaimRoute
@@ -348,6 +376,7 @@ export interface FileRouteTypes {
     | '/'
     | '/mcp'
     | '/$org/dashboard'
+    | '/$org/widget'
     | '/.well-known/$'
     | '/consent'
     | '/login'
@@ -360,6 +389,7 @@ export interface FileRouteTypes {
     | '/$org/dashboard/settings'
     | '/invite/$token'
     | '/api/$org/changelog'
+    | '/api/$org/widget'
     | '/api/auth/$'
     | '/$org/'
     | '/$org/dashboard/'
@@ -371,6 +401,7 @@ export interface FileRouteTypes {
     | '/$org/dashboard/settings/statuses'
     | '/$org/dashboard/settings/team'
     | '/$org/dashboard/settings/token'
+    | '/$org/dashboard/settings/widget'
     | '/$org/dashboard/settings/'
     | '/api/$org/posts/'
     | '/api/$org/posts/$id/claim'
@@ -382,6 +413,7 @@ export interface FileRouteTypes {
   to:
     | '/$org'
     | '/mcp'
+    | '/$org/widget'
     | '/.well-known/$'
     | '/consent'
     | '/login'
@@ -394,6 +426,7 @@ export interface FileRouteTypes {
     | '/$org/dashboard/runs'
     | '/invite/$token'
     | '/api/$org/changelog'
+    | '/api/$org/widget'
     | '/api/auth/$'
     | '/$org/dashboard'
     | '/$org/posts/$id'
@@ -404,6 +437,7 @@ export interface FileRouteTypes {
     | '/$org/dashboard/settings/statuses'
     | '/$org/dashboard/settings/team'
     | '/$org/dashboard/settings/token'
+    | '/$org/dashboard/settings/widget'
     | '/$org/dashboard/settings'
     | '/api/$org/posts'
     | '/api/$org/posts/$id/claim'
@@ -418,6 +452,7 @@ export interface FileRouteTypes {
     | '/mcp'
     | '/$org/_public'
     | '/$org/dashboard'
+    | '/$org/widget'
     | '/.well-known/$'
     | '/_site/consent'
     | '/_site/login'
@@ -431,6 +466,7 @@ export interface FileRouteTypes {
     | '/$org/dashboard/settings'
     | '/_site/invite/$token'
     | '/api/$org/changelog'
+    | '/api/$org/widget'
     | '/api/auth/$'
     | '/$org/_public/'
     | '/$org/dashboard/'
@@ -442,6 +478,7 @@ export interface FileRouteTypes {
     | '/$org/dashboard/settings/statuses'
     | '/$org/dashboard/settings/team'
     | '/$org/dashboard/settings/token'
+    | '/$org/dashboard/settings/widget'
     | '/$org/dashboard/settings/'
     | '/api/$org/posts/'
     | '/api/$org/posts/$id/claim'
@@ -457,6 +494,7 @@ export interface RootRouteChildren {
   McpRoute: typeof McpRoute
   DotwellKnownSplatRoute: typeof DotwellKnownSplatRoute
   ApiOrgChangelogRoute: typeof ApiOrgChangelogRoute
+  ApiOrgWidgetRoute: typeof ApiOrgWidgetRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
   ApiOrgPostsIndexRoute: typeof ApiOrgPostsIndexRoute
   ApiOrgPostsIdClaimRoute: typeof ApiOrgPostsIdClaimRoute
@@ -501,6 +539,13 @@ declare module '@tanstack/react-router' {
       path: '/dashboard'
       fullPath: '/$org/dashboard'
       preLoaderRoute: typeof OrgDashboardRouteImport
+      parentRoute: typeof OrgRoute
+    }
+    '/$org/widget': {
+      id: '/$org/widget'
+      path: '/widget'
+      fullPath: '/$org/widget'
+      preLoaderRoute: typeof OrgWidgetRouteImport
       parentRoute: typeof OrgRoute
     }
     '/.well-known/$': {
@@ -608,6 +653,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiOrgChangelogRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/$org/widget': {
+      id: '/api/$org/widget'
+      path: '/api/$org/widget'
+      fullPath: '/api/$org/widget'
+      preLoaderRoute: typeof ApiOrgWidgetRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/auth/$': {
       id: '/api/auth/$'
       path: '/api/auth/$'
@@ -676,6 +728,13 @@ declare module '@tanstack/react-router' {
       path: '/token'
       fullPath: '/$org/dashboard/settings/token'
       preLoaderRoute: typeof OrgDashboardSettingsTokenRouteImport
+      parentRoute: typeof OrgDashboardSettingsRoute
+    }
+    '/$org/dashboard/settings/widget': {
+      id: '/$org/dashboard/settings/widget'
+      path: '/widget'
+      fullPath: '/$org/dashboard/settings/widget'
+      preLoaderRoute: typeof OrgDashboardSettingsWidgetRouteImport
       parentRoute: typeof OrgDashboardSettingsRoute
     }
     '/api/$org/posts/': {
@@ -749,6 +808,7 @@ interface OrgDashboardSettingsRouteChildren {
   OrgDashboardSettingsStatusesRoute: typeof OrgDashboardSettingsStatusesRoute
   OrgDashboardSettingsTeamRoute: typeof OrgDashboardSettingsTeamRoute
   OrgDashboardSettingsTokenRoute: typeof OrgDashboardSettingsTokenRoute
+  OrgDashboardSettingsWidgetRoute: typeof OrgDashboardSettingsWidgetRoute
   OrgDashboardSettingsIndexRoute: typeof OrgDashboardSettingsIndexRoute
 }
 
@@ -761,6 +821,7 @@ const OrgDashboardSettingsRouteChildren: OrgDashboardSettingsRouteChildren = {
   OrgDashboardSettingsStatusesRoute: OrgDashboardSettingsStatusesRoute,
   OrgDashboardSettingsTeamRoute: OrgDashboardSettingsTeamRoute,
   OrgDashboardSettingsTokenRoute: OrgDashboardSettingsTokenRoute,
+  OrgDashboardSettingsWidgetRoute: OrgDashboardSettingsWidgetRoute,
   OrgDashboardSettingsIndexRoute: OrgDashboardSettingsIndexRoute,
 }
 
@@ -790,11 +851,13 @@ const OrgDashboardRouteWithChildren = OrgDashboardRoute._addFileChildren(
 interface OrgRouteChildren {
   OrgPublicRoute: typeof OrgPublicRouteWithChildren
   OrgDashboardRoute: typeof OrgDashboardRouteWithChildren
+  OrgWidgetRoute: typeof OrgWidgetRoute
 }
 
 const OrgRouteChildren: OrgRouteChildren = {
   OrgPublicRoute: OrgPublicRouteWithChildren,
   OrgDashboardRoute: OrgDashboardRouteWithChildren,
+  OrgWidgetRoute: OrgWidgetRoute,
 }
 
 const OrgRouteWithChildren = OrgRoute._addFileChildren(OrgRouteChildren)
@@ -823,6 +886,7 @@ const rootRouteChildren: RootRouteChildren = {
   McpRoute: McpRoute,
   DotwellKnownSplatRoute: DotwellKnownSplatRoute,
   ApiOrgChangelogRoute: ApiOrgChangelogRoute,
+  ApiOrgWidgetRoute: ApiOrgWidgetRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
   ApiOrgPostsIndexRoute: ApiOrgPostsIndexRoute,
   ApiOrgPostsIdClaimRoute: ApiOrgPostsIdClaimRoute,

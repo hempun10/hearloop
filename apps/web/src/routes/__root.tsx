@@ -4,6 +4,7 @@ import type { CSSProperties, ReactNode } from 'react'
 import { Toaster } from '@hearloop/ui/components/sonner'
 import { TooltipProvider } from '@hearloop/ui/components/tooltip'
 import { orgQuery, sessionQuery } from '#/features/orgs/org.queries'
+import { RADIUS_CSS } from '#/features/widget/widget.schema'
 import appCss from '../styles.css?url'
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
@@ -24,9 +25,15 @@ function useBoardLook() {
 
 function RootDocument({ children }: { children: ReactNode }) {
   const board = useBoardLook()
-  const style = board?.accent ? ({ '--brand': board.accent } as CSSProperties) : undefined
+  // the embeddable widget's panel carries its own look in its address (set by public/widget.js)
+  const look = useMatch({ from: '/$org/widget', shouldThrow: false })?.search
+  const theme = look?.theme ?? board?.theme
+  const accent = look?.accent ?? board?.accent
+  const style = accent || look?.radius
+    ? ({ ...(accent && { '--brand': accent }), ...(look?.radius && { '--radius': RADIUS_CSS[look.radius] }) } as CSSProperties)
+    : undefined
   return (
-    <html lang="en" className={board?.theme === 'light' ? 'light' : 'dark'} style={style}>
+    <html lang="en" className={theme === 'light' ? 'light' : 'dark'} style={style}>
       <head>
         <HeadContent />
       </head>

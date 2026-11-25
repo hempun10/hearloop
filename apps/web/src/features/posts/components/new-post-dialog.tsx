@@ -26,13 +26,15 @@ type Props = {
   mustSignIn: boolean
   isMember?: boolean
   defaultCategory?: number | null
+  /** Called with the new post instead of opening its page (the widget stays in its panel). */
+  onPosted?: (post: { id: number; title: string }) => void
 }
 
-export function NewPostDialog({ org, posts, open, onOpenChange, mustSignIn, isMember = false, defaultCategory = null }: Props) {
+export function NewPostDialog({ org, posts, open, onOpenChange, mustSignIn, isMember = false, defaultCategory = null, onPosted }: Props) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="gap-0 p-0 sm:max-w-[560px]">
-        {mustSignIn ? <SignInToPost org={org} onCancel={() => onOpenChange(false)} /> : <NewPostForm org={org} posts={posts} isMember={isMember} defaultCategory={defaultCategory} onDone={() => onOpenChange(false)} />}
+        {mustSignIn ? <SignInToPost org={org} onCancel={() => onOpenChange(false)} /> : <NewPostForm org={org} posts={posts} isMember={isMember} defaultCategory={defaultCategory} onDone={() => onOpenChange(false)} onPosted={onPosted} />}
       </DialogContent>
     </Dialog>
   )
@@ -55,7 +57,7 @@ function SignInToPost({ org, onCancel }: { org: string; onCancel: () => void }) 
   )
 }
 
-function NewPostForm({ org, posts, isMember, defaultCategory, onDone }: { org: string; posts: Post[]; isMember: boolean; defaultCategory: number | null; onDone: () => void }) {
+function NewPostForm({ org, posts, isMember, defaultCategory, onDone, onPosted }: { org: string; posts: Post[]; isMember: boolean; defaultCategory: number | null; onDone: () => void; onPosted?: Props['onPosted'] }) {
   const navigate = useNavigate()
   const create = useCreatePost(org)
   const { categories } = useOrg()
@@ -72,7 +74,8 @@ function NewPostForm({ org, posts, isMember, defaultCategory, onDone }: { org: s
     try {
       const post = await create.mutateAsync(input)
       onDone()
-      await navigate({ to: '/$org/posts/$id', params: { org, id: String(post.id) } })
+      if (onPosted) onPosted(post)
+      else await navigate({ to: '/$org/posts/$id', params: { org, id: String(post.id) } })
     } catch (e) {
       form.setError('root', { message: e instanceof Error ? e.message : 'Could not post. Try again.' })
     }
