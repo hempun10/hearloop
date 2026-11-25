@@ -1,13 +1,24 @@
-# hearloop v2
+# hearloop
 
-A feedback board that closes its own loop. Built for the KaneCLI Online Hackathon (Nov 2026).
+**Feedback that ships itself.** A public feedback board where coding agents build what customers ask for, and nothing ships until Kane CLI proves it works in a real browser.
 
-1. Users post requests and vote on them.
-2. A coding agent picks up the top request and builds it.
-3. Kane CLI verifies the feature in a real browser.
-4. Pass: the post moves to **shipped** and a changelog entry is published. Fail: the post goes back to **planned** with Kane's report, and the agent tries again.
+[hearloop.app](https://hearloop.app) · [Docs](https://hearloop-docs.hembdrpun10.workers.dev/docs) · Built for the KaneCLI Online Hackathon (November 2026)
+
+## Demo
+
+▶ **[Watch the 2-minute demo](demo/hearloop-demo.mp4)**: a real feature, the embeddable widget, going from a customer's request to a verified release.
+
+## How it works
+
+1. Customers post ideas on a public board and vote on them.
+2. The team hears about new requests in Slack or Discord.
+3. A teammate approves a request and assigns it to a coding agent: Claude Code, Codex, Cursor, OpenCode or any MCP client.
+4. The agent claims the request over MCP, builds it, and asks Kane CLI to test it in a real browser from a plain-English description.
+5. A pass moves the request to **Shipped** and publishes a changelog entry marked *Verified with Kane CLI*. A fail sends it back to **Planned** with Kane's report, and the agent tries again.
 
 Nothing reaches the changelog without a passing Kane run.
+
+Boards also come with a roadmap, a changelog, custom statuses, categories and tags, team invites, and an embeddable widget: one script tag puts the board on any site.
 
 ## Repo
 
@@ -58,11 +69,16 @@ bun run kane record <area>  # record tests added to kane/suite.ts, filed into th
 
 Every objective starts at `{{base_url}}`, so the same recordings run against any deployment.
 
-## Deploy
+## Deploy your own
+
+hearloop runs on Cloudflare Workers with D1. `apps/web/wrangler.jsonc` is set up for hearloop.app, so change two things first:
+
+- Replace `database_id` with the id that `wrangler d1 create` prints.
+- Remove the `routes` entry, or point it at your own domain.
 
 ```bash
 cd apps/web
-bunx wrangler d1 create hearloop-v2            # put the id in wrangler.jsonc
+bunx wrangler d1 create hearloop-v2
 bun run db:migrate:remote
 cd ../.. && bun run deploy:web && bun run deploy:docs
 bunx wrangler secret put BETTER_AUTH_SECRET    # and set BETTER_AUTH_URL in wrangler.jsonc vars
@@ -92,4 +108,12 @@ Every path is scoped to an org. Reads are public. Writes need `Authorization: Be
 - **Monorepo:** Bun workspaces, Turborepo, shared `@hearloop/ui` and `@hearloop/typescript-config`
 - **Tests:** Kane CLI (`apps/web/kane/`)
 
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md). To report a security issue, see [SECURITY.md](SECURITY.md).
+
 App code is organised by feature (`apps/web/src/features/<domain>/`); the conventions are in [apps/web/CLAUDE.md](apps/web/CLAUDE.md).
+
+## License
+
+[MIT](LICENSE)
